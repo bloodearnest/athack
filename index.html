@@ -228,13 +228,19 @@
         // workaround for only being able to render single nodes.
         *generate_attacks(attacks) {
           for (let attack of attacks) {
-            yield h(Attack, {attack: attack, player_name: this.props.player.name, record: this.props.record});
+            yield h(Attack, {
+              key: compose_id(this.props.player.name, attack.name),
+              id: compose_id(this.props.player.name, attack.name),
+              attack: attack,
+              player_name: this.props.player.name,
+              record: this.props.record
+            });
             yield h(AttackDescription, attack);
             yield h('tr', {"class": "spacer"}, h('td', {colspan: 4}));
           }
         }
         render({player, result}) {
-          return h("section", {"class": "player", id: compose_id(player.name)},
+          return h("section", {"class": "player", id: compose_id(player.name), key: compose_id(player.name)},
             h("table", null,
               h("tr", null,
                 h("th", null),
@@ -253,18 +259,16 @@
       class Attack extends Component {
         constructor() {
           super();
-          this.reset();
-          this.roll = this.roll.bind(this);
-          this.toggle_condition = this.toggle_condition.bind(this);
-        };
-        reset() {
           this.setState({
             advantage: false,
             disadvantage: false,
             conditions: new Map(),
           });
           console.log('reset state');
-        }
+
+          this.roll = this.roll.bind(this);
+          this.toggle_condition = this.toggle_condition.bind(this);
+        };
         roll(ev) {
           ev.preventDefault();
           let {tohit, damage, secondary} = this.props.attack;
@@ -317,7 +321,7 @@
               h("label", {for: compose_id(player_name, attack.name, c)}, c),
             )
           ));
-          let x = h("tr", {id: id, key: id},
+          return h("tr", {id: id},
             h("td", {"class": "name"}, attack.name),
             h("td", {"class": "vantage"}, h("input", {
               type: "checkbox",
@@ -329,7 +333,6 @@
             h("td", {"class": "vantage"}, h("input", {
               type: "checkbox",
               id: compose_id(player_name, attack.name, 'disadvantage'),
-              key: compose_id(player_name, attack.name, 'disadvantage'),
               name: compose_id(player_name, attack.name, 'disadvantage'),
               checked: this.state.disadvantage,
               onclick: () => this.setState({disadvantage: !this.state.disadvantage})
@@ -337,8 +340,6 @@
             h("td", {"class": "action"} , h("input", {type: "button", name: "attack", value: "Athack", onclick: this.roll})),
             h("td", {"class": "conditions"}, condition_elements),
           );
-          console.log(x.key);
-          return x;
         }
       }
 
