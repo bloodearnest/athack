@@ -52,12 +52,16 @@
         border-bottom: 2px solid #58180D;
       }
 
-      td, th {
+      td {
         padding: 0.2em;
+        border-bottom: 2px solid #58180D;
+        vertical-align: middle;
       }
 
       table {
         width: 100%;
+        border-bottom: 2px solid #58180D;
+        border-top: 2px solid #58180D;
       }
 
       .name {
@@ -66,12 +70,18 @@
       .vantage {
         width: 6em;
       }
-      .action {
-        font-size: 2.5em;
-        cursor: pointer;
-        width: 1em;
+
+      .action span {
+        text-align: center;
         vertical-align: middle;
-        text-decoration: none;
+        display: inline-block;
+        vertical-align: 0.5em;
+        font-size: 2em;
+        cursor: pointer;
+        border: 10px solid #58180D;
+        border-radius: 100px;
+        color: #EEE5CE;
+        background-color: #58180D;
       }
 
       .description {
@@ -80,11 +90,6 @@
         font-style: italic;
         font-size: 0.9em;
         word-wrap: break-word;
-      }
-
-      tr.spacer td {
-        border-top: 2px solid #58180D;
-        padding-top: 0.8em;
       }
 
       #log {
@@ -98,6 +103,8 @@
       }
 
       .result {
+        padding: 1em;
+        text-align: center;
         font-size: 1.5em;
       }
 
@@ -363,7 +370,6 @@
               h("p", {"class": "name"}, attack.name),
               h("p", {"class": "description"}, AttackDescription(attack)),
             ),
-            h("td", {"class": "action"} , h("span", {onclick: this.roll}, "@")),
             h("td", {"class": "vantage"},
               this.render_switch(
                 compose_id(player_name, attack.name, 'advantage'),
@@ -385,6 +391,7 @@
               ),
             ),
             h("td", {"class": "conditions"}, condition_elements),
+            h("td", {"class": "action"} , h("span", {onclick: this.roll}, "@")),
           );
         }
       }
