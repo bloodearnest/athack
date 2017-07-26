@@ -83,6 +83,10 @@
         color: grey;
       }
 
+      .result {
+        font-size: 1.5em;
+      }
+
     </style>
   </head>
   <body>
@@ -278,10 +282,6 @@
               tohit: 8,
               damage: {radiant: "d8+5"},
             }, {
-              name: "Sun Blade (Undead)",
-              tohit: 8,
-              damage: {radiant: "2d8+5"},
-            }, {
               name: "Green Flame Blade",
               tohit: 8,
               damage: {radiant: "d8+5", fire: "d8"},
@@ -345,17 +345,13 @@
               tohit: 8,
               damage: {"magical piercing": "d4+5"}
             }, {
-              name: "Giant Slayer Halberd (Giant)",
-              tohit: 8,
-              damage: {"magical slashing": "d10+2d6+5"}
-            }, {
-              name: "Giant Slayer Halberd Butt (Giant)",
-              tohit: 8,
-              damage: {"magical slashing": "d4+2d6+5"}
+              name: "Javelin of Lightning",
+              tohit: 7,
+              damage: {"magical piercing": "d6+4", lightning: "4d6"}
             }, {
               name: "Javelin",
-              tohit: 8,
-              damage: {piercing: "d6+5"}
+              tohit: 7,
+              damage: {piercing: "d6+4"}
             }
           ],
         },
