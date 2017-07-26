@@ -402,10 +402,11 @@
             }, {
               name: "Oathbow",
               tohit: 9,
-              damage: {"magical piercing": "d8+5"},
+              damage: {"magical piercing": "d8+4"},
               conditions: {
                 "Hunters Mark": {"magical piercing": "d6"},
                 "Favored Enemy": {"magical piercing": "4"},
+                "Sworn Enemy": {"magical piercing": "3d6"},
               }
             }
           ],
@@ -455,11 +456,8 @@
             {
               name: "+1 Heavy Crossbow",
               tohit: 8,
-              damage: {"magical piercing": "d10+5"}
-            }, {
-              name: "+1 Heavy Crossbow (Sneak Attack)",
-              tohit: 8,
-              damage: {"magical piercing": "d10+3d6+5"}
+              damage: {"magical piercing": "d10+5"},
+              conditions: {"Sneak Attack": {"magical piercing": "3d6"}}
             },
           ],
         },
