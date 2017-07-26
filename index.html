@@ -5,7 +5,7 @@
     <title>@Hack</title>
     <style>
 
-      html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}
+      html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;vertical-align:baseline;margin:0;padding:0}
       article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
       body{line-height:1}
       ol,ul{list-style:none}
@@ -34,7 +34,7 @@
         margin-bottom: 1em;
         padding: 0;
       }
-      label {
+      nav label {
         font-family: MrJeeves;
         font-weight: 800;
         font-size: 1.5em;
@@ -161,20 +161,37 @@
         damage === undefined ? "" : Object.keys(damage).map((k => damage[k] + " " + k)).join(" + ")
       )
 
-      function DamageResult(damage) {
-        let grand_total = damage.reduce((a, {total}) => a + total, 0);
+      function DamageResult(damages) {
+        // merge all damages together
+        let damage = new Map();
+        for (let d of damages) {
+          for (let result of d) {
+            let type = result.type;
+            if (damage.has(type)) {
+              let merged = damage.get(type);
+              merged.total += result.total;
+              merged.text += "+" + result.text;
+              merged.rolls = merged.rolls.concat(result.rolls);
+              damage.set(type, merged);
+            } else {
+              damage.set(type, result);
+            }
+          }
+        }
+        let values = Array.from(damage.values());
+        let grand_total = Array.from(values).reduce((a, {total}) => a + total, 0);
         let fmt_summary = ({total, type}) => `${total} ${type}`;
         let fmt_logmsg  = ({total, type, text, rolls}) => `${text} (${rolls.join()}) = ${total} ${type}`;
-        if (Object.keys(damage).length === 1) {
-          let summary = grand_total + " " + Object.values(damage)[0]["type"] + " damage";
+        if (values.length === 1) {
+          let summary = grand_total + " " + values[0]["type"] + " damage";
           return {
             summary: summary,
-            logmsg: summary + " (" + damage.map(fmt_logmsg).join(", ") + ")",
+            logmsg: summary + " (" + values.map(fmt_logmsg).join(", ") + ")",
           };
         } else {
           return {
-            summary: grand_total + " damage (" + damage.map(fmt_summary).join(", ") + ")",
-            logmsg: grand_total + " damage (" + damage.map(fmt_logmsg).join(", ") + ")",
+            summary: grand_total + " damage (" + values.map(fmt_summary).join(", ") + ")",
+            logmsg: grand_total + " damage (" + values.map(fmt_logmsg).join(", ") + ")",
           };
         }
       }
@@ -220,6 +237,7 @@
                 h("th", {"class": "vantage"}, "Adv"),
                 h("th", {"class": "vantage"}, "Dis"),
                 h("th", null, ""),
+                h("th", null, ""),
               ),
               Array.from(this.generate_attacks(player.attacks))
             ),
@@ -233,22 +251,33 @@
           super();
           this.state.advantage = false;
           this.state.disadvantage = false;
+          this.state.conditions = new Map();
+          console.log('reset state');
           this.roll = this.roll.bind(this);
+          this.toggle_condition = this.toggle_condition.bind(this);
         };
 
         roll(ev) {
           ev.preventDefault();
           let {tohit, damage, secondary} = this.props.attack;
           let {score, rolls, critical} = roll_hit(tohit, this.state.advantage, this.state.disadvantage, 20);
-          let rolled_damage = Array.from(roll_damage(damage, critical));
-          let {summary, logmsg} = DamageResult(rolled_damage);
+          let base_damage = Array.from(roll_damage(damage, critical));
+          let all_damage = [base_damage]
 
+          for (let [condition, active] of this.state.conditions) {
+            if (active) {
+              let condition_damage = Array.from(roll_damage(this.props.attack.conditions[condition], critical));
+              all_damage.push(condition_damage);
+            }
+          }
+
+          let {summary, logmsg} = DamageResult(all_damage);
           let log = `Hit ${score} (${rolls.join()}) for ${logmsg}`;
           let results = [`Hit ${score} for ${summary}`];
 
           if (secondary) {
             let secondary_damage = Array.from(roll_damage(secondary, critical))
-            let {summary, logmsg} = DamageResult(secondary_damage);
+            let {summary, logmsg} = DamageResult([secondary_damage]);
             results.push(`Secondary damage: ${summary}`);
             log += `, secondary damage: ${logmsg}`;
           }
@@ -256,20 +285,41 @@
           this.props.record(results, log);
         }
 
+        toggle_condition(condition) {
+          let new_conditions = this.state.conditions;
+          new_conditions.set(condition, !new_conditions.get(condition));
+          console.log(new_conditions);
+          this.setState({conditions: new_conditions});
+        }
+
         render({attack}) {
-          var {name, tohit, damage, secondary} = attack;
+          console.log(this);
+          console.log(this.state.conditions);
+          let conditions = attack.conditions || {};
+          let condition_elements = Object.keys(conditions).map((c) => (
+            h("div", null,
+              h("input", {
+                type: "checkbox",
+                checked: this.state.conditions.get(c),
+                id: attack.name.replace(" ", "_") + "_" + c,
+                onclick: () => this.toggle_condition(c),
+              }),
+              h("label", {for: attack.name.replace(" ", "_") + "_" + c}, c),
+            )
+          ));
           return h("tr", null,
-            h("td", {"class": "name"}, name),
-            h("td", {"class": "vantage"}, h("input", {type: "checkbox", onclick: () => this.setState({advantage: !this.state.advantage})})),
-            h("td", {"class": "vantage"}, h("input", {type: "checkbox", onclick: () => this.setState({disadvantage: !this.state.disadvantage})})),
+            h("td", {"class": "name"}, attack.name),
+            h("td", {"class": "vantage"}, h("input", {type: "checkbox", checked: this.state.advantage, onclick: () => this.setState({advantage: !this.state.advantage})})),
+            h("td", {"class": "vantage"}, h("input", {type: "checkbox", checked: this.state.disadvantage, onclick: () => this.setState({disadvantage: !this.state.disadvantage})})),
             h("td", {"class": "action"} , h("input", {type: "button", name: "attack", value: "Athack", onclick: this.roll})),
+            h("td", {"class": "conditions"}, condition_elements),
           );
         }
       }
 
       const AttackDescription = ({tohit, damage, secondary}) => (
         h("tr", null,
-          h("td", {colspan: 4, "class": "description"}, "+" + tohit + " to hit, " + DamageText(damage) + " " + (secondary ? "(" + DamageText(secondary) + ")" : "")),
+          h("td", {colspan: 5, "class": "description"}, "+" + tohit + " to hit, " + DamageText(damage) + " " + (secondary ? "(" + DamageText(secondary) + ")" : "")),
         )
       )
 
@@ -281,11 +331,13 @@
               name: "Sun Blade",
               tohit: 8,
               damage: {radiant: "d8+5"},
+              conditions: {Undead: {radiant: "d8"}}
             }, {
               name: "Green Flame Blade",
               tohit: 8,
               damage: {radiant: "d8+5", fire: "d8"},
-              secondary: {fire: "d8+4"}
+              secondary: {fire: "d8+4"},
+              conditions: {Undead: {radiant: "d8"}}
             }, {
               name: "Booming Blade",
               tohit: 8,
@@ -293,7 +345,8 @@
                 radiant: "d8+5",
                 thunder: "d8",
               },
-              secondary: {thunder: "2d8"}
+              secondary: {thunder: "2d8"},
+              conditions: {Undead: {radiant: "d8"}}
             }, {
               name: "Firebolt",
               tohit: 7,
@@ -307,15 +360,27 @@
             {
               name: "Hand Crossbow",
               tohit: 9,
-              damage: {piercing: "d6+4"}
+              damage: {piercing: "d6+4"},
+              conditions: {
+                "Hunters Mark": {piercing: "d6"},
+                "Favored Enemy": {piercing: "4"},
+              }
             }, {
               name: "+1 Longbow",
               tohit: 10,
-              damage: {"magical piercing": "d8+5"}
+              damage: {"magical piercing": "d8+5"},
+              conditions: {
+                "Hunters Mark": {"magical piercing": "d6"},
+                "Favored Enemy": {"magical piercing": "4"},
+              }
             }, {
               name: "Oathbow",
               tohit: 9,
-              damage: {"magical piercing": "d8+5"}
+              damage: {"magical piercing": "d8+5"},
+              conditions: {
+                "Hunters Mark": {"magical piercing": "d6"},
+                "Favored Enemy": {"magical piercing": "4"},
+              }
             }
           ],
         },
@@ -339,15 +404,18 @@
             {
               name: "Giant Slayer Halberd",
               tohit: 8,
-              damage: {"magical slashing": "d10+5"}
+              damage: {"magical slashing": "d10+5"},
+              conditions: {Giants: {"magical slashing": "2d6"}}
             }, {
               name: "Giant Slayer Halberd Butt",
               tohit: 8,
-              damage: {"magical piercing": "d4+5"}
+              damage: {"magical bludgeoning": "d4+5"},
+              conditions: {Giants: {"magical bludgeoning": "2d6"}}
             }, {
               name: "Javelin of Lightning",
               tohit: 7,
-              damage: {"magical piercing": "d6+4", lightning: "4d6"}
+              damage: {"magical piercing": "d6+4", lightning: "4d6"},
+              secondary: {lightning: "4d6"}
             }, {
               name: "Javelin",
               tohit: 7,
