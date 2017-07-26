@@ -152,6 +152,10 @@
         }
       }
 
+      function compose_id(...fragments) {
+        return fragments.map((f) => f.split(" ").join("_")).join("_");
+      }
+
 
       const MapObject = (obj, f) => (
         Object.keys(obj).filter((k) => k !== "children")).map((k) => f(k, obj[k])
@@ -224,13 +228,13 @@
         // workaround for only being able to render single nodes.
         *generate_attacks(attacks) {
           for (let attack of attacks) {
-            yield h(Attack, {attack: attack, record: this.props.record});
+            yield h(Attack, {attack: attack, player_name: this.props.player.name, record: this.props.record});
             yield h(AttackDescription, attack);
             yield h('tr', {"class": "spacer"}, h('td', {colspan: 4}));
           }
         }
         render({player, result}) {
-          return h("section", {"class": "player", id: player.name},
+          return h("section", {"class": "player", id: compose_id(player.name)},
             h("table", null,
               h("tr", null,
                 h("th", null),
@@ -249,14 +253,18 @@
       class Attack extends Component {
         constructor() {
           super();
-          this.state.advantage = false;
-          this.state.disadvantage = false;
-          this.state.conditions = new Map();
-          console.log('reset state');
+          this.reset();
           this.roll = this.roll.bind(this);
           this.toggle_condition = this.toggle_condition.bind(this);
         };
-
+        reset() {
+          this.setState({
+            advantage: false,
+            disadvantage: false,
+            conditions: new Map(),
+          });
+          console.log('reset state');
+        }
         roll(ev) {
           ev.preventDefault();
           let {tohit, damage, secondary} = this.props.attack;
@@ -266,7 +274,8 @@
 
           for (let [condition, active] of this.state.conditions) {
             if (active) {
-              let condition_damage = Array.from(roll_damage(this.props.attack.conditions[condition], critical));
+              let conditions = this.props.attack.conditions || {};
+              let condition_damage = Array.from(roll_damage(conditions[condition], critical));
               all_damage.push(condition_damage);
             }
           }
@@ -292,28 +301,44 @@
           this.setState({conditions: new_conditions});
         }
 
-        render({attack}) {
-          console.log(this);
+        render({attack, player_name}) {
+          console.log('render');
           console.log(this.state.conditions);
+          let id = compose_id(player_name, attack.name);
           let conditions = attack.conditions || {};
           let condition_elements = Object.keys(conditions).map((c) => (
             h("div", null,
               h("input", {
                 type: "checkbox",
                 checked: this.state.conditions.get(c),
-                id: attack.name.replace(" ", "_") + "_" + c,
+                id: compose_id(player_name, attack.name, c, 'checkbox'),
                 onclick: () => this.toggle_condition(c),
               }),
-              h("label", {for: attack.name.replace(" ", "_") + "_" + c}, c),
+              h("label", {for: compose_id(player_name, attack.name, c)}, c),
             )
           ));
-          return h("tr", null,
+          let x = h("tr", {id: id, key: id},
             h("td", {"class": "name"}, attack.name),
-            h("td", {"class": "vantage"}, h("input", {type: "checkbox", checked: this.state.advantage, onclick: () => this.setState({advantage: !this.state.advantage})})),
-            h("td", {"class": "vantage"}, h("input", {type: "checkbox", checked: this.state.disadvantage, onclick: () => this.setState({disadvantage: !this.state.disadvantage})})),
+            h("td", {"class": "vantage"}, h("input", {
+              type: "checkbox",
+              checked: this.state.advantage,
+              id: compose_id(player_name, attack.name, 'advantage'),
+              name: compose_id(player_name, attack.name, 'advantage'),
+              onclick: () => this.setState({advantage: !this.state.advantage})
+            })),
+            h("td", {"class": "vantage"}, h("input", {
+              type: "checkbox",
+              id: compose_id(player_name, attack.name, 'disadvantage'),
+              key: compose_id(player_name, attack.name, 'disadvantage'),
+              name: compose_id(player_name, attack.name, 'disadvantage'),
+              checked: this.state.disadvantage,
+              onclick: () => this.setState({disadvantage: !this.state.disadvantage})
+            })),
             h("td", {"class": "action"} , h("input", {type: "button", name: "attack", value: "Athack", onclick: this.roll})),
             h("td", {"class": "conditions"}, condition_elements),
           );
+          console.log(x.key);
+          return x;
         }
       }
 
