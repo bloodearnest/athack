@@ -67,10 +67,10 @@ class Party extends Component {
   }
   render(players, {current, log}) {
     return h("main", null,
-        h("nav", null, MapObject(players, (index, player) => h("label", {"class": current == index ? "current" : "", onclick: () => {this.setState({current: index});}}, player.name))),
-        h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
-        h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
-        );
+      h("nav", null, MapObject(players, (index, player) => h("label", {"class": current == index ? "current" : "", onclick: () => {this.setState({current: index});}}, player.name))),
+      h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
+      h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
+    );
 
   }
 }
@@ -91,9 +91,9 @@ class Player extends Component {
   }
   render({player, result}) {
     return h("section", {"class": "player", id: compose_id(player.name)},
-        h("table", null,  Array.from(this.generate_attacks(player.attacks))),
-        h("div", {"class": "result"}, result.map((r) => h("p", null, r))),
-        );
+      Array.from(this.generate_attacks(player.attacks)),
+      h("div", {"class": "result"}, result.map((r) => h("p", null, r))),
+    );
   }
 }
 
@@ -131,10 +131,7 @@ class Attack extends Component {
   }
 
   render_switch (id, text, checked, onclick) {
-    return h("div", {class: "switch"},
-        h("input", {type: "checkbox", checked: checked, id: id, name: id, onclick: onclick}),
-        h("label", {"class": "condition", for: id}, text),
-        );
+    return h("span", {"class": "condition " + (checked ? 'active' : ''), onclick: onclick}, text);
   }
 
   render({attack, player_name}) {
@@ -150,12 +147,14 @@ class Attack extends Component {
             () => this.toggle_condition(c),
             )
           ));
-    return h("tr", {id: id},
-        h("td", null,
-          h("p", {"class": "name"}, attack.name),
-          h("p", {"class": "description"}, AttackDescription(attack)),
-         ),
-        h("td", {"class": "vantage"},
+    return h("article", {id: id, class: "attack"},
+      h("span", {"class": "text"},
+        h("p", {"class": "name"}, attack.name),
+        h("p", {"class": "description"}, AttackDescription(attack)),
+      ),
+      h("span", {"class": "buttons"},
+        h("span", {"class": "conditions"}, condition_elements),
+        h("span", {"class": "conditions"},
           this.render_switch(
             compose_id(player_name, attack.name, 'advantage'),
             'Advantage',
@@ -174,10 +173,10 @@ class Attack extends Component {
             this.state.autocrit,
             () => this.setState({autocrit: !this.state.autocrit})
             ),
-         ),
-        h("td", {"class": "conditions"}, condition_elements),
-        h("td", {"class": "action"} , h("span", {onclick: this.roll}, "@")),
-        );
+        ),
+        h("span", {"class": "action", onclick: this.roll}, "@"),
+      )
+    );
   }
 }
 
