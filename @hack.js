@@ -1,6 +1,6 @@
 'use strict';
 
-const { h, render, Component } = (window || global).preact;
+const { h, render, Component } = window.preact;
 
 function compose_id(...fragments) {
   return fragments.map((f) => f.split(" ").join("_")).join("_");
