@@ -66,12 +66,17 @@ class Party extends Component {
   record(results, logmsg) {
     let new_state = this.state;
     new_state.result[this.state.current] = results;
-    new_state.log.unshift(this.props[this.state.current].name + ": " + logmsg);
+    let msg = this.props[this.state.current].name + ": " + logmsg;
+    new_state.log.unshift(msg);
+    console.log(msg);
     this.setState(new_state);
   }
   render(players, {current, log}) {
     return h("main", null,
-      h("select", {onchange: (this.select)}, MapObject(players, (index, player) => h("option", null, player.name))),
+      h("nav", null,
+        h("span", null, ">"),
+        h("select", {onchange: (this.select)}, MapObject(players, (index, player) => h("option", null, player.name)))
+      ),
       h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
     );
