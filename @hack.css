@@ -6,6 +6,9 @@ body {
   width: 100%;
 }
 
+main {
+  margin-bottom: 12rem;
+}
 nav * {
   font-family: MrJeeves;
   font-weight: 800;
