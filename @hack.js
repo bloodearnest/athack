@@ -58,6 +58,10 @@ class Party extends Component {
     this.state.log = [];
     this.state.result = {};
     this.record = this.record.bind(this);
+    this.select = this.select.bind(this);
+  }
+  select(event) {
+    this.setState({current: event.target.selectedIndex});
   }
   record(results, logmsg) {
     let new_state = this.state;
@@ -67,7 +71,7 @@ class Party extends Component {
   }
   render(players, {current, log}) {
     return h("main", null,
-      h("nav", null, MapObject(players, (index, player) => h("label", {"class": current == index ? "current" : "", onclick: () => {this.setState({current: index});}}, player.name))),
+      h("select", {onchange: (this.select)}, MapObject(players, (index, player) => h("option", null, player.name))),
       h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
     );
