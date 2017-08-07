@@ -106,6 +106,37 @@ function *roll_damage(damage_data, die_func, critical) {
   }
 }
 
+function DamageResult(damages) {
+  // merge all damages together
+  let damage = new Map();
+  for (let d of damages) {
+    for (let result of d) {
+      let type = result.type;
+      if (damage.has(type)) {
+        let merged = damage.get(type);
+        merged.total += result.total;
+        merged.text += "+" + result.text;
+        merged.rolls = merged.rolls.concat(result.rolls);
+        damage.set(type, merged);
+      } else {
+        damage.set(type, result);
+      }
+    }
+  }
+  let values = Array.from(damage.values());
+  let grand_total = Array.from(values).reduce((a, {total}) => a + total, 0);
+  let fmt_summary = ({total, type}) => `${total} ${type}`;
+  let single_summary = ({total, type}) => `${type}`;
+  let fmt_logmsg  = ({total, type, text, rolls}) => `${text} (${rolls.join()}) = ${total} ${type}`;
+  if (values.length === 1) {
+    fmt_summary = ({total, type}) => `${type}`;
+  }
+  return {
+    summary: grand_total + " damage (" + values.map(fmt_summary).join(", ") + ")",
+    logmsg: grand_total + " damage (" + values.map(fmt_logmsg).join(", ") + ")",
+  };
+}
+
 function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   let {tohit, damage, secondary, rules} = attack;
   conditions = conditions || {};
@@ -136,9 +167,9 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   }
 
   let {summary, logmsg} = DamageResult(all_damage);
-  let hit = critical ? "💪 CRITICAL HIT! " : `Hit ${score} `;
+  let hit = critical ? "CRITICAL! " : `Hit ${score} for `;
   let log = `${hit} (${rolls.join()}) for ${logmsg}`;
-  let results = [`${hit} for ${summary}`]
+  let results = [`${hit} ${summary}`]
 
   if (secondary) {
     let secondary_damage = Array.from(roll_damage(secondary, die_func, damage_critical));

@@ -16,41 +16,6 @@ const DamageText = (damage) => (
 )
 
 
-function DamageResult(damages) {
-  // merge all damages together
-  let damage = new Map();
-  for (let d of damages) {
-    for (let result of d) {
-      let type = result.type;
-      if (damage.has(type)) {
-        let merged = damage.get(type);
-        merged.total += result.total;
-        merged.text += "+" + result.text;
-        merged.rolls = merged.rolls.concat(result.rolls);
-        damage.set(type, merged);
-      } else {
-        damage.set(type, result);
-      }
-    }
-  }
-  let values = Array.from(damage.values());
-  let grand_total = Array.from(values).reduce((a, {total}) => a + total, 0);
-  let fmt_summary = ({total, type}) => `${total} ${type}`;
-  let fmt_logmsg  = ({total, type, text, rolls}) => `${text} (${rolls.join()}) = ${total} ${type}`;
-  if (values.length === 1) {
-    let summary = grand_total + " " + values[0]["type"] + " damage";
-    return {
-      summary: summary,
-      logmsg: summary + " (" + values.map(fmt_logmsg).join(", ") + ")",
-    };
-  } else {
-    return {
-      summary: grand_total + " damage (" + values.map(fmt_summary).join(", ") + ")",
-      logmsg: grand_total + " damage (" + values.map(fmt_logmsg).join(", ") + ")",
-    };
-  }
-}
-
 class Party extends Component {
   constructor() {
     super();
