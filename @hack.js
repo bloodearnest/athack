@@ -106,7 +106,6 @@ class Attack extends Component {
       autocrit: false,
       conditions: new Map(),
     });
-    console.log('reset state');
 
     this.roll = this.roll.bind(this);
     this.toggle_condition = this.toggle_condition.bind(this);
@@ -126,7 +125,6 @@ class Attack extends Component {
   toggle_condition(condition) {
     let new_conditions = this.state.conditions;
     new_conditions.set(condition, !new_conditions.get(condition));
-    console.log(new_conditions);
     this.setState({conditions: new_conditions});
   }
 
@@ -135,8 +133,6 @@ class Attack extends Component {
   }
 
   render({attack, player_name}) {
-    console.log('render');
-    console.log(this.state.conditions);
     let id = compose_id(player_name, attack.name);
     let conditions = attack.conditions || {};
     let condition_elements = Object.keys(conditions).map((c) => (
