@@ -127,7 +127,10 @@ const player_data = [
     {
       name: "Eldritch Blast",
       tohit: 7,
-      damage: {force: "d10"}
+      damage: {force: "d10"},
+      conditions: {
+        "Hex": {"necrotic": "d6"},
+      }
     },
     ],
   },
