@@ -40,7 +40,7 @@ class Party extends Component {
     return h("main", null,
       h("nav", null,
         h("span", null, ">"),
-        h("select", {onchange: (this.select)}, MapObject(players, (index, player) => h("option", null, player.name)))
+        h("select", {onchange: (this.select)}, MapObject(players, (index, player) => h("option", null, player.name))),
       ),
       h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),

@@ -174,7 +174,7 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   if (secondary) {
     let secondary_damage = Array.from(roll_damage(secondary, die_func, damage_critical));
     let {summary, logmsg} = DamageResult([secondary_damage]);
-    results.push(`Secondary damage: ${summary}`);
+    results.push(`Secondary: ${summary}`);
     log += `, secondary damage: ${logmsg}`;
   }
 
