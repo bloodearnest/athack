@@ -6,6 +6,16 @@ body {
   width: 100%;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 main {
   margin-bottom: 12rem;
 }
@@ -40,7 +50,8 @@ nav select {
 .text {
   margin-left: 0.5rem;
   margin-top: 0.5rem;
-  overflow-y: scroll;
+  max-height: 12.5rem;
+  overflow-y: auto;
 }
 
 .name {
@@ -112,8 +123,43 @@ nav select {
   min-height: 6rem;
   font-size: 4rem;
   bottom: 0;
-  text-align: center;
   background: white;
   border-top: 6px solid #58180D;
-  padding-top: .2rem;
+  padding-top: .3rem;
+  text-align: center;
+}
+
+.result .summary, .result .secondary {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.result .type {
+  font-size: 0.8em;
+  font-style: italic;
+  padding-left: 1rem;
+}
+
+.summary .result-part {
+  padding-left: 1rem;
+}
+
+.result .details.hide {
+  display: none;
+}
+
+.result .details.show {
+  display: block;
+}
+
+.result .details {
+  text-align: left;
+  font-size: 0.6em;
+  margin-left: 1rem;
+}
+
+.result .details p:first-letter {
+  text-transform:capitalize;
 }

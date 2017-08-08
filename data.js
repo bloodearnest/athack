@@ -54,7 +54,6 @@ const player_data = [
       name: "Oathbow",
       tohit: 9,
       damage: {"magical piercing": "d8+4"},
-      rules: {'some really cool shit': true},
       conditions: {
         "Hunters Mark": {"magical piercing": "d6"},
         "Favored Enemy": {"magical piercing": "4"},

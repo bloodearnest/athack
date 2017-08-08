@@ -8,13 +8,15 @@ Features:
 
 UI
 
- * Hide/show damage details 
  * Use ABBR or ACRO style popups for actual roll values
+ * Hide/show damage details 
  * Action/Bonus action grouping?
+ * Play sound when rolling dice
+ * Play sound on crit
 
 Technical:
 
- * Grid layout 
+ * Grid layout?
  * unit tests
  * prerender all attacks on load, use css to hide
  * Service worker for offline

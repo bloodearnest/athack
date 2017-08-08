@@ -63,37 +63,42 @@ class Damage {
 
   roll(die_func, critical) {
     let total = 0;
-    let rolls = [];
     let text = [];
+    let annotated = [];
 
     for (let {n, size} of this.parts) {
+      let rolls = [];
       if (n === 0) {
         // static bonus
         total += size;
         text.push(`${size}`);
+        annotated.push(`${size}`);
       } else {
+        let real_n = n;
         for (let i = 0; i < n; i++) {
           let roll = die_func(size);
           total += roll;
           rolls.push(roll);
         }
         if (critical) {
+          real_n = n * 2;
           for (let i = 0; i < n; i++) {
             let roll = CRIT_MAX ? size : die_func(size);
             total += roll;
             rolls.push(roll)
           }
-          text.push(`${n*2}d${size}`);
-        } else {
-          text.push(`${n}d${size}`);
         }
+
+        let t = `${real_n}d${size}`;
+        text.push(t);
+        annotated.push(`${t} (${rolls.join()})`);
       }
     }
     return {
       type: this.type,
       total: total,
-      rolls: rolls,
-      text: text
+      text: text,
+      annotated: annotated,
     }
   }
 }
@@ -107,33 +112,23 @@ function *roll_damage(damage_data, die_func, critical) {
 }
 
 function DamageResult(damages) {
-  // merge all damages together
-  let damage = new Map();
-  for (let d of damages) {
+  let damage_by_type = new Map();
+  let grand_total = 0;
+
+  // calculate per damage type summary
+  for (let [condition, d] of damages) {
     for (let result of d) {
       let type = result.type;
-      if (damage.has(type)) {
-        let merged = damage.get(type);
-        merged.total += result.total;
-        merged.text += "+" + result.text;
-        merged.rolls = merged.rolls.concat(result.rolls);
-        damage.set(type, merged);
-      } else {
-        damage.set(type, result);
-      }
+      let total = damage_by_type.has(type) ? damage_by_type.get(type) : 0;
+      damage_by_type.set(type, total + result.total);
+      grand_total += result.total;
     }
   }
-  let values = Array.from(damage.values());
-  let grand_total = Array.from(values).reduce((a, {total}) => a + total, 0);
-  let fmt_summary = ({total, type}) => `${total} ${type}`;
-  let single_summary = ({total, type}) => `${type}`;
-  let fmt_logmsg  = ({total, type, text, rolls}) => `${text} (${rolls.join()}) = ${total} ${type}`;
-  if (values.length === 1) {
-    fmt_summary = ({total, type}) => `${type}`;
-  }
+
   return {
-    summary: grand_total + " damage (" + values.map(fmt_summary).join(", ") + ")",
-    logmsg: grand_total + " damage (" + values.map(fmt_logmsg).join(", ") + ")",
+    total: grand_total,
+    components: damages,
+    types: damage_by_type,
   };
 }
 
@@ -141,20 +136,15 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   let {tohit, damage, secondary, rules} = attack;
   conditions = conditions || {};
   rules = rules || {};
+  let all_damage = new Map();
 
-  const {score, rolls, critical, miss} = roll_hit(tohit, advantage, disadvantage, rules);
-
-  if (miss) {
-    return {
-      results: ["Missed :("],
-      log: `Missed with a 1! (${rolls.join()})`,
-    }
-  }
+  const hit = roll_hit(tohit, advantage, disadvantage, rules);
+  const {score, rolls, critical, miss} = hit;
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
   let damage_critical = autocrit || critical;
   let base_damage = Array.from(roll_damage(damage, die_func, damage_critical));
-  let all_damage = [base_damage];
+  all_damage.set("Attack", base_damage);
 
   for (let [condition, active] of conditions) {
     if (active) {
@@ -162,24 +152,20 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
       let condition_damage = Array.from(
         roll_damage(attack_conditions[condition], die_func, damage_critical)
       );
-      all_damage.push(condition_damage);
+      all_damage.set(condition, condition_damage);
     }
   }
 
-  let {summary, logmsg} = DamageResult(all_damage);
-  let hit = critical ? "CRITICAL! " : `Hit ${score} for `;
-  let log = `${hit} (${rolls.join()}) for ${logmsg}`;
-  let results = [`${hit} ${summary}`]
-
+  let secondary_damage = new Map();
   if (secondary) {
-    let secondary_damage = Array.from(roll_damage(secondary, die_func, damage_critical));
-    let {summary, logmsg} = DamageResult([secondary_damage]);
-    results.push(`Secondary: ${summary}`);
-    log += `, secondary damage: ${logmsg}`;
+    // TODO: does critical always affect secondary damage?
+    secondary_damage.set('secondary', Array.from(roll_damage(secondary, die_func, damage_critical)));
   }
 
   return {
-    results: results,
-    log: log,
-  };
+    attack: attack,
+    hit: hit,
+    damage: DamageResult(all_damage),
+    secondary: secondary ? DamageResult(secondary_damage) : null,
+  }
 }

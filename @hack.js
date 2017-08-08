@@ -6,6 +6,11 @@ function compose_id(...fragments) {
   return fragments.map((f) => f.split(" ").join("_")).join("_");
 }
 
+// oh ffs, javascript. This should not be necessary.
+function mmap(map, func) {
+  return Array.from(map.entries()).map(([key, value]) => func(key, value));
+}
+
 
 const MapObject = (obj, f) => (
   Object.keys(obj).filter((k) => k !== "children")).map((k) => f(k, obj[k])
@@ -15,6 +20,9 @@ const DamageText = (damage) => (
   damage === undefined ? "" : Object.keys(damage).map((k => damage[k] + " " + k)).join(" + ")
 )
 
+const log_message = (name, result) => {
+  return name + ": " + result.total;
+}
 
 class Party extends Component {
   constructor() {
@@ -28,10 +36,10 @@ class Party extends Component {
   select(event) {
     this.setState({current: event.target.selectedIndex});
   }
-  record(results, logmsg) {
+  record(result) {
     let new_state = this.state;
-    new_state.result[this.state.current] = results;
-    let msg = this.props[this.state.current].name + ": " + logmsg;
+    new_state.result[this.state.current] = result;
+    let msg = log_message(this.props[this.state.current].name, result);
     new_state.log.unshift(msg);
     console.log(msg);
     this.setState(new_state);
@@ -66,7 +74,81 @@ class Player extends Component {
   render({player, result}) {
     return h("section", {"class": "player", id: compose_id(player.name)},
       Array.from(this.generate_attacks(player.attacks)),
-      h("div", {"class": "result"}, result.map((r) => h("p", null, r))),
+      result.hit ? h(Result, {result: result, key: result}) : h('div', {'class': 'result'}),
+    );
+  }
+}
+
+
+class Result extends Component {
+  constructor() {
+    super();
+    this.state.details = false;
+    this.toggle = this.toggle.bind(this);
+    this.secondary = this.secondary.bind(this);
+  }
+
+  toggle() {
+    this.setState({details: !this.state.details});
+  }
+
+  resultPart(text) {
+    return h('span', {"class": "result-part"}, text);
+  }
+
+  details(hit, damage, secondary, attack) {
+    let hit_details = `(${hit.rolls.join()}) + ${attack.tohit}`;
+
+    let fmt = (condition, damages) => {
+      let dam = damages.map((d) => `${d.annotated.join(" + ")} ${d.type}`).join(', ');
+      return h('p', null, `${condition}: ${dam}`);
+    }
+
+    let damage_text = mmap(damage.components, fmt);
+
+    if (secondary) {
+       damage_text = damage_text.concat(mmap(secondary.components, fmt));
+    }
+
+    return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},
+      h('p', null, "Hit: " + hit_details),
+      damage_text,
+    );
+  }
+
+  secondary(damage) {
+    return h('div', {'class': 'secondary', onclick: this.toggle},
+      `Secondary: ${damage.total} damage`,
+      this.typeSummary(damage.types),
+    );
+  }
+
+  typeSummary(types) {
+    let type_fmt = types.size == 1 ? (type, total) => `${type}` : (type, total) => `${total} ${type}`;
+    return h('span', {'class': 'type'}, "(",  mmap(types, type_fmt).join(", "), ")");
+  }
+
+  render({result}) {
+    let {hit, damage, secondary, attack} = result;
+
+    let hit_result = null;
+    if (hit.miss) {
+      hit_result = this.resultPart("Miss!");
+    }
+    else if (hit.critical) {
+      hit_result = this.resultPart("CRITICAL:");
+    }
+    else {
+      hit_result = this.resultPart("Hit " + hit.score + " for");
+    }
+
+    return h('div', {"class": "result"},
+      h('div', {'class': 'summary', onclick: this.toggle},
+        hit_result,
+        hit.miss ? "" : this.resultPart(damage.total + " damage"),
+        hit.miss ? "" : this.typeSummary(damage.types)),
+      secondary ? this.secondary(secondary) : "",
+      this.details(hit, damage, secondary, attack),
     );
   }
 }
@@ -86,14 +168,14 @@ class Attack extends Component {
   };
   roll(ev) {
     ev.preventDefault();
-    let {results, log} = roll_attack(
+    let result = roll_attack(
       this.props.attack,
       this.state.advantage,
       this.state.disadvantage,
       this.state.autocrit,
       this.state.conditions,
     );
-    this.props.record(results, log);
+    this.props.record(result);
   }
 
   toggle_condition(condition) {
@@ -144,7 +226,7 @@ class Attack extends Component {
             () => this.setState({autocrit: !this.state.autocrit})
             ),
         ),
-        h("span", {"class": "action", onclick: this.roll}, "@"),
+        h("span", {"class": "action noselect", onclick: this.roll}, "@"),
       )
     );
   }
