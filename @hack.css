@@ -122,12 +122,13 @@ nav select {
   width: 100%;
   height: -moz-min-content;
   height: min-content;
-  min-height: 6rem;
+  min-height: 4rem;
   font-size: 4rem;
   bottom: 0;
   background: white;
   border-top: 6px solid #58180D;
-  padding-top: .3rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
   text-align: center;
 }
 

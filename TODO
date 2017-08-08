@@ -3,13 +3,11 @@ Features:
  * GWM/sharpshooter
  * Spells w/DC (just roll damage)
  * Other actions requiring rolls (grapple, push, shove, tumble, etc)
- * List standard actions, but no rolls (dodge, disengage, dash)
+ * List standard actions, but no rolls (dodge, disengage, dash)?
  * General character info (level, abilities, skills, prof)
 
 UI
 
- * Use ABBR or ACRO style popups for actual roll values
- * Hide/show damage details 
  * Action/Bonus action grouping?
  * Play sound when rolling dice
  * Play sound on crit

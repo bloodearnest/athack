@@ -10,7 +10,7 @@ const player_data = [
       damage: {radiant: "d8+5"},
       conditions: {
         Undead: {radiant: "d8"},
-        "Green Flame Blade": {fire: "d8", secondary: {fire: "d8+4"}},
+        "Green Flame": {fire: "d8", secondary: {fire: "d8+4"}},
         "Booming Blade": {thunder: "d8", secondary: {thunder:"2d8"}},
       }
     }, {

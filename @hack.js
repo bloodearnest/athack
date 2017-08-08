@@ -110,7 +110,7 @@ class Result extends Component {
        damage_text = damage_text.concat(mmap(secondary.components, fmt).map((d) => h('p', null, 'Secondary ' + d)));
     }
 
-    return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},
+    return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide'), onclick: this.toggle},
       h('p', null, "Hit: " + hit_details),
       damage_text,
     );
