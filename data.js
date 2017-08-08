@@ -8,22 +8,11 @@ const player_data = [
       name: "Sun Blade",
       tohit: 8,
       damage: {radiant: "d8+5"},
-      conditions: {Undead: {radiant: "d8"}}
-    }, {
-      name: "Green Flame Blade",
-      tohit: 8,
-      damage: {radiant: "d8+5", fire: "d8"},
-      secondary: {fire: "d8+4"},
-      conditions: {Undead: {radiant: "d8"}}
-    }, {
-      name: "Booming Blade",
-      tohit: 8,
-      damage: {
-        radiant: "d8+5",
-        thunder: "d8",
-      },
-      secondary: {thunder: "2d8"},
-      conditions: {Undead: {radiant: "d8"}}
+      conditions: {
+        Undead: {radiant: "d8"},
+        "Green Flame Blade": {fire: "d8", secondary: {fire: "d8+4"}},
+        "Booming Blade": {thunder: "d8", secondary: {thunder:"2d8"}},
+      }
     }, {
       name: "Firebolt",
       tohit: 7,
@@ -68,7 +57,10 @@ const player_data = [
     {
       name: "Flame Tongue Greatsword",
       tohit: 8,
-      damage: {"magical slashing": "2d6+5", fire: "2d6"},
+      damage: {"magical slashing": "2d6+5"},
+      conditions: {
+        'Flame Tongue': {fire: "2d6"},
+      },
       rules: {"Great Weapon Fighting": true}
     }, {
       name: "Javelin",
@@ -85,13 +77,23 @@ const player_data = [
       tohit: 8,
       damage: {"magical slashing": "d10+5"},
       rules: {"Improved Critical": 19},
-      conditions: {Giants: {"magical slashing": "2d6"}}
+      conditions: {
+        "Giant": {"magical slashing": "2d6"},
+        "Trip Attack": {"magical slashing": "d8"},
+        "Goading Attack": {"magical slashing": "d8"},
+        "Sweeping Attack": {secondary: {"magical slashing": "d8"}},
+      }
     }, {
       name: "Giant Slayer Halberd Butt",
       tohit: 8,
       damage: {"magical bludgeoning": "d4+5"},
+      conditions: {
+        "Giant": {"magical bludgeoning": "2d6"},
+        "Trip Attack": {"magical bludgeoning": "d8"},
+        "Goading Attack": {"magical bludgeoning": "d8"},
+        "Sweeping Attack": {secondary: {"magical bludgeoning": "d8"}},
+      },
       rules: {"Improved Critical": 19},
-      conditions: {Giants: {"magical bludgeoning": "2d6"}}
     }, {
       name: "Javelin of Lightning",
       tohit: 7,

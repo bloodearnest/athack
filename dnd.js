@@ -106,6 +106,8 @@ class Damage {
 
 function *roll_damage(damage_data, die_func, critical) {
   for (let type in damage_data) {
+    if (type == "secondary")
+        continue;
     let damage = new Damage(type, damage_data[type]);
     yield damage.roll(die_func, critical);
   }
@@ -133,39 +135,49 @@ function DamageResult(damages) {
 }
 
 function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
-  let {tohit, damage, secondary, rules} = attack;
   conditions = conditions || {};
-  rules = rules || {};
+  let rules = attack.rules || {};
   let all_damage = new Map();
+  let secondary_damage = new Map();
+  let secondaries = new Map();
 
-  const hit = roll_hit(tohit, advantage, disadvantage, rules);
+  const hit = roll_hit(attack.tohit, advantage, disadvantage, rules);
   const {score, rolls, critical, miss} = hit;
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
   let damage_critical = autocrit || critical;
-  let base_damage = Array.from(roll_damage(damage, die_func, damage_critical));
+  let base_damage = Array.from(roll_damage(attack.damage, die_func, damage_critical));
   all_damage.set("Attack", base_damage);
+
+  if (attack.damage.secondary) {
+    secondaries.set("Attack", attack.damage.secondary);
+  }
 
   for (let [condition, active] of conditions) {
     if (active) {
       let attack_conditions = attack.conditions || {};
+      let damage = attack_conditions[condition];
       let condition_damage = Array.from(
-        roll_damage(attack_conditions[condition], die_func, damage_critical)
+        roll_damage(damage, die_func, damage_critical)
       );
       all_damage.set(condition, condition_damage);
+      if (damage.secondary) {
+        secondaries.set(condition, damage.secondary);
+      }
     }
   }
 
-  let secondary_damage = new Map();
-  if (secondary) {
-    // TODO: does critical always affect secondary damage?
-    secondary_damage.set('secondary', Array.from(roll_damage(secondary, die_func, damage_critical)));
+  if (secondaries.size > 0) {
+    for (let [name, dam] of secondaries) {
+      // TODO: does critical always affect secondary damage?
+      secondary_damage.set(name, Array.from(roll_damage(dam, die_func, damage_critical)));
+    }
   }
 
   return {
     attack: attack,
     hit: hit,
     damage: DamageResult(all_damage),
-    secondary: secondary ? DamageResult(secondary_damage) : null,
+    secondary: secondaries.size > 0 ? DamageResult(secondary_damage) : null,
   }
 }

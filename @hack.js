@@ -101,13 +101,13 @@ class Result extends Component {
 
     let fmt = (condition, damages) => {
       let dam = damages.map((d) => `${d.annotated.join(" + ")} ${d.type}`).join(', ');
-      return h('p', null, `${condition}: ${dam}`);
+      return `${condition}: ${dam}`;
     }
 
-    let damage_text = mmap(damage.components, fmt);
+    let damage_text = mmap(damage.components, fmt).map((d) => h('p', null, d));
 
     if (secondary) {
-       damage_text = damage_text.concat(mmap(secondary.components, fmt));
+       damage_text = damage_text.concat(mmap(secondary.components, fmt).map((d) => h('p', null, 'Secondary ' + d)));
     }
 
     return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},

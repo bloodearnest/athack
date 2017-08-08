@@ -39,12 +39,14 @@ nav select {
 
 .attack {
   width: 100%;
-  height: 12.5rem;
+  height: -moz-min-content;
+  height: min-content;
   display: -webkit-flex;
   display: flex;
   border-bottom: 2px solid #58180D;
   justify-content: space-between;
   margin-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .text {
@@ -119,6 +121,7 @@ nav select {
 .result {
   position: fixed;
   width: 100%;
+  height: -moz-min-content;
   height: min-content;
   min-height: 6rem;
   font-size: 4rem;
