@@ -2,6 +2,8 @@
 // TODO: make this global houserule
 var CRIT_MAX = true;
 
+const SKIPPED = new Set(['secondary', 'effect', 'desc']);
+
 function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
 }
@@ -25,7 +27,7 @@ function roll_hit(bonus, advantage, disadvantage, rules) {
     rolls.push(die(20))
     hit = Math.min(...rolls);
   }
-  let critical_threshold = rules['Improved Critical'] || 20;
+  let critical_threshold = parseInt(rules['Improved Critical'] || '20');
   return {
     miss: hit === 1,
     score: hit + bonus,
@@ -97,6 +99,7 @@ class Damage {
     return {
       type: this.type,
       total: total,
+      half: Math.floor(total/2),  // for spells
       text: text,
       annotated: annotated,
     }
@@ -106,8 +109,9 @@ class Damage {
 
 function *roll_damage(damage_data, die_func, critical) {
   for (let type in damage_data) {
-    if (type == "secondary")
+    if (SKIPPED.has(type)) {
         continue;
+    }
     let damage = new Damage(type, damage_data[type]);
     yield damage.roll(die_func, critical);
   }
@@ -129,6 +133,7 @@ function DamageResult(damages) {
 
   return {
     total: grand_total,
+    half: Math.floor(grand_total/2),
     components: damages,
     types: damage_by_type,
   };
@@ -140,17 +145,27 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   let all_damage = new Map();
   let secondary_damage = new Map();
   let secondaries = new Map();
+  let effects = new Map();
+  let critical = false;
+  let damage_critical = false;
+  let hit = {miss: false};
 
-  const hit = roll_hit(attack.tohit, advantage, disadvantage, rules);
-  const {score, rolls, critical, miss} = hit;
+  // only roll attack if it is an actual attack
+  if (attack.tohit) {
+    hit = roll_hit(attack.tohit, advantage, disadvantage, rules);
+    damage_critical = autocrit || hit.critical;
+  }
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
-  let damage_critical = autocrit || critical;
   let base_damage = Array.from(roll_damage(attack.damage, die_func, damage_critical));
   all_damage.set("Attack", base_damage);
 
   if (attack.damage.secondary) {
     secondaries.set("Attack", attack.damage.secondary);
+  }
+
+  if (attack.damage.effect) {
+    effects.set("Attack", attack.damage.effect);
   }
 
   for (let [condition, active] of conditions) {
@@ -164,13 +179,18 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
       if (damage.secondary) {
         secondaries.set(condition, damage.secondary);
       }
+      if (damage.effect) {
+        effects.set(condition, damage.effect);
+      }
     }
   }
 
   if (secondaries.size > 0) {
     for (let [name, dam] of secondaries) {
       // TODO: does critical always affect secondary damage?
-      secondary_damage.set(name, Array.from(roll_damage(dam, die_func, damage_critical)));
+      let sec = Array.from(roll_damage(dam, die_func, damage_critical));
+      sec.desc = dam.desc
+      secondary_damage.set(name, sec)
     }
   }
 
@@ -179,5 +199,6 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
     hit: hit,
     damage: DamageResult(all_damage),
     secondary: secondaries.size > 0 ? DamageResult(secondary_damage) : null,
+    effects: effects.size > 0 ? effects : null,
   }
 }

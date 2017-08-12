@@ -166,3 +166,10 @@ nav select {
 .result .details p:first-letter {
   text-transform:capitalize;
 }
+
+.result .half-damage {
+  font-size: 0.8em;
+}
+.result .effects {
+  font-size: 0.7em;
+}

@@ -10,13 +10,45 @@ const player_data = [
       damage: {radiant: "d8+5"},
       conditions: {
         Undead: {radiant: "d8"},
-        "Green Flame": {fire: "d8", secondary: {fire: "d8+4"}},
-        "Booming Blade": {thunder: "d8", secondary: {thunder:"2d8"}},
+        "Green Flame": {
+            fire: "d8",
+            secondary: {fire: "d8+4", desc: 'to adjacent target'},
+        },
+        "Booming Blade": {
+            thunder: "d8",
+            secondary: {thunder:"2d8", desc: 'if they voluntarily move'},
+        },
       }
     }, {
       name: "Firebolt",
       tohit: 7,
       damage: {fire: "2d10"},
+    }, {
+      name: "Fireball",
+      save: '15 Dex',
+      damage: {fire: "8d6"},
+      conditions: {
+        'Level 4 Slot': {fire: "1d6"},
+      }
+    }, {
+      name: "Lightning Bolt",
+      save: '15 Dex',
+      damage: {lightning: "8d6"},
+      conditions: {
+        'Level 4 Slot': {lightning: "1d6"},
+      }
+    }, {
+      name: "Thunderwave",
+      save: '15 Con',
+      damage: {
+          thunder: "2d8",
+          effect: "Each creature in 15' cube pushed 10' away if they fail the save",
+      },
+      conditions: {
+        'Level 2 Slot': {thunder: "1d8"},
+        'Level 3 Slot': {thunder: "2d8"},
+        'Level 4 Slot': {thunder: "3d8"},
+      }
     }
     ],
   },
@@ -60,12 +92,19 @@ const player_data = [
       damage: {"magical slashing": "2d6+5"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
+        "Trip Attack": {"magical slashing": "d8"},
+        "Goading Attack": {"magical slashing": "d8"},
+        "Sweeping Attack": {secondary: {"magical slashing": "d8"}},
       },
       rules: {"Great Weapon Fighting": true}
     }, {
       name: "Javelin",
       tohit: 8,
-      damage: {piercing: "d6+5"}
+      damage: {piercing: "d6+5"},
+      conditions: {
+        "Trip Attack": {"magical slashing": "d8"},
+        "Goading Attack": {"magical slashing": "d8"},
+      },
     }
     ],
   },
@@ -76,12 +115,12 @@ const player_data = [
       name: "Giant Slayer Halberd",
       tohit: 8,
       damage: {"magical slashing": "d10+5"},
-      rules: {"Improved Critical": 19},
+      rules: {
+          "Improved Critical": 19,
+          "Great Weapon Fighting": true,
+      },
       conditions: {
         "Giant": {"magical slashing": "2d6"},
-        "Trip Attack": {"magical slashing": "d8"},
-        "Goading Attack": {"magical slashing": "d8"},
-        "Sweeping Attack": {secondary: {"magical slashing": "d8"}},
       }
     }, {
       name: "Giant Slayer Halberd Butt",
@@ -89,17 +128,20 @@ const player_data = [
       damage: {"magical bludgeoning": "d4+5"},
       conditions: {
         "Giant": {"magical bludgeoning": "2d6"},
-        "Trip Attack": {"magical bludgeoning": "d8"},
-        "Goading Attack": {"magical bludgeoning": "d8"},
-        "Sweeping Attack": {secondary: {"magical bludgeoning": "d8"}},
       },
-      rules: {"Improved Critical": 19},
+      rules: {
+          "Improved Critical": 19,
+          "Great Weapon Fighting": true,
+      },
     }, {
       name: "Javelin of Lightning",
       tohit: 7,
-      damage: {"magical piercing": "d6+4", lightning: "4d6"},
+      damage: {
+        "magical piercing": "d6+4",
+        lightning: "4d6",
+        secondary: {lightning: "4d6"}
+      },
       rules: {"Improved Critical": 19},
-      secondary: {lightning: "4d6"}
     }, {
       name: "Javelin",
       tohit: 7,

@@ -16,9 +16,12 @@ const MapObject = (obj, f) => (
   Object.keys(obj).filter((k) => k !== "children")).map((k) => f(k, obj[k])
 )
 
-const DamageText = (damage) => (
-  damage === undefined ? "" : Object.keys(damage).map((k => damage[k] + " " + k)).join(" + ")
-)
+const DamageText = (damage) => {
+  if (damage) {
+    return Object.keys(damage).filter((k) => !SKIPPED.has(k)).map((k => damage[k] + " " + k)).join(" + ");
+  }
+  return "";
+}
 
 const log_message = (name, result) => {
   return name + ": " + result.total;
@@ -97,7 +100,8 @@ class Result extends Component {
   }
 
   details(hit, damage, secondary, attack) {
-    let hit_details = `(${hit.rolls.join()}) + ${attack.tohit}`;
+
+    let hit_details = attack.save ? null : `(${hit.rolls.join()}) + ${attack.tohit}`;
 
     let fmt = (condition, damages) => {
       let dam = damages.map((d) => `${d.annotated.join(" + ")} ${d.type}`).join(', ');
@@ -110,17 +114,27 @@ class Result extends Component {
        damage_text = damage_text.concat(mmap(secondary.components, fmt).map((d) => h('p', null, 'Secondary ' + d)));
     }
 
-    return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide'), onclick: this.toggle},
-      h('p', null, "Hit: " + hit_details),
+    return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},
+      hit_details ? h('p', null, "Hit: " + hit_details) : null,
       damage_text,
     );
   }
 
   secondary(damage) {
-    return h('div', {'class': 'secondary', onclick: this.toggle},
+    return h('div', {'class': 'secondary'},
       `Secondary: ${damage.total} damage`,
       this.typeSummary(damage.types),
+      damage.desc || "",
     );
+  }
+
+  half_damage(damage, attack) {
+    return h('div', {class: 'half-damage'}, this.resultPart(`DC ${attack.save} save for half (${damage.half})`));
+  }
+
+  effects(effects) {
+    return h('div', {class: 'effects'},
+        mmap(effects, (src, effect) => this.resultPart(effect)));
   }
 
   typeSummary(types) {
@@ -129,7 +143,7 @@ class Result extends Component {
   }
 
   render({result}) {
-    let {hit, damage, secondary, attack} = result;
+    let {hit, damage, secondary, effects, attack} = result;
 
     let hit_result = null;
     if (hit.miss) {
@@ -138,16 +152,18 @@ class Result extends Component {
     else if (hit.critical) {
       hit_result = this.resultPart("CRITICAL:");
     }
-    else {
+    else if (attack.save === undefined) {
       hit_result = this.resultPart("Hit " + hit.score + " for");
     }
 
-    return h('div', {"class": "result"},
-      h('div', {'class': 'summary', onclick: this.toggle},
+    return h('div', {"class": "result", onclick: this.toggle},
+      h('div', {'class': 'summary'},
         hit_result,
         hit.miss ? "" : this.resultPart(damage.total + " damage"),
         hit.miss ? "" : this.typeSummary(damage.types)),
-      secondary ? this.secondary(secondary) : "",
+      attack.save ? this.half_damage(damage, attack) : "",
+      secondary && !hit.miss ? this.secondary(secondary) : "",
+      effects && !hit.miss ? this.effects(effects) : "",
       this.details(hit, damage, secondary, attack),
     );
   }
@@ -199,6 +215,31 @@ class Attack extends Component {
             () => this.toggle_condition(c),
             )
           ));
+    let modifier_elements = []
+
+    if (attack.tohit) {
+      modifier_elements = [
+        this.render_switch(
+          compose_id(player_name, attack.name, 'advantage'),
+          'Advantage',
+          this.state.advantage,
+          () => this.setState({advantage: !this.state.advantage})
+        ),
+        this.render_switch(
+          compose_id(player_name, attack.name, 'disadvantage'),
+          'Disadvantage',
+          this.state.disadvantage,
+          () => this.setState({disadvantage: !this.state.disadvantage}),
+        ),
+        this.render_switch(
+          compose_id(player_name, attack.name, 'autocrit'),
+          'Autocrit',
+          this.state.autocrit,
+          () => this.setState({autocrit: !this.state.autocrit}),
+        )
+      ];
+    }
+
     return h("article", {id: id, class: "attack"},
       h("span", {"class": "text"},
         h("p", {"class": "name"}, attack.name),
@@ -206,39 +247,29 @@ class Attack extends Component {
       ),
       h("span", {"class": "buttons"},
         h("span", {"class": "conditions"}, condition_elements),
-        h("span", {"class": "conditions"},
-          this.render_switch(
-            compose_id(player_name, attack.name, 'advantage'),
-            'Advantage',
-            this.state.advantage,
-            () => this.setState({advantage: !this.state.advantage})
-            ),
-          this.render_switch(
-            compose_id(player_name, attack.name, 'disadvantage'),
-            'Disadvantage',
-            this.state.disadvantage,
-            () => this.setState({disadvantage: !this.state.disadvantage})
-            ),
-          this.render_switch(
-            compose_id(player_name, attack.name, 'autocrit'),
-            'Autocrit',
-            this.state.autocrit,
-            () => this.setState({autocrit: !this.state.autocrit})
-            ),
-        ),
+        h("span", {"class": "conditions"}, modifier_elements),
         h("span", {"class": "action noselect", onclick: this.roll}, "@"),
       )
     );
   }
 }
 
-const AttackDescription = function({tohit, damage, secondary, rules}) {
-  let description = [`+${tohit} to hit, ${DamageText(damage)}`];
-  if (rules) {
-    description.push(Object.keys(rules).join());
+const AttackDescription = function(attack) {
+  let description = [];
+
+  if (attack.tohit) {
+    description.push(`+${attack.tohit} to hit`);
+  } else if (attack.save) {
+    description.push(`DC ${attack.save}`)
   }
-  if (secondary) {
-    description.push(DamageText(secondary) + " secondary");
+
+  description.push(DamageText(attack.damage));
+
+  if (attack.damage.secondary) {
+      description.push('Secondary: ' + DamageText(attack.damage.secondary));
+  }
+  if (attack.rules) {
+    description.push(Object.keys(attack.rules).join(', '));
   }
   return description.join(", ");
 };
