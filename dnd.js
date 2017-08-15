@@ -2,7 +2,7 @@
 // TODO: make this global houserule
 var CRIT_MAX = true;
 
-const SKIPPED = new Set(['secondary', 'effect', 'desc']);
+const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit']);
 
 function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
@@ -17,22 +17,35 @@ function gwf_die(size) {
   return roll;
 }
 
-function roll_hit(bonus, advantage, disadvantage, rules) {
-  let hit = die(20);
-  let rolls = [hit];
+function roll_hit(attack, advantage, disadvantage, conditions, rules) {
+  let roll = die(20);
+  let rolls = [roll];
   if (advantage && !disadvantage) {
     rolls.push(die(20));
-    hit = Math.max(...rolls);
+    roll = Math.max(...rolls);
   } else if (disadvantage && !advantage) {
     rolls.push(die(20))
-    hit = Math.min(...rolls);
+    roll = Math.min(...rolls);
   }
   let critical_threshold = parseInt(rules['Improved Critical'] || '20');
+  let mods = [attack.tohit];
+  console.log(conditions);
+  for (let [condition, active] of conditions) {
+    if (active) {
+      let condition_data = attack.conditions[condition];
+      console.log(condition_data);
+      if (condition_data.tohit) {
+        mods.push(parseInt(condition_data.tohit));
+      }
+    }
+  }
+
   return {
-    miss: hit === 1,
-    score: hit + bonus,
+    miss: roll === 1,
+    score: roll + mods.reduce(function(a, b) { return a + b; }, 0),
     rolls: rolls,
-    critical: hit >= critical_threshold,
+    mods: mods,
+    critical: roll >= critical_threshold,
   }
 }
 
@@ -152,20 +165,20 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
 
   // only roll attack if it is an actual attack
   if (attack.tohit) {
-    hit = roll_hit(attack.tohit, advantage, disadvantage, rules);
+    hit = roll_hit(attack, advantage, disadvantage, conditions, rules);
     damage_critical = autocrit || hit.critical;
   }
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
   let base_damage = Array.from(roll_damage(attack.damage, die_func, damage_critical));
-  all_damage.set("Attack", base_damage);
+  all_damage.set("Damage", base_damage);
 
   if (attack.damage.secondary) {
-    secondaries.set("Attack", attack.damage.secondary);
+    secondaries.set("Damage", attack.damage.secondary);
   }
 
   if (attack.damage.effect) {
-    effects.set("Attack", attack.damage.effect);
+    effects.set("Damage", attack.damage.effect);
   }
 
   for (let [condition, active] of conditions) {

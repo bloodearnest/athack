@@ -62,6 +62,7 @@ const player_data = [
       conditions: {
         "Hunters Mark": {piercing: "d6"},
         "Favored Enemy": {piercing: "4"},
+        "Sharpshooter": {piercing: "10", tohit: "-5"},
       }
     }, {
       name: "+1 Longbow",
@@ -70,6 +71,7 @@ const player_data = [
       conditions: {
         "Hunters Mark": {"magical piercing": "d6"},
         "Favored Enemy": {"magical piercing": "4"},
+        "Sharpshooter": {"magical piercing": "10", tohit: "-5"},
       }
     }, {
       name: "Oathbow",
@@ -79,6 +81,7 @@ const player_data = [
         "Hunters Mark": {"magical piercing": "d6"},
         "Favored Enemy": {"magical piercing": "4"},
         "Sworn Enemy": {"magical piercing": "3d6"},
+        "Sharpshooter": {"magical piercing": "10", tohit: "-5"},
       }
     }, {
       name: "Hail of Thorns",

@@ -113,7 +113,7 @@ class Result extends Component {
 
   details(hit, damage, secondary, attack) {
 
-    let hit_details = attack.save ? null : `(${hit.rolls.join()}) + ${attack.tohit}`;
+    let hit_details = attack.save ? null : `(${hit.rolls.join()}) + ${hit.mods.join(' + ')}`;
 
     let fmt = (condition, damages) => {
       let dam = damages.map((d) => `${d.annotated.join(" + ")} ${d.type}`).join(', ');
