@@ -1,16 +1,13 @@
 Features:
 
  * GWM/sharpshooter
- * Spells w/DC (just roll damage)
- * Other actions requiring rolls (grapple, push, shove, tumble, etc)
- * List standard actions, but no rolls (dodge, disengage, dash)?
- * General character info (level, abilities, skills, prof)
 
 UI
 
- * Action/Bonus action grouping?
- * Play sound when rolling dice
+ * flash button on press
  * Play sound on crit
+ * Swipe left/right to switch characters
+ * Allow weapon sounds
 
 Technical:
 
@@ -20,3 +17,16 @@ Technical:
  * Service worker for offline
  * Google docs
 
+
+Credits:
+
+Sounds
+
+http://soundbible.com/182-Shake-And-Roll-Dice.html
+http://soundbible.com/181-Roll-Dice-2.html
+
+Images TODO:
+
+background: homebrewery
+
+fonts: homebrewery

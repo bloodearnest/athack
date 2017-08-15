@@ -2,6 +2,18 @@
 
 const { h, render, Component } = window.preact;
 
+const DICE_SOUNDS = [
+  new Audio("sounds/roll.mp3"),
+  new Audio("sounds/roll2.mp3"),
+];
+
+function play_dice_sound() {
+  DICE_SOUNDS.forEach(s => s.pause());
+  let sound = DICE_SOUNDS[Math.floor(Math.random() * DICE_SOUNDS.length)];
+  sound.currentTime = 0;
+  sound.play();
+}
+
 function compose_id(...fragments) {
   return fragments.map((f) => f.split(" ").join("_")).join("_");
 }
@@ -184,6 +196,7 @@ class Attack extends Component {
   };
   roll(ev) {
     ev.preventDefault();
+    play_dice_sound();
     let result = roll_attack(
       this.props.attack,
       this.state.advantage,
