@@ -80,6 +80,13 @@ const player_data = [
         "Favored Enemy": {"magical piercing": "4"},
         "Sworn Enemy": {"magical piercing": "3d6"},
       }
+    }, {
+      name: "Hail of Thorns",
+      save: '14 Dex',
+      damage: {"magical piercing": "d10"},
+      conditions: {
+        'Level 2 Slot': {"magical piercing": "d10"},
+      },
     }
     ],
   },
