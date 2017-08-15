@@ -102,7 +102,7 @@ nav select {
 }
 
 .action {
-  cursor: default;
+  cursor: pointer;
   font-size: 8rem;
   height: 8rem;
   border: 10px solid #58180D;
@@ -110,12 +110,14 @@ nav select {
   color: #EEE5CE;
   background-color: #58180D;
   margin: 1rem 0.5rem;
+  /* disable android chrome press highlighting */
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 }
 
 .action:active {
   background-image: none;
-  border-color: #EEE5CE;
-  background-color: #EEE5CE;
+  border-color: transparent;
+  background-color: transparent;
   color: #58180D;
 }
 
