@@ -102,7 +102,7 @@ nav select {
 }
 
 .action {
-  cursor: pointer;
+  cursor: default;
   font-size: 8rem;
   height: 8rem;
   border: 10px solid #58180D;
@@ -113,6 +113,7 @@ nav select {
 }
 
 .action:active {
+  background-image: none;
   border-color: #EEE5CE;
   background-color: #EEE5CE;
   color: #58180D;
