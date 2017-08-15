@@ -112,6 +112,11 @@ nav select {
   margin: 1rem 0.5rem;
 }
 
+.action:active {
+  border-color: #EEE5CE;
+  background-color: #EEE5CE;
+  color: #58180D;
+}
 
 #log {
   display: none;
