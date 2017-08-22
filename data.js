@@ -1,8 +1,7 @@
 'use strict';
 
-const player_data = [
-  {
-    name: "Eldaerion",
+const player_data = {
+  "Eldaerion": {
     attacks: [
     {
       name: "Sun Blade",
@@ -52,8 +51,7 @@ const player_data = [
     }
     ],
   },
-  {
-    name: "Dakeyras",
+  "Dakeyras": {
     attacks: [
     {
       name: "Hand Crossbow",
@@ -93,8 +91,7 @@ const player_data = [
     }
     ],
   },
-  {
-    name: "Skywatcher",
+  "Skywatcher": {
     attacks: [
     {
       name: "Flame Tongue Greatsword",
@@ -120,8 +117,7 @@ const player_data = [
     }
     ],
   },
-  {
-    name: "Steadyhand",
+  "Steadyhand": {
     attacks: [
     {
       name: "Giant Slayer Halberd",
@@ -162,8 +158,7 @@ const player_data = [
     }
     ],
   },
-  {
-    name: "Bram",
+  "Bram": {
     attacks: [
     {
       name: "+1 Heavy Crossbow",
@@ -176,8 +171,7 @@ const player_data = [
     },
     ],
   },
-  {
-    name: "Lyra",
+  "Lyra": {
     attacks: [
     {
       name: "Eldritch Blast",
@@ -192,4 +186,4 @@ const player_data = [
     },
     ],
   },
-];
+};

@@ -24,11 +24,6 @@ function mmap(map, func) {
   return Array.from(map.entries()).map(([key, value]) => func(key, value));
 }
 
-
-const MapObject = (obj, f) => (
-  Object.keys(obj).filter((k) => k !== "children")).map((k) => f(k, obj[k])
-)
-
 const DamageText = (damage) => {
   if (damage) {
     return Object.keys(damage).filter((k) => !SKIPPED.has(k)).map((k => damage[k] + " " + k)).join(" + ");
@@ -43,29 +38,24 @@ const log_message = (name, result) => {
 class Party extends Component {
   constructor() {
     super();
-    this.state.current = 0;
+    this.state.current = null;
     this.state.log = [];
     this.state.result = {};
     this.record = this.record.bind(this);
     this.select = this.select.bind(this);
   }
   select(event) {
-    this.setState({current: event.target.selectedIndex});
-    location.hash = event.target.options[event.target.selectedIndex].text
+    let player_name = event.target.options[event.target.selectedIndex].text
+    this.setState({current: player_name});
+    location.hash = player_name;
   }
   componentWillMount() {
-    let p = this.props;
     if (location.hash) {
-      for (var i in p) {
-        console.log(i);
-        console.log(p[i].name);
-        console.log(location.hash);
-        if ('#' + p[i].name == location.hash) {
-          this.setState({current: i});
-          break;
-        }
-      }
+      this.setState({current: location.hash.slice(1)});
+    } else {
+      this.setState({current: Object.keys(this.props)[0]});
     }
+
   }
   record(result) {
     let new_state = this.state;
@@ -79,9 +69,9 @@ class Party extends Component {
     return h("main", null,
       h("nav", null,
         h("span", null, ">"),
-        h("select", {onchange: this.select}, MapObject(players, (index, player) => h("option", index == current ? {selected: true} : null, player.name))),
+        h("select", {onchange: this.select}, Object.keys(players).map(name => h("option", name == current ? {selected: true} : null, name))),
       ),
-      h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
+      h(Player, {player: players[current], name: current, result: this.state.result[this.state.current] || [], record: this.record}),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
     );
 
@@ -90,21 +80,21 @@ class Party extends Component {
 
 class Player extends Component {
   // workaround for only being able to render single nodes.
-  *generate_attacks(attacks) {
+  *generate_attacks(attacks, name) {
     for (let attack of attacks) {
       yield h(Attack, {
         // key is important, or else components are reused based on index
-        key: compose_id(this.props.player.name, attack.name),
-        id: compose_id(this.props.player.name, attack.name),
+        key: compose_id(name, attack.name),
+        id: compose_id(name, attack.name),
         attack: attack,
-        player_name: this.props.player.name,
+        player_name: name,
         record: this.props.record
       });
     }
   }
-  render({player, result}) {
-    return h("section", {"class": "player", id: compose_id(player.name, 'id')},
-      Array.from(this.generate_attacks(player.attacks)),
+  render({player, name, result}) {
+    return h("section", {"class": "player", id: compose_id(name, 'id')},
+      Array.from(this.generate_attacks(player.attacks, name)),
       result.hit ? h(Result, {result: result, key: result}) : h('div', {'class': 'result'}),
     );
   }
