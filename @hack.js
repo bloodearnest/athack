@@ -2,6 +2,7 @@
 
 const { h, render, Component } = window.preact;
 
+
 const DICE_SOUNDS = [
   new Audio("sounds/roll.mp3"),
   new Audio("sounds/roll2.mp3"),
@@ -50,6 +51,21 @@ class Party extends Component {
   }
   select(event) {
     this.setState({current: event.target.selectedIndex});
+    location.hash = event.target.options[event.target.selectedIndex].text
+  }
+  componentWillMount() {
+    let p = this.props;
+    if (location.hash) {
+      for (var i in p) {
+        console.log(i);
+        console.log(p[i].name);
+        console.log(location.hash);
+        if ('#' + p[i].name == location.hash) {
+          this.setState({current: i});
+          break;
+        }
+      }
+    }
   }
   record(result) {
     let new_state = this.state;
@@ -63,7 +79,7 @@ class Party extends Component {
     return h("main", null,
       h("nav", null,
         h("span", null, ">"),
-        h("select", {onchange: (this.select)}, MapObject(players, (index, player) => h("option", null, player.name))),
+        h("select", {onchange: this.select}, MapObject(players, (index, player) => h("option", index == current ? {selected: true} : null, player.name))),
       ),
       h(Player, {player: players[current], result: this.state.result[this.state.current] || [], record: this.record}),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
@@ -87,7 +103,7 @@ class Player extends Component {
     }
   }
   render({player, result}) {
-    return h("section", {"class": "player", id: compose_id(player.name)},
+    return h("section", {"class": "player", id: compose_id(player.name, 'id')},
       Array.from(this.generate_attacks(player.attacks)),
       result.hit ? h(Result, {result: result, key: result}) : h('div', {'class': 'result'}),
     );

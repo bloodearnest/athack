@@ -1,10 +1,7 @@
 Features:
 
- * GWM/sharpshooter
-
 UI
 
- * flash button on press
  * Play sound on crit
  * Swipe left/right to switch characters
  * Allow weapon sounds
