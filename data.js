@@ -9,7 +9,7 @@ const player_data = [
       tohit: 8,
       damage: {radiant: "d8+5"},
       conditions: {
-        Undead: {radiant: "d8"},
+        Undead: {weapon: "d8"},
         "Green Flame": {
             fire: "d8",
             secondary: {fire: "d8+4", desc: 'to adjacent target'},
@@ -60,35 +60,35 @@ const player_data = [
       tohit: 9,
       damage: {piercing: "d6+4"},
       conditions: {
-        "Hunters Mark": {piercing: "d6"},
-        "Favored Enemy": {piercing: "4"},
-        "Sharpshooter": {piercing: "10", tohit: "-5"},
+        "Hunters Mark": {weapon: "d6"},
+        "Favored Enemy": {weapon: "4"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "+1 Longbow",
       tohit: 10,
       damage: {"magical piercing": "d8+5"},
       conditions: {
-        "Hunters Mark": {"magical piercing": "d6"},
-        "Favored Enemy": {"magical piercing": "4"},
-        "Sharpshooter": {"magical piercing": "10", tohit: "-5"},
+        "Hunters Mark": {weapon: "d6"},
+        "Favored Enemy": {weapon: "4"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "Oathbow",
       tohit: 9,
       damage: {"magical piercing": "d8+4"},
       conditions: {
-        "Hunters Mark": {"magical piercing": "d6"},
-        "Favored Enemy": {"magical piercing": "4"},
-        "Sworn Enemy": {"magical piercing": "3d6"},
-        "Sharpshooter": {"magical piercing": "10", tohit: "-5"},
+        "Hunters Mark": {weapon: "d6"},
+        "Favored Enemy": {weapon: "4"},
+        "Sworn Enemy": {weapon: "3d6"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "Hail of Thorns",
       save: '14 Dex',
       damage: {"magical piercing": "d10"},
       conditions: {
-        'Level 2 Slot': {"magical piercing": "d10"},
+        'Level 2 Slot': {"weapon": "d10"},
       },
     }
     ],
@@ -102,9 +102,10 @@ const player_data = [
       damage: {"magical slashing": "2d6+5"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
-        "Trip Attack": {"magical slashing": "d8"},
-        "Goading Attack": {"magical slashing": "d8"},
-        "Sweeping Attack": {secondary: {"magical slashing": "d8"}},
+        "Trip Attack": {"weapon": "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {"weapon": "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {"weapon": "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
+        "Riposte": {"weapon": "d8"},
       },
       rules: {"Great Weapon Fighting": true}
     }, {
@@ -112,8 +113,9 @@ const player_data = [
       tohit: 8,
       damage: {piercing: "d6+5"},
       conditions: {
-        "Trip Attack": {"magical slashing": "d8"},
-        "Goading Attack": {"magical slashing": "d8"},
+        "Trip Attack": {"weapon": "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {"weapon": "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {"weapon": "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
       },
     }
     ],
@@ -130,14 +132,14 @@ const player_data = [
           "Great Weapon Fighting": true,
       },
       conditions: {
-        "Giant": {"magical slashing": "2d6"},
+        "Giant": {"weapon": "2d6"},
       }
     }, {
       name: "Giant Slayer Halberd Butt",
       tohit: 8,
       damage: {"magical bludgeoning": "d4+5"},
       conditions: {
-        "Giant": {"magical bludgeoning": "2d6"},
+        "Giant": {"weapon": "2d6"},
       },
       rules: {
           "Improved Critical": 19,
@@ -168,8 +170,8 @@ const player_data = [
       tohit: 8,
       damage: {"magical piercing": "d10+5"},
       conditions: {
-        "Sneak Attack": {"magical piercing": "3d6"},
-        "Commanders Strike": {"magical piercing": "d8"},
+        "Sneak Attack": {"weapon": "4d6"},
+        "Commanders Strike": {"weapon": "d8"},
       }
     },
     ],
@@ -180,7 +182,10 @@ const player_data = [
     {
       name: "Eldritch Blast",
       tohit: 7,
-      damage: {force: "d10"},
+      damage: {
+          force: "d10",
+          effect: "Pushes target 10ft away",
+      },
       conditions: {
         "Hex": {"necrotic": "d6"},
       }

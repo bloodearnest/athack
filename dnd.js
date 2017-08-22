@@ -120,12 +120,16 @@ class Damage {
 }
 
 
-function *roll_damage(damage_data, die_func, critical) {
+function *roll_damage(damage_data, die_func, critical, weapon_type) {
   for (let type in damage_data) {
     if (SKIPPED.has(type)) {
         continue;
     }
-    let damage = new Damage(type, damage_data[type]);
+    var d = damage_data[type]
+    if (type == "weapon") {
+      type = weapon_type;
+    }
+    let damage = new Damage(type, d)
     yield damage.roll(die_func, critical);
   }
 }
@@ -170,7 +174,10 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   }
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
-  let base_damage = Array.from(roll_damage(attack.damage, die_func, damage_critical));
+  let weapon_damage_type = Object.keys(attack.damage)[0];
+  let base_damage = Array.from(
+    roll_damage(attack.damage, die_func, damage_critical, weapon_damage_type)
+  );
   all_damage.set("Damage", base_damage);
 
   if (attack.damage.secondary) {
@@ -186,7 +193,7 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
       let attack_conditions = attack.conditions || {};
       let damage = attack_conditions[condition];
       let condition_damage = Array.from(
-        roll_damage(damage, die_func, damage_critical)
+        roll_damage(damage, die_func, damage_critical, weapon_damage_type)
       );
       all_damage.set(condition, condition_damage);
       if (damage.secondary) {
@@ -201,7 +208,7 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
   if (secondaries.size > 0) {
     for (let [name, dam] of secondaries) {
       // TODO: does critical always affect secondary damage?
-      let sec = Array.from(roll_damage(dam, die_func, damage_critical));
+      let sec = Array.from(roll_damage(dam, die_func, damage_critical, weapon_damage_type));
       sec.desc = dam.desc
       secondary_damage.set(name, sec)
     }
