@@ -55,7 +55,6 @@ class Party extends Component {
     } else {
       this.setState({current: Object.keys(this.props)[0]});
     }
-
   }
   record(result) {
     let new_state = this.state;
@@ -69,7 +68,7 @@ class Party extends Component {
     return h("main", null,
       h("nav", null,
         h("span", null, ">"),
-        h("select", {onchange: this.select}, Object.keys(players).map(name => h("option", name == current ? {selected: true} : null, name))),
+        h("select", {onchange: this.select}, Object.keys(players).filter(n => n != 'children').map(name => h("option", name == current ? {selected: true} : null, name))),
       ),
       h(Player, {player: players[current], name: current, result: this.state.result[this.state.current] || [], record: this.record}),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
@@ -214,9 +213,13 @@ class Attack extends Component {
   }
 
   toggle_condition(condition) {
-    let new_conditions = this.state.conditions;
-    new_conditions.set(condition, !new_conditions.get(condition));
-    this.setState({conditions: new_conditions});
+    let new_state = this.state;
+    let condition_state = !(this.state['conditions'].get(condition));
+    if (condition_state && this.props.attack.conditions[condition].advantage) {
+      new_state['advantage'] = true;
+    }
+    new_state['conditions'].set(condition, condition_state);
+    this.setState(new_state);
   }
 
   render_switch (id, text, checked, onclick) {

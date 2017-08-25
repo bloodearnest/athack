@@ -60,7 +60,7 @@ const player_data = {
       conditions: {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
-        "Sharpshooter": {weapon: "10", tohit: "-5"},
+        //"Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "+1 Longbow",
@@ -69,7 +69,7 @@ const player_data = {
       conditions: {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
-        "Sharpshooter": {weapon: "10", tohit: "-5"},
+        //"Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "Oathbow",
@@ -79,14 +79,17 @@ const player_data = {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
         "Sworn Enemy": {weapon: "3d6"},
-        "Sharpshooter": {weapon: "10", tohit: "-5"},
+        //"Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
-      name: "Hail of Thorns",
-      save: '14 Dex',
-      damage: {"magical piercing": "d10"},
+      name: "Ensnaring Strike",
+      save: '14 Str',
+      damage: {
+        "magical piercing": "d6",
+        effect: "Restrained, takes the damage at the start of it's turn.",
+      },
       conditions: {
-        'Level 2 Slot': {"weapon": "d10"},
+        'Level 2 Slot': {weapon: "d6"},
       },
     }
     ],
@@ -99,10 +102,11 @@ const player_data = {
       damage: {"magical slashing": "2d6+5"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
-        "Trip Attack": {"weapon": "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {"weapon": "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {"weapon": "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
-        "Riposte": {"weapon": "d8"},
+        "Trip Attack": {weapon: "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
+        "Feinting Attack": {weapon: "d8", advantage: true},
+        "Riposte": {weapon: "d8"},
       },
       rules: {"Great Weapon Fighting": true}
     }, {
@@ -110,9 +114,9 @@ const player_data = {
       tohit: 8,
       damage: {piercing: "d6+5"},
       conditions: {
-        "Trip Attack": {"weapon": "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {"weapon": "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {"weapon": "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
+        "Trip Attack": {weapon: "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
       },
     }
     ],
@@ -128,14 +132,14 @@ const player_data = {
           "Great Weapon Fighting": true,
       },
       conditions: {
-        "Giant": {"weapon": "2d6"},
+        "Giant": {weapon: "2d6"},
       }
     }, {
       name: "Giant Slayer Halberd Butt",
       tohit: 8,
       damage: {"magical bludgeoning": "d4+5"},
       conditions: {
-        "Giant": {"weapon": "2d6"},
+        "Giant": {weapon: "2d6"},
       },
       rules: {
           "Improved Critical": 19,
@@ -165,8 +169,8 @@ const player_data = {
       tohit: 8,
       damage: {"magical piercing": "d10+5"},
       conditions: {
-        "Sneak Attack": {"weapon": "4d6"},
-        "Commanders Strike": {"weapon": "d8"},
+        "Sneak Attack": {weapon: "4d6"},
+        "Commanders Strike": {weapon: "d8"},
       }
     },
     ],
