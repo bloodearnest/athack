@@ -8,6 +8,39 @@ function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
 }
 
+function roll_dice(n, size, annotated, critical, die_func) {
+  if (!die_func) {
+    die_func = die;
+  }
+  let total = 0;
+  let rolls = [];
+  if (n === 0) {
+    // static bonus
+    total += size;
+    annotated.push(`${size}`);
+  } else {
+    let real_n = n;
+    let sign = n / (Math.abs(n));
+    for (let i = 0; i < Math.abs(n); i++) {
+      let roll = die_func(size);
+      total += sign * roll;
+      rolls.push(roll);
+    }
+    if (critical) {
+      real_n = n * 2;
+      for (let i = 0; i < Math.abs(n); i++) {
+        let roll = CRIT_MAX ? size : die_func(size);
+        total += sign * roll;
+        rolls.push(roll);
+      }
+    }
+    annotated.push(`${real_n}d${size} (${rolls.join()})`);
+  }
+  return total;
+}
+
+
+
 function gwf_die(size) {
   let roll = die(size);
   if (roll < 3) {
@@ -17,35 +50,66 @@ function gwf_die(size) {
   return roll;
 }
 
+
+function *parse_dice(dice_string) {
+  let tokens = dice_string.split('+').map((s) => s.trim());
+
+  for (let token of tokens) {
+    let parts = token.split('d');
+
+    if (parts.length === 1) {
+      yield {
+        n: 0,
+        size: parseInt(parts[0])
+      };
+    } else {
+      yield {
+        n: parts[0] === "" ? 1 : (parts[0] === "-" ? -1 : parseInt(parts[0])),
+        size: parseInt(parts[parts.length-1]),
+      }
+    }
+  }
+}
+
+
 function roll_hit(attack, advantage, disadvantage, conditions, rules) {
   let roll = die(20);
   let rolls = [roll];
+  let critical_threshold = parseInt(rules['Improved Critical'] || '20');
+  let annotated = []
+
   if (advantage && !disadvantage) {
     rolls.push(die(20));
     roll = Math.max(...rolls);
+    annotated.push(`Advantage (${rolls.join()})`);
   } else if (disadvantage && !advantage) {
     rolls.push(die(20))
     roll = Math.min(...rolls);
+    annotated.push(`Disadvantage (${rolls.join()})`);
+  } else {
+    annotated.push(`(${rolls.join()})`);
   }
-  let critical_threshold = parseInt(rules['Improved Critical'] || '20');
-  let mods = [attack.tohit];
-  console.log(conditions);
+
+  let score = roll + parseInt(attack.tohit);
+  annotated.push(attack.tohit)
+
   for (let [condition, active] of conditions) {
     if (active) {
       let condition_data = attack.conditions[condition];
-      console.log(condition_data);
       if (condition_data.tohit) {
-        mods.push(parseInt(condition_data.tohit));
+        let parts = Array.from(parse_dice(condition_data.tohit))
+        for (let {n, size} of parts) {
+          score += roll_dice(n, size, annotated);
+        }
       }
     }
   }
 
   return {
     miss: roll === 1,
-    score: roll + mods.reduce(function(a, b) { return a + b; }, 0),
-    rolls: rolls,
-    mods: mods,
     critical: roll >= critical_threshold,
+    score: score,
+    annotated: annotated,
   }
 }
 
@@ -53,67 +117,19 @@ class Damage {
   constructor(type, dice_string) {
     this.type = type;
     this.dice_string = dice_string;
-    this.parts = Array.from(this.parse(dice_string));
+    this.parts = Array.from(parse_dice(dice_string));
   }
-
-  *parse(dice_string) {
-    let tokens = dice_string.split('+').map((s) => s.trim());
-
-    for (let token of tokens) {
-      let parts = token.split('d');
-
-      if (parts.length === 1) {
-        yield {
-          n: 0,
-          size: parseInt(parts[0])
-        };
-      } else {
-        yield {
-          n: parts[0] === "" ? 1 : parseInt(parts[0]),
-          size: parseInt(parts[parts.length-1]),
-        }
-      }
-    }
-  }
-
   roll(die_func, critical) {
     let total = 0;
-    let text = [];
     let annotated = [];
 
     for (let {n, size} of this.parts) {
-      let rolls = [];
-      if (n === 0) {
-        // static bonus
-        total += size;
-        text.push(`${size}`);
-        annotated.push(`${size}`);
-      } else {
-        let real_n = n;
-        for (let i = 0; i < n; i++) {
-          let roll = die_func(size);
-          total += roll;
-          rolls.push(roll);
-        }
-        if (critical) {
-          real_n = n * 2;
-          for (let i = 0; i < n; i++) {
-            let roll = CRIT_MAX ? size : die_func(size);
-            total += roll;
-            rolls.push(roll)
-          }
-        }
-
-        let t = `${real_n}d${size}`;
-        text.push(t);
-        annotated.push(`${t} (${rolls.join()})`);
-      }
+      total += roll_dice(n, size, annotated, critical, die_func)
     }
     return {
       type: this.type,
       total: total,
       half: Math.floor(total/2),  // for spells
-      text: text,
       annotated: annotated,
     }
   }

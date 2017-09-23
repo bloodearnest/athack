@@ -118,11 +118,16 @@ class Result extends Component {
 
   details(hit, damage, secondary, attack) {
 
-    let hit_details = attack.save ? null : `(${hit.rolls.join()}) + ${hit.mods.join(' + ')}`;
+    let hit_details = null;
+    if (attack.save == undefined) {
+      hit_details = hit.annotated.join(" + ");
+    }
 
     let fmt = (condition, damages) => {
       let dam = damages.map((d) => `${d.annotated.join(" + ")} ${d.type}`).join(', ');
-      return `${condition}: ${dam}`;
+      if (dam) {
+        return `${condition}: ${dam}`;
+      }
     }
 
     let damage_text = mmap(damage.components, fmt).map((d) => h('p', null, d));

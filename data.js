@@ -17,6 +17,8 @@ const player_data = {
             thunder: "d8",
             secondary: {thunder:"2d8", desc: 'if they voluntarily move'},
         },
+        "Bless": {tohit: 'd4'},
+        "Bane": {tohit: '-d4'},
       }
     }, {
       name: "Firebolt",
@@ -187,6 +189,20 @@ const player_data = {
       conditions: {
         "Hex": {"necrotic": "d6"},
       }
+    },
+    ],
+  },
+  "King Kong": {
+    attacks: [
+    {
+      name: "Fist",
+      tohit: 9,
+      damage: {bludgeoning: "3d10+6"},
+    },
+    {
+      name: "Rock",
+      tohit: 9,
+      damage: {bludgeoning: "7d6+6"},
     },
     ],
   },
