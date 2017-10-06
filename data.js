@@ -5,8 +5,8 @@ const player_data = {
     attacks: [
     {
       name: "Sun Blade",
-      tohit: 8,
-      damage: {radiant: "d8+5"},
+      tohit: 9,
+      damage: {radiant: "d8+6"},
       conditions: {
         Undead: {weapon: "d8"},
         "Green Flame": {
@@ -57,31 +57,31 @@ const player_data = {
     attacks: [
     {
       name: "Hand Crossbow",
-      tohit: 9,
-      damage: {piercing: "d6+4"},
+      tohit: 10,
+      damage: {piercing: "d6+5"},
       conditions: {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
-        //"Sharpshooter": {weapon: "10", tohit: "-5"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "+1 Longbow",
+      tohit: 11,
+      damage: {"magical piercing": "d8+6"},
+      conditions: {
+        "Hunters Mark": {weapon: "d6"},
+        "Favored Enemy": {weapon: "4"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
+      }
+    }, {
+      name: "Oathbow",
       tohit: 10,
       damage: {"magical piercing": "d8+5"},
       conditions: {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
-        //"Sharpshooter": {weapon: "10", tohit: "-5"},
-      }
-    }, {
-      name: "Oathbow",
-      tohit: 9,
-      damage: {"magical piercing": "d8+4"},
-      conditions: {
-        "Hunters Mark": {weapon: "d6"},
-        "Favored Enemy": {weapon: "4"},
         "Sworn Enemy": {weapon: "3d6"},
-        //"Sharpshooter": {weapon: "10", tohit: "-5"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "Ensnaring Strike",
@@ -109,6 +109,7 @@ const player_data = {
         "Goading Attack": {weapon: "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
         "Feinting Attack": {weapon: "d8", advantage: true},
         "Riposte": {weapon: "d8"},
+        "Great Weapon Master": {weapon: "10", tohit: "-5"},
       },
       rules: {"Great Weapon Fighting": true}
     }, {
@@ -168,11 +169,12 @@ const player_data = {
     attacks: [
     {
       name: "+1 Heavy Crossbow",
-      tohit: 8,
-      damage: {"magical piercing": "d10+5"},
+      tohit: 9,
+      damage: {"magical piercing": "d10+6"},
       conditions: {
         "Sneak Attack": {weapon: "4d6"},
         "Commanders Strike": {weapon: "d8"},
+        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     },
     ],
@@ -181,7 +183,7 @@ const player_data = {
     attacks: [
     {
       name: "Eldritch Blast",
-      tohit: 7,
+      tohit: 8,
       damage: {
           force: "d10",
           effect: "Pushes target 10ft away",

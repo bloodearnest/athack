@@ -76,7 +76,7 @@ function roll_hit(attack, advantage, disadvantage, conditions, rules) {
   let roll = die(20);
   let rolls = [roll];
   let critical_threshold = parseInt(rules['Improved Critical'] || '20');
-  let annotated = []
+  let annotated = [];
 
   if (advantage && !disadvantage) {
     rolls.push(die(20));
