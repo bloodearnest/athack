@@ -56,32 +56,14 @@ const player_data = {
   "Dakeyras": {
     attacks: [
     {
-      name: "Hand Crossbow",
-      tohit: 10,
-      damage: {piercing: "d6+5"},
-      conditions: {
-        "Hunters Mark": {weapon: "d6"},
-        "Favored Enemy": {weapon: "4"},
-        "Sharpshooter": {weapon: "10", tohit: "-5"},
-      }
-    }, {
-      name: "+1 Longbow",
+      name: "+1 Hand Oathbow",
       tohit: 11,
-      damage: {"magical piercing": "d8+6"},
+      damage: {"magical piercing": "d6+6"},
       conditions: {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
         "Sharpshooter": {weapon: "10", tohit: "-5"},
-      }
-    }, {
-      name: "Oathbow",
-      tohit: 10,
-      damage: {"magical piercing": "d8+5"},
-      conditions: {
-        "Hunters Mark": {weapon: "d6"},
-        "Favored Enemy": {weapon: "4"},
         "Sworn Enemy": {weapon: "3d6"},
-        "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
     }, {
       name: "Ensnaring Strike",
