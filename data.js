@@ -154,7 +154,7 @@ const player_data = {
       tohit: 10,
       damage: {"magical piercing": "d10+6"},
       conditions: {
-        "Sneak Attack": {weapon: "4d6"},
+        "Sneak Attack": {weapon: "5d6"},
         "Commanders Strike": {weapon: "d8"},
         "Sharpshooter": {weapon: "10", tohit: "-5"},
       }
