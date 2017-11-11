@@ -5,7 +5,7 @@ const player_data = {
     attacks: [
     {
       name: "Sun Blade",
-      tohit: 9,
+      tohit: 10,
       damage: {radiant: "d8+6"},
       conditions: {
         Undead: {weapon: "d8"},
@@ -22,25 +22,25 @@ const player_data = {
       }
     }, {
       name: "Firebolt",
-      tohit: 7,
+      tohit: 8,
       damage: {fire: "2d10"},
     }, {
       name: "Fireball",
-      save: '15 Dex',
+      save: '16 Dex',
       damage: {fire: "8d6"},
       conditions: {
         'Level 4 Slot': {fire: "1d6"},
       }
     }, {
       name: "Lightning Bolt",
-      save: '15 Dex',
+      save: '16 Dex',
       damage: {lightning: "8d6"},
       conditions: {
         'Level 4 Slot': {lightning: "1d6"},
       }
     }, {
       name: "Thunderwave",
-      save: '15 Con',
+      save: '16 Con',
       damage: {
           thunder: "2d8",
           effect: "Each creature in 15' cube pushed 10' away if they fail the save",
@@ -57,7 +57,7 @@ const player_data = {
     attacks: [
     {
       name: "+1 Hand Oathbow",
-      tohit: 11,
+      tohit: 12,
       damage: {"magical piercing": "d6+6"},
       conditions: {
         "Hunters Mark": {weapon: "d6"},
@@ -67,7 +67,7 @@ const player_data = {
       }
     }, {
       name: "Ensnaring Strike",
-      save: '14 Str',
+      save: '15 Str',
       damage: {
         "magical piercing": "d6",
         effect: "Restrained, takes the damage at the start of it's turn.",
@@ -82,13 +82,13 @@ const player_data = {
     attacks: [
     {
       name: "Flame Tongue Greatsword",
-      tohit: 8,
+      tohit: 9,
       damage: {"magical slashing": "2d6+5"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
-        "Trip Attack": {weapon: "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {weapon: "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {weapon: "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
+        "Trip Attack": {weapon: "d8", effect: "DC 17 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d8", effect: "DC 17 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d8", effect: "DC 17 Wis save or has disadvantage against other targets"},
         "Feinting Attack": {weapon: "d8", advantage: true},
         "Riposte": {weapon: "d8"},
         "Great Weapon Master": {weapon: "10", tohit: "-5"},
@@ -96,12 +96,12 @@ const player_data = {
       rules: {"Great Weapon Fighting": true}
     }, {
       name: "Javelin",
-      tohit: 8,
+      tohit: 9,
       damage: {piercing: "d6+5"},
       conditions: {
-        "Trip Attack": {weapon: "d8", effect: "DC 16 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {weapon: "d8", effect: "DC 16 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {weapon: "d8", effect: "DC 16 Wis save or has disadvantage against other targets"},
+        "Trip Attack": {weapon: "d8", effect: "DC 17 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d8", effect: "DC 17 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d8", effect: "DC 17 Wis save or has disadvantage against other targets"},
       },
     }
     ],
@@ -110,7 +110,7 @@ const player_data = {
     attacks: [
     {
       name: "Giant Slayer Halberd",
-      tohit: 8,
+      tohit: 9,
       damage: {"magical slashing": "d10+5"},
       rules: {
           "Improved Critical": 19,
@@ -121,7 +121,7 @@ const player_data = {
       }
     }, {
       name: "Giant Slayer Halberd Butt",
-      tohit: 8,
+      tohit: 9,
       damage: {"magical bludgeoning": "d4+5"},
       conditions: {
         "Giant": {weapon: "2d6"},
@@ -132,7 +132,7 @@ const player_data = {
       },
     }, {
       name: "Javelin of Lightning",
-      tohit: 7,
+      tohit: 8,
       damage: {
         "magical piercing": "d6+4",
         lightning: "4d6",
@@ -141,7 +141,7 @@ const player_data = {
       rules: {"Improved Critical": 19},
     }, {
       name: "Javelin",
-      tohit: 7,
+      tohit: 8,
       damage: {piercing: "d6+4"},
       rules: {"Improved Critical": 19},
     }
@@ -151,7 +151,7 @@ const player_data = {
     attacks: [
     {
       name: "+1 Heavy Crossbow",
-      tohit: 9,
+      tohit: 10,
       damage: {"magical piercing": "d10+6"},
       conditions: {
         "Sneak Attack": {weapon: "4d6"},
@@ -165,7 +165,7 @@ const player_data = {
     attacks: [
     {
       name: "Eldritch Blast",
-      tohit: 8,
+      tohit: 9,
       damage: {
           force: "d10",
           effect: "Pushes target 10ft away",
