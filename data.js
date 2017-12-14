@@ -11,7 +11,7 @@ const player_data = {
         Undead: {weapon: "d8"},
         "Green Flame": {
             fire: "d8",
-            secondary: {fire: "d8+4", desc: 'to adjacent target'},
+            secondary: {fire: "d8+5", desc: 'to adjacent target'},
         },
         "Booming Blade": {
             thunder: "d8",
@@ -22,25 +22,25 @@ const player_data = {
       }
     }, {
       name: "Firebolt",
-      tohit: 8,
+      tohit: 9,
       damage: {fire: "2d10"},
     }, {
       name: "Fireball",
-      save: '16 Dex',
+      save: '17 Dex',
       damage: {fire: "8d6"},
       conditions: {
         'Level 4 Slot': {fire: "1d6"},
       }
     }, {
       name: "Lightning Bolt",
-      save: '16 Dex',
+      save: '17 Dex',
       damage: {lightning: "8d6"},
       conditions: {
         'Level 4 Slot': {lightning: "1d6"},
       }
     }, {
       name: "Thunderwave",
-      save: '16 Con',
+      save: '17 Con',
       damage: {
           thunder: "2d8",
           effect: "Each creature in 15' cube pushed 10' away if they fail the save",
@@ -49,7 +49,7 @@ const player_data = {
         'Level 2 Slot': {thunder: "1d8"},
         'Level 3 Slot': {thunder: "2d8"},
         'Level 4 Slot': {thunder: "3d8"},
-      }
+      },
     }
     ],
   },
@@ -64,6 +64,7 @@ const player_data = {
         "Favored Enemy": {weapon: "4"},
         "Sharpshooter": {weapon: "10", tohit: "-5"},
         "Sworn Enemy": {weapon: "3d6"},
+        "+1 Bolt": {weapon: "1", tohit: "1"},
       }
     }, {
       name: "Ensnaring Strike",
@@ -82,13 +83,13 @@ const player_data = {
     attacks: [
     {
       name: "Flame Tongue Greatsword",
-      tohit: 9,
-      damage: {"magical slashing": "2d6+5"},
+      tohit: 12,
+      damage: {"magical slashing": "2d6+8"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
-        "Trip Attack": {weapon: "d8", effect: "DC 17 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {weapon: "d8", effect: "DC 17 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {weapon: "d8", effect: "DC 17 Wis save or has disadvantage against other targets"},
+        "Trip Attack": {weapon: "d8", effect: "DC 20 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d8", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d8", effect: "DC 20 Wis save or has disadvantage against other targets"},
         "Feinting Attack": {weapon: "d8", advantage: true},
         "Riposte": {weapon: "d8"},
         "Great Weapon Master": {weapon: "10", tohit: "-5"},
@@ -97,11 +98,11 @@ const player_data = {
     }, {
       name: "Javelin",
       tohit: 9,
-      damage: {piercing: "d6+5"},
+      damage: {piercing: "d6+8"},
       conditions: {
-        "Trip Attack": {weapon: "d8", effect: "DC 17 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {weapon: "d8", effect: "DC 17 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {weapon: "d8", effect: "DC 17 Wis save or has disadvantage against other targets"},
+        "Trip Attack": {weapon: "d8", effect: "DC 20 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d8", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d8", effect: "DC 20 Wis save or has disadvantage against other targets"},
       },
     }
     ],
@@ -109,9 +110,9 @@ const player_data = {
   "Steadyhand": {
     attacks: [
     {
-      name: "Giant Slayer Halberd",
-      tohit: 9,
-      damage: {"magical slashing": "d10+5"},
+      name: "+1 Giant Slayer Halberd",
+      tohit: 10,
+      damage: {"magical slashing": "d10+6"},
       rules: {
           "Improved Critical": 19,
           "Great Weapon Fighting": true,
@@ -122,7 +123,7 @@ const player_data = {
     }, {
       name: "Giant Slayer Halberd Butt",
       tohit: 9,
-      damage: {"magical bludgeoning": "d4+5"},
+      damage: {"magical bludgeoning": "d4+6"},
       conditions: {
         "Giant": {weapon: "2d6"},
       },
@@ -157,6 +158,7 @@ const player_data = {
         "Sneak Attack": {weapon: "5d6"},
         "Commanders Strike": {weapon: "d8"},
         "Sharpshooter": {weapon: "10", tohit: "-5"},
+        "+1 Bolt": {weapon: "1", tohit: "1"},
       }
     },
     ],
