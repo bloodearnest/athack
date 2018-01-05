@@ -25,11 +25,23 @@ const player_data = {
       tohit: 9,
       damage: {fire: "2d10"},
     }, {
+      name: "Steel Wind Strike",
+      tohit: 9,
+      damage: {force: "6d10"},
+    }, {
+      name: "Synaptic Strike",
+      save: '17 Int',
+      damage: {
+          psychic: "8d6",
+          effect: "20' radius, -1d6 to attacks, ablility checks, and concentration for 1 min. Save at end of their turn ends condition.",
+      },
+    }, {
       name: "Fireball",
       save: '17 Dex',
       damage: {fire: "8d6"},
       conditions: {
         'Level 4 Slot': {fire: "1d6"},
+        'Level 5 Slot': {fire: "2d6"},
       }
     }, {
       name: "Lightning Bolt",
@@ -37,6 +49,7 @@ const player_data = {
       damage: {lightning: "8d6"},
       conditions: {
         'Level 4 Slot': {lightning: "1d6"},
+        'Level 5 Slot': {lightning: "2d6"},
       }
     }, {
       name: "Thunderwave",
@@ -49,6 +62,7 @@ const player_data = {
         'Level 2 Slot': {thunder: "1d8"},
         'Level 3 Slot': {thunder: "2d8"},
         'Level 4 Slot': {thunder: "3d8"},
+        'Level 5 Slot': {thunder: "4d8"},
       },
     }
     ],
@@ -87,11 +101,11 @@ const player_data = {
       damage: {"magical slashing": "2d6+8"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
-        "Trip Attack": {weapon: "d8", effect: "DC 20 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {weapon: "d8", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {weapon: "d8", effect: "DC 20 Wis save or has disadvantage against other targets"},
-        "Feinting Attack": {weapon: "d8", advantage: true},
-        "Riposte": {weapon: "d8"},
+        "Trip Attack": {weapon: "d10", effect: "DC 20 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d10", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d10", effect: "DC 20 Wis save or has disadvantage against other targets"},
+        "Feinting Attack": {weapon: "d10", advantage: true},
+        "Riposte": {weapon: "d10"},
         "Great Weapon Master": {weapon: "10", tohit: "-5"},
       },
       rules: {"Great Weapon Fighting": true}
@@ -100,9 +114,9 @@ const player_data = {
       tohit: 9,
       damage: {piercing: "d6+8"},
       conditions: {
-        "Trip Attack": {weapon: "d8", effect: "DC 20 Str save or prone (Large or smaller)"},
-        "Pushing Attack": {weapon: "d8", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
-        "Goading Attack": {weapon: "d8", effect: "DC 20 Wis save or has disadvantage against other targets"},
+        "Trip Attack": {weapon: "d10", effect: "DC 20 Str save or prone (Large or smaller)"},
+        "Pushing Attack": {weapon: "d10", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
+        "Goading Attack": {weapon: "d10", effect: "DC 20 Wis save or has disadvantage against other targets"},
       },
     }
     ],
@@ -121,8 +135,8 @@ const player_data = {
         "Giant": {weapon: "2d6"},
       }
     }, {
-      name: "Giant Slayer Halberd Butt",
-      tohit: 9,
+      name: "+1 Giant Slayer Halberd Butt",
+      tohit: 10,
       damage: {"magical bludgeoning": "d4+6"},
       conditions: {
         "Giant": {weapon: "2d6"},
@@ -133,7 +147,7 @@ const player_data = {
       },
     }, {
       name: "Javelin of Lightning",
-      tohit: 8,
+      tohit: 9,
       damage: {
         "magical piercing": "d6+4",
         lightning: "4d6",
@@ -142,7 +156,7 @@ const player_data = {
       rules: {"Improved Critical": 19},
     }, {
       name: "Javelin",
-      tohit: 8,
+      tohit: 9,
       damage: {piercing: "d6+4"},
       rules: {"Improved Critical": 19},
     }
