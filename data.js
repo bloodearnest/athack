@@ -183,7 +183,7 @@ const player_data = {
       name: "Eldritch Blast",
       tohit: 9,
       damage: {
-          force: "d10",
+          force: "d10+5",
           effect: "Pushes target 10ft away",
       },
       conditions: {
