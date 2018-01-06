@@ -5,8 +5,8 @@ const player_data = {
     attacks: [
     {
       name: "Sun Blade",
-      tohit: 10,
-      damage: {radiant: "d8+6"},
+      tohit: "13",
+      damage: {radiant: "3d8+9"},
       conditions: {
         Undead: {weapon: "d8"},
         "Green Flame": {
@@ -72,7 +72,7 @@ const player_data = {
     {
       name: "+1 Hand Oathbow",
       tohit: 12,
-      damage: {"magical piercing": "d6+6"},
+      damage: {"magical piercing": "3d6+6"},
       conditions: {
         "Hunters Mark": {weapon: "d6"},
         "Favored Enemy": {weapon: "4"},
@@ -98,7 +98,7 @@ const player_data = {
     {
       name: "Flame Tongue Greatsword",
       tohit: 12,
-      damage: {"magical slashing": "2d6+8"},
+      damage: {"magical slashing": "6d6+8"},
       conditions: {
         'Flame Tongue': {fire: "2d6"},
         "Trip Attack": {weapon: "d10", effect: "DC 20 Str save or prone (Large or smaller)"},
@@ -111,8 +111,8 @@ const player_data = {
       rules: {"Great Weapon Fighting": true}
     }, {
       name: "Javelin",
-      tohit: 9,
-      damage: {piercing: "d6+8"},
+      tohit: 12,
+      damage: {piercing: "3d6+8"},
       conditions: {
         "Trip Attack": {weapon: "d10", effect: "DC 20 Str save or prone (Large or smaller)"},
         "Pushing Attack": {weapon: "d10", effect: "DC 20 Str save or pushed 15ft away (Large or smaller)"},
@@ -125,8 +125,8 @@ const player_data = {
     attacks: [
     {
       name: "+1 Giant Slayer Halberd",
-      tohit: 10,
-      damage: {"magical slashing": "d10+6"},
+      tohit: 12,
+      damage: {"magical slashing": "3d10+8"},
       rules: {
           "Improved Critical": 19,
           "Great Weapon Fighting": true,
@@ -136,8 +136,8 @@ const player_data = {
       }
     }, {
       name: "+1 Giant Slayer Halberd Butt",
-      tohit: 10,
-      damage: {"magical bludgeoning": "d4+6"},
+      tohit: 12,
+      damage: {"magical bludgeoning": "3d4+8"},
       conditions: {
         "Giant": {weapon: "2d6"},
       },
@@ -147,17 +147,17 @@ const player_data = {
       },
     }, {
       name: "Javelin of Lightning",
-      tohit: 9,
+      tohit: 12,
       damage: {
-        "magical piercing": "d6+4",
+        "magical piercing": "3d6+7",
         lightning: "4d6",
         secondary: {lightning: "4d6"}
       },
       rules: {"Improved Critical": 19},
     }, {
       name: "Javelin",
-      tohit: 9,
-      damage: {piercing: "d6+4"},
+      tohit: 12,
+      damage: {piercing: "3d6+8"},
       rules: {"Improved Critical": 19},
     }
     ],
@@ -167,7 +167,7 @@ const player_data = {
     {
       name: "+1 Heavy Crossbow",
       tohit: 10,
-      damage: {"magical piercing": "d10+6"},
+      damage: {"magical piercing": "3d10+6"},
       conditions: {
         "Sneak Attack": {weapon: "5d6"},
         "Commanders Strike": {weapon: "d8"},
