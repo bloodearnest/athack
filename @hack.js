@@ -183,7 +183,7 @@ class Result extends Component {
         hit_result,
         hit.miss ? "" : this.resultPart(damage.total + " damage"),
         hit.miss ? "" : this.typeSummary(damage.types)),
-      attack.save ? this.half_damage(damage, attack) : "",
+      (attack.save && (attack.half || true)) ? this.half_damage(damage, attack) : "",
       secondary && !hit.miss ? this.secondary(secondary) : "",
       effects && !hit.miss ? this.effects(effects) : "",
       this.details(hit, damage, secondary, attack),
