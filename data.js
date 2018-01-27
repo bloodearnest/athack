@@ -47,6 +47,23 @@ const player_data = {
       }
     ],
   },
+  "Corminar": {
+    attacks: [
+      {
+        name: "Rapier",
+        tohit: 4,
+        damage: {piercing: "d6+2"},
+      }, {
+        name: "Vicious Mockery",
+        save: 13,
+        half: false,
+        damage: {
+          psychic: "d4",
+          effect: "disadvantage on next attack roll",
+        },
+      }
+    ]
+  },
   "Half-Pint": {
     attacks: [
       {
