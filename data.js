@@ -52,7 +52,7 @@ const player_data = {
       {
         name: "Rapier",
         tohit: 4,
-        damage: {piercing: "d6+2"},
+        damage: {piercing: "d8+2"},
       }, {
         name: "Vicious Mockery",
         save: '13 Wis',
