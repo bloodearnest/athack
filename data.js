@@ -55,7 +55,7 @@ const player_data = {
         damage: {piercing: "d6+2"},
       }, {
         name: "Vicious Mockery",
-        save: 13,
+        save: '13 Wis',
         half: false,
         damage: {
           psychic: "d4",
