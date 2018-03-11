@@ -118,22 +118,16 @@ const player_data = {
       },
     ],
   },
-  "Rhogar": {
+  "Timber": {
     attacks: [
       {
-        name: "Whip",
-        tohit: 4,
-        damage: {"slashing": "d4+2"},
-        conditions: {
-          "Sneak Attack": {weapon: "1d6"},
-        },
+        name: "Longbow",
+        tohit: 7,
+        damage: {"piercing": "d8+3"},
       }, {
-        name: "Dagger",
-        tohit: "4",
-        damage: {piercing: "d4+2"},
-        conditions: {
-          "Sneak Attack": {weapon: "1d6"},
-        },
+        name: "Cat's Claw",
+        tohit: "3",
+        damage: {piercing: "d4+ 1"},
       }
     ],
   },
