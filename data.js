@@ -28,7 +28,7 @@ const player_data = {
       },
     ]
   },
-  "Bangrim": {
+  "Thorin": {
     attacks: [
       {
         name: "Ashbringer",
