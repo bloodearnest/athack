@@ -166,16 +166,16 @@ const player_data = {
         effect: "Target is restrained. DC 10 Str check or 5 slashing damage to escape. Can only make 1 attack per turn."
       }, {
         name: "Trident (1 handed)",
-        tohit: "3",
-        damage: {piercing: "d6+1"},
+        tohit: "4",
+        damage: {piercing: "d6+2"},
       }, {
         name: "Trident (2 handed)",
-        tohit: "3",
-        damage: {piercing: "d8+1"},
+        tohit: "4",
+        damage: {piercing: "d8+2"},
       }, {
         name: "Cat's Claw",
-        tohit: "3",
-        damage: {piercing: "d4+1"},
+        tohit: "4",
+        damage: {piercing: "d4+2"},
       }
     ],
   },
