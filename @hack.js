@@ -118,7 +118,7 @@ class Player extends Component {
 // global character affecting conditions
 const CONDITIONS = [
   'advantage',
-  'disadv',
+  'disadvantage',
   'crit',
   'bless',
 ];

@@ -189,7 +189,7 @@ function DamageResult(damages) {
 function roll_attack(attack, conditions, attack_options) {
   attack_options = attack_options || {};
   let advantage = conditions.get('advantage');
-  let disadvantage = conditions.get('disadv');
+  let disadvantage = conditions.get('disadvantage');
   let autocrit = conditions.get('crit');
   let rules = attack.rules || {};
   let all_damage = new Map();
