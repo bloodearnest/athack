@@ -24,6 +24,7 @@ nav * {
   font-weight: 800;
   font-size: 4rem;
   color: #58180D;
+  padding-top: 1em;
 }
 
 nav select {
@@ -125,6 +126,23 @@ nav select {
   display: none;
 }
 
+.player-conditions {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: -moz-min-content;
+  height: min-content;
+  border-bottom: 6px solid #58180D;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  z-index: 100;
+  background: #e0e5c1;
+}
+
+.spacer {
+  height: 1em;
+}
+
 .result {
   position: fixed;
   width: 100%;
@@ -133,7 +151,7 @@ nav select {
   min-height: 4rem;
   font-size: 4rem;
   bottom: 0;
-  background: white;
+  background: #e0e5c1;
   border-top: 6px solid #58180D;
   padding-top: .5rem;
   padding-bottom: .5rem;

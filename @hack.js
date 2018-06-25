@@ -66,7 +66,7 @@ class Party extends Component {
   }
   render(players, {current, log}) {
     return h("main", null,
-      h("nav", null,
+      h("nav", {"class": "character-selector"},
         h("span", null, ">"),
         h("select", {onchange: this.select}, Object.keys(players).filter(n => n != 'children').map(name => h("option", name == current ? {selected: true} : null, name))),
       ),
@@ -79,7 +79,21 @@ class Party extends Component {
 
 class Player extends Component {
   // workaround for only being able to render single nodes.
-  *generate_attacks(attacks, name) {
+  constructor() {
+    super();
+    this.setState({
+      conditions: new Map(),  // conditions affecting all attacks, e.g. bless, or disadvantage
+    });
+    CONDITIONS.forEach(c => this.state.conditions.set(c, false));
+    this.toggle_condition = this.toggle_condition.bind(this);
+  };
+  toggle_condition(condition) {
+    let new_state = this.state;
+    let condition_state = !(this.state['conditions'].get(condition));
+    new_state['conditions'].set(condition, condition_state);
+    this.setState(new_state);
+  }
+  *generate_attacks(name, attacks, options) {
     for (let attack of attacks) {
       yield h(Attack, {
         // key is important, or else components are reused based on index
@@ -87,18 +101,47 @@ class Player extends Component {
         id: compose_id(name, attack.name),
         attack: attack,
         player_name: name,
-        record: this.props.record
+        record: this.props.record,
+        conditions: this.state.conditions,
       });
     }
   }
   render({player, name, result}) {
     return h("section", {"class": "player", id: compose_id(name, 'id')},
-      Array.from(this.generate_attacks(player.attacks, name)),
+      h(Conditions, {name: name, conditions: this.state.conditions, toggle: this.toggle_condition}),
+      Array.from(this.generate_attacks(name, player.attacks, player.options)),
       result.hit ? h(Result, {result: result, key: result}) : h('div', {'class': 'result'}),
     );
   }
 }
 
+// global character affecting conditions
+const CONDITIONS = [
+  'advantage',
+  'disadv',
+  'crit',
+  'bless',
+];
+
+class Conditions extends Component {
+  *generate_conditions(name) {
+    for (let condition of this.props.conditions.keys()) {
+      yield Switch(
+        compose_id(name, 'options', condition),
+        condition,
+        this.props.conditions.get(condition),
+        () => this.props.toggle(condition),
+      )
+    }
+  }
+  render({name}) {
+    return h(
+      "div",
+      {"class": "player-conditions buttons", id: compose_id(name, 'options', 'id')},
+      Array.from(this.generate_conditions(name))
+    );
+  }
+}
 
 class Result extends Component {
   constructor() {
@@ -195,9 +238,6 @@ class Attack extends Component {
   constructor() {
     super();
     this.setState({
-      advantage: false,
-      disadvantage: false,
-      autocrit: false,
       conditions: new Map(),
     });
 
@@ -209,9 +249,7 @@ class Attack extends Component {
     play_dice_sound();
     let result = roll_attack(
       this.props.attack,
-      this.state.advantage,
-      this.state.disadvantage,
-      this.state.autocrit,
+      this.props.conditions,
       this.state.conditions,
     );
     this.props.record(result);
@@ -220,52 +258,21 @@ class Attack extends Component {
   toggle_condition(condition) {
     let new_state = this.state;
     let condition_state = !(this.state['conditions'].get(condition));
-    if (condition_state && this.props.attack.conditions[condition].advantage) {
-      new_state['advantage'] = true;
-    }
     new_state['conditions'].set(condition, condition_state);
     this.setState(new_state);
-  }
-
-  render_switch (id, text, checked, onclick) {
-    return h("span", {"class": "condition " + (checked ? 'active' : ''), onclick: onclick}, text);
   }
 
   render({attack, player_name}) {
     let id = compose_id(player_name, attack.name);
     let conditions = attack.conditions || {};
     let condition_elements = Object.keys(conditions).map((c) => (
-          this.render_switch(
+          Switch(
             compose_id(player_name, attack.name, c),
             c,
             this.state.conditions.get(c),
             () => this.toggle_condition(c),
             )
           ));
-    let modifier_elements = []
-
-    if (attack.tohit) {
-      modifier_elements = [
-        this.render_switch(
-          compose_id(player_name, attack.name, 'advantage'),
-          'Advantage',
-          this.state.advantage,
-          () => this.setState({advantage: !this.state.advantage})
-        ),
-        this.render_switch(
-          compose_id(player_name, attack.name, 'disadvantage'),
-          'Disadvantage',
-          this.state.disadvantage,
-          () => this.setState({disadvantage: !this.state.disadvantage}),
-        ),
-        this.render_switch(
-          compose_id(player_name, attack.name, 'autocrit'),
-          'Autocrit',
-          this.state.autocrit,
-          () => this.setState({autocrit: !this.state.autocrit}),
-        )
-      ];
-    }
 
     return h("article", {id: id, class: "attack"},
       h("span", {"class": "text"},
@@ -274,7 +281,6 @@ class Attack extends Component {
       ),
       h("span", {"class": "buttons"},
         h("span", {"class": "conditions"}, condition_elements),
-        h("span", {"class": "conditions"}, modifier_elements),
         h("span", {"class": "action noselect", onclick: this.roll}, "@"),
       )
     );
@@ -300,3 +306,9 @@ const AttackDescription = function(attack) {
   }
   return description.join(", ");
 };
+
+const Switch = function(id, text, checked, onclick) {
+  return h("span", {"class": "condition " + (checked ? 'active' : ''), onclick: onclick}, text);
+}
+
+

@@ -72,7 +72,7 @@ function *parse_dice(dice_string) {
 }
 
 
-function roll_hit(attack, advantage, disadvantage, conditions, rules) {
+function roll_hit(attack, conditions, advantage, disadvantage, attack_options, rules) {
   let roll = die(20);
   let rolls = [roll];
   let critical_threshold = parseInt(rules['Improved Critical'] || '20');
@@ -90,12 +90,26 @@ function roll_hit(attack, advantage, disadvantage, conditions, rules) {
     annotated.push(`(${rolls.join()})`);
   }
 
+  if (conditions.get('bless')) {
+    let r = die(4);
+    rolls.push(r);
+    annotated.push(`(${r})`);
+    roll += r;
+
+  }
+  else if (conditions.get('bane')) {
+    let r = die(4);
+    rolls.push(-r);
+    annotated.push(`(${-r})`);
+    roll -= r;
+  }
+
   let score = roll + parseInt(attack.tohit);
   annotated.push(attack.tohit)
 
-  for (let [condition, active] of conditions) {
+  for (let [option, active] of attack_options) {
     if (active) {
-      let condition_data = attack.conditions[condition];
+      let condition_data = attack.conditions[option];
       if (condition_data.tohit) {
         let parts = Array.from(parse_dice(condition_data.tohit))
         for (let {n, size} of parts) {
@@ -172,8 +186,11 @@ function DamageResult(damages) {
   };
 }
 
-function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
-  conditions = conditions || {};
+function roll_attack(attack, conditions, attack_options) {
+  attack_options = attack_options || {};
+  let advantage = conditions.get('advantage');
+  let disadvantage = conditions.get('disadv');
+  let autocrit = conditions.get('crit');
   let rules = attack.rules || {};
   let all_damage = new Map();
   let secondary_damage = new Map();
@@ -185,7 +202,7 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
 
   // only roll attack if it is an actual attack
   if (attack.tohit) {
-    hit = roll_hit(attack, advantage, disadvantage, conditions, rules);
+    hit = roll_hit(attack, conditions, advantage, disadvantage, attack_options, rules);
     damage_critical = autocrit || hit.critical;
   }
 
@@ -204,19 +221,19 @@ function roll_attack(attack, advantage, disadvantage, autocrit, conditions) {
     effects.set("Damage", attack.damage.effect);
   }
 
-  for (let [condition, active] of conditions) {
+  for (let [option, active] of attack_options) {
     if (active) {
       let attack_conditions = attack.conditions || {};
-      let damage = attack_conditions[condition];
+      let damage = attack_conditions[option];
       let condition_damage = Array.from(
         roll_damage(damage, die_func, damage_critical, weapon_damage_type)
       );
-      all_damage.set(condition, condition_damage);
+      all_damage.set(option, condition_damage);
       if (damage.secondary) {
-        secondaries.set(condition, damage.secondary);
+        secondaries.set(option, damage.secondary);
       }
       if (damage.effect) {
-        effects.set(condition, damage.effect);
+        effects.set(option, damage.effect);
       }
     }
   }
