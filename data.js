@@ -150,32 +150,53 @@ const player_data = {
         name: "Longbow",
         tohit: 8,
         damage: {"piercing": "d8+4"},
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }, {
         name: "Bolas",
         tohit: "8",
         damage: {bludgeoning: "d4+4"},
-        effect: "Large and smaller creatures are rendered prone. DC 10 Str, DC 15 Dex, or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained."
+        effect: "Large and smaller creatures are rendered prone. DC 10 Str, DC 15 Dex, or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }, {
         name: "Blowgun",
         tohit: "8",
         damage: {piercing: "1"},
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }, {
         name: "Net",
         tohit: "8",
         damage: {bludgeoning: "0"},
-        effect: "Target is restrained. DC 10 Str check or 5 slashing damage to escape. Can only make 1 attack per turn."
+        effect: "Target is restrained. DC 10 Str check or 5 slashing damage to escape. Can only make 1 attack per turn.",
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }, {
         name: "Trident (1 handed)",
         tohit: "4",
         damage: {piercing: "d6+2"},
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }, {
         name: "Trident (2 handed)",
         tohit: "4",
         damage: {piercing: "d8+2"},
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }, {
         name: "Cat's Claw",
         tohit: "4",
         damage: {piercing: "d4+2"},
+        conditions: {
+          'maneuver': {weapon: "d8"},
+        }
       }
     ],
   },

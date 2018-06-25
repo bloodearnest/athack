@@ -90,21 +90,21 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
     annotated.push(`(${rolls.join()})`);
   }
 
+  let score = roll;
+  // do this now before bless
+
   if (conditions.get('bless')) {
     let r = die(4);
-    rolls.push(r);
     annotated.push(`(${r})`);
-    roll += r;
-
+    score += r;
   }
   else if (conditions.get('bane')) {
     let r = die(4);
-    rolls.push(-r);
     annotated.push(`(${-r})`);
-    roll -= r;
+    score -= r;
   }
 
-  let score = roll + parseInt(attack.tohit);
+  score += parseInt(attack.tohit);
   annotated.push(attack.tohit)
 
   for (let [option, active] of attack_options) {
