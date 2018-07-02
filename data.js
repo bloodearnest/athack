@@ -95,28 +95,28 @@ const player_data = {
       {
         name: "Battleaxe (one handed)",
         tohit: 6,
-        damage: {"slashing": "d8+3"},
+        damage: {"slashing": "d8+4"},
         conditions: {
           "Raging": {weapon: "2"}
         },
       }, {
         name: "Battleaxe (two handed)",
         tohit: 6,
-        damage: {"slashing": "d10+3"},
+        damage: {"slashing": "d10+4"},
         conditions: {
           "Raging": {weapon: "2"}
         },
       }, {
         name: "Chakram",
         tohit: 6,
-        damage: {"slashing": "d6+3"},
+        damage: {"slashing": "d6+4"},
         conditions: {
           "Raging (melee)": {weapon: "2"}
         }
       }, {
         name: "Handaxe",
         tohit: 6,
-        damage: {"slashing": "d6+3"},
+        damage: {"slashing": "d6+4"},
         conditions: {
           "Raging (melee)": {weapon: "2"}
         }
