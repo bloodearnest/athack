@@ -2,7 +2,7 @@
 // TODO: make this global houserule
 var CRIT_MAX = true;
 
-const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage']);
+const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage', 'replace']);
 
 function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
@@ -207,6 +207,7 @@ function roll_attack(attack, conditions, attack_options) {
   }
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
+  // use the first damage type as the weapon type.
   let weapon_damage_type = Object.keys(attack.damage)[0];
   let base_damage = Array.from(
     roll_damage(attack.damage, die_func, damage_critical, weapon_damage_type)
@@ -228,7 +229,13 @@ function roll_attack(attack, conditions, attack_options) {
       let condition_damage = Array.from(
         roll_damage(damage, die_func, damage_critical, weapon_damage_type)
       );
-      all_damage.set(option, condition_damage);
+      // replace the base damage with this option
+      if (damage.replace) {
+        all_damage.set("Damage", condition_damage);
+      }
+      else {
+        all_damage.set(option, condition_damage);
+      }
       if (damage.secondary) {
         secondaries.set(option, damage.secondary);
       }

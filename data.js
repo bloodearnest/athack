@@ -4,15 +4,13 @@ const player_data = {
   "Airnel": {
     attacks: [
       {
-        name: "Toll the Dead (full hitpoints)",
+        name: "Toll the Dead",
         save: '15 Wis',
         half: false,
         damage: {necrotic: "d8"},
-      }, {
-        name: "Toll the Dead (injured)",
-        save: '15 Wis',
-        half: false,
-        damage: {necrotic: "d12"},
+        conditions: {
+          'Injured': {weapon: "d12", replace: true},
+        },
       }, {
         name: "Spiritual Weapon",
         tohit: 7,
@@ -93,18 +91,12 @@ const player_data = {
   "Half-Pint": {
     attacks: [
       {
-        name: "Battleaxe (one handed)",
+        name: "Battleaxe",
         tohit: 6,
         damage: {"slashing": "d8+4"},
         conditions: {
-          "Raging": {weapon: "2"}
-        },
-      }, {
-        name: "Battleaxe (two handed)",
-        tohit: 6,
-        damage: {"slashing": "d10+4"},
-        conditions: {
-          "Raging": {weapon: "2"}
+          "Raging": {weapon: "2"},
+          "Two Handed": {weapon: "d10+4", replace: true},
         },
       }, {
         name: "Chakram",
@@ -126,21 +118,19 @@ const player_data = {
   "Nordan": {
     attacks: [
       {
-        name: "2H Quarterstaff (Shillelagh)",
-        tohit: 5,
-        damage: {"magical bludgeoning": "d8+3"},
-      }, {
-        name: "1H Quarterstaff (Shillelagh)",
+        name: "Quarterstaff (Shillelagh)",
         tohit: 5,
         damage: {"magical bludgeoning": "d6+3"},
+        conditions: {
+          'Two Handed': {weapon: "d8+3", replace: true},
+        }
       }, {
-        name: "2H Quarterstaff (Strength)",
+        name: "Quarterstaff (Strength)",
         tohit: 4,
-        damage: {"magical bludgeoning": "d8+2"},
-      }, {
-        name: "1H Quarterstaff (Strength)",
-        tohit: 4,
-        damage: {"magical bludgeoning": "d6+2"},
+        damage: {"bludgeoning": "d6+2"},
+        conditions: {
+          'Two Handed': {weapon: "d8+2", replace: true},
+        }
       },
     ],
   },
