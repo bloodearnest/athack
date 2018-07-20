@@ -39,20 +39,20 @@ class Party extends Component {
   constructor(props) {
     super(props);
 
-    let players = {};
+    let characters = {};
     for (const name of Object.keys(props))
     {
-      players[name] = {
+      characters[name] = {
         conditions: new Map(),
         result: {},
       };
-      CONDITIONS.forEach(c => players[name].conditions.set(c, false));
+      CONDITIONS.forEach(c => characters[name].conditions.set(c, false));
     };
 
     this.setState({
       current: null,
       log: [],
-      players: players
+      characters: characters
     });
 
     this.record = this.record.bind(this);
@@ -73,7 +73,7 @@ class Party extends Component {
   }
   record(result) {
     let new_state = this.state;
-    new_state.players[this.state.current].result = result;
+    new_state.characters[this.state.current].result = result;
     let msg = log_message(this.props[this.state.current].name, result);
     new_state.log.unshift(msg);
     console.log(msg);
@@ -81,20 +81,20 @@ class Party extends Component {
   }
   toggle_condition(condition) {
     let new_state = this.state;
-    let condition_state = new_state.players[this.state.current].conditions.get(condition)
-    new_state.players[this.state.current].conditions.set(condition, !condition_state);
+    let condition_state = new_state.characters[this.state.current].conditions.get(condition)
+    new_state.characters[this.state.current].conditions.set(condition, !condition_state);
     this.setState(new_state);
   }
-  render(players, {current, log}) {
+  render(characters, {current, log}) {
     return h("main", null,
       h("nav", {"class": "character-selector"},
         h("span", null, ">"),
-        h("select", {onchange: this.select}, Object.keys(players).filter(n => n != 'children').map(name => h("option", name == current ? {selected: true} : null, name))),
+        h("select", {onchange: this.select}, Object.keys(characters).filter(n => n != 'children').map(name => h("option", name == current ? {selected: true} : null, name))),
       ),
       h(Player, {
-        player: players[current],
+        player: characters[current],
         name: current,
-        state: this.state.players[current],
+        state: this.state.characters[current],
         record: this.record,
         toggle_condition: this.toggle_condition,
       }),
