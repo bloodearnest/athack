@@ -36,13 +36,28 @@ const log_message = (name, result) => {
 }
 
 class Party extends Component {
-  constructor() {
-    super();
-    this.state.current = null;
-    this.state.log = [];
-    this.state.result = {};
+  constructor(props) {
+    super(props);
+
+    let players = {};
+    for (const name of Object.keys(props))
+    {
+      players[name] = {
+        conditions: new Map(),
+        result: {},
+      };
+      CONDITIONS.forEach(c => players[name].conditions.set(c, false));
+    };
+
+    this.setState({
+      current: null,
+      log: [],
+      players: players
+    });
+
     this.record = this.record.bind(this);
     this.select = this.select.bind(this);
+    this.toggle_condition = this.toggle_condition.bind(this);
   }
   select(event) {
     let player_name = event.target.options[event.target.selectedIndex].text
@@ -58,10 +73,16 @@ class Party extends Component {
   }
   record(result) {
     let new_state = this.state;
-    new_state.result[this.state.current] = result;
+    new_state.players[this.state.current].result = result;
     let msg = log_message(this.props[this.state.current].name, result);
     new_state.log.unshift(msg);
     console.log(msg);
+    this.setState(new_state);
+  }
+  toggle_condition(condition) {
+    let new_state = this.state;
+    let condition_state = new_state.players[this.state.current].conditions.get(condition)
+    new_state.players[this.state.current].conditions.set(condition, !condition_state);
     this.setState(new_state);
   }
   render(players, {current, log}) {
@@ -70,7 +91,13 @@ class Party extends Component {
         h("span", null, ">"),
         h("select", {onchange: this.select}, Object.keys(players).filter(n => n != 'children').map(name => h("option", name == current ? {selected: true} : null, name))),
       ),
-      h(Player, {player: players[current], name: current, result: this.state.result[this.state.current] || [], record: this.record}),
+      h(Player, {
+        player: players[current],
+        name: current,
+        state: this.state.players[current],
+        record: this.record,
+        toggle_condition: this.toggle_condition,
+      }),
       h("ul", {id: "log"}, log.map((l) => h("li", null, l))),
     );
 
@@ -79,21 +106,7 @@ class Party extends Component {
 
 class Player extends Component {
   // workaround for only being able to render single nodes.
-  constructor() {
-    super();
-    this.setState({
-      conditions: new Map(),  // conditions affecting all attacks, e.g. bless, or disadvantage
-    });
-    CONDITIONS.forEach(c => this.state.conditions.set(c, false));
-    this.toggle_condition = this.toggle_condition.bind(this);
-  };
-  toggle_condition(condition) {
-    let new_state = this.state;
-    let condition_state = !(this.state['conditions'].get(condition));
-    new_state['conditions'].set(condition, condition_state);
-    this.setState(new_state);
-  }
-  *generate_attacks(name, attacks, options) {
+  *generate_attacks(name, attacks, conditions, options) {
     for (let attack of attacks) {
       yield h(Attack, {
         // key is important, or else components are reused based on index
@@ -102,15 +115,15 @@ class Player extends Component {
         attack: attack,
         player_name: name,
         record: this.props.record,
-        conditions: this.state.conditions,
+        conditions: conditions,
       });
     }
   }
-  render({player, name, result}) {
+  render({player, name, state, toggle_condition}) {
     return h("section", {"class": "player", id: compose_id(name, 'id')},
-      h(Conditions, {name: name, conditions: this.state.conditions, toggle: this.toggle_condition}),
-      Array.from(this.generate_attacks(name, player.attacks, player.options)),
-      result.hit ? h(Result, {result: result, key: result}) : h('div', {'class': 'result'}),
+      h(Conditions, {name: name, conditions: state.conditions, toggle: toggle_condition}),
+      Array.from(this.generate_attacks(name, player.attacks, state.conditions, player.options)),
+      state.result.hit ? h(Result, {result: state.result, key: state.result}) : h('div', {'class': 'result'}),
     );
   }
 }
