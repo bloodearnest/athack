@@ -167,7 +167,7 @@ const party_data = {
           'Maneuver': {weapon: "d8"},
         }
       }, {
-        name: "Trident (1 handed)",
+        name: "Trident",
         tohit: "4",
         damage: {piercing: "d6+2"},
         conditions: {
