@@ -60,9 +60,9 @@ class Party extends Component {
     this.toggle_condition = this.toggle_condition.bind(this);
   }
   select(event) {
-    let player_name = event.target.options[event.target.selectedIndex].text
-    this.setState({current: player_name});
-    location.hash = player_name;
+    let character_name = event.target.options[event.target.selectedIndex].text
+    this.setState({current: character_name});
+    location.hash = character_name;
   }
   componentWillMount() {
     if (location.hash) {
@@ -91,8 +91,8 @@ class Party extends Component {
         h("span", null, ">"),
         h("select", {onchange: this.select}, Object.keys(characters).filter(n => n != 'children').map(name => h("option", name == current ? {selected: true} : null, name))),
       ),
-      h(Player, {
-        player: characters[current],
+      h(Character, {
+        character: characters[current],
         name: current,
         state: this.state.characters[current],
         record: this.record,
@@ -104,7 +104,7 @@ class Party extends Component {
   }
 }
 
-class Player extends Component {
+class Character extends Component {
   // workaround for only being able to render single nodes.
   *generate_attacks(name, attacks, conditions, options) {
     for (let attack of attacks) {
@@ -113,16 +113,16 @@ class Player extends Component {
         key: compose_id(name, attack.name),
         id: compose_id(name, attack.name),
         attack: attack,
-        player_name: name,
+        character_name: name,
         record: this.props.record,
         conditions: conditions,
       });
     }
   }
-  render({player, name, state, toggle_condition}) {
-    return h("section", {"class": "player", id: compose_id(name, 'id')},
+  render({character, name, state, toggle_condition}) {
+    return h("section", {"class": "character", id: compose_id(name, 'id')},
       h(Conditions, {name: name, conditions: state.conditions, toggle: toggle_condition}),
-      Array.from(this.generate_attacks(name, player.attacks, state.conditions, player.options)),
+      Array.from(this.generate_attacks(name, character.attacks, state.conditions, character.options)),
       state.result.hit ? h(Result, {result: state.result, key: state.result}) : h('div', {'class': 'result'}),
     );
   }
@@ -150,7 +150,7 @@ class Conditions extends Component {
   render({name}) {
     return h(
       "div",
-      {"class": "player-conditions buttons", id: compose_id(name, 'options', 'id')},
+      {"class": "character-conditions buttons", id: compose_id(name, 'options', 'id')},
       Array.from(this.generate_conditions(name))
     );
   }
@@ -275,12 +275,12 @@ class Attack extends Component {
     this.setState(new_state);
   }
 
-  render({attack, player_name}) {
-    let id = compose_id(player_name, attack.name);
+  render({attack, character_name}) {
+    let id = compose_id(character_name, attack.name);
     let conditions = attack.conditions || {};
     let condition_elements = Object.keys(conditions).map((c) => (
           Switch(
-            compose_id(player_name, attack.name, c),
+            compose_id(character_name, attack.name, c),
             c,
             this.state.conditions.get(c),
             () => this.toggle_condition(c),
