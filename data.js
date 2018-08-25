@@ -119,10 +119,10 @@ const party_data = {
     attacks: [
       {
         name: "Quarterstaff (Shillelagh)",
-        tohit: 5,
-        damage: {"magical bludgeoning": "d6+3"},
+        tohit: 6,
+        damage: {"magical bludgeoning": "d6+4"},
         conditions: {
-          'Two Handed': {weapon: "d8+3", replace: true},
+          'Two Handed': {weapon: "d8+4", replace: true},
         }
       }, {
         name: "Quarterstaff (Strength)",
