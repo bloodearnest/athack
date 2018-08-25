@@ -139,7 +139,7 @@ const party_data = {
       {
         name: "Longbow",
         tohit: 8,
-        damage: {"piercing": "d8+4"},
+        damage: {"piercing": "d8+6"},
         conditions: {
           'Maneuver': {weapon: "d8"},
         }
