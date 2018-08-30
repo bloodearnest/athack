@@ -21,11 +21,12 @@ const party_data = {
         }
       }, {
         name: "Guiding Bolt",
-        tohit: 5,
+        tohit: 7,
         damage: {radiant: "4d6"},
         conditions: {
             'Level 2': {radiant: "1d6"},
             'Level 3': {radiant: "2d6"},
+            'Level 4': {radiant: "3d6"},
         },
       }, {
         name: "Dagger",
@@ -118,18 +119,18 @@ const party_data = {
   "Nordan": {
     attacks: [
       {
-        name: "Quarterstaff (Shillelagh)",
-        tohit: 6,
-        damage: {"magical bludgeoning": "d6+4"},
+        name: "Staff of the Jungle (Shillelagh)",
+        tohit: 7,
+        damage: {"magical bludgeoning": "d6+5"},
         conditions: {
-          'Two Handed': {weapon: "d8+4", replace: true},
+          'Two Handed': {weapon: "d8+5", replace: true},
         }
       }, {
-        name: "Quarterstaff (Strength)",
-        tohit: 4,
-        damage: {"bludgeoning": "d6+2"},
+        name: "Staff of the Jungle (Strength)",
+        tohit: 5,
+        damage: {"bludgeoning": "d6+3"},
         conditions: {
-          'Two Handed': {weapon: "d8+2", replace: true},
+          'Two Handed': {weapon: "d8+3", replace: true},
         }
       },
     ],
