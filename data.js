@@ -142,7 +142,14 @@ const party_data = {
         tohit: 8,
         damage: {"piercing": "d8+6"},
         conditions: {
-          'Maneuver': {weapon: "d8"},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
         },
         rules: {
            'Elven Accuracy': true,
@@ -153,7 +160,14 @@ const party_data = {
         damage: {bludgeoning: "d4+4"},
         effect: "Large and smaller creatures are rendered prone. DC 10 Str, DC 15 Dex, or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
         conditions: {
-          'Maneuver': {weapon: "d8"},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
         },
         rules: {
            'Elven Accuracy': true,
@@ -163,7 +177,14 @@ const party_data = {
         tohit: "8",
         damage: {piercing: "1"},
         conditions: {
-          'Maneuver': {weapon: "d8"},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
         },
         rules: {
            'Elven Accuracy': true,
@@ -174,7 +195,14 @@ const party_data = {
         damage: {bludgeoning: "0"},
         effect: "Target is restrained. DC 10 Str check or 5 slashing damage to escape. Can only make 1 attack per turn.",
         conditions: {
-          'Maneuver': {weapon: "d8"},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
         },
         rules: {
            'Elven Accuracy': true,
@@ -184,15 +212,29 @@ const party_data = {
         tohit: "4",
         damage: {piercing: "d6+2"},
         conditions: {
-          'Maneuver': {weapon: "d8"},
           "Two Handed": {weapon: "d8+2", replace: true},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
         }
       }, {
         name: "Cat's Claw",
         tohit: "4",
         damage: {piercing: "d4+2"},
         conditions: {
-          'Maneuver': {weapon: "d8"},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
         }
       }
     ],
