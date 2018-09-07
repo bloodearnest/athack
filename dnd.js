@@ -80,6 +80,9 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
 
   if (advantage && !disadvantage) {
     rolls.push(die(20));
+    if (rules['Elven Accuracy'] || false) {
+        rolls.push(die(20));
+    }
     roll = Math.max(...rolls);
     annotated.push(`Advantage (${rolls.join()})`);
   } else if (disadvantage && !advantage) {

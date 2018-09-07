@@ -143,7 +143,10 @@ const party_data = {
         damage: {"piercing": "d8+6"},
         conditions: {
           'Maneuver': {weapon: "d8"},
-        }
+        },
+        rules: {
+           'Elven Accuracy': true,
+        },
       }, {
         name: "Bolas",
         tohit: "8",
@@ -151,14 +154,20 @@ const party_data = {
         effect: "Large and smaller creatures are rendered prone. DC 10 Str, DC 15 Dex, or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
         conditions: {
           'Maneuver': {weapon: "d8"},
-        }
+        },
+        rules: {
+           'Elven Accuracy': true,
+        },
       }, {
         name: "Blowgun",
         tohit: "8",
         damage: {piercing: "1"},
         conditions: {
           'Maneuver': {weapon: "d8"},
-        }
+        },
+        rules: {
+           'Elven Accuracy': true,
+        },
       }, {
         name: "Net",
         tohit: "8",
@@ -166,7 +175,10 @@ const party_data = {
         effect: "Target is restrained. DC 10 Str check or 5 slashing damage to escape. Can only make 1 attack per turn.",
         conditions: {
           'Maneuver': {weapon: "d8"},
-        }
+        },
+        rules: {
+           'Elven Accuracy': true,
+        },
       }, {
         name: "Trident",
         tohit: "4",
