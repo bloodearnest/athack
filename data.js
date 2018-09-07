@@ -44,7 +44,7 @@ const party_data = {
       {
         name: "Ashbringer",
         tohit: 5,
-        damage: {"slashing": "d6+3"},
+        damage: {"slashing": "d8+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
           "Level 2 Smite": {radiant: "4d8"},
@@ -52,7 +52,7 @@ const party_data = {
       }, {
         name: "Oathbringer (offhand)",
         tohit: 5,
-        damage: {"slashing": "d6+3"},
+        damage: {"slashing": "d8+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
           "Level 2 Smite": {radiant: "4d8"},
