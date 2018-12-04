@@ -139,83 +139,75 @@ const party_data = {
     attacks: [
       {
         name: "Longbow",
-        tohit: 8,
+        tohit: 9,
         damage: {"piercing": "d8+6"},
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
-        },
-        rules: {
-           'Elven Accuracy': true,
         },
       }, {
         name: "Bolas",
-        tohit: "8",
-        damage: {bludgeoning: "d4+4"},
-        effect: "Large and smaller creatures are rendered prone. DC 10 Str, DC 15 Dex, or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
+        tohit: 9,
+        damage: {
+            bludgeoning: "d4+4",
+            effect: "Target is prone. DC 10 Str/15 Dex or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
+        },
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
         },
-        rules: {
-           'Elven Accuracy': true,
-        },
       }, {
         name: "Blowgun",
-        tohit: "8",
+        tohit: 9,
         damage: {piercing: "1"},
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
-        },
-        rules: {
-           'Elven Accuracy': true,
         },
       }, {
         name: "Net",
-        tohit: "8",
-        damage: {bludgeoning: "0"},
-        effect: "Target is restrained. DC 10 Str check or 5 slashing damage to escape. Can only make 1 attack per turn.",
+        tohit: 9,
+        damage: {
+            bludgeoning: "0",
+            effect: "Target is restrained. DC 13 Str check or 5 slashing damage to escape",
+        },
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
         },
-        rules: {
-           'Elven Accuracy': true,
-        },
       }, {
         name: "Trident",
-        tohit: "4",
+        tohit: 5,
         damage: {piercing: "d6+2"},
         conditions: {
           "Two Handed": {weapon: "d8+2", replace: true},
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
@@ -224,12 +216,12 @@ const party_data = {
         }
       }, {
         name: "Cat's Claw",
-        tohit: "4",
+        tohit: 5,
         damage: {piercing: "d4+2"},
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 14 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
