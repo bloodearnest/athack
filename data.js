@@ -43,7 +43,7 @@ const party_data = {
     attacks: [
       {
         name: "Ashbringer",
-        tohit: 6,
+        tohit: 7,
         damage: {"slashing": "d8+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
@@ -51,7 +51,7 @@ const party_data = {
         },
       }, {
         name: "Oathbringer (offhand)",
-        tohit: 6,
+        tohit: 7,
         damage: {"slashing": "d8+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
@@ -89,34 +89,7 @@ const party_data = {
       }
     ]
   },
-  "Half-Pint": {
-    attacks: [
-      {
-        name: "Battleaxe",
-        tohit: 6,
-        damage: {"slashing": "d8+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-          "Two Handed": {weapon: "d10+4", replace: true},
-        },
-      }, {
-        name: "Chakram",
-        tohit: 6,
-        damage: {"slashing": "d6+4"},
-        conditions: {
-          "Raging (melee)": {weapon: "2"}
-        }
-      }, {
-        name: "Handaxe",
-        tohit: 6,
-        damage: {"slashing": "d6+4"},
-        conditions: {
-          "Raging (melee)": {weapon: "2"}
-        }
-      }
-    ],
-  },
-  "Nordan": {
+ "Nordan": {
     attacks: [
       {
         name: "Staff of the Jungle (Shillelagh)",
@@ -227,6 +200,45 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+        }
+      }
+    ],
+  },
+  "Grondrath": {
+    attacks: [
+      {
+        name: "Greatsword of Vengence",
+        tohit: 8,
+        damage: {"slashing": "2d6+5"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      },
+    ],
+  },
+  "Half-Pint": {
+    attacks: [
+      {
+        name: "Battleaxe",
+        tohit: 7,
+        damage: {"slashing": "d8+4"},
+        conditions: {
+          "Raging": {weapon: "2"},
+          "Two Handed": {weapon: "d10+4", replace: true},
+        },
+      }, {
+        name: "Chakram",
+        tohit: 7,
+        damage: {"slashing": "d6+4"},
+        conditions: {
+          "Raging (melee)": {weapon: "2"}
+        }
+      }, {
+        name: "Handaxe",
+        tohit: 7,
+        damage: {"slashing": "d6+4"},
+        conditions: {
+          "Raging (melee)": {weapon: "2"}
         }
       }
     ],
