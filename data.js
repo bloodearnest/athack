@@ -7,9 +7,9 @@ const party_data = {
         name: "Toll the Dead",
         save: '15 Wis',
         half: false,
-        damage: {necrotic: "d8"},
+        damage: {necrotic: "2d8"},
         conditions: {
-          'Injured': {weapon: "d12", replace: true},
+          'Injured': {weapon: "2d12", replace: true},
         },
       }, {
         name: "Spiritual Weapon",
@@ -68,15 +68,15 @@ const party_data = {
         damage: {piercing: "d8+2"},
       }, {
         name: "Vicious Mockery",
-        save: '14 Wis',
+        save: '15 Wis',
         half: false,
         damage: {
-          psychic: "d4",
+          psychic: "2d4",
           effect: "disadvantage on next attack roll",
         },
       }, {
         name: "Dissonant Whispers",
-        save: '14 Wis',
+        save: '15 Wis',
         half: true,
         damage: {
           psychic: "3d6",
@@ -94,10 +94,7 @@ const party_data = {
       {
         name: "Staff of the Jungle (Shillelagh)",
         tohit: 7,
-        damage: {"magical bludgeoning": "d6+5"},
-        conditions: {
-          'Two Handed': {weapon: "d8+5", replace: true},
-        }
+        damage: {"magical bludgeoning": "d8+5"},
       }, {
         name: "Staff of the Jungle (Strength)",
         tohit: 5,
@@ -105,7 +102,11 @@ const party_data = {
         conditions: {
           'Two Handed': {weapon: "d8+3", replace: true},
         }
-      },
+      }, {
+        name: "Primal Savagery",
+        tohit: 7,
+        damage: {"acid": "2d10"},
+      }
     ],
   },
   "Timber": {
