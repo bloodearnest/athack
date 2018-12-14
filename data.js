@@ -14,7 +14,7 @@ const party_data = {
       }, {
         name: "Spiritual Weapon",
         tohit: 7,
-        damage: {force: "d8+5"},
+        damage: {force: "d8+4"},
         conditions: {
             'Level 3-4': {force: "d8"},
             'Level 5-6': {force: "2d8"},
@@ -44,7 +44,7 @@ const party_data = {
       {
         name: "Ashbringer",
         tohit: 7,
-        damage: {"slashing": "d8+4"},
+        damage: {"slashing": "d6+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
           "Level 2 Smite": {radiant: "4d8"},
@@ -52,7 +52,7 @@ const party_data = {
       }, {
         name: "Oathbringer (offhand)",
         tohit: 7,
-        damage: {"slashing": "d8+4"},
+        damage: {"slashing": "d6+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
           "Level 2 Smite": {radiant: "4d8"},
@@ -93,18 +93,18 @@ const party_data = {
     attacks: [
       {
         name: "Staff of the Jungle (Shillelagh)",
-        tohit: 7,
+        tohit: 8,
         damage: {"magical bludgeoning": "d8+5"},
       }, {
         name: "Staff of the Jungle (Strength)",
-        tohit: 5,
+        tohit: 6,
         damage: {"bludgeoning": "d6+3"},
         conditions: {
           'Two Handed': {weapon: "d8+3", replace: true},
         }
       }, {
         name: "Primal Savagery",
-        tohit: 7,
+        tohit: 8,
         damage: {"acid": "2d10"},
       }
     ],
@@ -208,14 +208,47 @@ const party_data = {
   "Grondrath": {
     attacks: [
       {
-        name: "Greatsword of Vengence",
+        name: "Unarmed Attack",
         tohit: 8,
-        damage: {"slashing": "2d6+5"},
+        damage: {"magical bludgeoning": "6"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
+        name: "Hand Axe",
+        tohit: 7,
+        damage: {"slashing": "1d6+4"},
         conditions: {
           "Raging": {weapon: "2"},
         },
       },
     ],
+  },
+  "Hew Hackinstone" : {
+    attacks: [
+      {
+        name: "Battleaxe",
+        tohit: 7,
+        damage: {"slashing": "1d8+4"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
+        name: "Hand Axe",
+        tohit: 7,
+        damage: {"slashing": "1d6+4"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
+        name: "Javelin",
+        tohit: 7,
+        damage: {"piercing": "1d6+4"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      },
+    ]
   },
   "Half-Pint": {
     attacks: [
