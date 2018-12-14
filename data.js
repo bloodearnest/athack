@@ -210,7 +210,7 @@ const party_data = {
       {
         name: "Unarmed Attack",
         tohit: 8,
-        damage: {"magical bludgeoning": "6"},
+        damage: {"magical bludgeoning": "1d4+5"},
         conditions: {
           "Raging": {weapon: "2"},
         },
