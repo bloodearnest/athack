@@ -2,7 +2,7 @@
 // TODO: make this global houserule
 var CRIT_MAX = true;
 
-const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage', 'replace']);
+const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage', 'replace', 'save']);
 
 function die(size) {
   return Math.floor(Math.random() * (size)) + 1;

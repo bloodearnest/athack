@@ -108,10 +108,11 @@ class Character extends Component {
   // workaround for only being able to render single nodes.
   *generate_attacks(name, attacks, conditions, options) {
     for (let attack of attacks) {
+      let id = compose_id(name, attack.name)
       yield h(Attack, {
         // key is important, or else components are reused based on index
-        key: compose_id(name, attack.name),
-        id: compose_id(name, attack.name),
+        key: id,
+        id: id,
         attack: attack,
         character_name: name,
         record: this.props.record,

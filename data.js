@@ -42,12 +42,36 @@ const party_data = {
   "Thorin": {
     attacks: [
       {
+        name: "Thunder",
+        tohit: 7,
+        damage: {
+            "magical slashing": "d6+4",
+            thunder: "d6",
+            effect: "If Lightning also hits, DC13 CON or stunned for one round",
+        },
+        conditions: {
+          "Level 1 Smite": {radiant: "2d8"},
+          "Level 2 Smite": {radiant: "3d8"},
+        },
+      }, {
+        name: "Lightning",
+        tohit: 7,
+        damage: {
+            "magical slashing": "d6+4",
+            "lightning": "d6",
+            effect: "If Lightning also hits, DC13 CON or stunned for one round",
+        },
+        conditions: {
+          "Level 1 Smite": {radiant: "2d8"},
+          "Level 2 Smite": {radiant: "3d8"},
+        },
+      }, {
         name: "Ashbringer",
         tohit: 7,
         damage: {"slashing": "d6+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
-          "Level 2 Smite": {radiant: "4d8"},
+          "Level 2 Smite": {radiant: "3d8"},
         },
       }, {
         name: "Oathbringer (offhand)",
@@ -55,7 +79,7 @@ const party_data = {
         damage: {"slashing": "d6+4"},
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
-          "Level 2 Smite": {radiant: "4d8"},
+          "Level 2 Smite": {radiant: "3d8"},
         },
       }
     ],
@@ -64,8 +88,18 @@ const party_data = {
     attacks: [
       {
         name: "Rapier",
-        tohit: 4,
+        tohit: 5,
         damage: {piercing: "d8+2"},
+      }, {
+        name: "Dagger of Venom",
+        tohit: 6,
+        damage: {piercing: "d4+3"},
+        conditions: {
+            "Venom": {
+                secondary: {poison: "2d10"},
+                effect: "DC 15 Con save, or take poison damage and poisoned",
+            },
+        },
       }, {
         name: "Vicious Mockery",
         save: '15 Wis',
@@ -86,7 +120,11 @@ const party_data = {
             'Level 2': {weapon: "1d6"},
             'Level 3': {weapon: "2d6"},
         },
-      }
+      }, {
+        name: "Pistol",
+        tohit: 4,
+        damage: {piercing: "1d10+2"},
+      },
     ]
   },
  "Nordan": {
@@ -112,10 +150,11 @@ const party_data = {
   "Timber": {
     attacks: [
       {
-        name: "Longbow",
+        name: "Oathbow",
         tohit: 9,
-        damage: {"piercing": "d8+6"},
+        damage: {"magical piercing": "d8+6"},
         conditions: {
+          'Sworn Enemy': {weapon: "2d6"},
           'Goading': {
               secondary: {weapon: "d8"},
               effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
@@ -218,6 +257,13 @@ const party_data = {
         name: "Hand Axe",
         tohit: 7,
         damage: {"slashing": "1d6+4"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
+        name: "Javelin",
+        tohit: 7,
+        damage: {"piercing": "1d6+4"},
         conditions: {
           "Raging": {weapon: "2"},
         },
