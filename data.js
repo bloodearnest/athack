@@ -89,7 +89,7 @@ const party_data = {
       {
         name: "Rapier",
         tohit: 5,
-        damage: {piercing: "d8+2"},
+        damage: {'magical piercing': "d8+2"},
       }, {
         name: "Dagger of Venom",
         tohit: 6,
@@ -151,8 +151,8 @@ const party_data = {
     attacks: [
       {
         name: "Oathbow",
-        tohit: 9,
-        damage: {"magical piercing": "d8+6"},
+        tohit: 10,
+        damage: {"magical piercing": "d8+7"},
         conditions: {
           'Sworn Enemy': {weapon: "2d6"},
           'Goading': {
@@ -166,9 +166,9 @@ const party_data = {
         },
       }, {
         name: "Bolas",
-        tohit: 9,
+        tohit: 10,
         damage: {
-            bludgeoning: "d4+4",
+            bludgeoning: "d4+5",
             effect: "Target is prone. DC 10 Str/15 Dex or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
         },
         conditions: {
@@ -183,7 +183,7 @@ const party_data = {
         },
       }, {
         name: "Blowgun",
-        tohit: 9,
+        tohit: 10,
         damage: {piercing: "1"},
         conditions: {
           'Goading': {
@@ -197,7 +197,7 @@ const party_data = {
         },
       }, {
         name: "Net",
-        tohit: 9,
+        tohit: 10,
         damage: {
             bludgeoning: "0",
             effect: "Target is restrained. DC 13 Str check or 5 slashing damage to escape",
