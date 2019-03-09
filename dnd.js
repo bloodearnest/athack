@@ -201,7 +201,10 @@ function roll_attack(attack, conditions, attack_options) {
   let effects = new Map();
   let critical = false;
   let damage_critical = false;
-  let hit = {miss: false};
+  let hit = {
+    miss: false,
+    annotated: [],
+  };
 
   // only roll attack if it is an actual attack
   if (attack.tohit) {

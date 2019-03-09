@@ -176,7 +176,7 @@ class Result extends Component {
   details(hit, damage, secondary, attack) {
 
     let hit_details = null;
-    if (attack.save == undefined) {
+    if (attack.tohit != undefined) {
       hit_details = hit.annotated.join(" + ");
     }
 
@@ -231,7 +231,7 @@ class Result extends Component {
     else if (hit.critical) {
       hit_result = this.resultPart("CRITICAL:");
     }
-    else if (attack.save === undefined) {
+    else if (attack.tohit != undefined) {
       hit_result = this.resultPart("Hit " + hit.score + " for");
     }
 

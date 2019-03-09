@@ -29,6 +29,37 @@ const party_data = {
             'Level 4': {radiant: "3d6"},
         },
       }, {
+        name: "Spirit Guardians",
+        save: "15 Wis",
+        damage: {radiant: "3d8", effect: "speed halved"},
+        conditions: {
+          "Level 4": {weapon: "d8"},
+        }
+      }, {
+        name: "Vampiric Touch",
+        tohit: 7,
+        damage: {
+          necrotic: "3d6",
+          effect: "You heal half",
+        },
+        conditions: {
+          "Level 4": {weapon: "d6"},
+        }
+      }, {
+        name: "Healing Word",
+        damage: {healing: "d4+4"},
+        conditions: {
+          "Level 2": {weapon: "d4"},
+          "Level 3": {weapon: "2d4"},
+        }
+      }, {
+        name: "Cure Wounds",
+        damage: {healing: "d8+4"},
+        conditions: {
+          "Level 2": {weapon: "d8"},
+          "Level 3": {weapon: "2d8"},
+        },
+      }, {
         name: "Dagger",
         tohit: "3",
         damage: {piercing: "d4+1"},
@@ -59,12 +90,23 @@ const party_data = {
         damage: {
             "magical slashing": "d6+4",
             "lightning": "d6",
-            effect: "If Lightning also hits, DC13 CON or stunned for one round",
+            effect: "If Thunder also hits, DC13 CON or stunned for one round",
         },
         conditions: {
           "Level 1 Smite": {radiant: "2d8"},
           "Level 2 Smite": {radiant: "3d8"},
         },
+      }, {
+        name: "Crag Cat Claw",
+        tohit: 5,
+        damage: {"slashing": "d8+3"},
+        conditions: {
+          "Pounce": {effect: "DC 13 Str save or prone. If prone, can Bite as bonus action"}
+        },
+      }, {
+        name: "Crag Cat Bite",
+        tohit: 5,
+        damage: {"slashing": "d10+3"},
       }, {
         name: "Ashbringer",
         tohit: 7,
@@ -81,6 +123,13 @@ const party_data = {
           "Level 1 Smite": {radiant: "2d8"},
           "Level 2 Smite": {radiant: "3d8"},
         },
+      }, {
+        name: "Cure Wounds",
+        damage: {healing: "d8+2"},
+        conditions: {
+          "Level 2": {weapon: "d8"},
+          "Level 3": {weapon: "2d8"},
+        }
       }
     ],
   },
@@ -121,9 +170,36 @@ const party_data = {
             'Level 3': {weapon: "2d6"},
         },
       }, {
+        name: "Heat Metal",
+        damage: {
+          "fire": "2d8",
+          effect: "If holding/wearing, DC 15 Con save or must drop, disadvantage on attacks and checks if it cannot",
+        },
+        conditions: {
+          'Level 3': {weapon: "1d8"},
+        }
+      }, {
         name: "Pistol",
         tohit: 4,
         damage: {piercing: "1d10+2"},
+      }, {
+        name: "Healing Word",
+        damage: {healing: "d4+4"},
+        conditions: {
+          "Level 2": {weapon: "d4"},
+          "Level 3": {weapon: "2d4"},
+        }
+      }, {
+        name: "Fireball",
+        save: '15 Dex',
+        damage: {
+          fire: "8d6",
+          effect: "sets stuff on fire",
+        },
+        conditions: {
+          "Level 4": {weapon: "d8"},
+          "Level 5": {weapon: "2d8"},
+        }
       },
     ]
   },
@@ -134,11 +210,34 @@ const party_data = {
         tohit: 8,
         damage: {"magical bludgeoning": "d8+5"},
       }, {
+        name: "Call Lightning",
+        save: "15 Dex",
+        damage: {"lightning": "3d10"},
+        conditions: {
+          'Level 4': {weapon: "1d10"},
+        }
+      }, {
+        name: "Heat Metal",
+        damage: {
+          "fire": "2d8",
+          effect: "If holding/wearing, DC 15 Con save or must drop, disadvantage on attacks and checks if it cannot",
+        },
+        conditions: {
+          'Level 3': {weapon: "1d8"},
+        }
+      }, {
         name: "Staff of the Jungle (Strength)",
         tohit: 6,
         damage: {"bludgeoning": "d6+3"},
         conditions: {
           'Two Handed': {weapon: "d8+3", replace: true},
+        }
+      }, {
+        name: "Healing Word",
+        damage: {healing: "d4+4"},
+        conditions: {
+          "Level 2": {weapon: "d4"},
+          "Level 3": {weapon: "2d4"},
         }
       }, {
         name: "Primal Savagery",
@@ -268,59 +367,6 @@ const party_data = {
           "Raging": {weapon: "2"},
         },
       },
-    ],
-  },
-  "Hew Hackinstone" : {
-    attacks: [
-      {
-        name: "Battleaxe",
-        tohit: 7,
-        damage: {"slashing": "1d8+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-      }, {
-        name: "Hand Axe",
-        tohit: 7,
-        damage: {"slashing": "1d6+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-      }, {
-        name: "Javelin",
-        tohit: 7,
-        damage: {"piercing": "1d6+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-      },
-    ]
-  },
-  "Half-Pint": {
-    attacks: [
-      {
-        name: "Battleaxe",
-        tohit: 7,
-        damage: {"slashing": "d8+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-          "Two Handed": {weapon: "d10+4", replace: true},
-        },
-      }, {
-        name: "Chakram",
-        tohit: 7,
-        damage: {"slashing": "d6+4"},
-        conditions: {
-          "Raging (melee)": {weapon: "2"}
-        }
-      }, {
-        name: "Handaxe",
-        tohit: 7,
-        damage: {"slashing": "d6+4"},
-        conditions: {
-          "Raging (melee)": {weapon: "2"}
-        }
-      }
     ],
   },
 };
