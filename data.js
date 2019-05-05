@@ -346,12 +346,19 @@ const party_data = {
   "Grondrath": {
     attacks: [
       {
+        name: "Athletics",
+        tohit: 7,
+      }, {
         name: "Unarmed Attack",
         tohit: 8,
         damage: {"magical bludgeoning": "1d4+5"},
         conditions: {
           "Raging": {weapon: "2"},
         },
+      }, {
+        name: "Dragon Breath",
+        save: "DEX 15",
+        damage: {"fire": "3d6"},
       }, {
         name: "Hand Axe",
         tohit: 7,
