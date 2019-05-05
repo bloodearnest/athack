@@ -348,7 +348,7 @@ const party_data = {
       {
         name: "Athletics",
         tohit: 7,
-        damage: {},
+        damage: {bludgeoning: "0"},
       }, {
         name: "Unarmed Attack",
         tohit: 8,
