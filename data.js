@@ -7,9 +7,9 @@ const party_data = {
         name: "Toll the Dead",
         save: '15 Wis',
         half: false,
-        damage: {necrotic: "2d8"},
+        damage: {necrotic: "2d8+4"},
         conditions: {
-          'Injured': {weapon: "2d12", replace: true},
+          'Injured': {weapon: "2d12+4", replace: true},
         },
       }, {
         name: "Spiritual Weapon",
@@ -74,27 +74,35 @@ const party_data = {
     attacks: [
       {
         name: "Thunder",
-        tohit: 7,
+        tohit: 8,
         damage: {
-            "magical slashing": "d6+4",
+            "magical slashing": "d6+5",
             thunder: "d6",
             effect: "If Lightning also hits, DC13 CON or stunned for one round",
         },
-        conditions: {
-          "Level 1 Smite": {radiant: "2d8"},
-          "Level 2 Smite": {radiant: "3d8"},
-        },
       }, {
         name: "Lightning",
-        tohit: 7,
+        tohit: 8,
         damage: {
-            "magical slashing": "d6+4",
+            "magical slashing": "d6+5",
             "lightning": "d6",
             effect: "If Thunder also hits, DC13 CON or stunned for one round",
         },
+      }, {
+        name: "Smite",
+        tohit: "auto",
+        damage: {radiant: "2d8"},
         conditions: {
-          "Level 1 Smite": {radiant: "2d8"},
-          "Level 2 Smite": {radiant: "3d8"},
+          "Level 2": {radiant: "1d8"},
+          "Level 3": {radiant: "2d8"},
+        },
+      }, {
+        name: "Javelin of Lightning",
+        tohit: 8,
+        damage: {
+          piercing: "1d6+5",
+          lightning: "4d6",
+          secondary: { lightning: "4d6", desc: "To all in a line to target"},
         },
       }, {
         name: "Crag Cat Claw",
@@ -109,20 +117,12 @@ const party_data = {
         damage: {"slashing": "d10+3"},
       }, {
         name: "Ashbringer",
-        tohit: 7,
-        damage: {"slashing": "d6+4"},
-        conditions: {
-          "Level 1 Smite": {radiant: "2d8"},
-          "Level 2 Smite": {radiant: "3d8"},
-        },
+        tohit: 8,
+        damage: {"slashing": "d6+5"},
       }, {
         name: "Oathbringer (offhand)",
-        tohit: 7,
-        damage: {"slashing": "d6+4"},
-        conditions: {
-          "Level 1 Smite": {radiant: "2d8"},
-          "Level 2 Smite": {radiant: "3d8"},
-        },
+        tohit: 8,
+        damage: {"slashing": "d6+5"},
       }, {
         name: "Cure Wounds",
         damage: {healing: "d8+2"},
@@ -136,9 +136,43 @@ const party_data = {
   "Corminar": {
     attacks: [
       {
+        name: "Eldritch Blast",
+        tohit: 7,
+        damage: {force: "d10"},
+        conditions: {
+          "hex": {necrotic: "d6"}
+        },
+      }, {
+        name: "Poison Spray",
+        save: '15 Con',
+        half: false,
+        damage: {
+          poison: "2d12",
+        }
+      }, {
+        name: "Vicious Mockery",
+        save: '15 Wis',
+        half: false,
+        damage: {
+          psychic: "2d4",
+          effect: "disadvantage on next attack roll",
+        },
+      }, {
+        name: "Hellish Rebuke",
+        save: '15 Dex',
+        damage: {
+          fire: "2d10",
+        },
+        conditions: {
+          "Level 2": {fire: "1d10"},
+          "Level 3": {fire: "2d10"},
+          "Level 4": {fire: "3d10"},
+        }
+      }, {
         name: "Rapier",
         tohit: 5,
         damage: {'magical piercing': "d8+2"},
+        conditions: {hex: {necrotic: "d6"}},
       }, {
         name: "Dagger of Venom",
         tohit: 6,
@@ -148,14 +182,7 @@ const party_data = {
                 secondary: {poison: "2d10"},
                 effect: "DC 15 Con save, or take poison damage and poisoned",
             },
-        },
-      }, {
-        name: "Vicious Mockery",
-        save: '15 Wis',
-        half: false,
-        damage: {
-          psychic: "2d4",
-          effect: "disadvantage on next attack roll",
+            hex: {necrotic: "d6"},
         },
       }, {
         name: "Dissonant Whispers",
@@ -182,6 +209,7 @@ const party_data = {
         name: "Pistol",
         tohit: 4,
         damage: {piercing: "1d10+2"},
+        conditions: {hex: {necrotic: "d6"}},
       }, {
         name: "Healing Word",
         damage: {healing: "d4+4"},
@@ -207,23 +235,35 @@ const party_data = {
     attacks: [
       {
         name: "Staff of the Jungle (Shillelagh)",
-        tohit: 8,
+        tohit: 9,
         damage: {"magical bludgeoning": "d8+5"},
       }, {
         name: "Call Lightning",
-        save: "15 Dex",
+        save: "16 Dex",
         damage: {"lightning": "3d10"},
         conditions: {
           'Level 4': {weapon: "1d10"},
+          'Level 5': {weapon: "2d10"},
+        }
+      }, {
+        name: "Moonbeam",
+        save: "16 Con",
+        damage: {"radiant": "2d10"},
+        conditions: {
+          'Level 3': {weapon: "1d10"},
+          'Level 4': {weapon: "2d10"},
+          'Level 4': {weapon: "3d10"},
         }
       }, {
         name: "Heat Metal",
         damage: {
           "fire": "2d8",
-          effect: "If holding/wearing, DC 15 Con save or must drop, disadvantage on attacks and checks if it cannot",
+          effect: "If holding/wearing, DC 16 Con save or must drop, disadvantage on attacks and checks if it cannot",
         },
         conditions: {
           'Level 3': {weapon: "1d8"},
+          'Level 4': {weapon: "2d8"},
+          'Level 5': {weapon: "3d8"},
         }
       }, {
         name: "Staff of the Jungle (Strength)",
@@ -234,14 +274,16 @@ const party_data = {
         }
       }, {
         name: "Healing Word",
-        damage: {healing: "d4+4"},
+        damage: {healing: "d4+5"},
         conditions: {
-          "Level 2": {weapon: "d4"},
+          "Level 2": {weapon: "1d4"},
           "Level 3": {weapon: "2d4"},
+          "Level 4": {weapon: "3d4"},
+          "Level 5": {weapon: "4d4"},
         }
       }, {
         name: "Primal Savagery",
-        tohit: 8,
+        tohit: 9,
         damage: {"acid": "2d10"},
       }
     ],
@@ -273,7 +315,7 @@ const party_data = {
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 16 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
@@ -287,7 +329,7 @@ const party_data = {
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 16 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
@@ -304,7 +346,7 @@ const party_data = {
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 16 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
@@ -319,7 +361,7 @@ const party_data = {
           "Two Handed": {weapon: "d8+2", replace: true},
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 16 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
@@ -333,7 +375,7 @@ const party_data = {
         conditions: {
           'Goading': {
               secondary: {weapon: "d8"},
-              effect: "DC 15 Wis save or disadvantage on all attacks not against Timber",
+              effect: "DC 16 Wis save or disadvantage on all attacks not against Timber",
           },
           'Distracting': {
               secondary: {weapon: "d8"},
@@ -347,12 +389,12 @@ const party_data = {
     attacks: [
       {
         name: "Athletics",
-        tohit: 7,
+        tohit: 8,
         damage: {bludgeoning: "0"},
       }, {
         name: "Unarmed Attack",
-        tohit: 8,
-        damage: {"magical bludgeoning": "1d4+5"},
+        tohit: 9,
+        damage: {"magical bludgeoning": "1d4+6"},
         conditions: {
           "Raging": {weapon: "2"},
         },
@@ -362,19 +404,34 @@ const party_data = {
         damage: {"fire": "3d6"},
       }, {
         name: "Hand Axe",
-        tohit: 7,
-        damage: {"slashing": "1d6+4"},
+        tohit: 8,
+        damage: {"slashing": "1d6+5"},
         conditions: {
           "Raging": {weapon: "2"},
         },
       }, {
         name: "Javelin",
-        tohit: 7,
-        damage: {"piercing": "1d6+4"},
+        tohit: 8,
+        damage: {"piercing": "1d6+2"},
         conditions: {
           "Raging": {weapon: "2"},
         },
       },
     ],
   },
+  "HalfPint": {
+    attacks: [
+      {
+        name: "Mysterious Axe",
+        tohit: 11,
+        damage: {"magical slashing": "1d8+8"},
+        conditions: {
+          "Raging": {weapon: "2"},
+          "2H": {weapon: "1d10+8", replace: true},
+          "Giant": {weapon: "1d8"},
+        }
+      }
+    ],
+  },
+
 };
