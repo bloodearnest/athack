@@ -433,5 +433,36 @@ const party_data = {
       }
     ],
   },
+  "Areni": {
+    attacks: [
+      {
+        name: "Firebolt",
+        tohit: 9,
+        damage: {"fire": "2d10"},
+      }, {
+        name: "Shadowblade",
+        tohit: 6,
+        damage: {"psychic": "2d8"},
+        conditions: {
+          "level 3/4": {"weapon": "d8"},
+          "level 5/6": {"weapon": "2d8"},
+        },
+      }, {
+        name: "Booming blade (Shadowblade)",
+        tohit: 6,
+        damage: {"psychic": "2d8", "thunder": "d8"},
+        secondary: {"thunder": "3d8", "desc": "if the target moves"},
+        conditions: {
+          "level 3/4": {"weapon": "d8"},
+          "level 5/6": {"weapon": "2d8"},
+        },
+      }, {
+        name: "Booming blade (short sword)",
+        tohit: 6,
+        damage: {"slashing": "d6+3", "thunder": "d8"},
+        secondary: {"thunder": "3d8", "desc": "if the target moves"},
+      },
+    ]
+  }
 
 };
