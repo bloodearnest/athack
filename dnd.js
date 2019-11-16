@@ -2,7 +2,7 @@
 // TODO: make this global houserule
 var CRIT_MAX = true;
 
-const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage', 'replace', 'save']);
+const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage', 'replace', 'save', 'rules']);
 
 function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
@@ -117,6 +117,11 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
         let parts = Array.from(parse_dice(condition_data.tohit))
         for (let {n, size} of parts) {
           score += roll_dice(n, size, annotated);
+        }
+      }
+      if (condition_data.rules) {
+        if (condition_data.rules["Improved Critical"] || false) {
+          critical_threshold = parseInt(condition_data.rules["Improved Critical"]) || critical_threshold
         }
       }
     }
