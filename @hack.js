@@ -207,8 +207,9 @@ class Result extends Component {
     );
   }
 
-  half_damage(damage, attack) {
-    return h('div', {class: 'half-damage'}, this.resultPart(`DC ${attack.save} save for half (${damage.half})`));
+  save_damage(half, damage, attack) {
+    let half_msg = half !== false ? ` for half (${damage.half})` : ''
+    return h('div', {class: 'half-damage'}, this.resultPart(`DC ${attack.save} save${half_msg}`));
   }
 
   effects(effects) {
@@ -240,7 +241,7 @@ class Result extends Component {
         hit_result,
         hit.miss ? "" : this.resultPart(damage.total + " damage"),
         hit.miss ? "" : this.typeSummary(damage.types)),
-      (attack.save && (attack.half !== false)) ? this.half_damage(damage, attack) : "",
+      (attack.save ? this.save_damage(attack.half, damage, attack) : ""),
       secondary && !hit.miss ? this.secondary(secondary) : "",
       effects && !hit.miss ? this.effects(effects) : "",
       this.details(hit, damage, secondary, attack),

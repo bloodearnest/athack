@@ -154,5 +154,43 @@ const party_data = {
         },
       },
     ]
-  }
+  },
+  "Dorlamir": {
+    attacks: [
+      {
+        name: "Firebolt",
+        tohit: 6,
+        damage: {"fire": "1d10"},
+      }, {
+        name: "Mind Sliver",
+        save: "14 Int",
+        half: false,
+        damage: {psychic: "1d6", effect: "Subract 1d4 from next saving throw"},
+      }, {
+        name: "Dissonant Whispers",
+        save: "14 Wis",
+        damage: {psychic: "3d6", effect: "Must use reaction to as far as possible away from you"},
+        conditions: {
+          "level 2": {"weapon": "1d6"},
+          "level 3": {"weapon": "2d6"},
+        },
+      }, {
+        name: "Arms of Hadar",
+        save: "14 Str",
+        damage: {necrotic: "2d6", effect: "Cannot take reactions till next turn"},
+        conditions: {
+          "level 2": {"weapon": "1d6"},
+          "level 3": {"weapon": "2d6"},
+        },
+      }, {
+        name: "Sleep",
+        damage: {sleep: "5d8"},
+        conditions: {
+          "level 2": {"weapon": "2d8"},
+          "level 3": {"weapon": "4d8"},
+        },
+      },
+    ],
+  },
+
 };
