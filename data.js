@@ -53,6 +53,16 @@ const party_data = {
           "Maneuver": {"weapon": "d8"},
         },
       }, {
+        name: "Dagger of Venom",
+        tohit: 7,
+        damage: {"peircing": "1d4+5"},
+        conditions: {
+            "Venom": {
+                secondary: {poison: "2d10"},
+                effect: "DC 15 Con save, or take poison damage and poisoned",
+            },
+        }
+      }, {
         name: "Dart",
         tohit: 6,
         damage: {"slashing": "1d6+4"},
@@ -137,16 +147,16 @@ const party_data = {
     attacks: [
       {
         name: "Shadowmourne",
-        tohit: 6,
-        damage: {slashing: "1d10+4"},
+        tohit: 7,
+        damage: {slashing: "1d10+5"},
         conditions: {
           "Hexed": {weapon: "d6"},
           "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
-          "One Handed": {weapon: "d8+4", replace: true},
+          "One Handed": {weapon: "d8+5", replace: true},
         },
       }, {
         name: "Eldritch Blast",
-        tohit: 5,
+        tohit: 6,
         damage: {force: "d10"},
         conditions: {
           "Hexed": {weapon: "d6"},
