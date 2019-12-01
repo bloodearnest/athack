@@ -261,12 +261,12 @@ class Attack extends Component {
   };
   roll(ev) {
     ev.preventDefault();
-    play_dice_sound();
     let result = roll_attack(
       this.props.attack,
       this.props.conditions,
       this.state.conditions,
     );
+    play_dice_sound();
     this.props.record(result);
   }
 
