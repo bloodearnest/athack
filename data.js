@@ -46,29 +46,46 @@ const party_data = {
     attacks: [
       {
         name: "Scimitar/Chakram",
-        tohit: 6,
+        tohit: 7,
         damage: {"slashing": "1d6+4"},
         conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 14 Wis save or frightened till next turn"},
+          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
           "Maneuver": {"weapon": "d8"},
         },
       }, {
         name: "Dagger of Venom",
-        tohit: 7,
+        tohit: 8,
         damage: {"peircing": "1d4+5"},
         conditions: {
-            "Venom": {
-                secondary: {poison: "2d10"},
-                effect: "DC 15 Con save, or take poison damage and poisoned",
-            },
+          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
+          "Maneuver": {"weapon": "d8"},
+          "Venom": {
+              secondary: {poison: "2d10"},
+              effect: "DC 15 Con save, or take poison damage and poisoned for 1 min",
+          },
         }
       }, {
-        name: "Dart",
-        tohit: 6,
-        damage: {"slashing": "1d6+4"},
+        name: "Hand Crossbow",
+        tohit: 7,
+        damage: {"peircing": "1d6+4"},
         conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 14 Wis save or frightened till next turn"},
+          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
           "Maneuver": {"weapon": "d8"},
+          "Drow Poison": {
+              effect: "DC 13 Con save or poisoned for 1 hour. Fail by 5+ and unconcious (woken if attacked or shaken)",
+          },
+        }
+
+      }, {
+        name: "Dart",
+        tohit: 7,
+        damage: {"slashing": "1d4+4"},
+        conditions: {
+          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
+          "Maneuver": {"weapon": "d8"},
+          "Drow Poison": {
+              effect: "DC 13 Con save or poisoned for 1 hour. Fail by 5+ and unconcious (woken if attacked or shaken)",
+          },
         },
       }
     ]
@@ -96,7 +113,7 @@ const party_data = {
     attacks: [
       {
         name: "Toll the Dead",
-        save: "13 Wis",
+        save: "14 Wis",
         half: false,
         damage: {"necrotic": "d8"},
         conditions: {
@@ -105,7 +122,7 @@ const party_data = {
       }, {
         name: "Spiritual Weapon",
         tohit: 5,
-        damage: {force: "d8+3"},
+        damage: {force: "d8+4"},
       }, {
         name: "Guided Bolt",
         tohit: 5,
