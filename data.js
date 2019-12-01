@@ -7,6 +7,7 @@ const party_data = {
         name: "Firebolt",
         tohit: 6,
         damage: {"fire": "1d10"},
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Shortsword",
         tohit: 5,
@@ -16,6 +17,7 @@ const party_data = {
         tohit: 6,
         damage: {"lightning": "1d8"},
         secondary: {"desc": "target cannot use reaction this turn"},
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Chromatic Orb",
         tohit: 6,
@@ -24,6 +26,7 @@ const party_data = {
           "level 2": {"weapon": "d8"},
           "level 3": {"weapon": "2d8"},
         },
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Burning Hands",
         save: "14 Dex",
@@ -32,6 +35,7 @@ const party_data = {
           "level 2": {"weapon": "d6"},
           "level 3": {"weapon": "2d6"},
         },
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Sleep",
         damage: {sleep: "5d8"},
@@ -39,6 +43,7 @@ const party_data = {
           "level 2": {"weapon": "2d8"},
           "level 3": {"weapon": "4d8"},
         },
+        sounds: SPELL_SOUNDS,
       }
     ]
   },
@@ -74,7 +79,8 @@ const party_data = {
           "Drow Poison": {
               effect: "DC 13 Con save or poisoned for 1 hour. Fail by 5+ and unconcious (woken if attacked or shaken)",
           },
-        }
+        },
+        sounds: RANGED_SOUNDS,
 
       }, {
         name: "Dart",
@@ -87,6 +93,7 @@ const party_data = {
               effect: "DC 13 Con save or poisoned for 1 hour. Fail by 5+ and unconcious (woken if attacked or shaken)",
           },
         },
+        sounds: RANGED_SOUNDS,
       }
     ]
   },
@@ -99,6 +106,7 @@ const party_data = {
         conditions: {
           "Hunters Mark": {"weapon": "d6"},
         },
+        sounds: RANGED_SOUNDS,
       }, {
         name: "Rapier",
         tohit: 6,
@@ -119,10 +127,12 @@ const party_data = {
         conditions: {
           "Injured": {weapon: "d12", replace: true},
         },
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Spiritual Weapon",
         tohit: 5,
         damage: {force: "d8+4"},
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Guided Bolt",
         tohit: 5,
@@ -131,6 +141,7 @@ const party_data = {
           "level 2": {weapon: "d6"},
           "level 3": {weapon: "d6"},
         },
+        sounds: SPELL_SOUNDS,
       },
     ],
   },
@@ -150,6 +161,7 @@ const party_data = {
         conditions: {
           "Raging": {weapon: "2"},
         },
+        sounds: RANGED_SOUNDS,
       }, {
         name: "Light Hammer",
         tohit: 6,
@@ -179,6 +191,7 @@ const party_data = {
           "Hexed": {weapon: "d6"},
           "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
         },
+        sounds: SPELL_SOUNDS,
       },
     ]
   },
@@ -188,11 +201,13 @@ const party_data = {
         name: "Firebolt",
         tohit: 6,
         damage: {"fire": "1d10"},
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Mind Sliver",
         save: "14 Int",
         half: false,
         damage: {psychic: "1d6", effect: "Subract 1d4 from next saving throw"},
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Dissonant Whispers",
         save: "14 Wis",
@@ -201,6 +216,7 @@ const party_data = {
           "level 2": {"weapon": "1d6"},
           "level 3": {"weapon": "2d6"},
         },
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Arms of Hadar",
         save: "14 Str",
@@ -209,6 +225,7 @@ const party_data = {
           "level 2": {"weapon": "1d6"},
           "level 3": {"weapon": "2d6"},
         },
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Sleep",
         damage: {sleep: "5d8"},
@@ -216,6 +233,7 @@ const party_data = {
           "level 2": {"weapon": "2d8"},
           "level 3": {"weapon": "4d8"},
         },
+        sounds: SPELL_SOUNDS,
       },
     ],
   },

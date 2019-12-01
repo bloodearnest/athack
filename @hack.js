@@ -8,9 +8,31 @@ const DICE_SOUNDS = [
   new Audio("sounds/roll2.mp3"),
 ];
 
-function play_dice_sound() {
-  DICE_SOUNDS.forEach(s => s.pause());
-  let sound = DICE_SOUNDS[Math.floor(Math.random() * DICE_SOUNDS.length)];
+const SWORD_SOUNDS = [
+  new Audio("sounds/Princess+Bride+Sword.mp3"),
+  new Audio("sounds/steelsword.mp3"),
+  new Audio("sounds/Sword1.mp3"),
+  new Audio("sounds/swordecho.mp3"),
+  new Audio("sounds/swordraw.mp3"),
+];
+
+const RANGED_SOUNDS = [
+  new Audio("sounds/throwknife.mp3"),
+  new Audio("sounds/934369_SOUNDDOGS__fi.mp3"),
+  new Audio("sounds/934378_SOUNDDOGS__fi.mp3"),
+  new Audio("sounds/934380_SOUNDDOGS__fi.mp3"),
+];
+
+const SPELL_SOUNDS = [
+  new Audio("sounds/270395__littlerobotsoundfactory__spell-04.wav"),
+  new Audio("sounds/270396__littlerobotsoundfactory__spell-01.wav"),
+  new Audio("sounds/270397__littlerobotsoundfactory__spell-02.wav"),
+];
+
+
+function play_random_sound(sounds) {
+  sounds.forEach(s => s.pause());
+  let sound = sounds[Math.floor(Math.random() * sounds.length)];
   sound.currentTime = 0;
   sound.play();
 }
@@ -266,7 +288,8 @@ class Attack extends Component {
       this.props.conditions,
       this.state.conditions,
     );
-    play_dice_sound();
+    let sounds = this.props.attack.sounds || SWORD_SOUNDS;
+    play_random_sound(sounds);
     this.props.record(result);
   }
 
