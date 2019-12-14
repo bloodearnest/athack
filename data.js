@@ -197,6 +197,15 @@ const party_data = {
           "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
         },
         sounds: SPELL_SOUNDS,
+      }, {
+        name: "Vampiric Touch",
+        tohit: 7,
+        damage: {necrotic: "3d6"},
+        conditions: {
+          "Hexed": {weapon: "d6"},
+          "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
+        },
+        sounds: SPELL_SOUNDS,
       },
     ]
   },
@@ -230,6 +239,12 @@ const party_data = {
           "level 2": {"weapon": "1d6"},
           "level 3": {"weapon": "2d6"},
         },
+        sounds: SPELL_SOUNDS,
+      }, {
+        name: "Hunger of Hadar",
+        save: "15 Dex",
+        damage: {acid: "2d6"},
+        secondary: {cold: "2d6"},
         sounds: SPELL_SOUNDS,
       }, {
         name: "Sleep",
