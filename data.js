@@ -10,13 +10,18 @@ const party_data = {
         sounds: SPELL_SOUNDS,
       }, {
         name: "Shortsword",
-        tohit: 5,
+        tohit: 6,
         damage: {"piercing": "d6+3"},
       }, {
         name: "Shocking Grasp",
         tohit: 7,
         damage: {"lightning": "2d8"},
         secondary: {"desc": "target cannot use reaction this turn"},
+        sounds: SPELL_SOUNDS,
+      }, {
+        name: "Fireball",
+        save: "15 Dex",
+        damage: {"fire": "8d6"},
         sounds: SPELL_SOUNDS,
       }, {
         name: "Chromatic Orb",
