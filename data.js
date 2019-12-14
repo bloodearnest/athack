@@ -107,7 +107,7 @@ const party_data = {
       {
         name: "Shortbow",
         tohit: 9,
-        damage: {"piercing": "1d8+4"},
+        damage: {"piercing": "1d6+4"},
         conditions: {
           "Hunters Mark": {"weapon": "d6"},
         },
