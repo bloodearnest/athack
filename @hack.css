@@ -61,6 +61,16 @@ nav select {
   font-size: 3rem;
 }
 
+.save {
+  padding-top: 3rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  overflow: auto;
+  font-weight: bold;
+  display: inline-block;
+  text-align: right;
+}
+
 .description {
   font-size: 2rem;
   font-style: italic;

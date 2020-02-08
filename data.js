@@ -2,6 +2,14 @@
 
 const party_data = {
   "Areni": {
+    saves: {
+      'Str': -1,
+      'Dex': 3,
+      'Con': 1,
+      'Int': 7,
+      'Wis': 4,
+      'Cha': 0,
+    },
     attacks: [
       {
         name: "Firebolt",
@@ -61,6 +69,14 @@ const party_data = {
     ]
   },
   "Caimbarel": {
+    saves: {
+        'Str': 4,
+        'Dex': 5,
+        'Con': 3,
+        'Int': 0,
+        'Wis': 2,
+        'Cha': 2,
+    },
     attacks: [
       {
         name: "Picks",
@@ -119,6 +135,14 @@ const party_data = {
     ]
   },
   "Haemyr": {
+    saves: {
+      'Str': 3,
+      'Dex': 7,
+      'Con': 1,
+      'Int': 1,
+      'Wis': 3,
+      'Cha': -1,
+    },
     attacks: [
       {
         name: "Kestrel's bow",
@@ -147,6 +171,14 @@ const party_data = {
     ]
   },
   "Harethier": {
+    saves: {
+      'Str': 1,
+      'Dex': 1,
+      'Con': 2,
+      'Int': 0,
+      'Wis': 7,
+      'Cha': 3,
+    },
     attacks: [
       {
         name: "Toll the Dead",
@@ -208,6 +240,14 @@ const party_data = {
     ],
   },
   "Sigurd": {
+    saves: {
+      'Str': 7,
+      'Dex': 2,
+      'Con': 6,
+      'Int': 0,
+      'Wis': -1,
+      'Cha': 1,
+    },
     attacks: [
       {
         name: "Wulfstrom's Axe of Cleaving",
@@ -246,6 +286,14 @@ const party_data = {
     ],
   },
   "Zanavor": {
+    saves: {
+      'Str': 0,
+      'Dex': 2,
+      'Con': 2,
+      'Int': 1,
+      'Wis': 4,
+      'Cha': 7,
+    },
     attacks: [
       {
         name: "Shadowmourne",
@@ -278,6 +326,14 @@ const party_data = {
     ]
   },
   "Dorlamir": {
+    saves: {
+      'Str': -1,
+      'Dex': 3,
+      'Con': 5,
+      'Int': 0,
+      'Wis': 1,
+      'Cha': 7,
+    },
     attacks: [
       {
         name: "Firebolt",

@@ -4,6 +4,15 @@ var CRIT_MAX = true;
 
 const SKIPPED = new Set(['secondary', 'effect', 'desc', 'tohit', 'advantage', 'replace', 'save', 'rules']);
 
+const PRONOUNCE = {
+  'str': 'strength',
+  'dex': 'dexterity',
+  'con': 'consitution',
+  'wis': 'wisdom',
+  'int': 'intelligence',
+  'cha': 'charisma',
+};
+
 function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
 }
@@ -132,6 +141,53 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
     critical: roll >= critical_threshold,
     score: score,
     annotated: annotated,
+  }
+}
+
+function roll_save(bonus, name, conditions) {
+  let advantage = conditions.get('advantage');
+  let disadvantage = conditions.get('disadvantage');
+  let roll = die(20);
+  let rolls = [roll];
+  let annotated = [];
+
+  if (advantage && !disadvantage) {
+    rolls.push(die(20));
+    roll = Math.max(...rolls);
+    annotated.push(`Advantage (${rolls.join()})`);
+  } else if (disadvantage && !advantage) {
+    rolls.push(die(20))
+    roll = Math.min(...rolls);
+    annotated.push(`Disadvantage (${rolls.join()})`);
+  } else {
+    annotated.push(`(${rolls.join()})`);
+  }
+
+  let score = roll;
+  // do this now before bless
+
+  if (conditions.get('bless')) {
+    let r = die(4);
+    annotated.push(`(${r})`);
+    score += r;
+  }
+  else if (conditions.get('bane')) {
+    let r = die(4);
+    annotated.push(`(${-r})`);
+    score -= r;
+  }
+
+  score += parseInt(bonus);
+  annotated.push(bonus)
+
+  // gross
+  return {
+    attack: {tohit: "roll"},
+    hit: {
+      score: score,
+      annotated: annotated,
+    },
+    text: PRONOUNCE[name.toLowerCase()] + " save " + score
   }
 }
 
@@ -265,11 +321,36 @@ function roll_attack(attack, conditions, attack_options) {
     }
   }
 
+  let damage = DamageResult(all_damage)
+  let text = "";
+
+  if (hit.miss) {
+    text = "Miss!"
+  }
+  else if (hit.critical) {
+    text = "CRITICAL:"
+  }
+  else if (attack.tohit === 'roll') {
+    text = hit.score.toString()
+  }
+  else if (attack.tohit != undefined) {
+    text = "Hit " + hit.score + " for"
+  }
+
+  if (damage && !hit.miss) {
+    text += " " + damage.total + " damage"
+  }
+
+  if (hit.critical) {
+    text += ". Suck it Josh"
+  }
+
   return {
     attack: attack,
     hit: hit,
-    damage: DamageResult(all_damage),
+    damage: damage,
     secondary: secondaries.size > 0 ? DamageResult(secondary_damage) : null,
     effects: effects.size > 0 ? effects : null,
+    text: text,
   }
 }

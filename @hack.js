@@ -29,6 +29,11 @@ const SPELL_SOUNDS = [
   new Audio("sounds/270397__littlerobotsoundfactory__spell-02.wav"),
 ];
 
+function say(phrase) {
+  let utterance = new SpeechSynthesisUtterance(phrase);
+  speechSynthesis.speak(utterance);
+}
+
 
 function play_random_sound(sounds) {
   sounds.forEach(s => s.pause());
@@ -145,6 +150,12 @@ class Character extends Component {
   render({character, name, state, toggle_condition}) {
     return h("section", {"class": "character", id: compose_id(name, 'id')},
       h(Conditions, {name: name, conditions: state.conditions, toggle: toggle_condition}),
+      h(Saves, {
+        name: name,
+        saves: character.saves,
+        record: this.props.record,
+        conditions: state.conditions,
+      }),
       Array.from(this.generate_attacks(name, character.attacks, state.conditions, character.options)),
       state.result.hit ? h(Result, {result: state.result, key: state.result}) : h('div', {'class': 'result'}),
     );
@@ -179,6 +190,37 @@ class Conditions extends Component {
   }
 }
 
+class Saves extends Component {
+  constructor() {
+    super();
+    this.roll = this.roll.bind(this);
+  }
+
+  *generate_saves(name, saves) {
+    for (let save of Object.keys(saves)) {
+      yield h("span", {"class": "buttons"},
+        h("span", {"class": "save"}, save, ' ', saves[save].toString()),
+        h("span", {"class": "action noselect", onclick: (ev) => this.roll(ev, save)}, "S"),
+      )
+    }
+  }
+  roll(ev, save) {
+    let bonus = this.props.saves[save]
+    let result = roll_save(bonus, save, this.props.conditions)
+    if (result.text) {
+      say(result.text)
+    }
+    this.props.record(result)
+  }
+  render({name, saves}) {
+    return h(
+      "div",
+      {"class": "character-saves buttons", id: compose_id(name, 'saves', 'id')},
+      Array.from(this.generate_saves(name, saves))
+    );
+  }
+}
+
 class Result extends Component {
   constructor() {
     super();
@@ -209,10 +251,14 @@ class Result extends Component {
       }
     }
 
-    let damage_text = mmap(damage.components, fmt).map((d) => h('p', null, d));
+    let damage_text = ""
 
-    if (secondary) {
-       damage_text = damage_text.concat(mmap(secondary.components, fmt).map((d) => h('p', null, 'Secondary ' + d)));
+    if (damage) {
+      damage_text = mmap(damage.components || [], fmt).map((d) => h('p', null, d));
+
+      if (secondary) {
+        damage_text = damage_text.concat(mmap(secondary.components, fmt).map((d) => h('p', null, 'Secondary ' + d)));
+      }
     }
 
     return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},
@@ -245,24 +291,16 @@ class Result extends Component {
   }
 
   render({result}) {
-    let {hit, damage, secondary, effects, attack} = result;
+    let {hit, damage, secondary, effects, attack, text} = result;
 
-    let hit_result = null;
-    if (hit.miss) {
-      hit_result = this.resultPart("Miss!");
-    }
-    else if (hit.critical) {
-      hit_result = this.resultPart("CRITICAL:");
-    }
-    else if (attack.tohit != undefined) {
-      hit_result = this.resultPart("Hit " + hit.score + " for");
+    let hit_info = [this.resultPart(text)]
+    if (damage && !hit.miss) {
+      //hit_info.push(this.resultPart(damage.total + " damage"))
+      hit_info.push(this.typeSummary(damage.types))
     }
 
     return h('div', {"class": "result", onclick: this.toggle},
-      h('div', {'class': 'summary'},
-        hit_result,
-        hit.miss ? "" : this.resultPart(damage.total + " damage"),
-        hit.miss ? "" : this.typeSummary(damage.types)),
+      h('div', {'class': 'summary'}, hit_info),
       (attack.save ? this.save_damage(attack.half, damage, attack) : ""),
       secondary && !hit.miss ? this.secondary(secondary) : "",
       effects && !hit.miss ? this.effects(effects) : "",
@@ -290,6 +328,9 @@ class Attack extends Component {
     );
     let sounds = this.props.attack.sounds || SWORD_SOUNDS;
     play_random_sound(sounds);
+    if (result.text) {
+      say(result.text)
+    }
     this.props.record(result);
   }
 
