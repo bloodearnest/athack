@@ -15,13 +15,18 @@ const party_data = {
       }, {
         name: "Shocking Grasp",
         tohit: 7,
-        damage: {"lightning": "2d8"},
-        secondary: {"desc": "target cannot use reaction this turn"},
+        damage: {
+            lightning: "2d8",
+            effect: "target cannot use reaction this turn",
+        },
         sounds: SPELL_SOUNDS,
       }, {
         name: "Fireball",
         save: "15 Dex",
         damage: {"fire": "8d6"},
+        conditions: {
+          "level 4": {"weapon": "1d6"},
+        },
         sounds: SPELL_SOUNDS,
       }, {
         name: "Chromatic Orb",
@@ -30,6 +35,7 @@ const party_data = {
         conditions: {
           "level 2": {"weapon": "d8"},
           "level 3": {"weapon": "2d8"},
+          "level 4": {"weapon": "3d8"},
         },
         sounds: SPELL_SOUNDS,
       }, {
@@ -39,6 +45,7 @@ const party_data = {
         conditions: {
           "level 2": {"weapon": "d6"},
           "level 3": {"weapon": "2d6"},
+          "level 4": {"weapon": "3d6"},
         },
         sounds: SPELL_SOUNDS,
       }, {
@@ -47,6 +54,7 @@ const party_data = {
         conditions: {
           "level 2": {"weapon": "2d8"},
           "level 3": {"weapon": "4d8"},
+          "level 4": {"weapon": "6d8"},
         },
         sounds: SPELL_SOUNDS,
       }
@@ -55,17 +63,25 @@ const party_data = {
   "Caimbarel": {
     attacks: [
       {
+        name: "Picks",
+        tohit: 8,
+        damage: {"magical piercing": "1d6+5"},
+        conditions: {
+          "Menacing": {"weapon": "d8", "effect": "DC 16 Wis save or frightened till next turn"},
+          "Maneuver": {"weapon": "d8"},
+        },
+      }, {
         name: "Scimitar/Chakram",
-        tohit: 7,
-        damage: {"slashing": "1d6+4"},
+        tohit: 8,
+        damage: {"slashing": "1d6+5"},
         conditions: {
           "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
           "Maneuver": {"weapon": "d8"},
         },
       }, {
         name: "Dagger of Venom",
-        tohit: 8,
-        damage: {"peircing": "1d4+5"},
+        tohit: 9,
+        damage: {"peircing": "1d4+6"},
         conditions: {
           "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
           "Maneuver": {"weapon": "d8"},
@@ -76,8 +92,8 @@ const party_data = {
         }
       }, {
         name: "Hand Crossbow",
-        tohit: 7,
-        damage: {"peircing": "1d6+4"},
+        tohit: 8,
+        damage: {"peircing": "1d6+5"},
         conditions: {
           "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
           "Maneuver": {"weapon": "d8"},
@@ -89,7 +105,7 @@ const party_data = {
 
       }, {
         name: "Dart",
-        tohit: 7,
+        tohit: 8,
         damage: {"slashing": "1d4+4"},
         conditions: {
           "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
@@ -105,6 +121,14 @@ const party_data = {
   "Haemyr": {
     attacks: [
       {
+        name: "Kestrel's bow",
+        tohit: 10,
+        damage: {"piercing": "1d6+5"},
+        conditions: {
+          "Hunters Mark": {"weapon": "d6"},
+        },
+        sounds: RANGED_SOUNDS,
+      }, {
         name: "Shortbow",
         tohit: 9,
         damage: {"piercing": "1d6+4"},
@@ -144,21 +168,65 @@ const party_data = {
         damage: {radiant: "4d6", effect: "Next attack on target has advantage"},
         conditions: {
           "level 2": {weapon: "d6"},
-          "level 3": {weapon: "d6"},
+          "level 3": {weapon: "2d6"},
+          "level 4": {weapon: "3d6"},
         },
         sounds: SPELL_SOUNDS,
-      },
+      }, {
+        name: "Healing Word",
+        save: false,
+        half: false,
+        damage: {healing: "d4+4"},
+        sounds: SPELL_SOUNDS,
+        conditions: {
+          "level 2": {weapon: "d4"},
+          "level 3": {weapon: "2d4"},
+          "level 4": {weapon: "3d4"},
+        },
+      }, {
+        name: "Cure Wounds",
+        save: false,
+        half: false,
+        damage: {healing: "d8+4"},
+        sounds: SPELL_SOUNDS,
+        conditions: {
+          "level 2": {weapon: "d8"},
+          "level 3": {weapon: "2d8"},
+          "level 4": {weapon: "3d8"},
+        },
+      }, {
+        name: "Prayer of Healing",
+        save: false,
+        half: false,
+        damage: {healing: "2d8+4"},
+        sounds: SPELL_SOUNDS,
+        conditions: {
+          "level 3": {weapon: "d8"},
+          "level 4": {weapon: "2d8"},
+        },
+      }
     ],
   },
   "Sigurd": {
     attacks: [
       {
+        name: "Wulfstrom's Axe of Cleaving",
+        tohit: 8,
+        damage: {"magical slashing": "2d6+5"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
         name: "Greataxe",
         tohit: 7,
         damage: {"slashing": "2d6+4"},
         conditions: {
           "Raging": {weapon: "2"},
         },
+      }, {
+        name: "+1 Heavy Crossbow",
+        tohit: 6,
+        damage: {"magical piercing": "d10+3"},
       }, {
         name: "Javelin",
         tohit: 7,
@@ -213,9 +281,18 @@ const party_data = {
     attacks: [
       {
         name: "Firebolt",
-        tohit: 7,
+        tohit: 8,
         damage: {"fire": "2d10"},
         sounds: SPELL_SOUNDS,
+      }, {
+        name: "Shocking Grasp",
+        tohit: 8,
+        damage: {
+            lightning: "2d8",
+            effect: "target cannot use reaction this turn",
+        },
+        sounds: SPELL_SOUNDS,
+
       }, {
         name: "Mind Sliver",
         save: "15 Int",
@@ -229,6 +306,7 @@ const party_data = {
         conditions: {
           "level 2": {"weapon": "1d6"},
           "level 3": {"weapon": "2d6"},
+          "level 4": {"weapon": "3d6"},
         },
         sounds: SPELL_SOUNDS,
       }, {
@@ -238,13 +316,34 @@ const party_data = {
         conditions: {
           "level 2": {"weapon": "1d6"},
           "level 3": {"weapon": "2d6"},
+          "level 4": {"weapon": "3d6"},
         },
         sounds: SPELL_SOUNDS,
       }, {
         name: "Hunger of Hadar",
         save: "15 Dex",
-        damage: {acid: "2d6"},
-        secondary: {cold: "2d6"},
+        damage: {
+            acid: "2d6",
+            secondary: {cold: "2d6"},
+        },
+        sounds: SPELL_SOUNDS,
+      }, {
+        name: "Mind Spike",
+        save: "15 Dex",
+        damage: {psychic: "3d8", effect: "You know location of target while spell lasts"},
+        conditions: {
+          "level 3": {"weapon": "1d8"},
+          "level 4": {"weapon": "2d8"},
+        },
+        sounds: SPELL_SOUNDS,
+      }, {
+        name: "Psychic Blast",
+        save: "15 Dex",
+        damage: {force: "5d8", effect: "On failed save, pushed 20ft away and knocked prone"},
+        conditions: {
+          "level 3": {"weapon": "1d8"},
+          "level 4": {"weapon": "2d8"},
+        },
         sounds: SPELL_SOUNDS,
       }, {
         name: "Sleep",
@@ -252,6 +351,7 @@ const party_data = {
         conditions: {
           "level 2": {"weapon": "2d8"},
           "level 3": {"weapon": "4d8"},
+          "level 4": {"weapon": "5d8"},
         },
         sounds: SPELL_SOUNDS,
       },
