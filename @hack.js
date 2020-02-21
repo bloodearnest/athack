@@ -196,10 +196,11 @@ class Saves extends Component {
     this.roll = this.roll.bind(this);
   }
 
-  *generate_saves(name, saves) {
-    for (let save of Object.keys(saves)) {
-      yield h("span", {"class": "buttons"},
-        h("span", {"class": "save"}, save, ' ', saves[save].toString()),
+  *generate_saves(saves, keys) {
+    for (let i = 0; i < keys.length; i++) {
+      let save = keys[i]
+      yield h("span", {"class": "save buttons"},
+        h("span", {"class": "attr"}, save, ' ', saves[save].toString()),
         h("span", {"class": "action noselect", onclick: (ev) => this.roll(ev, save)}, "S"),
       )
     }
@@ -216,7 +217,9 @@ class Saves extends Component {
     return h(
       "div",
       {"class": "character-saves buttons", id: compose_id(name, 'saves', 'id')},
-      Array.from(this.generate_saves(name, saves))
+      h("div", null, Array.from(this.generate_saves(saves, ["Str", "Int"]))),
+      h("div", null, Array.from(this.generate_saves(saves, ["Dex", "Wis"]))),
+      h("div", null, Array.from(this.generate_saves(saves, ["Con", "Cha"]))),
     );
   }
 }

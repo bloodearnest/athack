@@ -61,14 +61,22 @@ nav select {
   font-size: 3rem;
 }
 
-.save {
-  padding-top: 3rem;
+.character-saves {
+}
+
+.save .attr{
+  padding-top: 2rem;
   margin-left: 0.5rem;
   margin-top: 0.5rem;
   overflow: auto;
   font-weight: bold;
   display: inline-block;
   text-align: right;
+}
+
+.save .action {
+  font-size: 6rem;
+  height: 5.5rem;
 }
 
 .description {

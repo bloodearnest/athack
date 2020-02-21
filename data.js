@@ -1,417 +1,545 @@
 'use strict';
 
 const party_data = {
+  "Airnel": {
+    saves: {
+      'Str': 0,
+      'Dex': 2,
+      'Con': 2,
+      'Int': 3,
+      'Wis': 9,
+      'Cha': 7,
+    },
+    attacks: [
+      {
+        name: "Toll the Dead",
+        save: '16 Wis',
+        half: false,
+        damage: {necrotic: "2d8+4"},
+        conditions: {
+          'Injured': {weapon: "2d12+4", replace: true},
+        },
+      }, {
+        name: "Spiritual Weapon",
+        tohit: 7,
+        damage: {force: "d8+4"},
+        conditions: {
+            'Level 3-4': {force: "d8"},
+            'Level 5-6': {force: "2d8"},
+        }
+      }, {
+        name: "Guiding Bolt",
+        tohit: 8,
+        damage: {radiant: "4d6"},
+        conditions: {
+            'Level 2': {radiant: "1d6"},
+            'Level 3': {radiant: "2d6"},
+            'Level 4': {radiant: "3d6"},
+            'Level 5': {radiant: "4d6"},
+        },
+      }, {
+        name: "Spirit Guardians",
+        save: "16 Wis",
+        damage: {radiant: "3d8", effect: "speed halved"},
+        conditions: {
+          "Level 4": {weapon: "d8"},
+          "Level 5": {weapon: "2d8"},
+        }
+      }, {
+        name: "Vampiric Touch",
+        tohit: 8,
+        damage: {
+          necrotic: "3d6",
+          effect: "You heal half",
+        },
+        conditions: {
+          "Level 4": {weapon: "d6"},
+          "Level 5": {weapon: "2d6"},
+        }
+      }, {
+        name: "Healing Word",
+        damage: {healing: "d4+4"},
+        conditions: {
+          "Level 2": {weapon: "d4"},
+          "Level 3": {weapon: "2d4"},
+          "Level 4": {weapon: "3d4"},
+          "Level 5": {weapon: "4d4"},
+        }
+      }, {
+        name: "Cure Wounds",
+        damage: {healing: "d8+4"},
+        conditions: {
+          "Level 2": {weapon: "d8"},
+          "Level 3": {weapon: "2d8"},
+          "Level 4": {weapon: "3d8"},
+          "Level 5": {weapon: "4d8"},
+        },
+      }, {
+        name: "Mass Healing Word",
+        damage: {healing: "d4+4"},
+        conditions: {
+          "Level 4": {weapon: "1d4"},
+          "Level 5": {weapon: "2d4"},
+        },
+      }, {
+        name: "Mass Cure Wounds",
+        damage: {healing: "3d8+4"},
+      }, {
+        name: "Blight",
+        save: "16 Wis",
+        damage: {necrotic: "8d8", effect: "Undead and constructs immune. Plants have disadvantage and max damage."},
+        conditions: {
+          "Level 5": {weapon: "1d8"},
+        }
+      }, {
+        name: "Dagger",
+        tohit: "3",
+        damage: {piercing: "d4+1"},
+      }, {
+        name: "Light Crossbow",
+        tohit: 3,
+        damage: {piercing: "d8+1"},
+      },
+    ]
+  },
+  "Thorin": {
+    saves: {
+      'Str': 7,
+      'Dex': 3,
+      'Con': 5,
+      'Int': 1,
+      'Wis': 6,
+      'Cha': 7,
+    },
+    attacks: [
+      {
+        name: "Thunder",
+        tohit: 9,
+        damage: {
+            "magical slashing": "d6+5",
+            thunder: "d6",
+            effect: "If Lightning also hits, DC13 CON or stunned for one round",
+        },
+      }, {
+        name: "Lightning",
+        tohit: 9,
+        damage: {
+            "magical slashing": "d6+5",
+            "lightning": "d6",
+            effect: "If Thunder also hits, DC13 CON or stunned for one round",
+        },
+      }, {
+        name: "Smite",
+        tohit: "auto",
+        damage: {radiant: "2d8"},
+        conditions: {
+          "Level 2": {radiant: "1d8"},
+          "Level 3": {radiant: "2d8"},
+        },
+      }, {
+        name: "Javelin of Lightning",
+        tohit: 9,
+        damage: {
+          piercing: "1d6+5",
+          lightning: "4d6",
+          secondary: { lightning: "4d6", desc: "To all in a line to target"},
+        },
+      }, {
+        name: "Crag Cat Claw",
+        tohit: 5,
+        damage: {"slashing": "d8+3"},
+        conditions: {
+          "Pounce": {effect: "DC 13 Str save or prone. If prone, can Bite as bonus action"}
+        },
+      }, {
+        name: "Crag Cat Bite",
+        tohit: 5,
+        damage: {"slashing": "d10+3"},
+      }, {
+        name: "Ashbringer",
+        tohit: 9,
+        damage: {"slashing": "d6+5"},
+      }, {
+        name: "Oathbringer (offhand)",
+        tohit: 9,
+        damage: {"slashing": "d6+5"},
+      }, {
+        name: "Cure Wounds",
+        damage: {healing: "d8+2"},
+        conditions: {
+          "Level 2": {weapon: "d8"},
+          "Level 3": {weapon: "2d8"},
+        }
+      }
+    ],
+  },
+  "Corminar": {
+    saves: {
+      'Str': 1,
+      'Dex': 7,
+      'Con': 2,
+      'Int': 3,
+      'Wis': 3,
+      'Cha': 9,
+    },
+    attacks: [
+      {
+        name: "Eldritch Blast",
+        tohit: 8,
+        damage: {force: "d10"},
+        conditions: {
+          "hex": {necrotic: "d6"}
+        },
+      }, {
+        name: "Poison Spray",
+        save: '16 Con',
+        half: false,
+        damage: {
+          poison: "2d12",
+        }
+      }, {
+        name: "Vicious Mockery",
+        save: '16 Wis',
+        half: false,
+        damage: {
+          psychic: "2d4",
+          effect: "disadvantage on next attack roll",
+        },
+      }, {
+        name: "Hellish Rebuke",
+        save: '16 Dex',
+        damage: {fire: "2d10"},
+        conditions: {
+          "Level 2": {fire: "1d10"},
+          "Level 3": {fire: "2d10"},
+          "Level 4": {fire: "3d10"},
+        }
+      }, {
+        name: "Rapier",
+        tohit: 6,
+        damage: {'magical piercing': "d8+2"},
+        conditions: {hex: {necrotic: "d6"}},
+      }, {
+        name: "Dagger of Venom",
+        tohit: 7,
+        damage: {piercing: "d4+3"},
+        conditions: {
+            "Venom": {
+                secondary: {poison: "2d10"},
+                effect: "DC 16 Con save, or take poison damage and poisoned",
+            },
+            hex: {necrotic: "d6"},
+        },
+      }, {
+        name: "Dissonant Whispers",
+        save: '16 Wis',
+        half: true,
+        damage: {
+          psychic: "3d6",
+          effect: "must use reaction to move full speed away from you.",
+        },
+        conditions: {
+            'Level 2': {weapon: "1d6"},
+            'Level 3': {weapon: "2d6"},
+            'Level 4': {weapon: "3d6"},
+        },
+      }, {
+        name: "Heat Metal",
+        damage: {
+          "fire": "2d8",
+          effect: "If holding/wearing, DC 16 Con save or must drop, disadvantage on attacks and checks if it cannot",
+        },
+        conditions: {
+          'Level 3': {weapon: "1d8"},
+          'Level 4': {weapon: "2d8"},
+        }
+      }, {
+        name: "Pistol",
+        tohit: 5,
+        damage: {piercing: "1d10+2"},
+        conditions: {hex: {necrotic: "d6"}},
+      }, {
+        name: "Healing Word",
+        damage: {healing: "d4+4"},
+        conditions: {
+          "Level 2": {weapon: "d4"},
+          "Level 3": {weapon: "2d4"},
+          "Level 3": {weapon: "3d4"},
+        }
+      }, {
+        name: "Fireball",
+        save: '16 Dex',
+        damage: {
+          fire: "8d6",
+          effect: "sets stuff on fire",
+        },
+        conditions: {
+          "Level 4": {weapon: "d8"},
+        }
+      },
+    ]
+  },
+ "Nordan": {
+    saves: {
+      'Str': 2,
+      'Dex': -1,
+      'Con': 2,
+      'Int': 5,
+      'Wis': 9,
+      'Cha': 0,
+    },
+    attacks: [
+      {
+        name: "Staff of the Jungle (Shillelagh)",
+        tohit: 10,
+        damage: {"magical bludgeoning": "d8+6"},
+      }, {
+        name: "Primal Savagery",
+        tohit: 10,
+        damage: {"acid": "2d10"},
+      }, {
+        name: "Call Lightning",
+        save: "17 Dex",
+        damage: {"lightning": "3d10"},
+        conditions: {
+          'Level 4': {weapon: "1d10"},
+          'Level 5': {weapon: "2d10"},
+        }
+      }, {
+        name: "Moonbeam",
+        save: "17 Con",
+        damage: {"radiant": "2d10"},
+        conditions: {
+          'Level 3': {weapon: "1d10"},
+          'Level 4': {weapon: "2d10"},
+          'Level 4': {weapon: "3d10"},
+        }
+      }, {
+        name: "Heat Metal",
+        damage: {
+          "fire": "2d8",
+          effect: "If holding/wearing, DC 17 Con save or must drop, disadvantage on attacks and checks if it cannot",
+        },
+        conditions: {
+          'Level 3': {weapon: "1d8"},
+          'Level 4': {weapon: "2d8"},
+          'Level 5': {weapon: "3d8"},
+        }
+      }, {
+        name: "Staff of the Jungle (Strength)",
+        tohit: 7,
+        damage: {"bludgeoning": "d6+3"},
+        conditions: {
+          'Two Handed': {weapon: "d8+3", replace: true},
+        }
+      }, {
+        name: "Healing Word",
+        damage: {healing: "d4+5"},
+        conditions: {
+          "Level 2": {weapon: "1d4"},
+          "Level 3": {weapon: "2d4"},
+          "Level 4": {weapon: "3d4"},
+          "Level 5": {weapon: "4d4"},
+        }
+      }
+    ],
+  },
+  "Timber": {
+    saves: {
+      'Str': 6,
+      'Dex': 5,
+      'Con': 5,
+      'Int': 0,
+      'Wis': 2,
+      'Cha': -1,
+    },
+    attacks: [
+      {
+        name: "Oathbow",
+        tohit: 11,
+        damage: {"magical piercing": "d8+7"},
+        conditions: {
+          'Sworn Enemy': {weapon: "2d6"},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
+        },
+      }, {
+        name: "Bolas",
+        tohit: 11,
+        damage: {
+            bludgeoning: "d4+5",
+            effect: "Target is prone. DC 10 Str/16 Dex or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
+        },
+        conditions: {
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
+        },
+      }, {
+        name: "Blowgun",
+        tohit: 10,
+        damage: {piercing: "1"},
+        conditions: {
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
+        },
+      }, {
+        name: "Net",
+        tohit: 11,
+        damage: {
+            bludgeoning: "0",
+            effect: "Target is restrained. DC 13 Str check or 5 slashing damage to escape",
+        },
+        conditions: {
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
+        },
+      }, {
+        name: "Trident",
+        tohit: 6,
+        damage: {piercing: "d6+2"},
+        conditions: {
+          "Two Handed": {weapon: "d8+2", replace: true},
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
+        }
+      }, {
+        name: "Cat's Claw",
+        tohit: 6,
+        damage: {piercing: "d4+2"},
+        conditions: {
+          'Goading': {
+              secondary: {weapon: "d8"},
+              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
+          },
+          'Distracting': {
+              secondary: {weapon: "d8"},
+              effect: "Allies next attack against target has advantage",
+          },
+        }
+      }
+    ],
+  },
+  "Grondrath": {
+    saves: {
+      'Str': 9,
+      'Dex': 1,
+      'Con': 8,
+      'Int': -1,
+      'Wis': 1,
+      'Cha': 2,
+    },
+    attacks: [
+      {
+        name: "Athletics",
+        tohit: 9,
+        damage: {bludgeoning: "0"},
+      }, {
+        name: "Unarmed Attack",
+        tohit: 10,
+        damage: {"magical bludgeoning": "1d4+6"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
+        name: "Dragon Breath",
+        save: "DEX 16",
+        damage: {"fire": "3d6"},
+      }, {
+        name: "Hand Axe",
+        tohit: 9,
+        damage: {"slashing": "1d6+5"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      }, {
+        name: "Javelin",
+        tohit: 9,
+        damage: {"piercing": "1d6+2"},
+        conditions: {
+          "Raging": {weapon: "2"},
+        },
+      },
+    ],
+  },
   "Areni": {
     saves: {
       'Str': -1,
       'Dex': 3,
       'Con': 1,
-      'Int': 7,
-      'Wis': 4,
+      'Int': 9,
+      'Wis': 5,
       'Cha': 0,
     },
     attacks: [
       {
         name: "Firebolt",
-        tohit: 7,
+        tohit: 10,
         damage: {"fire": "2d10"},
-        sounds: SPELL_SOUNDS,
       }, {
-        name: "Shortsword",
-        tohit: 6,
-        damage: {"piercing": "d6+3"},
-      }, {
-        name: "Shocking Grasp",
+        name: "Shadowblade",
         tohit: 7,
-        damage: {
-            lightning: "2d8",
-            effect: "target cannot use reaction this turn",
+        damage: {"psychic": "2d8"},
+        conditions: {
+          "level 3/4": {"weapon": "d8"},
+          "level 5/6": {"weapon": "2d8"},
         },
-        sounds: SPELL_SOUNDS,
+      }, {
+        name: "Booming blade (Shadowblade)",
+        tohit: 7,
+        damage: {"psychic": "2d8", "thunder": "d8"},
+        secondary: {"thunder": "3d8", "desc": "if the target moves"},
+        conditions: {
+          "level 3/4": {"weapon": "d8"},
+          "level 5/6": {"weapon": "2d8"},
+        },
+      }, {
+        name: "Booming blade (short sword)",
+        tohit: 7,
+        damage: {"slashing": "d6+3", "thunder": "d8"},
+        secondary: {"thunder": "3d8", "desc": "if the target moves"},
       }, {
         name: "Fireball",
-        save: "15 Dex",
-        damage: {"fire": "8d6"},
-        conditions: {
-          "level 4": {"weapon": "1d6"},
+        save: '17 Dex',
+        damage: {
+          fire: "8d6",
+          effect: "sets stuff on fire",
         },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Chromatic Orb",
-        tohit: 7,
-        damage: {"acid|cold|fire|lightning|poison|thunder": "3d8"},
         conditions: {
-          "level 2": {"weapon": "d8"},
-          "level 3": {"weapon": "2d8"},
-          "level 4": {"weapon": "3d8"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Burning Hands",
-        save: "15 Dex",
-        damage: {"fire": "3d6"},
-        conditions: {
-          "level 2": {"weapon": "d6"},
-          "level 3": {"weapon": "2d6"},
-          "level 4": {"weapon": "3d6"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Sleep",
-        damage: {sleep: "5d8"},
-        conditions: {
-          "level 2": {"weapon": "2d8"},
-          "level 3": {"weapon": "4d8"},
-          "level 4": {"weapon": "6d8"},
-        },
-        sounds: SPELL_SOUNDS,
-      }
-    ]
-  },
-  "Caimbarel": {
-    saves: {
-        'Str': 4,
-        'Dex': 5,
-        'Con': 3,
-        'Int': 0,
-        'Wis': 2,
-        'Cha': 2,
-    },
-    attacks: [
-      {
-        name: "Picks",
-        tohit: 8,
-        damage: {"magical piercing": "1d6+5"},
-        conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 16 Wis save or frightened till next turn"},
-          "Maneuver": {"weapon": "d8"},
-        },
-      }, {
-        name: "Scimitar/Chakram",
-        tohit: 8,
-        damage: {"slashing": "1d6+5"},
-        conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
-          "Maneuver": {"weapon": "d8"},
-        },
-      }, {
-        name: "Dagger of Venom",
-        tohit: 9,
-        damage: {"peircing": "1d4+6"},
-        conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
-          "Maneuver": {"weapon": "d8"},
-          "Venom": {
-              secondary: {poison: "2d10"},
-              effect: "DC 15 Con save, or take poison damage and poisoned for 1 min",
-          },
+          "Level 4": {weapon: "d8"},
+          "Level 5": {weapon: "2d8"},
         }
-      }, {
-        name: "Hand Crossbow",
-        tohit: 8,
-        damage: {"peircing": "1d6+5"},
-        conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
-          "Maneuver": {"weapon": "d8"},
-          "Drow Poison": {
-              effect: "DC 13 Con save or poisoned for 1 hour. Fail by 5+ and unconcious (woken if attacked or shaken)",
-          },
-        },
-        sounds: RANGED_SOUNDS,
-
-      }, {
-        name: "Dart",
-        tohit: 8,
-        damage: {"slashing": "1d4+4"},
-        conditions: {
-          "Menacing": {"weapon": "d8", "effect": "DC 15 Wis save or frightened till next turn"},
-          "Maneuver": {"weapon": "d8"},
-          "Drow Poison": {
-              effect: "DC 13 Con save or poisoned for 1 hour. Fail by 5+ and unconcious (woken if attacked or shaken)",
-          },
-        },
-        sounds: RANGED_SOUNDS,
-      }
-    ]
-  },
-  "Haemyr": {
-    saves: {
-      'Str': 3,
-      'Dex': 7,
-      'Con': 1,
-      'Int': 1,
-      'Wis': 3,
-      'Cha': -1,
-    },
-    attacks: [
-      {
-        name: "Kestrel's bow",
-        tohit: 10,
-        damage: {"piercing": "1d6+5"},
-        conditions: {
-          "Hunters Mark": {"weapon": "d6"},
-        },
-        sounds: RANGED_SOUNDS,
-      }, {
-        name: "Shortbow",
-        tohit: 9,
-        damage: {"piercing": "1d6+4"},
-        conditions: {
-          "Hunters Mark": {"weapon": "d6"},
-        },
-        sounds: RANGED_SOUNDS,
-      }, {
-        name: "Rapier",
-        tohit: 7,
-        damage: {"piercing": "1d8+4"},
-        conditions: {
-          "Hunters Mark": {"weapon": "d6"},
-        },
-      }
-    ]
-  },
-  "Harethier": {
-    saves: {
-      'Str': 1,
-      'Dex': 1,
-      'Con': 2,
-      'Int': 0,
-      'Wis': 7,
-      'Cha': 3,
-    },
-    attacks: [
-      {
-        name: "Toll the Dead",
-        save: "15 Wis",
-        half: false,
-        damage: {"necrotic": "2d8"},
-        conditions: {
-          "Injured": {weapon: "2d12", replace: true},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Spiritual Weapon",
-        tohit: 7,
-        damage: {force: "d8+4"},
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Guided Bolt",
-        tohit: 7,
-        damage: {radiant: "4d6", effect: "Next attack on target has advantage"},
-        conditions: {
-          "level 2": {weapon: "d6"},
-          "level 3": {weapon: "2d6"},
-          "level 4": {weapon: "3d6"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Healing Word",
-        save: false,
-        half: false,
-        damage: {healing: "d4+4"},
-        sounds: SPELL_SOUNDS,
-        conditions: {
-          "level 2": {weapon: "d4"},
-          "level 3": {weapon: "2d4"},
-          "level 4": {weapon: "3d4"},
-        },
-      }, {
-        name: "Cure Wounds",
-        save: false,
-        half: false,
-        damage: {healing: "d8+4"},
-        sounds: SPELL_SOUNDS,
-        conditions: {
-          "level 2": {weapon: "d8"},
-          "level 3": {weapon: "2d8"},
-          "level 4": {weapon: "3d8"},
-        },
-      }, {
-        name: "Prayer of Healing",
-        save: false,
-        half: false,
-        damage: {healing: "2d8+4"},
-        sounds: SPELL_SOUNDS,
-        conditions: {
-          "level 3": {weapon: "d8"},
-          "level 4": {weapon: "2d8"},
-        },
-      }
-    ],
-  },
-  "Sigurd": {
-    saves: {
-      'Str': 7,
-      'Dex': 2,
-      'Con': 6,
-      'Int': 0,
-      'Wis': -1,
-      'Cha': 1,
-    },
-    attacks: [
-      {
-        name: "Wulfstrom's Axe of Cleaving",
-        tohit: 8,
-        damage: {"magical slashing": "2d6+5"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-      }, {
-        name: "Greataxe",
-        tohit: 7,
-        damage: {"slashing": "2d6+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-      }, {
-        name: "+1 Heavy Crossbow",
-        tohit: 6,
-        damage: {"magical piercing": "d10+3"},
-      }, {
-        name: "Javelin",
-        tohit: 7,
-        damage: {"piercing": "1d6+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-        sounds: RANGED_SOUNDS,
-      }, {
-        name: "Light Hammer",
-        tohit: 7,
-        damage: {"piercing": "1d4+4"},
-        conditions: {
-          "Raging": {weapon: "2"},
-        },
-      }
-    ],
-  },
-  "Zanavor": {
-    saves: {
-      'Str': 0,
-      'Dex': 2,
-      'Con': 2,
-      'Int': 1,
-      'Wis': 4,
-      'Cha': 7,
-    },
-    attacks: [
-      {
-        name: "Shadowmourne",
-        tohit: 8,
-        damage: {slashing: "1d10+5"},
-        conditions: {
-          "Hexed": {weapon: "d6"},
-          "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
-          "One Handed": {weapon: "d8+5", replace: true},
-        },
-      }, {
-        name: "Eldritch Blast",
-        tohit: 7,
-        damage: {force: "d10"},
-        conditions: {
-          "Hexed": {weapon: "d6"},
-          "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Vampiric Touch",
-        tohit: 7,
-        damage: {necrotic: "3d6"},
-        conditions: {
-          "Hexed": {weapon: "d6"},
-          "Cursed": {weapon: "2", rules: {"Improved Critical": "19"}},
-        },
-        sounds: SPELL_SOUNDS,
       },
     ]
-  },
-  "Dorlamir": {
-    saves: {
-      'Str': -1,
-      'Dex': 3,
-      'Con': 5,
-      'Int': 0,
-      'Wis': 1,
-      'Cha': 7,
-    },
-    attacks: [
-      {
-        name: "Firebolt",
-        tohit: 8,
-        damage: {"fire": "2d10"},
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Shocking Grasp",
-        tohit: 8,
-        damage: {
-            lightning: "2d8",
-            effect: "target cannot use reaction this turn",
-        },
-        sounds: SPELL_SOUNDS,
-
-      }, {
-        name: "Mind Sliver",
-        save: "15 Int",
-        half: false,
-        damage: {psychic: "2d6", effect: "Subract 1d4 from next saving throw"},
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Dissonant Whispers",
-        save: "15 Wis",
-        damage: {psychic: "3d6", effect: "Must use reaction to as far as possible away from you"},
-        conditions: {
-          "level 2": {"weapon": "1d6"},
-          "level 3": {"weapon": "2d6"},
-          "level 4": {"weapon": "3d6"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Arms of Hadar",
-        save: "15 Str",
-        damage: {necrotic: "2d6", effect: "Cannot take reactions till next turn"},
-        conditions: {
-          "level 2": {"weapon": "1d6"},
-          "level 3": {"weapon": "2d6"},
-          "level 4": {"weapon": "3d6"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Hunger of Hadar",
-        save: "15 Dex",
-        damage: {
-            acid: "2d6",
-            secondary: {cold: "2d6"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Mind Spike",
-        save: "15 Dex",
-        damage: {psychic: "3d8", effect: "You know location of target while spell lasts"},
-        conditions: {
-          "level 3": {"weapon": "1d8"},
-          "level 4": {"weapon": "2d8"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Psychic Blast",
-        save: "15 Dex",
-        damage: {force: "5d8", effect: "On failed save, pushed 20ft away and knocked prone"},
-        conditions: {
-          "level 3": {"weapon": "1d8"},
-          "level 4": {"weapon": "2d8"},
-        },
-        sounds: SPELL_SOUNDS,
-      }, {
-        name: "Sleep",
-        damage: {sleep: "5d8"},
-        conditions: {
-          "level 2": {"weapon": "2d8"},
-          "level 3": {"weapon": "4d8"},
-          "level 4": {"weapon": "5d8"},
-        },
-        sounds: SPELL_SOUNDS,
-      },
-    ],
-  },
+  }
 
 };
