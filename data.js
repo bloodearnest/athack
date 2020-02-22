@@ -391,6 +391,7 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+          "Hunter's Mark": {weapon: "d6"}
         },
       }, {
         name: "Bolas",
@@ -409,6 +410,7 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+          "Hunter's Mark": {weapon: "d6"}
         },
       }, {
         name: "Blowgun",
@@ -424,6 +426,7 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+          "Hunter's Mark": {weapon: "d6"}
         },
       }, {
         name: "Net",
@@ -442,6 +445,7 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+          "Hunter's Mark": {weapon: "d6"}
         },
       }, {
         name: "Trident",
@@ -457,6 +461,7 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+          "Hunter's Mark": {weapon: "d6"}
         }
       }, {
         name: "Cat's Claw",
@@ -471,6 +476,7 @@ const party_data = {
               secondary: {weapon: "d8"},
               effect: "Allies next attack against target has advantage",
           },
+          "Hunter's Mark": {weapon: "d6"}
         }
       }
     ],
