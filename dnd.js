@@ -35,8 +35,8 @@ function roll_dice(n, size, annotated, critical, die_func) {
       total += sign * roll;
       rolls.push(roll);
     }
-    if (critical) {
-      real_n = n * 2;
+    for (let i = 0; i < critical; i++) {
+      real_n += n
       for (let i = 0; i < Math.abs(n); i++) {
         let roll = CRIT_MAX ? size : die_func(size);
         total += sign * roll;
@@ -262,6 +262,7 @@ function roll_attack(attack, conditions, attack_options) {
   let effects = new Map();
   let critical = false;
   let damage_critical = false;
+  let main_critical = 0
   let hit = {
     miss: false,
     annotated: [],
@@ -270,14 +271,17 @@ function roll_attack(attack, conditions, attack_options) {
   // only roll attack if it is an actual attack
   if (attack.tohit) {
     hit = roll_hit(attack, conditions, advantage, disadvantage, attack_options, rules);
-    damage_critical = autocrit || hit.critical;
+    if (autocrit || hit.critical) {
+        damage_critical = 1;
+        main_critical = 1 + (rules["Brutal Critical"] || 0)
+    }
   }
 
   let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
   // use the first damage type as the weapon type.
   let weapon_damage_type = Object.keys(attack.damage)[0];
   let base_damage = Array.from(
-    roll_damage(attack.damage, die_func, damage_critical, weapon_damage_type)
+    roll_damage(attack.damage, die_func, main_critical, weapon_damage_type)
   );
   all_damage.set("Damage", base_damage);
 
@@ -294,7 +298,7 @@ function roll_attack(attack, conditions, attack_options) {
       let attack_conditions = attack.conditions || {};
       let damage = attack_conditions[option];
       let condition_damage = Array.from(
-        roll_damage(damage, die_func, damage_critical, weapon_damage_type)
+        roll_damage(damage, die_func, main_critical, weapon_damage_type)
       );
       // replace the base damage with this option
       if (damage.replace) {

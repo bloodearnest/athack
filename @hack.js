@@ -3,6 +3,8 @@
 const { h, render, Component } = window.preact;
 
 
+var current_sound = null;
+
 const DICE_SOUNDS = [
   new Audio("sounds/roll.mp3"),
   new Audio("sounds/roll2.mp3"),
@@ -31,13 +33,25 @@ const SPELL_SOUNDS = [
 
 function say(phrase) {
   let utterance = new SpeechSynthesisUtterance(phrase);
-  speechSynthesis.speak(utterance);
+  speechSynthesis.cancel();
+  say_when_no_sound(utterance)
+}
+
+function say_when_no_sound(utterance) {
+    if (current_sound == undefined || current_sound.currentTime >= current_sound.duration) {
+        speechSynthesis.speak(utterance);
+    } else {
+        setTimeout(function() { say_when_no_sound(utterance) }, 100)
+    }
 }
 
 
 function play_random_sound(sounds) {
-  sounds.forEach(s => s.pause());
   let sound = sounds[Math.floor(Math.random() * sounds.length)];
+  if (current_sound) {
+    current_sound.pause()
+  }
+  current_sound = sound
   sound.currentTime = 0;
   sound.play();
 }

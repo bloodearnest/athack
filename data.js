@@ -7,29 +7,32 @@ const party_data = {
       'Dex': 2,
       'Con': 2,
       'Int': 3,
-      'Wis': 9,
+      'Wis': 10,
       'Cha': 7,
     },
     attacks: [
       {
         name: "Toll the Dead",
-        save: '16 Wis',
+        save: '17 Wis',
         half: false,
-        damage: {necrotic: "2d8+4"},
+        sounds: SPELL_SOUNDS,
+        damage: {necrotic: "2d8+5"},
         conditions: {
-          'Injured': {weapon: "2d12+4", replace: true},
+          'Injured': {weapon: "2d12+5", replace: true},
         },
       }, {
         name: "Spiritual Weapon",
-        tohit: 7,
-        damage: {force: "d8+4"},
+        tohit: 9,
+        sounds: SPELL_SOUNDS,
+        damage: {force: "d8+5"},
         conditions: {
             'Level 3-4': {force: "d8"},
             'Level 5-6': {force: "2d8"},
         }
       }, {
         name: "Guiding Bolt",
-        tohit: 8,
+        sounds: SPELL_SOUNDS,
+        tohit: 9,
         damage: {radiant: "4d6"},
         conditions: {
             'Level 2': {radiant: "1d6"},
@@ -41,13 +44,15 @@ const party_data = {
         name: "Spirit Guardians",
         save: "16 Wis",
         damage: {radiant: "3d8", effect: "speed halved"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 4": {weapon: "d8"},
           "Level 5": {weapon: "2d8"},
         }
       }, {
         name: "Vampiric Touch",
-        tohit: 8,
+        tohit: 9,
+        sounds: SPELL_SOUNDS,
         damage: {
           necrotic: "3d6",
           effect: "You heal half",
@@ -58,7 +63,8 @@ const party_data = {
         }
       }, {
         name: "Healing Word",
-        damage: {healing: "d4+4"},
+        damage: {healing: "d4+5"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {weapon: "d4"},
           "Level 3": {weapon: "2d4"},
@@ -67,7 +73,8 @@ const party_data = {
         }
       }, {
         name: "Cure Wounds",
-        damage: {healing: "d8+4"},
+        damage: {healing: "d8+5"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {weapon: "d8"},
           "Level 3": {weapon: "2d8"},
@@ -76,18 +83,21 @@ const party_data = {
         },
       }, {
         name: "Mass Healing Word",
-        damage: {healing: "d4+4"},
+        damage: {healing: "d4+5"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 4": {weapon: "1d4"},
           "Level 5": {weapon: "2d4"},
         },
       }, {
         name: "Mass Cure Wounds",
-        damage: {healing: "3d8+4"},
+        damage: {healing: "3d8+5"},
+        sounds: SPELL_SOUNDS,
       }, {
         name: "Blight",
-        save: "16 Wis",
+        save: "17 Wis",
         damage: {necrotic: "8d8", effect: "Undead and constructs immune. Plants have disadvantage and max damage."},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 5": {weapon: "1d8"},
         }
@@ -186,7 +196,8 @@ const party_data = {
       {
         name: "Eldritch Blast",
         tohit: 8,
-        damage: {force: "d10"},
+        damage: {force: "d10+4"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "hex": {necrotic: "d6"}
         },
@@ -194,6 +205,7 @@ const party_data = {
         name: "Poison Spray",
         save: '16 Con',
         half: false,
+        sounds: SPELL_SOUNDS,
         damage: {
           poison: "2d12",
         }
@@ -201,6 +213,7 @@ const party_data = {
         name: "Vicious Mockery",
         save: '16 Wis',
         half: false,
+        sounds: SPELL_SOUNDS,
         damage: {
           psychic: "2d4",
           effect: "disadvantage on next attack roll",
@@ -209,6 +222,7 @@ const party_data = {
         name: "Hellish Rebuke",
         save: '16 Dex',
         damage: {fire: "2d10"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {fire: "1d10"},
           "Level 3": {fire: "2d10"},
@@ -234,6 +248,7 @@ const party_data = {
         name: "Dissonant Whispers",
         save: '16 Wis',
         half: true,
+        sounds: SPELL_SOUNDS,
         damage: {
           psychic: "3d6",
           effect: "must use reaction to move full speed away from you.",
@@ -245,6 +260,7 @@ const party_data = {
         },
       }, {
         name: "Heat Metal",
+        sounds: SPELL_SOUNDS,
         damage: {
           "fire": "2d8",
           effect: "If holding/wearing, DC 16 Con save or must drop, disadvantage on attacks and checks if it cannot",
@@ -261,6 +277,7 @@ const party_data = {
       }, {
         name: "Healing Word",
         damage: {healing: "d4+4"},
+        sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {weapon: "d4"},
           "Level 3": {weapon: "2d4"},
@@ -269,6 +286,7 @@ const party_data = {
       }, {
         name: "Fireball",
         save: '16 Dex',
+        sounds: SPELL_SOUNDS,
         damage: {
           fire: "8d6",
           effect: "sets stuff on fire",
@@ -296,10 +314,12 @@ const party_data = {
       }, {
         name: "Primal Savagery",
         tohit: 10,
+        sounds: SPELL_SOUNDS,
         damage: {"acid": "2d10"},
       }, {
         name: "Call Lightning",
         save: "17 Dex",
+        sounds: SPELL_SOUNDS,
         damage: {"lightning": "3d10"},
         conditions: {
           'Level 4': {weapon: "1d10"},
@@ -308,6 +328,7 @@ const party_data = {
       }, {
         name: "Moonbeam",
         save: "17 Con",
+        sounds: SPELL_SOUNDS,
         damage: {"radiant": "2d10"},
         conditions: {
           'Level 3': {weapon: "1d10"},
@@ -316,6 +337,7 @@ const party_data = {
         }
       }, {
         name: "Heat Metal",
+        sounds: SPELL_SOUNDS,
         damage: {
           "fire": "2d8",
           effect: "If holding/wearing, DC 17 Con save or must drop, disadvantage on attacks and checks if it cannot",
@@ -357,6 +379,7 @@ const party_data = {
       {
         name: "Oathbow",
         tohit: 11,
+        sounds: RANGED_SOUNDS,
         damage: {"magical piercing": "d8+7"},
         conditions: {
           'Sworn Enemy': {weapon: "2d6"},
@@ -372,6 +395,7 @@ const party_data = {
       }, {
         name: "Bolas",
         tohit: 11,
+        sounds: RANGED_SOUNDS,
         damage: {
             bludgeoning: "d4+5",
             effect: "Target is prone. DC 10 Str/16 Dex or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
@@ -389,6 +413,7 @@ const party_data = {
       }, {
         name: "Blowgun",
         tohit: 10,
+        sounds: RANGED_SOUNDS,
         damage: {piercing: "1"},
         conditions: {
           'Goading': {
@@ -403,6 +428,7 @@ const party_data = {
       }, {
         name: "Net",
         tohit: 11,
+        sounds: RANGED_SOUNDS,
         damage: {
             bludgeoning: "0",
             effect: "Target is restrained. DC 13 Str check or 5 slashing damage to escape",
@@ -467,6 +493,7 @@ const party_data = {
         name: "Unarmed Attack",
         tohit: 10,
         damage: {"magical bludgeoning": "1d4+6"},
+        rules: {"Brutal Critical": 1},
         conditions: {
           "Raging": {weapon: "2"},
         },
@@ -478,6 +505,7 @@ const party_data = {
         name: "Hand Axe",
         tohit: 9,
         damage: {"slashing": "1d6+5"},
+        rules: {"Brutal Critical": 1},
         conditions: {
           "Raging": {weapon: "2"},
         },
@@ -485,6 +513,8 @@ const party_data = {
         name: "Javelin",
         tohit: 9,
         damage: {"piercing": "1d6+2"},
+        sounds: RANGED_SOUNDS,
+        rules: {"Brutal Critical": 1},
         conditions: {
           "Raging": {weapon: "2"},
         },
@@ -504,10 +534,12 @@ const party_data = {
       {
         name: "Firebolt",
         tohit: 10,
+        sounds: SPELL_SOUNDS,
         damage: {"fire": "2d10"},
       }, {
         name: "Shadowblade",
         tohit: 7,
+        sounds: SPELL_SOUNDS,
         damage: {"psychic": "2d8"},
         conditions: {
           "level 3/4": {"weapon": "d8"},
@@ -516,6 +548,7 @@ const party_data = {
       }, {
         name: "Booming blade (Shadowblade)",
         tohit: 7,
+        sounds: SPELL_SOUNDS,
         damage: {"psychic": "2d8", "thunder": "d8"},
         secondary: {"thunder": "3d8", "desc": "if the target moves"},
         conditions: {
@@ -525,11 +558,13 @@ const party_data = {
       }, {
         name: "Booming blade (short sword)",
         tohit: 7,
+        sounds: SPELL_SOUNDS,
         damage: {"slashing": "d6+3", "thunder": "d8"},
         secondary: {"thunder": "3d8", "desc": "if the target moves"},
       }, {
         name: "Fireball",
         save: '17 Dex',
+        sounds: SPELL_SOUNDS,
         damage: {
           fire: "8d6",
           effect: "sets stuff on fire",
