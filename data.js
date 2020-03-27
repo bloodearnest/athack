@@ -366,119 +366,37 @@ const party_data = {
       }
     ],
   },
-  "Timber": {
+  "Heston": {
     saves: {
-      'Str': 6,
-      'Dex': 5,
-      'Con': 5,
-      'Int': 0,
-      'Wis': 2,
-      'Cha': -1,
+      'Str': 5,
+      'Dex': 3,
+      'Con': 8,
+      'Int': 9,
+      'Wis': 6,
+      'Cha': 0,
     },
     attacks: [
       {
-        name: "Oathbow",
-        tohit: 11,
-        sounds: RANGED_SOUNDS,
-        damage: {"magical piercing": "d8+7"},
+        name: "Quarterstaff",
+        tohit: 8,
+        damage: {bludgeoning: "d6+4"},
         conditions: {
-          'Sworn Enemy': {weapon: "2d6"},
-          'Goading': {
-              secondary: {weapon: "d8"},
-              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
-          },
-          'Distracting': {
-              secondary: {weapon: "d8"},
-              effect: "Allies next attack against target has advantage",
-          },
-          "Hunter's Mark": {weapon: "d6"}
+          'Two Handed': {weapon: "d8+4", replace: true},
         },
       }, {
-        name: "Bolas",
-        tohit: 11,
-        sounds: RANGED_SOUNDS,
+        name: "Ray of Sickness",
+        tohit: 8,
+        sounds: SPELL_SOUNDS,
         damage: {
-            bludgeoning: "d4+5",
-            effect: "Target is prone. DC 10 Str/16 Dex or 5 slashing damage to escape. If you have advantage, and both hit, target is also restrained.",
+            poison: "2d8",
+            effect: "DC 16 Con save or poisoned",
         },
         conditions: {
-          'Goading': {
-              secondary: {weapon: "d8"},
-              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
-          },
-          'Distracting': {
-              secondary: {weapon: "d8"},
-              effect: "Allies next attack against target has advantage",
-          },
-          "Hunter's Mark": {weapon: "d6"}
+          "Level 2": {weapon: "1d8"},
+          "Level 3": {weapon: "2d8"},
+          "Level 4": {weapon: "3d8"},
         },
-      }, {
-        name: "Blowgun",
-        tohit: 10,
-        sounds: RANGED_SOUNDS,
-        damage: {piercing: "1"},
-        conditions: {
-          'Goading': {
-              secondary: {weapon: "d8"},
-              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
-          },
-          'Distracting': {
-              secondary: {weapon: "d8"},
-              effect: "Allies next attack against target has advantage",
-          },
-          "Hunter's Mark": {weapon: "d6"}
-        },
-      }, {
-        name: "Net",
-        tohit: 11,
-        sounds: RANGED_SOUNDS,
-        damage: {
-            bludgeoning: "0",
-            effect: "Target is restrained. DC 13 Str check or 5 slashing damage to escape",
-        },
-        conditions: {
-          'Goading': {
-              secondary: {weapon: "d8"},
-              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
-          },
-          'Distracting': {
-              secondary: {weapon: "d8"},
-              effect: "Allies next attack against target has advantage",
-          },
-          "Hunter's Mark": {weapon: "d6"}
-        },
-      }, {
-        name: "Trident",
-        tohit: 6,
-        damage: {piercing: "d6+2"},
-        conditions: {
-          "Two Handed": {weapon: "d8+2", replace: true},
-          'Goading': {
-              secondary: {weapon: "d8"},
-              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
-          },
-          'Distracting': {
-              secondary: {weapon: "d8"},
-              effect: "Allies next attack against target has advantage",
-          },
-          "Hunter's Mark": {weapon: "d6"}
-        }
-      }, {
-        name: "Cat's Claw",
-        tohit: 6,
-        damage: {piercing: "d4+2"},
-        conditions: {
-          'Goading': {
-              secondary: {weapon: "d8"},
-              effect: "DC 17 Wis save or disadvantage on all attacks not against Timber",
-          },
-          'Distracting': {
-              secondary: {weapon: "d8"},
-              effect: "Allies next attack against target has advantage",
-          },
-          "Hunter's Mark": {weapon: "d6"}
-        }
-      }
+      },
     ],
   },
   "Grondrath": {
