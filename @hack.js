@@ -279,7 +279,7 @@ class Result extends Component {
   }
 
   save_damage(text) {
-    return h('div', {class: 'half-damage'}, this.resultPart(MarkdownContent(test)));
+    return h('div', {class: 'half-damage'}, this.resultPart(MarkdownContent(text)));
   }
 
   effects(effects) {

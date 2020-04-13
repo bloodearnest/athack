@@ -1,7 +1,9 @@
 import flask
 import requests
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
+CORS(app)
 
 channels = {
     "test": (
@@ -14,38 +16,15 @@ channels = {
     ),
 }
 
-CORS_HEADERS = [
-    ("Access-Control-Allow-Origin", "*"),
-    ("Access-Control-Allow-Headers", "Content-Type"),
-    ("Access-Control-Allow-Methods", "*"),
-]
-
-
-def cors():
-    if flask.request.method != 'POST':
-        print(flask.request.headers)
-        resp = flask.make_response('', 204)
-        for h, v in CORS_HEADERS:
-            resp.headers[h] = v
-        return resp
-
-
-@app.route('/attack/<channel>', methods=['GET', 'POST', 'HEAD', 'OPTIONS'])
+@app.route('/attack/<channel>', methods=["POST"])
 def attack(channel):
-    r = cors()
-    if r:
-        return cors()
-
     data = flask.request.get_json()
     resp = post('attack', channels[channel], data)
     return flask.make_response('', resp.status_code)
 
 
-@app.route('/save/<channel>', methods=['GET', 'POST', 'HEAD', 'OPTIONS'])
+@app.route('/save/<channel>', methods=["POST"])
 def save(channel):
-    r = cors()
-    if r:
-        return cors()
     data = flask.request.get_json()
     resp = post('save', channels[channel], data)
     return flask.make_response('', resp.status_code)
