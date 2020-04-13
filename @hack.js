@@ -303,7 +303,7 @@ class Result extends Component {
 
     return h('div', {"class": "result", onclick: this.toggle},
       h('div', {'class': 'summary'}, hit_info),
-      (attack.save ? this.save_damage(attack.save_text) : ""),
+      (attack.save ? this.save_damage(result.save_text) : ""),
       secondary && !hit.miss ? this.secondary(result.secondary_text, secondary.desc) : "",
       effects && !hit.miss ? this.effects(effects) : "",
       this.details(result),
