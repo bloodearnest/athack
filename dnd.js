@@ -80,12 +80,9 @@ function *parse_dice(dice_string) {
   }
 }
 
-
-function roll_hit(attack, conditions, advantage, disadvantage, attack_options, rules) {
+function roll_d20(bonus, advantage, disadvantage, annotated, rules, conditions) {
   let roll = die(20);
-  let rolls = [roll];
-  let critical_threshold = parseInt(rules['Improved Critical'] || '20');
-  let annotated = [];
+  let rolls = [roll]
 
   if (advantage && !disadvantage) {
     rolls.push(die(20));
@@ -93,13 +90,13 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
         rolls.push(die(20));
     }
     roll = Math.max(...rolls);
-    annotated.push(`Advantage (${rolls.join()})`);
+    annotated.push(`2d20kh1 (${rolls.map(r => r == roll ? r : "~~" + r + "~~").join()})`);
   } else if (disadvantage && !advantage) {
     rolls.push(die(20))
     roll = Math.min(...rolls);
-    annotated.push(`Disadvantage (${rolls.join()})`);
+    annotated.push(`2d20kl1 (${rolls.map(r => r == roll ? r : "~~" + r + "~~").join()})`);
   } else {
-    annotated.push(`(${rolls.join()})`);
+    annotated.push(`1d20 (${rolls.join()})`);
   }
 
   let score = roll;
@@ -107,17 +104,30 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
 
   if (conditions.get('bless')) {
     let r = die(4);
-    annotated.push(`(${r})`);
+    annotated.push(`+ 1d4 (${r})`);
     score += r;
   }
   else if (conditions.get('bane')) {
     let r = die(4);
-    annotated.push(`(${-r})`);
+    annotated.push(`- 1d4 (${-r})`);
     score -= r;
   }
 
-  score += parseInt(attack.tohit);
-  annotated.push(attack.tohit)
+  score += parseInt(bonus);
+  annotated.push('+ ' + bonus)
+  annotated.push('= ' + score)
+  return {
+    "score": score,
+    "roll": roll,
+  }
+}
+
+function roll_hit(attack, conditions, advantage, disadvantage, attack_options, rules) {
+  let annotated = [];
+  let critical_threshold = parseInt(rules['Improved Critical'] || '20');
+
+
+  let {score, roll} = roll_d20(attack.tohit, advantage, disadvantage, annotated, rules, conditions);
 
   for (let [option, active] of attack_options) {
     if (active) {
@@ -144,41 +154,13 @@ function roll_hit(attack, conditions, advantage, disadvantage, attack_options, r
   }
 }
 
+
 function roll_save(bonus, name, conditions) {
   let advantage = conditions.get('advantage');
   let disadvantage = conditions.get('disadvantage');
-  let roll = die(20);
-  let rolls = [roll];
   let annotated = [];
 
-  if (advantage && !disadvantage) {
-    rolls.push(die(20));
-    roll = Math.max(...rolls);
-    annotated.push(`Advantage (${rolls.join()})`);
-  } else if (disadvantage && !advantage) {
-    rolls.push(die(20))
-    roll = Math.min(...rolls);
-    annotated.push(`Disadvantage (${rolls.join()})`);
-  } else {
-    annotated.push(`(${rolls.join()})`);
-  }
-
-  let score = roll;
-  // do this now before bless
-
-  if (conditions.get('bless')) {
-    let r = die(4);
-    annotated.push(`(${r})`);
-    score += r;
-  }
-  else if (conditions.get('bane')) {
-    let r = die(4);
-    annotated.push(`(${-r})`);
-    score -= r;
-  }
-
-  score += parseInt(bonus);
-  annotated.push(bonus)
+  let {score, roll} = roll_d20(bonus, advantage, disadvantage, annotated, {}, conditions);
 
   // gross
   return {
@@ -250,6 +232,9 @@ function DamageResult(damages) {
   };
 }
 
+
+
+
 function roll_attack(attack, conditions, attack_options) {
   attack_options = attack_options || {};
   let advantage = conditions.get('advantage');
@@ -316,6 +301,8 @@ function roll_attack(attack, conditions, attack_options) {
     }
   }
 
+  let damage = DamageResult(all_damage)
+
   if (secondaries.size > 0) {
     for (let [name, dam] of secondaries) {
       // TODO: does critical always affect secondary damage?
@@ -325,7 +312,23 @@ function roll_attack(attack, conditions, attack_options) {
     }
   }
 
-  let damage = DamageResult(all_damage)
+  let result = {
+    attack: attack,
+    hit: hit,
+    damage: damage,
+    secondary: secondaries.size > 0 ? DamageResult(secondary_damage) : null,
+    effects: effects.size > 0 ? effects : null,
+  }
+
+  add_details_text(result)
+
+  return result
+
+}
+
+
+function add_details_text(result) {
+  let {hit, damage, secondary, attack} = result
   let text = "";
 
   if (hit.miss) {
@@ -338,7 +341,7 @@ function roll_attack(attack, conditions, attack_options) {
     text = hit.score.toString()
   }
   else if (attack.tohit != undefined) {
-    text = "Hit " + hit.score + " for"
+    text = "Hits AC " + hit.score + " for"
   }
 
   if (damage && !hit.miss) {
@@ -349,12 +352,39 @@ function roll_attack(attack, conditions, attack_options) {
     text += ". Suck it Josh"
   }
 
-  return {
-    attack: attack,
-    hit: hit,
-    damage: damage,
-    secondary: secondaries.size > 0 ? DamageResult(secondary_damage) : null,
-    effects: effects.size > 0 ? effects : null,
-    text: text,
+  result["text"] = text
+
+  if (attack.tohit != undefined) {
+    result["hit_details"] = hit.annotated.join(" ");
   }
+
+  if (damage.types.size == 1) {
+    result["damage_types"] = '[*' + mmap(damage.types, (type, total) => `${type}`).join() + '*]'
+  } else {
+    result["damage_types"] = '(' + mmap(damage.types, (type, total) => `${total} [*${type}*]`).join(", ") + ')'
+  }
+
+  let fmt = (condition, damages) => {
+    let dam = damages.map((d) => `${d.annotated.join(" + ")} [*${d.type}*]`).join(' + ');
+    if (dam) {
+      let header = (condition == 'Damage') ? '' : ` (*${condition}*)`;
+      return `${dam}${header}`;
+    }
+  }
+
+  if (damage) {
+    result["damage_details"] = mmap(damage.components || [], fmt).join(" + ") + " = " + damage.total;
+  }
+
+  if (secondary) {
+    let secondary_types = ""
+    if (secondary.types.size === 1) {
+      secondary_types = '[*' + secondary.types.keys().next().value + '*]' // go home javascript, you're drunk
+    } else {
+      secondary_types = mmap(secondary.types, type_fmt).join(", ")
+    }
+    result["secondary_text"] = `Secondary: ${secondary.total} damage (${secondary_types})`
+    result["secondary_details"] = mmap(secondary.components, fmt).join(" + ") + " = " + secondary.total
+  }
+
 }

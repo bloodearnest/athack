@@ -126,7 +126,7 @@ const party_data = {
         name: "Thunder",
         tohit: 9,
         damage: {
-            "magical slashing": "d6+5",
+            "slashing": "d6+5",
             thunder: "d6",
             effect: "If Lightning also hits, DC13 CON or stunned for one round",
         },
@@ -134,15 +134,15 @@ const party_data = {
         name: "Lightning",
         tohit: 9,
         damage: {
-            "magical slashing": "d6+5",
+            "slashing": "d6+5",
             "lightning": "d6",
             effect: "If Thunder also hits, DC13 CON or stunned for one round",
         },
       }, {
         name: "Smite",
-        tohit: "auto",
         damage: {radiant: "2d8"},
         conditions: {
+          "Undead/Fiend": {radiant: "1d8"},
           "Level 2": {radiant: "1d8"},
           "Level 3": {radiant: "2d8"},
         },
@@ -231,7 +231,7 @@ const party_data = {
       }, {
         name: "Rapier",
         tohit: 6,
-        damage: {'magical piercing': "d8+2"},
+        damage: {'piercing': "d8+2"},
         conditions: {hex: {necrotic: "d6"}},
       }, {
         name: "Dagger of Venom",
@@ -310,7 +310,7 @@ const party_data = {
       {
         name: "Staff of the Jungle (Shillelagh)",
         tohit: 10,
-        damage: {"magical bludgeoning": "d8+6"},
+        damage: {"bludgeoning": "d8+6"},
       }, {
         name: "Primal Savagery",
         tohit: 10,
@@ -416,7 +416,7 @@ const party_data = {
       }, {
         name: "Unarmed Attack",
         tohit: 10,
-        damage: {"magical bludgeoning": "1d4+6"},
+        damage: {"bludgeoning": "1d4+6"},
         rules: {"Brutal Critical": 1},
         conditions: {
           "Raging": {weapon: "2"},

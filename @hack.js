@@ -119,6 +119,8 @@ class Party extends Component {
     new_state.log.unshift(msg);
     console.log(msg);
     this.setState(new_state);
+    console.log(result);
+    discord(this.state.current, result);
   }
   toggle_condition(condition) {
     let new_state = this.state;
@@ -238,6 +240,7 @@ class Saves extends Component {
   }
 }
 
+
 class Result extends Component {
   constructor() {
     super();
@@ -254,42 +257,17 @@ class Result extends Component {
     return h('span', {"class": "result-part"}, text);
   }
 
-  details(hit, damage, secondary, attack) {
-
-    let hit_details = null;
-    if (attack.tohit != undefined) {
-      hit_details = hit.annotated.join(" + ");
-    }
-
-    let fmt = (condition, damages) => {
-      let dam = damages.map((d) => `${d.annotated.join(" + ")} ${d.type}`).join(', ');
-      if (dam) {
-        return `${condition}: ${dam}`;
-      }
-    }
-
-    let damage_text = ""
-
-    if (damage) {
-      damage_text = mmap(damage.components || [], fmt).map((d) => h('p', null, d));
-
-      if (secondary) {
-        damage_text = damage_text.concat(mmap(secondary.components, fmt).map((d) => h('p', null, 'Secondary ' + d)));
-      }
-    }
-
+  details(result) {
+    //TODO: markdown these
     return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},
-      hit_details ? h('p', null, "Hit: " + hit_details) : null,
-      damage_text,
+      result.hit_details ? h('p', null, "**To Hit:** " + result.hit_details) : null,
+      result.damage_details ? h('p', null, "**Damage:** " + result.damage_details) : null,
+      result.secondary_details  ? h('p', null, "**Secondary:** " + result.secondary_details) : null,
     );
   }
 
-  secondary(damage) {
-    return h('div', {'class': 'secondary'},
-      `Secondary: ${damage.total} damage`,
-      this.typeSummary(damage.types),
-      damage.desc || "",
-    );
+  secondary(text, details, desc) {
+    return h('div', {'class': 'secondary'}, text, details, desc)
   }
 
   save_damage(half, damage, attack) {
@@ -303,7 +281,7 @@ class Result extends Component {
   }
 
   typeSummary(types) {
-    let type_fmt = types.size == 1 ? (type, total) => `${type}` : (type, total) => `${total} ${type}`;
+    let type_fmt = types.size == 1 ? (type, total) => `${type}` : (type, total) => `${total} [*${type}*]`;
     return h('span', {'class': 'type'}, "(",  mmap(types, type_fmt).join(", "), ")");
   }
 
@@ -313,15 +291,15 @@ class Result extends Component {
     let hit_info = [this.resultPart(text)]
     if (damage && !hit.miss) {
       //hit_info.push(this.resultPart(damage.total + " damage"))
-      hit_info.push(this.typeSummary(damage.types))
+      hit_info.push(this.resultPart(result.damage_types))
     }
 
     return h('div', {"class": "result", onclick: this.toggle},
       h('div', {'class': 'summary'}, hit_info),
       (attack.save ? this.save_damage(attack.half, damage, attack) : ""),
-      secondary && !hit.miss ? this.secondary(secondary) : "",
+      secondary && !hit.miss ? this.secondary(result.secondary_text, " ", secondary.desc) : "",
       effects && !hit.miss ? this.effects(effects) : "",
-      this.details(hit, damage, secondary, attack),
+      this.details(result),
     );
   }
 }
@@ -407,4 +385,14 @@ const Switch = function(id, text, checked, onclick) {
   return h("span", {"class": "condition " + (checked ? 'active' : ''), onclick: onclick}, text);
 }
 
+
+const discord = function(character, {attack, hit, damage, secondary, effects, text}) {
+    let data = {
+        "character": character,
+        "attack": attack.name,
+        "result": text,
+        //"roll": "**To Hit:** " + hit,
+    }
+    console.log();
+}
 
