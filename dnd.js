@@ -90,11 +90,11 @@ function roll_d20(bonus, advantage, disadvantage, annotated, rules, conditions) 
         rolls.push(die(20));
     }
     roll = Math.max(...rolls);
-    annotated.push(`2d20kh1 (${rolls.map(r => r == roll ? r : "~~" + r + "~~").join()})`);
+    annotated.push(`${rolls.length}d20 keep highest (${rolls.map(r => r == roll ? r : "~~" + r + "~~").join()})`);
   } else if (disadvantage && !advantage) {
     rolls.push(die(20))
     roll = Math.min(...rolls);
-    annotated.push(`2d20kl1 (${rolls.map(r => r == roll ? r : "~~" + r + "~~").join()})`);
+    annotated.push(`2d20 keep lowest (${rolls.map(r => r == roll ? r : "~~" + r + "~~").join()})`);
   } else {
     annotated.push(`1d20 (${rolls.join()})`);
   }
@@ -162,6 +162,14 @@ function roll_save(bonus, name, conditions) {
 
   let {score, roll} = roll_d20(bonus, advantage, disadvantage, annotated, {}, conditions);
 
+  let display_name = name.toUpperCase()
+  let active = []
+  let f = function(value, key, map) {
+    if (value) { active.push(key[0].toUpperCase() + key.slice(1)); };
+  }
+  conditions.forEach(f)
+
+
   // gross
   return {
     attack: {tohit: "roll"},
@@ -169,7 +177,10 @@ function roll_save(bonus, name, conditions) {
       score: score,
       annotated: annotated,
     },
-    text: PRONOUNCE[name.toLowerCase()] + " save " + score
+    save: display_name,
+    text: display_name + " save of **" + score + "**",
+    hit_details: '**Saving Throw**: ' + annotated.join(" "),
+    conditions: active,
   }
 }
 
@@ -274,6 +285,7 @@ function roll_attack(attack, conditions, attack_options) {
     secondaries.set("Damage", attack.damage.secondary);
   }
 
+
   if (attack.damage.effect) {
     effects.set("Damage", attack.damage.effect);
   }
@@ -312,12 +324,19 @@ function roll_attack(attack, conditions, attack_options) {
     }
   }
 
+  let active = Array.from(attack_options.keys());
+  let f = function(value, key, map) {
+    if (value) { active.push(key[0].toUpperCase() + key.slice(1)); };
+  }
+  conditions.forEach(f)
+
   let result = {
     attack: attack,
     hit: hit,
     damage: damage,
     secondary: secondaries.size > 0 ? DamageResult(secondary_damage) : null,
     effects: effects.size > 0 ? effects : null,
+    conditions: active,
   }
 
   add_details_text(result)
@@ -326,65 +345,68 @@ function roll_attack(attack, conditions, attack_options) {
 
 }
 
+function damage_types(types) {
+  if (types.size == 1) {
+    return mmap(types, (type, total) => `${type}`).join()
+  } else {
+    return mmap(types, (type, total) => `${total} ${type}`).join(", ")
+  }
+}
+
 
 function add_details_text(result) {
   let {hit, damage, secondary, attack} = result
   let text = "";
 
   if (hit.miss) {
-    text = "Miss!"
+    text = "**Miss!**"
   }
   else if (hit.critical) {
-    text = "CRITICAL:"
+    text = "**CRITICAL**: "
   }
   else if (attack.tohit === 'roll') {
     text = hit.score.toString()
   }
   else if (attack.tohit != undefined) {
-    text = "Hits AC " + hit.score + " for"
+    text = "Hits AC **" + hit.score + "** for"
   }
 
   if (damage && !hit.miss) {
-    text += " " + damage.total + " damage"
+    text += " **" + damage.total + "** damage"
   }
 
   if (hit.critical) {
-    text += ". Suck it Josh"
+    text += ". **Suck it Josh**"
   }
 
   result["text"] = text
+  result["damage_types"] = '(' + damage_types(damage.types) + ')'
 
-  if (attack.tohit != undefined) {
-    result["hit_details"] = hit.annotated.join(" ");
+  if (result.attack.save) {
+    let half_msg = result.attack.half !== false ? ` for half (${damage.half})` : ''
+    result["save_text"] = `DC ${result.attack.save} save${half_msg}`;
   }
 
-  if (damage.types.size == 1) {
-    result["damage_types"] = '[*' + mmap(damage.types, (type, total) => `${type}`).join() + '*]'
-  } else {
-    result["damage_types"] = '(' + mmap(damage.types, (type, total) => `${total} [*${type}*]`).join(", ") + ')'
+  if (attack.tohit != undefined) {
+    result["hit_details"] = "**To Hit:** " + hit.annotated.join(" ");
   }
 
   let fmt = (condition, damages) => {
-    let dam = damages.map((d) => `${d.annotated.join(" + ")} [*${d.type}*]`).join(' + ');
+    let dam = damages.map((d) => `${d.annotated.join(" + ")} [${d.type}]`).join(' + ');
     if (dam) {
-      let header = (condition == 'Damage') ? '' : ` (*${condition}*)`;
+      let header = (condition == 'Damage') ? '' : ` (${condition})`;
       return `${dam}${header}`;
     }
   }
 
   if (damage) {
-    result["damage_details"] = mmap(damage.components || [], fmt).join(" + ") + " = " + damage.total;
+    result["damage_details"] = "**Damage:** " + mmap(damage.components || [], fmt).join(" + ") + " = " + damage.total;
   }
 
   if (secondary) {
-    let secondary_types = ""
-    if (secondary.types.size === 1) {
-      secondary_types = '[*' + secondary.types.keys().next().value + '*]' // go home javascript, you're drunk
-    } else {
-      secondary_types = mmap(secondary.types, type_fmt).join(", ")
-    }
-    result["secondary_text"] = `Secondary: ${secondary.total} damage (${secondary_types})`
-    result["secondary_details"] = mmap(secondary.components, fmt).join(" + ") + " = " + secondary.total
+    let secondary_types = damage_types(secondary.types)
+    result["secondary_text"] = `${secondary.total} damage (${secondary_types})`
+    result["secondary_details"] = "**Secondary:** " + mmap(secondary.components, fmt).join(" + ") + " = " + secondary.total
   }
 
 }

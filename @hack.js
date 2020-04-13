@@ -2,6 +2,14 @@
 
 const { h, render, Component } = window.preact;
 
+var base_discord_url = null;
+if (window.location.hostname == 'bloodearnest.github.io') {
+  base_discord_url = 'https://bloodearnest.com/discord'
+} else {
+  base_discord_url = 'http://localhost:5000'
+}
+
+
 
 var current_sound = null;
 
@@ -32,7 +40,7 @@ const SPELL_SOUNDS = [
 ];
 
 function say(phrase) {
-  let utterance = new SpeechSynthesisUtterance(phrase);
+  let utterance = new SpeechSynthesisUtterance(phrase.replace(/\*/g, ''));
   speechSynthesis.cancel();
   say_when_no_sound(utterance)
 }
@@ -112,7 +120,7 @@ class Party extends Component {
       this.setState({current: Object.keys(this.props)[0]});
     }
   }
-  record(result) {
+  record(result, type) {
     let new_state = this.state;
     new_state.characters[this.state.current].result = result;
     let msg = log_message(this.props[this.state.current].name, result);
@@ -120,7 +128,7 @@ class Party extends Component {
     console.log(msg);
     this.setState(new_state);
     console.log(result);
-    discord(this.state.current, result);
+    discord(type, this.state.current, result);
   }
   toggle_condition(condition) {
     let new_state = this.state;
@@ -227,7 +235,7 @@ class Saves extends Component {
     if (result.text) {
       say(result.text)
     }
-    this.props.record(result)
+    this.props.record(result, 'save')
   }
   render({name, saves}) {
     return h(
@@ -260,19 +268,18 @@ class Result extends Component {
   details(result) {
     //TODO: markdown these
     return h('div', {'class': 'details ' + (this.state.details ? 'show' : 'hide')},
-      result.hit_details ? h('p', null, "**To Hit:** " + result.hit_details) : null,
-      result.damage_details ? h('p', null, "**Damage:** " + result.damage_details) : null,
-      result.secondary_details  ? h('p', null, "**Secondary:** " + result.secondary_details) : null,
+      result.hit_details ? h('p', null, MarkdownContent(result.hit_details)) : null,
+      result.damage_details ? h('p', null, MarkdownContent(result.damage_details)) : null,
+      result.secondary_details  ? h('p', null, MarkdownContent(result.secondary_details)) : null,
     );
   }
 
-  secondary(text, details, desc) {
-    return h('div', {'class': 'secondary'}, text, details, desc)
+  secondary(text, desc) {
+    return h('div', {'class': 'secondary'}, "Secondary: ", MarkdownContent(text), " ", desc)
   }
 
-  save_damage(half, damage, attack) {
-    let half_msg = half !== false ? ` for half (${damage.half})` : ''
-    return h('div', {class: 'half-damage'}, this.resultPart(`DC ${attack.save} save${half_msg}`));
+  save_damage(text) {
+    return h('div', {class: 'half-damage'}, this.resultPart(MarkdownContent(test)));
   }
 
   effects(effects) {
@@ -288,20 +295,30 @@ class Result extends Component {
   render({result}) {
     let {hit, damage, secondary, effects, attack, text} = result;
 
-    let hit_info = [this.resultPart(text)]
+    let hit_info = [this.resultPart(MarkdownContent(text))]
     if (damage && !hit.miss) {
       //hit_info.push(this.resultPart(damage.total + " damage"))
-      hit_info.push(this.resultPart(result.damage_types))
+      hit_info.push(this.resultPart(MarkdownContent(result.damage_types)))
     }
 
     return h('div', {"class": "result", onclick: this.toggle},
       h('div', {'class': 'summary'}, hit_info),
-      (attack.save ? this.save_damage(attack.half, damage, attack) : ""),
-      secondary && !hit.miss ? this.secondary(result.secondary_text, " ", secondary.desc) : "",
+      (attack.save ? this.save_damage(attack.save_text) : ""),
+      secondary && !hit.miss ? this.secondary(result.secondary_text, secondary.desc) : "",
       effects && !hit.miss ? this.effects(effects) : "",
       this.details(result),
     );
   }
+}
+
+const MarkdownContent = function(text) {
+  let html = marked(text);
+  html = html.slice(3, html.length - 5); // marked always adds <p> tags
+  return h(
+    'Fragment',
+    {dangerouslySetInnerHTML: {__html: html}},
+    null,
+  );
 }
 
 class Attack extends Component {
@@ -326,7 +343,7 @@ class Attack extends Component {
     if (result.text) {
       say(result.text)
     }
-    this.props.record(result);
+    this.props.record(result, 'attack');
   }
 
   toggle_condition(condition) {
@@ -386,13 +403,60 @@ const Switch = function(id, text, checked, onclick) {
 }
 
 
-const discord = function(character, {attack, hit, damage, secondary, effects, text}) {
-    let data = {
-        "character": character,
-        "attack": attack.name,
-        "result": text,
-        //"roll": "**To Hit:** " + hit,
-    }
-    console.log();
+const discord = function(type, character, result) {
+  let data = {
+      "character": character,
+      "conditions": result.conditions,
+      "url": "https://bloodearnest.github.io/toa/" + character + ".jpg",
+
+  }
+  let meta = [];
+  let url = null;
+
+  if (type == 'save') {
+    data["save"] = result.save
+    data["result"] = result.text
+    url = base_discord_url + "/save/toa"
+  } else {
+    data["attack"] = result.attack.name
+    data["result"] = result.text + "\n" + result.damage_types
+    data["save"] = result.save_text
+    data["effects"] = []
+    url = base_discord_url + "/attack/toa"
+  }
+
+  if (result.hit_details) {
+    meta.push(result.hit_details)
+  }
+  if (result.damage_details) {
+    meta.push(result.damage_details)
+  }
+  if (result.effects) {
+    data.effects = Array.from(result.effects.values())
+  }
+  if (result.secondary) {
+    meta.push(result.secondary_details)
+    data.secondary = result.secondary_text
+  }
+  data["meta"] = meta
+  console.log(data);
+
+
+  postData(url, data).then(() => null);
+}
+
+async function postData(url='', data = {}) {
+
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+  return response;
 }
 
