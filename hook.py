@@ -60,7 +60,7 @@ def post(action, hook, data):
                 {"name": name.title(), "value": value},
             )
 
-    if type == 'attack':
+    if action == 'attack':
         add_field('save')
         add_field('secondary')
         add_field('effects', join='\n')
