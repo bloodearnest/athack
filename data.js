@@ -2,6 +2,7 @@
 
 const party_data = {
   "Airnel": {
+    channel: 'toa',
     saves: {
       'Str': 0,
       'Dex': 2,
@@ -113,6 +114,7 @@ const party_data = {
     ]
   },
   "Thorin": {
+    channel: 'toa',
     saves: {
       'Str': 7,
       'Dex': 3,
@@ -184,6 +186,7 @@ const party_data = {
     ],
   },
   "Corminar": {
+    channel: 'toa',
     saves: {
       'Str': 1,
       'Dex': 7,
@@ -298,6 +301,7 @@ const party_data = {
     ]
   },
  "Nordan": {
+    channel: 'toa',
     saves: {
       'Str': 2,
       'Dex': -1,
@@ -367,6 +371,7 @@ const party_data = {
     ],
   },
   "Heston": {
+    channel: 'toa',
     saves: {
       'Str': 5,
       'Dex': 3,
@@ -446,6 +451,7 @@ const party_data = {
     ],
   },
   "Areni": {
+    channel: 'toa',
     saves: {
       'Str': -1,
       'Dex': 3,

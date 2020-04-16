@@ -1,0 +1,4 @@
+talisker[gunicorn]
+flask
+flask-cors
+requests

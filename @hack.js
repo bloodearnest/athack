@@ -6,7 +6,7 @@ var base_discord_url = null;
 if (window.location.hostname == 'bloodearnest.github.io') {
   base_discord_url = 'https://bloodearnest.com/discord'
 } else {
-  base_discord_url = 'http://localhost:5000'
+  base_discord_url = 'http://localhost:8000'
 }
 
 
@@ -41,18 +41,11 @@ const SPELL_SOUNDS = [
 
 function say(phrase) {
   let utterance = new SpeechSynthesisUtterance(phrase.replace(/\*/g, ''));
-  speechSynthesis.cancel();
-  say_when_no_sound(utterance)
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel()
+  }
+  setTimeout(function() { speechSynthesis.speak(utterance)}, 100);
 }
-
-function say_when_no_sound(utterance) {
-    if (current_sound == undefined || current_sound.currentTime >= current_sound.duration) {
-        speechSynthesis.speak(utterance);
-    } else {
-        setTimeout(function() { say_when_no_sound(utterance) }, 100)
-    }
-}
-
 
 function play_random_sound(sounds) {
   let sound = sounds[Math.floor(Math.random() * sounds.length)];
@@ -128,7 +121,7 @@ class Party extends Component {
     console.log(msg);
     this.setState(new_state);
     console.log(result);
-    discord(type, this.state.current, result);
+    discord(type, this.state.current, this.props[this.state.current], result);
   }
   toggle_condition(condition) {
     let new_state = this.state;
@@ -403,12 +396,12 @@ const Switch = function(id, text, checked, onclick) {
 }
 
 
-const discord = function(type, character, result) {
+const discord = function(type, name, character, result) {
   let data = {
-      "character": character,
+      "character": name,
+      "channel": character.channel,
+      "url": "https://bloodearnest.github.io/toa/" + name + ".jpg",
       "conditions": result.conditions,
-      "url": "https://bloodearnest.github.io/toa/" + character + ".jpg",
-
   }
   let meta = [];
   let url = null;
@@ -416,23 +409,25 @@ const discord = function(type, character, result) {
   if (type == 'save') {
     data["save"] = result.save
     data["result"] = result.text
-    url = base_discord_url + "/save/toa"
+    url = base_discord_url + "/save"
   } else {
     data["attack"] = result.attack.name
-    data["result"] = result.text + "\n" + result.damage_types
+    data["result"] = result.text + (result.hit.miss ? "" : "\n" + result.damage_types)
     data["save"] = result.save_text
     data["effects"] = []
-    url = base_discord_url + "/attack/toa"
+    url = base_discord_url + "/attack"
   }
 
   if (result.hit_details) {
     meta.push(result.hit_details)
   }
-  if (result.damage_details) {
-    meta.push(result.damage_details)
-  }
-  if (result.effects) {
-    data.effects = Array.from(result.effects.values())
+  if (!result.attack.hit) {
+    if (result.damage_details) {
+        meta.push(result.damage_details)
+    }
+    if (result.effects) {
+        data.effects = Array.from(result.effects.values())
+    }
   }
   if (result.secondary) {
     meta.push(result.secondary_details)

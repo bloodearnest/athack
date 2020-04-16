@@ -1,38 +1,51 @@
-import flask
+import logging
+import os
+
 import requests
+import flask
 from flask_cors import CORS
 
 app = flask.Flask(__name__)
 CORS(app)
 
+
 channels = {
-    "test": (
-        "https://discordapp.com/api/webhooks/699241461576892416/"
-        "U8xXZmj7N6gUjv-0tUUtbb7xMj7u72o68KvdIJZl3Y6FUURuWUqHoKCwTaPfuuyYAemk"
-    ),
-    "toa": (
-        "https://discordapp.com/api/webhooks/699214978854682664/"
-        "LrtFj83v9rODZH7YGZPd06rS0a_HCtdrz3iQmwGtJ1VQATPtzASe7BO5itJXVGLFzBrz"
-    ),
+    "toa": os.getenv("DISCORD_TOA"),
+    "wm": os.getenv("DISTORD_WM"),
 }
 
-@app.route('/attack/<channel>', methods=["POST"])
-def attack(channel):
-    data = flask.request.get_json()
-    resp = post('attack', channels[channel], data)
+logger = logging.getLogger(__name__)
+
+
+def validate(request):
+    body = request.get_json()
+    try:
+        assert channels.get(body['channel']) is not None
+    except Exception:
+        logger.error('bad request', extra=body)
+        flask.abort(400)
+
+    return body
+
+
+@app.route('/attack', methods=["POST"])
+def attack():
+    data = validate(flask.request)
+    resp = post('attack', data)
     return flask.make_response('', resp.status_code)
 
 
-@app.route('/save/<channel>', methods=["POST"])
-def save(channel):
-    data = flask.request.get_json()
-    resp = post('save', channels[channel], data)
+@app.route('/save', methods=["POST"])
+def save():
+    data = validate(flask.request)
+    resp = post('save', data)
     return flask.make_response('', resp.status_code)
 
 
-def post(action, hook, data):
+def post(action, data):
+    logger.info("{}".format(action), extra=data)
     character = data.get('character')
-    print(data)
+    hook = channels[data['channel']]
     if action == 'save':
         title = '{} makes a {} saving throw!'.format(
             character,
