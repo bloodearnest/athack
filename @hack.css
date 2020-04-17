@@ -65,17 +65,18 @@ nav select {
 }
 
 .save .attr{
-  padding-top: 2rem;
-  margin-left: 0.5rem;
-  margin-top: 0.5rem;
-  overflow: auto;
+  padding-top: 1.5rem;
+  margin-left: 0.4rem;
+  margin-top: 0.4rem;
+  font-size: 80%;
+  overflow: hidden;
   font-weight: bold;
   display: inline-block;
   text-align: right;
 }
 
 .save .action {
-  font-size: 6rem;
+  font-size: 5rem;
   height: 5.5rem;
 }
 

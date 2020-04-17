@@ -120,8 +120,8 @@ const party_data = {
       'Dex': 3,
       'Con': 5,
       'Int': 1,
-      'Wis': 6,
-      'Cha': 7,
+      'Wis': 7,
+      'Cha': 8,
     },
     attacks: [
       {
@@ -453,12 +453,12 @@ const party_data = {
   "Areni": {
     channel: 'toa',
     saves: {
-      'Str': -1,
-      'Dex': 3,
-      'Con': 1,
-      'Int': 9,
-      'Wis': 5,
-      'Cha': 0,
+      'Str': 0,
+      'Dex': 4,
+      'Con': 0,
+      'Int': 10,
+      'Wis': 6,
+      'Cha': 1,
     },
     attacks: [
       {
