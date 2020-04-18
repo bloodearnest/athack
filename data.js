@@ -466,6 +466,51 @@ const party_data = {
         tohit: 10,
         sounds: SPELL_SOUNDS,
         damage: {"fire": "2d10"},
+        rules: {
+          "Damage Speciality": {"fire": 1},
+        },
+      }, {
+        name: "Burning Hands",
+        save: "DEX 17",
+        sounds: SPELL_SOUNDS,
+        damage: {
+          fire: "3d6",
+          effect: "sets stuff on fire",
+        },
+        rules: {
+          "Damage Speciality": {"fire": 1},
+        },
+        conditions: {
+          "level 2": {"fire": "d6"},
+          "level 3": {"fire": "2d6"},
+          "level 4": {"fire": "3d6"},
+          "level 5": {"fire": "4d6"},
+        },
+      }, {
+        name: "Fireball",
+        save: '17 Dex',
+        sounds: SPELL_SOUNDS,
+        damage: {
+          fire: "8d6",
+          effect: "sets stuff on fire",
+        },
+        rules: {
+          "Damage Speciality": {"fire": 1},
+        },
+        conditions: {
+          "Level 4": {weapon: "d8"},
+          "Level 5": {weapon: "2d8"},
+        }
+      }, {
+        name: "Melf's Minute Meteors",
+        save: "DEX 17",
+        sounds: SPELL_SOUNDS,
+        damage: {
+          fire: "2d6",
+        },
+        rules: {
+          "Damage Speciality": {"fire": 1},
+        },
       }, {
         name: "Shadowblade",
         tohit: 7,
@@ -491,18 +536,6 @@ const party_data = {
         sounds: SPELL_SOUNDS,
         damage: {"slashing": "d6+3", "thunder": "d8"},
         secondary: {"thunder": "3d8", "desc": "if the target moves"},
-      }, {
-        name: "Fireball",
-        save: '17 Dex',
-        sounds: SPELL_SOUNDS,
-        damage: {
-          fire: "8d6",
-          effect: "sets stuff on fire",
-        },
-        conditions: {
-          "Level 4": {weapon: "d8"},
-          "Level 5": {weapon: "2d8"},
-        }
       },
     ]
   }

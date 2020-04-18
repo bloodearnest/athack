@@ -17,12 +17,9 @@ function die(size) {
   return Math.floor(Math.random() * (size)) + 1;
 }
 
-function roll_dice(n, size, annotated, critical, die_func) {
-  if (!die_func) {
-    die_func = die;
-  }
-  let total = 0;
+function roll_dice(n, size, annotated, critical, reroll) {
   let rolls = [];
+  let total = 0;
   if (n === 0) {
     // static bonus
     total += size;
@@ -31,14 +28,18 @@ function roll_dice(n, size, annotated, critical, die_func) {
     let real_n = n;
     let sign = n / (Math.abs(n));
     for (let i = 0; i < Math.abs(n); i++) {
-      let roll = die_func(size);
-      total += sign * roll;
+      let roll = die(size);
+      if (reroll && reroll(roll)) {
+        rolls.push(`~~${roll}~~`)
+        roll = die(size)
+      }
       rolls.push(roll);
+      total += sign * roll;
     }
     for (let i = 0; i < critical; i++) {
       real_n += n
       for (let i = 0; i < Math.abs(n); i++) {
-        let roll = CRIT_MAX ? size : die_func(size);
+        let roll = CRIT_MAX ? size : die(size);
         total += sign * roll;
         rolls.push(roll);
       }
@@ -185,17 +186,28 @@ function roll_save(bonus, name, conditions) {
 }
 
 class Damage {
-  constructor(type, dice_string) {
+  constructor(type, dice_string, rules) {
     this.type = type;
     this.dice_string = dice_string;
     this.parts = Array.from(parse_dice(dice_string));
+    this.reroll = (r) => false
+
+    rules = rules || {};
+
+    if (rules['Great Weapon Fighting']) {
+      this.reroll = (r) => r < 3
+    } else if (rules['Damage Speciality']) {
+      if (type in rules['Damage Speciality']) {
+        this.reroll = (r) => r == 1
+      }
+    }
   }
-  roll(die_func, critical) {
+  roll(critical) {
     let total = 0;
     let annotated = [];
 
     for (let {n, size} of this.parts) {
-      total += roll_dice(n, size, annotated, critical, die_func)
+      total += roll_dice(n, size, annotated, critical, this.reroll)
     }
     return {
       type: this.type,
@@ -207,7 +219,7 @@ class Damage {
 }
 
 
-function *roll_damage(damage_data, die_func, critical, weapon_type) {
+function *roll_damage(damage_data, critical, weapon_type, rules) {
   for (let type in damage_data) {
     if (SKIPPED.has(type)) {
         continue;
@@ -216,8 +228,8 @@ function *roll_damage(damage_data, die_func, critical, weapon_type) {
     if (type == "weapon") {
       type = weapon_type;
     }
-    let damage = new Damage(type, d)
-    yield damage.roll(die_func, critical);
+    let damage = new Damage(type, d, rules)
+    yield damage.roll(critical);
   }
 }
 
@@ -273,11 +285,10 @@ function roll_attack(attack, conditions, attack_options) {
     }
   }
 
-  let die_func = rules['Great Weapon Fighting'] ? gwf_die : die;
   // use the first damage type as the weapon type.
   let weapon_damage_type = Object.keys(attack.damage)[0];
   let base_damage = Array.from(
-    roll_damage(attack.damage, die_func, main_critical, weapon_damage_type)
+    roll_damage(attack.damage, main_critical, weapon_damage_type, rules)
   );
   all_damage.set("Damage", base_damage);
 
@@ -295,7 +306,7 @@ function roll_attack(attack, conditions, attack_options) {
       let attack_conditions = attack.conditions || {};
       let damage = attack_conditions[option];
       let condition_damage = Array.from(
-        roll_damage(damage, die_func, main_critical, weapon_damage_type)
+        roll_damage(damage, main_critical, weapon_damage_type, rules)
       );
       // replace the base damage with this option
       if (damage.replace) {
@@ -318,7 +329,7 @@ function roll_attack(attack, conditions, attack_options) {
   if (secondaries.size > 0) {
     for (let [name, dam] of secondaries) {
       // TODO: does critical always affect secondary damage?
-      let sec = Array.from(roll_damage(dam, die_func, damage_critical, weapon_damage_type));
+      let sec = Array.from(roll_damage(dam, damage_critical, weapon_damage_type, rules));
       sec.desc = dam.desc
       secondary_damage.set(name, sec)
     }
