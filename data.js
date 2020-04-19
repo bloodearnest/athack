@@ -405,6 +405,7 @@ const party_data = {
     ],
   },
   "Grondrath": {
+    channel: "toa",
     saves: {
       'Str': 9,
       'Dex': 1,
