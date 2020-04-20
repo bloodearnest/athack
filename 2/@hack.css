@@ -1,0 +1,41 @@
+body {
+  background-color: #EEE5CE;
+  font-size: 4rem;
+  font-family: BookSanity;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+}
+
+section {
+  width: 100%;
+  border: 1px solid red;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+#selector select, #selector option {
+  font-family: MrJeeves;
+  font-weight: 800;
+  color: #58180D;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  background: inherit;
+  box-shadow: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  line-height: normal;
+  max-width: 100%;
+  width: 100%;
+}
