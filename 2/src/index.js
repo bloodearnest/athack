@@ -6,16 +6,23 @@ import htm from '/web_modules/htm.js'
 const html = htm.bind(h)
 const map = (obj, func) => Object.entries(obj).map(([k, v]) => func(k, v))
 
-const GROUPS = {
-    "Tomb of Annihilation": {
-        "Airnel": {},
-        "Areni": {},
-        "Grondrath": {},
+const CAMPAIGNS = {
+    toa: {
+      name: "Tomb of Annihilation",
+      characters: ["Airnel", "Areni", "Grondrath"],
     },
-    "West Marches": {
-        "Jerem": {},
-        "The Count": {},
+    wm: {
+      name: "West Marches",
+      characters: ["Jerem", "The Count"]
     },
+}
+
+const CHARACTERS = {
+    "Airnel": {},
+    "Areni": {},
+    "Grondrath": {},
+    "Jerem": {},
+    "The Count": {},
 }
 
 
@@ -63,36 +70,44 @@ function useCharacterState(name, initial) {
 }
 
 function CharacterProvider(props) {
-  const [group, setGroup] = useState(null);
-  const [name, setName] = useState(null);
+  let initialGroup = null
+  let initialName = null
+  if (location.hash) {
+     [initialGroup, initialName] = location.hash.split('/')
+  }
+  const [group, setGroup] = useState(initialGroup);
+  const [name, setName] = useState(initialName);
   const [conditions, setConditions] = useCharacterState(name, [])
-  const data = name ? GROUPS[group][name] : {}
+  const data = CHARACTERS[name] || {}
 
+  const setNameAndHash = (name, group) => {
+    setName(name)
+    setGroup(name)
+    location.hash = group + '/' + name
+  }
 
   const contextValue = {
       group: group,
       name: name,
       data: data,
       conditions: conditions,
-      setGroup: setGroup,
-      setName: setName,
+      setCharacter: setNameAndHash,
       setConditions: setConditions
   }
   return html`<${CharacterContext.Provider} value=${contextValue} ...${props} />`
 }
 
 const CharacterSelector = function() {
-    let {group, name, setGroup, setName} = getCharacter()
+    let {name, setCharacter} = getCharacter()
 
     const set = (e) => {
-        setName(e.target.value)
-        setGroup(e.target.selectedOptions[0].parentNode.label)
+        setCharacter(e.target.value, e.target.selectedOptions[0].parentNode.dataset.id)
     }
 
     let optionGroups = [html`<option value="">Choose character...</option>`];
-    for (let [group, characters] of Object.entries(GROUPS)) {
-        let options = map(characters, (k, v) => html`<option value="${k}">${k}</option>`)
-        optionGroups.push(html`<optgroup label=${group}>Campaign: ${options}</optgroup>`)
+    for (let [id, data] of Object.entries(CAMPAIGNS)) {
+        let options = data.characters.map((c) => html`<option value="${c}">${c}</option>`)
+        optionGroups.push(html`<optgroup data-id=${id} label=${data.name}>Campaign: ${options}</optgroup>`)
     }
 
     return html`
