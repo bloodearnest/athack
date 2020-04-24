@@ -63,6 +63,7 @@ def get_attack(attack):
     types = set()
     range = get_text(attack, CSS.range, ' ')
 
+
     if notes:
         if 'melee' in notes[0].lower():
             types.add('Melee')
@@ -71,7 +72,7 @@ def get_attack(attack):
         if ('Level' in notes[0] or 'Cantrip' in notes[0]):
             types.add('Spell')
 
-    if 'Reach' in range or 'Self' in range:
+    if 'reach' in range.lower():
         types.add('Melee')
     elif range:
         types.add('Ranged')
@@ -137,6 +138,7 @@ def get_attack(attack):
         data = {
             'name': name,
             'types': list(types),
+            'range': range,
             'damage': dict(damage),
             'options': options,
             'notes': notes,
@@ -208,12 +210,7 @@ def get_spell(level, spell, attacks):
     elif name not in attacks:
         save = get_text(spell, '.ct-spells-spell__save *::text', ' ').upper()
         range = get_text(spell, '.ct-spells-spell__range *::text', ' ').upper()
-        types = set()
-
-        if 'Reach' in range or 'Self' in range:
-            types.add('Melee')
-        else:
-            types.add('Ranged')
+        types = ['Spell']
 
         notes = [level, range.title()]
 
@@ -227,15 +224,16 @@ def get_spell(level, spell, attacks):
             elif type == 'aoe-icon':
                 icon_type = note.css('i').attrib['class'][6:].title()
                 notes.append(distance + ' ' + icon_type)
-                types.add('AoE')
+                types.append('AoE')
                 distance = None
             elif type == 'tooltip':
                 notes.append(get_tooltip_type(note).title())
 
         data = dict(
             name=name,
-            types=list(types),
+            types=types,
             save=save,
+            range=range,
             damage={dtype: damage},
             options={},
             notes=notes,

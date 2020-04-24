@@ -27,7 +27,7 @@ SPECIAL_CASES = {}
 
 
 def handle(name, data):
-    key = name.lower()
+    key = name.lower().replace("'", '')
     if key in EFFECTS:
         data['effect'] = EFFECTS[key]
     if key in SPECIAL_CASES:
@@ -75,3 +75,17 @@ def dagger_of_venom(data):
         'damage': dict(Poison=dmg),
         'effect': effect,
     }
+
+
+@special
+def thunder_step(data):
+    if 'Ranged' in data['types']:
+        data['types'].remove('Ranged')
+        data['types'] = ['Melee'] + data['types']
+
+@special
+def melfs_minute_meteors(data):
+    if 'Melee' in data['types']:
+        data['types'].remove('Melee')
+        data['types'] = ['Ranged'] + data['types']
+

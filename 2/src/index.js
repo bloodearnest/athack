@@ -50,32 +50,48 @@ function useCharacterState(name, initial) {
   }
 }
 
+
+// helper to remove an item from the supplied array and set it as new state
+function removeFromListState(list, set) {
+    return (item) => set(list.filter(i => i != item))
+}
+
+// helper to add an item to the supplied array and set it as new state
+function addToListState(list, set) {
+    return (item) => set([...list, item])
+}
+
 function CharacterProvider(props) {
-  let initialGroup = null
-  let initialName = null
-  if (location.hash) {
-     [initialGroup, initialName] = location.hash.split('/')
-  }
-  const [group, setGroup] = useState(initialGroup);
-  const [name, setName] = useState(initialName);
-  const [conditions, setConditions] = useCharacterState(name, [])
-  const attacks = CHARACTERS.attacks[name] || {}
+    let initialGroup = null
+    let initialName = null
+    if (location.hash) {
+        [initialGroup, initialName] = location.hash.split('/')
+    }
+    const [group, setGroup] = useState(initialGroup);
+    const [name, setName] = useState(initialName);
+    const [conditions, setConditions] = useCharacterState(name, [])
+    const [filters, setFilters] = useCharacterState(name, [])
+    const attacks = CHARACTERS.attacks[name] || {}
 
-  const setNameAndHash = (name, group) => {
-    setName(name)
-    setGroup(name)
-    location.hash = group + '/' + name
-  }
+    const setNameAndHash = (name, group) => {
+        setName(name)
+        setGroup(name)
+        location.hash = group + '/' + name
+    }
 
-  const contextValue = {
-      group: group,
-      name: name,
-      attacks: attacks,
-      conditions: conditions,
-      setCharacter: setNameAndHash,
-      setConditions: setConditions
-  }
-  return html`<${CharacterContext.Provider} value=${contextValue} ...${props} />`
+    const contextValue = {
+        group: group,
+        name: name,
+        attacks: attacks,
+        conditions: conditions,
+        filters: filters,
+        setCharacter: setNameAndHash,
+        addCondition: addToListState(conditions, setConditions),
+        removeCondition: removeFromListState(conditions, setConditions),
+        addFilter: addToListState(filters, setFilters),
+        removeFilter: removeFromListState(filters, setFilters),
+    }
+    return html`<${CharacterContext.Provider} value=${contextValue} ...${props} />`
 }
 
 const CharacterSelector = function() {
@@ -92,30 +108,24 @@ const CharacterSelector = function() {
     }
 
     return html`
-        <section id="selector">
-            <select value=${name} onChange=${set}>${optionGroups}</select>
+        <section id=selector class=row>
+            <label for=character>
+                <select name=character value=${name} onChange=${set}>${optionGroups}</select>
+            </label>
         </section>
     `
 }
 
 const ConditionTag = function({condition}) {
-    let {conditions, setConditions} = getCharacter()
-    let remove = (e) => {
-        setConditions(conditions.filter((c) => c != condition))
-    }
-    return html`
-        <span class=condition>
-            <span>${condition}</span>
-            <button onClick=${remove}>X</button>
-        </span>
-    `
+    let {removeCondition} = getCharacter()
+    return html`<span class="condition button" onClick=${e =>removeCondition(condition)}>${condition}</span>`
 
 }
 
 const ConditionsBar = function() {
-    let {conditions, setConditions} = getCharacter()
+    let {conditions, addCondition} = getCharacter()
 
-    let optionGroups = [html`<option value="">Add Condition...</option>`]
+    let optionGroups = [html`<option value="">+</option>`]
     for (let [k, v] of Object.entries(MOD_GROUPS)) {
         let valid = v.filter((o) => !conditions.includes(o))
         if (valid.length == 0) {
@@ -125,34 +135,64 @@ const ConditionsBar = function() {
         optionGroups.push(html`<optgroup label=${k}>${options}</optgroup>`)
     }
     let add = (e) => {
-        setConditions([...conditions, e.target.value])
+        addCondition(e.target.value)
         e.preventDefault()
     }
     return html`
-        <section id=condition>
+        <section id=conditions class=row>
+            <select value="" class="button" onChange=${add}>${optionGroups}</select>
             ${conditions.map((c) => html`<${ConditionTag} condition=${c}/>`)}
-            <select value="" onChange=${add}>${optionGroups}</select>
         </section>
     `
 }
 
 const AttackSummary = function({name, attack}) {
     return html`
-        <div class=attack-summary>
+        <div class="attack-summary row">
             <span class=name>${name}</span>
             <span class=type>${attack.types}</span>
-            <span class=tohit>${attack.tohit}</span>
         </div>
     `
 }
 
+const FILTERS = [
+    'Melee',
+    'Ranged',
+    'Spell',
+    'AoE',
+];
+
+
+const Filter = function({filter, active}) {
+    const {addFilter, removeFilter} = getCharacter()
+    const toggle = active? e => removeFilter(filter) : e => addFilter(filter)
+    return html`
+        <span class=filter class="filter filter_${active}" onClick=${toggle}>${filter}</span>
+    `
+}
+
+
+const FilterBar = function() {
+    const {filters} = getCharacter()
+    console.log(filters)
+    let tags = FILTERS.map((f) => {
+        return html`<${Filter} filter=${f} active=${filters.includes(f)}/>`
+    })
+    return html` <section id=filters class=row>${tags}</section>`
+}
 
 const Attacks = function() {
-    const {attacks} = getCharacter()
+    const {attacks, filters} = getCharacter()
+
+    let selected = (types) => true
+    if (filters.length > 0) {
+        selected = (types) => filters.every(f => types.includes(f))
+    }
 
     let elements = []
     for (let [name, attack] of Object.entries(attacks)) {
-        elements.push(html`<${AttackSummary} name=${name} attack=${attack}/>`)
+        if (selected(attack.types))
+            elements.push(html`<${AttackSummary} name=${name} attack=${attack}/>`)
     }
 
     return html`
@@ -164,7 +204,7 @@ const Attacks = function() {
 
 const Result = function() {
     return html`
-        <section id=result>
+        <section id=result class=row>
             Result Here
         </section>
     `
@@ -175,6 +215,7 @@ const AtHack = function() {
         <${CharacterProvider}>
             <${CharacterSelector}/>
             <${ConditionsBar}/>
+            <${FilterBar}/>
             <${Attacks}/>
             <${Result}/>
         </${CharacterProvider}>

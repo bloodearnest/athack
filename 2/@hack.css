@@ -1,16 +1,10 @@
 body {
   background-color: #EEE5CE;
-  font-size: 4rem;
+  font-size: 5rem;
   font-family: BookSanity;
   text-rendering: optimizeLegibility;
   width: 100%;
 }
-
-section {
-  width: 100%;
-  border: 1px solid red;
-}
-
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -33,23 +27,108 @@ body select {
   border: none;
   border-radius: 0;
   line-height: normal;
-  max-width: 100%;
-  width: 100%;
 }
 
-#selector select, #selector option {
-  font-family: MrJeeves;
-  font-weight: 800;
+.button {
+  cursor: pointer;
+  border: 10px solid #58180D;
+  border-radius: 2rem;
+  color: #EEE5CE;
+  background-color: #58180D;
+  margin: 0rem 0.5rem;
+  /* disable android chrome press highlighting */
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+}
+
+.button:active {
+  background-image: none;
+  border-color: transparent;
+  background-color: transparent;
   color: #58180D;
 }
 
 
+section {
+  width: 100%;
+}
+
+
+#selector select, #selector select option, #selector select optgroup {
+  font-family: MrJeeves;
+  font-weight: 800;
+  color: #58180D;
+  font-size: 6rem;
+}
+
+#selector select {
+  padding: 1rem 1rem 1rem 4rem; /* 4rem leaves space for the chevron */
+  width: 36rem;
+}
+
+#selector label {
+  position: relative:
+}
+
+#selector label:before {
+  content: "\0027a4";
+  color: #58180D;
+  position: absolute;
+  top: 1.5rem;
+  font-size: 4rem;
+}
+
+#conditions {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+}
+
+#conditions select {
+  width: 2.5em;
+  padding-left: 1rem;
+}
+
+.condition {
+  position: relative;
+  padding: 1rem;
+}
+
+.condition:after {
+    position: absolute;
+    content: 'x';
+    top: -1rem;
+    font-size: 3rem;
+    right: 0.5rem;
+}
+
+.attack-summary {
+  display: flex;
+  align-items: baseline;
+}
 .attack-summary .name {
   font-weight: bold;
+  font-size: 4rem;
+}
+
+.attack-summary .type {
+  font-style: italic;
   font-size: 3rem;
 }
 
-.attack-summary .type, .attack-summary .tohit {
-  font-weight: italic;
-  font-size: 2rem;
+#filters {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+#filters .filter {
+  padding: 1rem;
+}
+
+#filters .filter_true {
+  text-decoration: underline;
+}
+
+.attack {
+  display: flex;
 }
