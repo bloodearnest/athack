@@ -43,3 +43,13 @@ body select {
   color: #58180D;
 }
 
+
+.attack-summary .name {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.attack-summary .type, .attack-summary .tohit {
+  font-weight: italic;
+  font-size: 2rem;
+}

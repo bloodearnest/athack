@@ -1,2 +1,7 @@
 web_modules
 node_modules
+geckodriver.log
+characters.json
+attacks.yaml
+scrape/data
+

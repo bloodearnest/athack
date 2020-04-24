@@ -1,30 +1,11 @@
 import '/web_modules/preact/debug.js';
-import { h, Component, render, createContext } from '/web_modules/preact.js';
+import { h, render, createContext } from '/web_modules/preact.js';
 import { useState, useContext } from '/web_modules/preact/hooks.js';
 import htm from '/web_modules/htm.js'
+import {readCharacters} from '/src/data.js'
 
 const html = htm.bind(h)
 const map = (obj, func) => Object.entries(obj).map(([k, v]) => func(k, v))
-
-const CAMPAIGNS = {
-    toa: {
-      name: "Tomb of Annihilation",
-      characters: ["Airnel", "Areni", "Grondrath"],
-    },
-    wm: {
-      name: "West Marches",
-      characters: ["Jerem", "The Count"]
-    },
-}
-
-const CHARACTERS = {
-    "Airnel": {},
-    "Areni": {},
-    "Grondrath": {},
-    "Jerem": {},
-    "The Count": {},
-}
-
 
 const MODIFIERS = {
     "Bless": {hit: '1d4', save: '1d4'},
@@ -78,7 +59,7 @@ function CharacterProvider(props) {
   const [group, setGroup] = useState(initialGroup);
   const [name, setName] = useState(initialName);
   const [conditions, setConditions] = useCharacterState(name, [])
-  const data = CHARACTERS[name] || {}
+  const attacks = CHARACTERS.attacks[name] || {}
 
   const setNameAndHash = (name, group) => {
     setName(name)
@@ -89,7 +70,7 @@ function CharacterProvider(props) {
   const contextValue = {
       group: group,
       name: name,
-      data: data,
+      attacks: attacks,
       conditions: conditions,
       setCharacter: setNameAndHash,
       setConditions: setConditions
@@ -105,9 +86,9 @@ const CharacterSelector = function() {
     }
 
     let optionGroups = [html`<option value="">Choose character...</option>`];
-    for (let [id, data] of Object.entries(CAMPAIGNS)) {
-        let options = data.characters.map((c) => html`<option value="${c}">${c}</option>`)
-        optionGroups.push(html`<optgroup data-id=${id} label=${data.name}>Campaign: ${options}</optgroup>`)
+    for (let [id, campaign] of Object.entries(CHARACTERS.campaigns)) {
+        let options = map(campaign.characters, (c, _) => html`<option value="${c}">${c}</option>`)
+        optionGroups.push(html`<optgroup data-id=${id} label=${campaign.name}>Campaign: ${options}</optgroup>`)
     }
 
     return html`
@@ -116,21 +97,6 @@ const CharacterSelector = function() {
         </section>
     `
 }
-
-const Character = function() {
-    let {name} = getCharacter()
-    if (!name) {
-        return null;
-    }
-    return html`
-        <section id="character">
-            <${ConditionsBar}/>
-            <${Attacks}/>
-            <${Result}/>
-        </section>
-    `
-}
-
 
 const ConditionTag = function({condition}) {
     let {conditions, setConditions} = getCharacter()
@@ -170,11 +136,28 @@ const ConditionsBar = function() {
     `
 }
 
+const AttackSummary = function({name, attack}) {
+    return html`
+        <div class=attack-summary>
+            <span class=name>${name}</span>
+            <span class=type>${attack.types}</span>
+            <span class=tohit>${attack.tohit}</span>
+        </div>
+    `
+}
+
 
 const Attacks = function() {
+    const {attacks} = getCharacter()
+
+    let elements = []
+    for (let [name, attack] of Object.entries(attacks)) {
+        elements.push(html`<${AttackSummary} name=${name} attack=${attack}/>`)
+    }
+
     return html`
         <section id=attacks>
-            Attacks here
+            ${elements}
         </section>
     `
 }
@@ -191,11 +174,16 @@ const AtHack = function() {
     return html`
         <${CharacterProvider}>
             <${CharacterSelector}/>
-            <${Character}/>
+            <${ConditionsBar}/>
+            <${Attacks}/>
+            <${Result}/>
         </${CharacterProvider}>
     `
 }
 
-const app = html`<${AtHack}/>`
-
-render(app, document.body);
+let CHARACTERS = null
+readCharacters().then((data) => {
+    CHARACTERS = data;
+    const app = html`<${AtHack}/>`
+    render(app, document.body);
+})

@@ -1,0 +1,43 @@
+toa:
+    name: Tomb of Annihilation
+    channel: toa
+    characters: 
+        Airnel:
+            url: https://ddb.ac/characters/1183264/1eK3Rw
+        Areni:
+            url: https://ddb.ac/characters/16334152/1UU8vM
+            rules: 
+                Damage Speciality: [Fire]
+        Corminar:
+            url: https://ddb.ac/characters/1339195/vNUdni
+            rules:
+                Hex: true
+        Grondrath:
+            url: https://ddb.ac/characters/6579686/iJATQ1
+            rules:
+                Rage: true
+        Heston:
+            url: https://ddb.ac/characters/23253033/bqSxqn
+        Nordan:
+            url: https://ddb.ac/characters/1133678/NUYblq
+        Thorin:
+            url: https://ddb.ac/characters/1149756/Xz8mT2
+            attacks:
+                Divine Smite:
+wm: 
+    name: West Marches
+    channel: wm
+    characters:
+        Jerem: 
+            url: https://ddb.ac/characters/3503461/mRsib5
+            rules: {}
+        The Count:
+            url: https://ddb.ac/characters/25661189/kW92K5
+            rules: {}
+        Vanuanth:
+            url: https://ddb.ac/characters/25582957/BZxLbI
+            rules: {}
+        Galmyn:
+            url: https://ddb.ac/characters/25661213/eIJxX2
+            rules: 
+                Hunter's Mark: true
