@@ -1,6 +1,6 @@
 import '/web_modules/preact/debug.js';
 import { h, render, createContext } from '/web_modules/preact.js';
-import { useState, useContext } from '/web_modules/preact/hooks.js';
+import { useState, useContext, useRef, useEffect } from '/web_modules/preact/hooks.js';
 import htm from '/web_modules/htm.js'
 import {readCharacters} from '/src/data.js'
 
@@ -123,24 +123,43 @@ const ConditionTag = function({condition}) {
 }
 
 const ConditionsBar = function() {
-    let {conditions, addCondition} = getCharacter()
+    const ref = useRef()
+    const {conditions, addCondition} = getCharacter()
+    const [active, setActive] = useState(false)
 
-    let optionGroups = [html`<option value="">+</option>`]
+    const cls = (active ? 'on' : 'off')
+    const show = (e) => { setActive(true) }
+    const select = (e) => {
+        addCondition(e.target.dataset.value)
+        setActive(false)
+    }
+    const close = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+            setActive(false)
+            e.preventDefault()
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', close, false)
+        return () => { document.removeEventListener('mousedown', close, false) }
+    })
+
+    let options = []
     for (let [k, v] of Object.entries(MOD_GROUPS)) {
         let valid = v.filter((o) => !conditions.includes(o))
         if (valid.length == 0) {
             continue
         }
-        let options = valid.map((o) => html`<option value=${o}>${o}</option>`)
-        optionGroups.push(html`<optgroup label=${k}>${options}</optgroup>`)
-    }
-    let add = (e) => {
-        addCondition(e.target.value)
-        e.preventDefault()
+        options.push(html`<li class=group>${k}</li>`)
+        valid.forEach((o) => options.push(html`<li data-value=${o} onClick=${select}>${o}</li>`))
     }
     return html`
-        <section id=conditions class=row>
-            <select value="" class="button" onChange=${add}>${optionGroups}</select>
+        <section id=conditions>
+            <nav class="dropdown button" ref=${ref}>
+                <ul class=${cls}>${options}</ul>
+                <span class="${cls}" onClick=${show}>+</span>
+            </nav>
             ${conditions.map((c) => html`<${ConditionTag} condition=${c}/>`)}
         </section>
     `
@@ -174,7 +193,6 @@ const Filter = function({filter, active}) {
 
 const FilterBar = function() {
     const {filters} = getCharacter()
-    console.log(filters)
     let tags = FILTERS.map((f) => {
         return html`<${Filter} filter=${f} active=${filters.includes(f)}/>`
     })

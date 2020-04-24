@@ -40,7 +40,7 @@ body select {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 }
 
-.button:active {
+.button.on {
   background-image: none;
   border-color: transparent;
   background-color: transparent;
@@ -81,16 +81,46 @@ section {
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
+  position: relative;
 }
 
-#conditions select {
-  width: 2.5em;
-  padding-left: 1rem;
+#conditions .dropdown.button {
+  padding: 1rem 2rem;
+  margin-bottom: 1rem;
 }
+
+.dropdown ul {
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .2s ease-in-out;
+  position: absolute;
+  background-color: #EEE5CE;
+  border: 10px solid #58180D;
+  border-radius: 2rem;
+  left: 2.5rem;
+  width: 90%;
+  z-index: 10;
+}
+
+.dropdown ul li {
+  width: 100%;
+  color: #58180D;
+  border-bottom: 1px solid #58180D;
+  padding: 2rem;
+}
+.dropdown ul li.group {
+  background-color: #58180D;
+  color: #EEE5CE;
+  transform: uppercase;
+}
+.dropdown ul.on  { opacity: 1; z-index: 1;}
+.dropdown ul.off  { opacity: 0; z-index: -1;}
+
 
 .condition {
   position: relative;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .condition:after {
