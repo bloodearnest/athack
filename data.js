@@ -539,6 +539,93 @@ const party_data = {
         secondary: {"thunder": "3d8", "desc": "if the target moves"},
       },
     ]
-  }
+  },
+  "The Count": {
+    channel: 'wm',
+    saves: {
+      'Str': 0,
+      'Dex': 4,
+      'Con': 0,
+      'Int': 10,
+      'Wis': 6,
+      'Cha': 1,
+    },
+    attacks: [
+        {
+            "damage": {
+                "Piercing": "1d4+3"
+            },
+            "name": "Dagger",
+            "notes": [
+                "Melee Weapon",
+                "Simple",
+                "Finesse",
+                "Light",
+                "Thrown"
+            ],
+            "options": {},
+            "range": "20 (60)",
+            "tohit": "+5",
+            "types": [
+                "Ranged",
+                "Melee"
+            ]
+        }, {
+            "damage": {
+                "Piercing": "1d4+3"
+            },
+            "name": "Dart",
+            "notes": [
+                "Ranged Weapon",
+                "Simple",
+                "Finesse",
+                "Thrown"
+            ],
+            "options": {},
+            "range": "20 (60)",
+            "tohit": "+5",
+            "types": [
+                "Ranged"
+            ]
+        }, {
+            "damage": {
+                "Bludgeoning": "1d6-1"
+            },
+            "name": "Quarterstaff",
+            "notes": [
+                "Melee Weapon",
+                "Simple",
+                "Versatile"
+            ],
+            "options": {
+                "Versatile": {
+                    "Bludgeoning": "1d8-1",
+                    "replace": true
+                }
+            },
+            "range": "5 ft. Reach",
+            "tohit": "+1",
+            "types": [
+                "Melee"
+            ]
+        }, {
+            "damage": {
+                "Piercing": "1d8+3"
+            },
+            "name": "Rapier",
+            "notes": [
+                "Melee Weapon",
+                "Martial",
+                "Finesse"
+            ],
+            "options": {},
+            "range": "5 ft. Reach",
+            "tohit": "+5",
+            "types": [
+                "Melee"
+            ]
+        },
+    ]
+  },
 
 };
