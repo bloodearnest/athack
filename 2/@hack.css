@@ -151,10 +151,6 @@ section {
   padding: 1rem;
 }
 
-#filters .filter.active {
-  text-decoration: underline;
-}
-
 
 .attack {
   display: flex;
@@ -170,7 +166,7 @@ section {
   width: 100%;
 }
 
-.attack.off:active {
+.attack.off :active {
   color: #EEE5CE;
   border-color: #EEE5CE;
   background-color: #58180D;
@@ -228,8 +224,36 @@ section {
 }
 .details .attack_conditions .button {
   font-size: 4rem;
+  padding: 1rem;
 }
 .details .attack_conditions .disabled {
   color: grey;
   border-color: grey;
+}
+
+.details .attack_conditions .vantage {
+  display: inline-block;
+  width: 50%;
+}
+.details .attack_conditions .vantage span {
+  display: inline-block;
+  width: 49%;
+  padding: 2rem;
+}
+.details .attack_conditions .advantage {
+  margin-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-width: 5px;
+}
+.details .attack_conditions .disadvantage {
+  margin-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 5px;
+}
+.details .attack_conditions .autocrit {
+  display: inline-block;
+  width: 49%;
+  padding: 2rem;
 }

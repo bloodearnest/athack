@@ -30,6 +30,20 @@ function AttackProvider(props) {
         }
         setActive(active)
     }
+    const toggleAdvantage = () => {
+        const adv = !advantage
+        setAdvantage(adv)
+        if (adv) {
+            setDisadvantage(false)
+        }
+    }
+    const toggleDisadvantage = () => {
+        const dis = !disadvantage
+        setDisadvantage(dis)
+        if (dis) {
+            setAdvantage(false)
+        }
+    }
     const removeOption = removeFromListState(options, setOptions)
     const addOption = opt => {
         let temp = options
@@ -52,8 +66,8 @@ function AttackProvider(props) {
         defaults: defaults,
         options: options,
         setActive: setActiveAndReset,
-        toggleAdvantage: () => setAdvantage(!advantage),
-        toggleDisadvantage: () => setDisadvantage(!disadvantage),
+        toggleAdvantage: toggleAdvantage,
+        toggleDisadvantage: toggleDisadvantage,
         toggleAutocrit: () => setAutocrit(!autocrit),
         removeOption: removeOption,
         addOption: addOption,
@@ -99,12 +113,14 @@ const AttackConditions = function() {
 
     return html`
         <div class=attack_conditions>
-            <span class="button ${ctx.advantage ? 'on' : 'off'} ${adv_disabled ? 'disabled': ''}"
-                  onClick=${adv_disabled ? null : ctx.toggleAdvantage}>Advantage</span>
-            <span class="button ${ctx.disadvantage ? 'on' : 'off'} ${dis_disabled ? 'disabled': ''}"
-                  onClick=${dis_disabled ? null : ctx.toggleDisadvantage}>Disadv.</span>
-            <span class="button ${ctx.autocrit ? 'on': 'off'}"
-                  onClick=${ctx.toggleAutocrit}>AutoCrit</span>
+            <span class="vantage">
+                <span class="advantage button ${ctx.advantage ? 'on' : 'off'} ${adv_disabled ? 'disabled': ''}"
+                    onClick=${adv_disabled ? null : ctx.toggleAdvantage}>ADV</span>
+                <span class="disadvantage button ${ctx.disadvantage ? 'on' : 'off'} ${dis_disabled ? 'disabled': ''}"
+                    onClick=${dis_disabled ? null : ctx.toggleDisadvantage}>DIS</span>
+            </span>
+            <span class="button autocrit ${ctx.autocrit ? 'on': 'off'}"
+                  onClick=${ctx.toggleAutocrit}>Auto-Crit</span>
         </div>
     `
     console.log(vantage)
@@ -113,7 +129,7 @@ const AttackConditions = function() {
 }
 
 const AttackDetails = function() {
-    const {name, attack, active, setActive, options, conditions} = useAttack()
+    const {name, attack, active, setActive, options} = useAttack()
     const ref = useRef()
     useClickOutside(ref, () => setActive(false))
 
@@ -135,11 +151,17 @@ const AttackDetails = function() {
         return html` <${AttackOption} name=${n} option=${o} active=${options.includes(n)}/>`
     })
 
+    let conditions = null
+    if (attack.tohit) {
+        conditions = html`<${AttackConditions}/>`
+    }
+
+
     return html`
     <div class="details popup ${active ? 'on' : 'off'}" ref=${ref}>
         <div class=name>${name}</div>
         ${details}
-        <${AttackConditions}/>
+        ${conditions}
         <div class=options>${opts}</div>
     </div>`
 
@@ -147,9 +169,10 @@ const AttackDetails = function() {
 
 const Attack = function() {
     const {name, attack, active, setActive} = useAttack()
+    const click = active ? null : e => setActive(true)
     return html`
-        <div class="attack ${active ? 'on' : 'off'}">
-            <span class=name onClick=${e => setActive(true)}>${name}</span>
+        <div class="attack ${active ? 'on' : 'off'}" onClick=${click}>
+            <span class=name>${name}</span>
             <${AttackDetails}/>
         </div>
     `
