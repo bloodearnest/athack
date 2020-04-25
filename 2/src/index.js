@@ -70,7 +70,7 @@ function CharacterProvider(props) {
     const [group, setGroup] = useState(initialGroup);
     const [name, setName] = useState(initialName);
     const [conditions, setConditions] = useCharacterState(name, [])
-    const [filters, setFilters] = useCharacterState(name, [])
+    const [filter, setFilter] = useCharacterState(name, null)
     const attacks = CHARACTERS.attacks[name] || {}
 
     const setNameAndHash = (name, group) => {
@@ -84,12 +84,11 @@ function CharacterProvider(props) {
         name: name,
         attacks: attacks,
         conditions: conditions,
-        filters: filters,
+        filter: filter,
         setCharacter: setNameAndHash,
+        setFilter: setFilter,
         addCondition: addToListState(conditions, setConditions),
         removeCondition: removeFromListState(conditions, setConditions),
-        addFilter: addToListState(filters, setFilters),
-        removeFilter: removeFromListState(filters, setFilters),
     }
     return html`<${CharacterContext.Provider} value=${contextValue} ...${props} />`
 }
@@ -118,7 +117,7 @@ const CharacterSelector = function() {
 
 const ConditionTag = function({condition}) {
     let {removeCondition} = getCharacter()
-    return html`<span class="condition button" onClick=${e =>removeCondition(condition)}>${condition}</span>`
+    return html`<span class="condition button on" onClick=${e =>removeCondition(condition)}>${condition}</span>`
 
 }
 
@@ -136,7 +135,6 @@ const ConditionsBar = function() {
     const close = (e) => {
         if (ref.current && !ref.current.contains(e.target)) {
             setActive(false)
-            e.preventDefault()
         }
     }
 
@@ -157,7 +155,7 @@ const ConditionsBar = function() {
     return html`
         <section id=conditions>
             <nav class="dropdown button" ref=${ref}>
-                <ul class=${cls}>${options}</ul>
+                <ul class="popup ${cls}">${options}</ul>
                 <span class="${cls}" onClick=${show}>+</span>
             </nav>
             ${conditions.map((c) => html`<${ConditionTag} condition=${c}/>`)}
@@ -165,52 +163,124 @@ const ConditionsBar = function() {
     `
 }
 
-const AttackSummary = function({name, attack}) {
-    return html`
-        <div class="attack-summary row">
-            <span class=name>${name}</span>
-            <span class=type>${attack.types}</span>
-        </div>
-    `
-}
-
 const FILTERS = [
     'Melee',
-    'Ranged',
+    'Range',
     'Spell',
     'AoE',
 ];
 
 
-const Filter = function({filter, active}) {
-    const {addFilter, removeFilter} = getCharacter()
-    const toggle = active? e => removeFilter(filter) : e => addFilter(filter)
+const FilterBar = function() {
+    const {filter, setFilter} = getCharacter()
+    let filters = FILTERS.map((f) => {
+        const active = f == filter
+        const handler = active ? e => setFilter(null) : e => setFilter(f)
+        return html`
+            <span class="filter button ${active ? "on" : "off"}" onClick=${handler}>${f}</span>`
+    })
+    return html` <section id=filters class=row>${filters}</section>`
+}
+
+const Damage = function({damage}) {
+    let damages = []
+    for (const [k, v] of Object.entries(damage)) {
+        damages.push(html`<span class=damage data-type=${k}>${v} ${k}</span>`)
+    }
+    return damages
+}
+
+const AttackOption = function({name, option, active, add, remove}) {
+    const toggle = active ? remove : add
+    const handler = (e) => toggle(name)
     return html`
-        <span class=filter class="filter filter_${active}" onClick=${toggle}>${filter}</span>
+        <div class=option>
+            <span class="button ${active ? 'on' : 'off'}" onClick=${handler}>${name}</span>
+            <span class=info><${Damage} damage=${option.damage}/></span>
+        </div>
+    `
+
+}
+
+const AttackDetails = function({name, attack, active, setActive}) {
+    const ref = useRef()
+    const [options, setOptions] = useState([])
+
+    const close = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+            setActive(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', close, false)
+        return () => { document.removeEventListener('mousedown', close, false) }
+    })
+
+    const click = e => {
+        e.preventDefault();
+        return false;
+    }
+
+    let details = [];
+    let add = (cls, hdr, content) => details.push(html`
+        <div class="detail ${cls}">
+            <span class=header>${hdr}: </span>
+            <span class=value>${content}</span>
+        </div>
+    `)
+    let half = (attack.half || true) ? ' for half' : '';
+    if (attack.tohit)  { add('tohit', 'To Hit', `${attack.tohit}`) }
+    if (attack.save)   { add('save',  'Save',   `${attack.save}${half}`) }
+    if (attack.range)  { add('range', 'Range',  `${attack.range}`) }
+    if (attack.damage) { add('damage','Damage', html`<${Damage} damage=${attack.damage}/>`) }
+    if (attack.effect) { add('effect','Effect', `${attack.effect}`) }
+
+
+    const removeOpt = removeFromListState(options, setOptions)
+    const addOpt = opt => {
+        let temp = options
+        if (attack.options[opt].type == 'spell slot') {
+            // deselect all other spell slot options
+            const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
+            const toRemove = Object.entries(attack.options).filter(selector)
+            temp = options.filter(o => toRemove.includes(o))
+        }
+        setOptions([...temp, opt])
+    }
+
+    let opts = map(attack.options, (n, o) => {
+        return html`
+            <${AttackOption} name=${n} option=${o} active=${options.includes(n)} add=${addOpt} remove=${removeOpt}/>`
+    })
+
+    return html`
+    <div class="details popup ${active ? 'on' : 'off'}" ref=${ref} onClick=${click}>
+        <div class=name>${name}</div>
+        ${details}
+        <div class=options>${opts}</div>
+    </div>`
+
+}
+
+const Attack = function({name, attack}) {
+    const [active, setActive] = useState(false)
+    return html`
+        <div class="attack ${active ? 'on' : 'off'}">
+            <span class=name onClick=${e => setActive(true)}>${name}</span>
+            <${AttackDetails} active=${active} setActive=${setActive} name=${name} attack=${attack}/>
+        </div>
     `
 }
 
-
-const FilterBar = function() {
-    const {filters} = getCharacter()
-    let tags = FILTERS.map((f) => {
-        return html`<${Filter} filter=${f} active=${filters.includes(f)}/>`
-    })
-    return html` <section id=filters class=row>${tags}</section>`
-}
-
 const Attacks = function() {
-    const {attacks, filters} = getCharacter()
+    const {attacks, filter} = getCharacter()
 
-    let selected = (types) => true
-    if (filters.length > 0) {
-        selected = (types) => filters.every(f => types.includes(f))
-    }
+    let selected = ([n, a]) => !filter || a.types.includes(filter)
 
     let elements = []
-    for (let [name, attack] of Object.entries(attacks)) {
-        if (selected(attack.types))
-            elements.push(html`<${AttackSummary} name=${name} attack=${attack}/>`)
+    for (let [name, attack] of Object.entries(attacks).filter(selected)) {
+        elements.push(html`<${Attack} name=${name} attack=${attack}/>`)
     }
 
     return html`
@@ -223,7 +293,6 @@ const Attacks = function() {
 const Result = function() {
     return html`
         <section id=result class=row>
-            Result Here
         </section>
     `
 }

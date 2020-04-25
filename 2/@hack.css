@@ -4,6 +4,7 @@ body {
   font-family: BookSanity;
   text-rendering: optimizeLegibility;
   width: 100%;
+  color: #58180D;
 }
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -33,25 +34,29 @@ body select {
   cursor: pointer;
   border: 10px solid #58180D;
   border-radius: 2rem;
-  color: #EEE5CE;
-  background-color: #58180D;
-  margin: 0rem 0.5rem;
+  color: #58180D;
+  margin: 0rem 0.25rem;
   /* disable android chrome press highlighting */
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 }
 
 .button.on {
   background-image: none;
-  border-color: transparent;
-  background-color: transparent;
-  color: #58180D;
+  background-color: #58180D;
+  color: #EEE5CE;
 }
+
+.button
 
 
 section {
   width: 100%;
 }
 
+#conditions, #filters, #attacks {
+  border-top: 3px solid #58180D;
+  padding: 1rem;
+}
 
 #selector select, #selector select option, #selector select optgroup {
   font-family: MrJeeves;
@@ -86,10 +91,9 @@ section {
 
 #conditions .dropdown.button {
   padding: 1rem 2rem;
-  margin-bottom: 1rem;
 }
 
-.dropdown ul {
+.popup {
   opacity: 0;
   z-index: -1;
   transition: opacity .2s ease-in-out;
@@ -97,9 +101,15 @@ section {
   background-color: #EEE5CE;
   border: 10px solid #58180D;
   border-radius: 2rem;
-  left: 2.5rem;
   width: 90%;
-  z-index: 10;
+}
+
+.popup.on  { opacity: 1; z-index: 1;}
+.popup.off  { opacity: 0; z-index: -1;}
+
+
+.dropdown ul {
+  left: 2.5rem;
 }
 
 .dropdown ul li {
@@ -111,16 +121,13 @@ section {
 .dropdown ul li.group {
   background-color: #58180D;
   color: #EEE5CE;
-  transform: uppercase;
+  text-transform: uppercase;
 }
-.dropdown ul.on  { opacity: 1; z-index: 1;}
-.dropdown ul.off  { opacity: 0; z-index: -1;}
 
 
 .condition {
   position: relative;
   padding: 1rem;
-  margin-bottom: 1rem;
 }
 
 .condition:after {
@@ -131,23 +138,11 @@ section {
     right: 0.5rem;
 }
 
-.attack-summary {
-  display: flex;
-  align-items: baseline;
-}
-.attack-summary .name {
-  font-weight: bold;
-  font-size: 4rem;
-}
-
-.attack-summary .type {
-  font-style: italic;
-  font-size: 3rem;
-}
 
 #filters {
   display: flex;
   flex-flow: row wrap;
+  font-size: 4rem;
   justify-content: space-around;
 }
 
@@ -155,10 +150,74 @@ section {
   padding: 1rem;
 }
 
-#filters .filter_true {
+#filters .filter.active {
   text-decoration: underline;
 }
 
+
 .attack {
   display: flex;
+  align-items: baseline;
+  border: 10px transparent #58180D;
+  border-radius: 2rem;
+  padding: 2rem 2rem;
+}
+
+.attack .name {
+  font-weight: bold;
+  font-size: 4rem;
+  width: 100%;
+}
+
+.attack.off:active {
+  color: #EEE5CE;
+  border-color: #EEE5CE;
+  background-color: #58180D;
+  /* disable android chrome press highlighting */
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+}
+
+.attack .details {
+  padding: 1rem;
+  position: fixed;
+  width: 90%;
+  left: 5%;
+  top: 3%;
+  height: 94%;
+}
+
+.attack .details.on {
+  z-index: 10;
+}
+
+.details .name {
+  font-weight: bold;
+  font-size: 5rem;
+}
+
+.details > div {
+  padding: 0.5rem 0;
+}
+
+.details .detail {
+  font-size: 3rem;
+  color: black;
+}
+
+.details .detail .header {
+  font-style: italic;
+}
+
+.details .option {
+  padding: 0.5rem 0rem;
+}
+
+.details .option .button {
+  display: inline-block;
+  padding: 1rem;
+  width: 50%;
+}
+.details .option .info {
+  font-size: 3rem;
+  color: black;
 }

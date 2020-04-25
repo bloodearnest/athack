@@ -3,6 +3,7 @@ import os
 import yaml
 
 from parsel import Selector
+import parse
 
 import special
 
@@ -191,6 +192,9 @@ def get_spell(level, spell, attacks):
     if name.lower() in special.SPELL_BLACKLIST:
         return
 
+    if name.lower() in special.SPELL_OPTIONS:
+        return
+
     tohit = get_text(spell, '.ct-spells-spell__tohit *::text')
     tohit = tohit.replace('--', '')
 
@@ -205,6 +209,7 @@ def get_spell(level, spell, attacks):
         base_spell['options'][level] = {
             'damage': {dtype: damage},
             'replace': True,
+            'type': 'spell slot'
         }
         special.handle(name, base_spell)
     elif name not in attacks:
@@ -244,6 +249,37 @@ def get_spell(level, spell, attacks):
         return data
 
 
+def clean(attack):
+    def pop(l, i):
+        if i in l:
+            l.remove(i)
+            return i
+        else:
+            return None
+
+    components = [
+        pop(attack['notes'], 'Verbal'),
+        pop(attack['notes'], 'Somatic'),
+        pop(attack['notes'], 'Material'),
+    ]
+    components = [c[0].upper() for c in components if c]
+    if components:
+        attack['components'] = components
+
+    attack['range'] = attack['range'].replace('FT', 'ft')
+    attack['range'] = attack['range'].replace('SELF', 'Self')
+
+    for note in attack['notes']:
+        if note.lower() == attack['range'].lower():
+            attack['notes'].remove(note)
+        elif note.startswith('Range ('):
+            values = parse.parse('Range ({}/{})', note)
+            value = '{} ({})'.format(*values)
+            assert value == attack['range'], 'mismatched ranges'
+            attack['notes'].remove(note)
+
+
+
 def main(characters):
 
     for name in characters:
@@ -261,6 +297,7 @@ def main(characters):
         for attack in attack_selector.css('.ct-combat-attack'):
             data = get_attack(attack)
             if data:
+                clean(data)
                 attacks[data['name']] = data
 
         spells = None
@@ -279,6 +316,7 @@ def main(characters):
                 for spell in level_spells.css('.ct-spells-spell'):
                     data = get_spell(level, spell, attacks)
                     if data:
+                        clean(data)
                         attacks[data['name']] = data
 
         yield name, attacks

@@ -4,6 +4,11 @@ SPELL_BLACKLIST = set(b.lower() for b in [
     'Armor of Agathys',
 ])
 
+SPELL_OPTIONS = set(b.lower() for b in [
+    'Hex',
+    'Hunter\'s Mark',
+])
+
 
 EFFECTS = {
     'Spritual Guardians': 'Speed halved',
@@ -44,7 +49,9 @@ def special(f):
 def toll_the_dead(data):
     """Add injured option."""
     data['options']['Injured'] = {
-        'Necrotic': data['damage']['Necrotic'].replace('d8', 'd12'),
+        'damage': {
+            'Necrotic': data['damage']['Necrotic'].replace('d8', 'd12'),
+        },
         'replace': True,
     }
 
