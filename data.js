@@ -543,12 +543,12 @@ const party_data = {
   "The Count": {
     channel: 'wm',
     saves: {
-      'Str': 0,
-      'Dex': 4,
-      'Con': 0,
-      'Int': 10,
-      'Wis': 6,
-      'Cha': 1,
+      'Str': -1,
+      'Dex': 5,
+      'Con': 2,
+      'Int': 2,
+      'Wis': 1,
+      'Cha': 3,
     },
     attacks: [
         {
