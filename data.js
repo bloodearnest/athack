@@ -563,11 +563,7 @@ const party_data = {
                 "Light",
                 "Thrown"
             ],
-            "conditions": {
-                'Sneak Attack': {
-                    'weapon': '2d6',
-                }
-            },
+            "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "20 (60)",
             "tohit": "+5",
@@ -586,11 +582,7 @@ const party_data = {
                 "Finesse",
                 "Thrown"
             ],
-            "conditions": {
-                'Sneak Attack': {
-                    'weapon': '2d6',
-                }
-            },
+            "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "20 (60)",
             "tohit": "+5",
@@ -607,9 +599,9 @@ const party_data = {
                 "Simple",
                 "Versatile"
             ],
-            "options": {
+            "conditions": {
                 "Versatile": {
-                    "Bludgeoning": "1d8-1",
+                    "weapon": "1d8-1",
                     "replace": true
                 }
             },
@@ -628,11 +620,7 @@ const party_data = {
                 "Martial",
                 "Finesse"
             ],
-            "conditions": {
-                'Sneak Attack': {
-                    'weapon': '2d6',
-                }
-            },
+            "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "5 ft. Reach",
             "tohit": "+5",
