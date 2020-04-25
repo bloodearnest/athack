@@ -1,7 +1,7 @@
 import '/web_modules/preact/debug.js';
 import { h, render, createContext } from '/web_modules/preact.js';
-import { useState, useContext, useRef, useEffect } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, removeFromListState } from '/src/core.js'
+import { useState, useContext, useRef } from '/web_modules/preact/hooks.js';
+import { html, map, getCharacter, removeFromListState, useClickOutside, GetVantage} from '/src/core.js'
 
 
 const AttackContext = createContext()
@@ -10,12 +10,26 @@ function useAttack() {
   return useContext(AttackContext)
 }
 
+
+
 function AttackProvider(props) {
+    const {conditions} = getCharacter()
     const [active, setActive] = useState(false)
     const [options, setOptions] = useState([])
+    const defaults = GetVantage(conditions)
+    const [advantage, setAdvantage] = useState(defaults.advantage)
+    const [disadvantage, setDisadvantage] = useState(defaults.disadvantage)
+    const [autocrit, setAutocrit] = useState(false)
     const attackOptions = props.attack.options
-    const {conditions} = getCharacter()
 
+    const setActiveAndReset = active => {
+        if (active == false) {
+            setAdvantage(defaults.advantage)
+            setDisadvantage(defaults.disadvantage)
+            setAutocrit(false)
+        }
+        setActive(active)
+    }
     const removeOption = removeFromListState(options, setOptions)
     const addOption = opt => {
         let temp = options
@@ -32,11 +46,17 @@ function AttackProvider(props) {
         active: active,
         attack: props.attack,
         name: props.name,
+        advantage: advantage,
+        disadvantage: disadvantage,
+        autocrit: autocrit,
+        defaults: defaults,
         options: options,
-        setActive: setActive,
+        setActive: setActiveAndReset,
+        toggleAdvantage: () => setAdvantage(!advantage),
+        toggleDisadvantage: () => setDisadvantage(!disadvantage),
+        toggleAutocrit: () => setAutocrit(!autocrit),
         removeOption: removeOption,
         addOption: addOption,
-        conditions: conditions,
     }
     return html`<${AttackContext.Provider} value=${contextValue} ...${props} />`
 }
@@ -69,20 +89,33 @@ const AttackOption = function({name, option, active}) {
 
 }
 
+const AttackConditions = function() {
+    const ctx = useAttack()
+
+    // if we already have disadvantage, we cannot have advantage
+    const adv_disabled = ctx.defaults.disadvantage
+    // vice versa
+    const dis_disabled = ctx.defaults.advantage
+
+    return html`
+        <div class=attack_conditions>
+            <span class="button ${ctx.advantage ? 'on' : 'off'} ${adv_disabled ? 'disabled': ''}"
+                  onClick=${adv_disabled ? null : ctx.toggleAdvantage}>Advantage</span>
+            <span class="button ${ctx.disadvantage ? 'on' : 'off'} ${dis_disabled ? 'disabled': ''}"
+                  onClick=${dis_disabled ? null : ctx.toggleDisadvantage}>Disadv.</span>
+            <span class="button ${ctx.autocrit ? 'on': 'off'}"
+                  onClick=${ctx.toggleAutocrit}>AutoCrit</span>
+        </div>
+    `
+    console.log(vantage)
+
+
+}
+
 const AttackDetails = function() {
+    const {name, attack, active, setActive, options, conditions} = useAttack()
     const ref = useRef()
-    const {name, attack, active, setActive, options} = useAttack()
-
-    const close = (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-            setActive(false)
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('mousedown', close, false)
-        return () => { document.removeEventListener('mousedown', close, false) }
-    })
+    useClickOutside(ref, () => setActive(false))
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -106,6 +139,7 @@ const AttackDetails = function() {
     <div class="details popup ${active ? 'on' : 'off'}" ref=${ref}>
         <div class=name>${name}</div>
         ${details}
+        <${AttackConditions}/>
         <div class=options>${opts}</div>
     </div>`
 

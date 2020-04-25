@@ -1,21 +1,10 @@
 import '/web_modules/preact/debug.js';
-import { h, render, createContext } from '/web_modules/preact.js';
-import { useState, useRef, useEffect } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, CharacterProvider } from '/src/core.js'
+import { render } from '/web_modules/preact.js';
+import { useState, useRef } from '/web_modules/preact/hooks.js';
+import { html, map, getCharacter, CharacterProvider, useClickOutside } from '/src/core.js'
 import { Attacks } from '/src/attacks.js'
 import { readCharacters } from '/src/data.js'
 
-const MODIFIERS = {
-    "Bless": {hit: '1d4', save: '1d4'},
-    "Bane":  {hit: '-1d4', save: '-1d4'},
-    "Synaptic Static": {hit: '-1d6'},
-    "Enlarge": {damage: '1d4'},
-    "Reduce": {damage: '-1d4'},
-    "Poisoned": {hit: 'dis'},
-    "Restrained": {hit: 'dis'},
-    "Prone": {hit: 'dis'},
-    "Frightened": {hit: 'dis'},
-}
 
 const MOD_GROUPS = {
     "Spells": ["Bless", "Bane", "Synaptic Static", "Enlarge", "Reduce"],
@@ -54,6 +43,7 @@ const ConditionsBar = function() {
     const ref = useRef()
     const {conditions, addCondition} = getCharacter()
     const [active, setActive] = useState(false)
+    useClickOutside(ref, () => setActive(false))
 
     const cls = (active ? 'on' : 'off')
     const show = (e) => { setActive(true) }
@@ -61,16 +51,6 @@ const ConditionsBar = function() {
         addCondition(e.target.dataset.value)
         setActive(false)
     }
-    const close = (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-            setActive(false)
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener('mousedown', close, false)
-        return () => { document.removeEventListener('mousedown', close, false) }
-    })
 
     let options = []
     for (let [k, v] of Object.entries(MOD_GROUPS)) {

@@ -74,10 +74,54 @@ function CharacterProvider(props) {
     return html`<${CharacterContext.Provider} value=${contextValue} ...${props} />`
 }
 
+function useClickOutside(ref, handler) {
+    const close = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+            handler()
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', close, false)
+        return () => { document.removeEventListener('mousedown', close, false) }
+    })
+}
+
+
+const MODIFIERS = {
+    "Bless": {hit: '1d4', save: '1d4'},
+    "Bane":  {hit: '-1d4', save: '-1d4'},
+    "Synaptic Static": {hit: '-1d6'},
+    "Enlarge": {damage: '1d4'},
+    "Reduce": {damage: '-1d4'},
+    "Poisoned": {hit: 'dis'},
+    "Restrained": {hit: 'dis'},
+    "Prone": {hit: 'dis'},
+    "Frightened": {hit: 'dis'},
+}
+
+function GetVantage(conditions) {
+    let advantage = false
+    let disadvantage = false
+    for (const c of conditions) {
+        const hit = MODIFIERS[c].hit
+        if (hit == 'adv') { advantage = true }
+        if (hit == 'dis') { disadvantage = true }
+    }
+    return {
+        advantage: advantage && !disadvantage,
+        disadvantage: disadvantage && !advantage,
+    }
+}
+
+
 export {
     html,
     map,
     getCharacter,
     CharacterProvider,
     removeFromListState,
+    useClickOutside,
+    GetVantage,
 }
+

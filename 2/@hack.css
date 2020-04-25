@@ -222,3 +222,14 @@ section {
   font-size: 3rem;
   color: black;
 }
+
+.details .attack_conditions {
+  padding: 2rem 0;
+}
+.details .attack_conditions .button {
+  font-size: 4rem;
+}
+.details .attack_conditions .disabled {
+  color: grey;
+  border-color: grey;
+}
