@@ -59,7 +59,12 @@ def toll_the_dead(data):
 @special
 def absorb_elements(data):
     "Correct the damage type"
-    dtype = 'Acid|Cold|Fire|Lightning|Thunder'
+    dtype = 'Elemental'
+
+    data['effect'] = (
+        'You choose from Acid, Cold, Fire, Lightning, or Thunder. You can'
+        'and can damage to your first melee hit next turn.'
+    )
 
     def replace(dmg):
         if 'Acid' in dmg:

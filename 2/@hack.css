@@ -78,7 +78,8 @@ section {
   content: "\0027a4";
   color: #58180D;
   position: absolute;
-  top: 1.5rem;
+  top: 2rem;
+  left: 1rem;
   font-size: 4rem;
 }
 
