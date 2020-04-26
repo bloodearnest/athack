@@ -22,13 +22,13 @@ function AttackProvider(props) {
     const [autocrit, setAutocrit] = useState(false)
     const attackOptions = props.attack.options
 
-    const setActiveAndReset = active => {
-        if (active == false) {
+    const setActiveAndReset = flag => {
+        if (flag == false) {
             setAdvantage(defaults.advantage)
             setDisadvantage(defaults.disadvantage)
             setAutocrit(false)
         }
-        setActive(active)
+        setActive(flag)
     }
     const toggleAdvantage = () => {
         const adv = !advantage
@@ -78,26 +78,26 @@ function AttackProvider(props) {
 
 
 
-const Damage = function({damage}) {
+const Damage = function({damage, sign}) {
     let damages = []
     for (const [k, v] of Object.entries(damage)) {
-        damages.push(html`<span class=damage data-type=${k}>${v} ${k}</span>`)
+        damages.push(html`<span class=damage data-type=${k}>${sign}${v}${'\u00A0'}${k}</span>`)
     }
     return damages
 }
 
-const AttackOption = function({name, option, active}) {
-    const {addOption, removeOption} = useAttack()
+const AttackOption = function({name, option}) {
+    const {options, addOption, removeOption} = useAttack()
+    const active = options.includes(name)
     const toggle = active ? removeOption : addOption
-    const handler = (e) => toggle(name)
     let details = []
     if (option.damage) {
-        details.push(html`<span class=info><${Damage} damage=${option.damage}/></span>`)
+        const sign = option.replace ? '' : '+'
+        details.push(html`<${Damage} damage=${option.damage} sign=${sign}/>`)
     }
     return html`
-        <div class=option>
-            <span class="button ${active ? 'on' : 'off'}" onClick=${handler}>${name}</span>
-            ${details}
+        <div class="option button ${active ? 'on' : 'off'}" onClick=${e => toggle(name)}>
+            <span>${name}</span> <span class=info>(${details})</span>
         </div>
     `
 
@@ -131,7 +131,10 @@ const AttackConditions = function() {
 const AttackDetails = function() {
     const {name, attack, active, setActive, options} = useAttack()
     const ref = useRef()
-    useClickOutside(ref, () => setActive(false))
+    const close = () => {
+        setActive(false)
+    }
+    //useClickOutside(ref, close)
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -156,9 +159,9 @@ const AttackDetails = function() {
         conditions = html`<${AttackConditions}/>`
     }
 
-
     return html`
     <div class="details popup ${active ? 'on' : 'off'}" ref=${ref}>
+        <span class=close onClick=${() => setActive(false)}>X</span>
         <div class=name>${name}</div>
         ${details}
         ${conditions}
@@ -170,10 +173,11 @@ const AttackDetails = function() {
 const Attack = function() {
     const {name, attack, active, setActive} = useAttack()
     const click = active ? null : e => setActive(true)
+    const details = active ? html`<${AttackDetails}/>` : null
     return html`
         <div class="attack ${active ? 'on' : 'off'}" onClick=${click}>
             <span class=name>${name}</span>
-            <${AttackDetails}/>
+            ${details}
         </div>
     `
 }

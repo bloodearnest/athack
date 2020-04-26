@@ -192,9 +192,6 @@ def get_spell(level, spell, attacks):
     if name.lower() in special.SPELL_BLACKLIST:
         return
 
-    if name.lower() in special.SPELL_OPTIONS:
-        return
-
     tohit = get_text(spell, '.ct-spells-spell__tohit *::text')
     tohit = tohit.replace('--', '')
 
@@ -280,6 +277,26 @@ def clean(attack):
 
 
 
+def clean_all(attacks):
+    hex = attacks.pop('Hex', None)
+    hm = attacks.pop('Hunter\'s Mark', None)
+    if not (hex or hm):
+        return
+
+    for attack in attacks.values():
+        if not attack.get('tohit'):
+            continue
+
+        if hex:
+            attack['options']['Hex'] = dict(damage=hex['damage'].copy())
+        if hm:
+            dtype = next(iter(attack['damage'].keys()))
+            attack['options']['Hunter\'s Mark'] = dict(
+                damage={dtype:hm['damage']['Bludgeoning']},
+            )
+
+
+
 def main(characters):
 
     for name in characters:
@@ -319,6 +336,7 @@ def main(characters):
                         clean(data)
                         attacks[data['name']] = data
 
+        clean_all(attacks)
         yield name, attacks
 
 

@@ -157,7 +157,7 @@ section {
   align-items: baseline;
   border: 10px transparent #58180D;
   border-radius: 2rem;
-  padding: 2rem 2rem;
+  padding: 1.5rem 1rem;
 }
 
 .attack .name {
@@ -166,7 +166,7 @@ section {
   width: 100%;
 }
 
-.attack.off :active {
+.attack.off:active {
   color: #EEE5CE;
   border-color: #EEE5CE;
   background-color: #58180D;
@@ -190,6 +190,19 @@ section {
 .details .name {
   font-weight: bold;
   font-size: 5rem;
+  position:relative;
+}
+
+.details .close {
+  position: absolute;
+  right: 0;
+  top: -0.5rem;
+  border-radius: 0 0 0 2rem;
+  border-style: solid;
+  border-color: #58180D;
+  border-width: 0 0 10px 10px;
+  padding: 2rem 3rem;
+  z-index: 2;
 }
 
 .details > div {
@@ -197,8 +210,9 @@ section {
 }
 
 .details .detail {
-  font-size: 3rem;
+  font-size: 4rem;
   color: black;
+
 }
 
 .details .detail .header {
@@ -206,21 +220,20 @@ section {
 }
 
 .details .option {
-  padding: 0.5rem 0rem;
+  padding: 1rem;
+  width: 100%;
+  font-size: 5rem;
+  margin-bottom: 1rem;
 }
 
-.details .option .button {
-  display: inline-block;
-  padding: 1rem;
-  width: 50%;
-}
 .details .option .info {
-  font-size: 3rem;
-  color: black;
+  font-size: 4rem;
+  font-style: italic;
+  margin-right: 1rem;
 }
 
 .details .attack_conditions {
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 .details .attack_conditions .button {
   font-size: 4rem;
