@@ -14,6 +14,8 @@ env/done: scrape/requirements.txt
 	env/bin/pip install -r scrape/requirements.txt
 	touch $@
 
+serve:
+	python3 -m http.server
 
 .PHONY: build
 build: | node_modules
@@ -21,3 +23,6 @@ build: | node_modules
 
 node_modules:
 	npm install
+
+clean: 
+	rm -rf node_modules web_modules
