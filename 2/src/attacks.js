@@ -14,13 +14,17 @@ function useAttack() {
 
 function AttackProvider(props) {
     const {conditions} = getCharacter()
-    const [active, setActive] = useState(false)
+    const [active, setActiveActual] = useState(false)
     const [options, setOptions] = useState([])
     const defaults = GetVantage(conditions)
     const [advantage, setAdvantage] = useState(defaults.advantage)
     const [disadvantage, setDisadvantage] = useState(defaults.disadvantage)
     const [autocrit, setAutocrit] = useState(false)
     const attackOptions = props.attack.options
+
+    const setActive = f => {
+        setActiveActual(f)
+    }
 
     const setActiveAndReset = flag => {
         if (flag == false) {
@@ -120,7 +124,7 @@ const AttackConditions = function() {
                     onClick=${dis_disabled ? null : ctx.toggleDisadvantage}>DIS</span>
             </span>
             <span class="button autocrit ${ctx.autocrit ? 'on': 'off'}"
-                  onClick=${ctx.toggleAutocrit}>Auto-Crit</span>
+                  onClick=${ctx.toggleAutocrit}>AUTOCRIT</span>
         </div>
     `
     console.log(vantage)
@@ -131,10 +135,8 @@ const AttackConditions = function() {
 const AttackDetails = function() {
     const {name, attack, active, setActive, options} = useAttack()
     const ref = useRef()
-    const close = () => {
-        setActive(false)
-    }
-    //useClickOutside(ref, close)
+    const close = () => setActive(false)
+    useClickOutside(ref, close)
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -175,8 +177,10 @@ const Attack = function() {
     const click = active ? null : e => setActive(true)
     const details = active ? html`<${AttackDetails}/>` : null
     return html`
-        <div class="attack ${active ? 'on' : 'off'}" onClick=${click}>
-            <span class=name>${name}</span>
+        <div class=attack>
+            <div class="summary ${active ? 'on' : 'off'}" onClick=${click}>
+                <span class=name>${name}</span>
+            </div>
             ${details}
         </div>
     `

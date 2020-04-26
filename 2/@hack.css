@@ -152,7 +152,7 @@ section {
 }
 
 
-.attack {
+.attack .summary {
   display: flex;
   align-items: baseline;
   border: 10px transparent #58180D;
@@ -160,13 +160,13 @@ section {
   padding: 1.5rem 1rem;
 }
 
-.attack .name {
+.attack .summary .name {
   font-weight: bold;
   font-size: 4rem;
   width: 100%;
 }
 
-.attack.off:active {
+.attack .summary.off:active {
   color: #EEE5CE;
   border-color: #EEE5CE;
   background-color: #58180D;
@@ -191,6 +191,7 @@ section {
   font-weight: bold;
   font-size: 5rem;
   position:relative;
+  padding-right: 9rem; /* leave space for .close */
 }
 
 .details .close {
@@ -203,6 +204,11 @@ section {
   border-width: 0 0 10px 10px;
   padding: 2rem 3rem;
   z-index: 2;
+}
+
+.details .close:active {
+  background-color: #58180D;
+  color: #EEE5CE;
 }
 
 .details > div {
@@ -269,4 +275,5 @@ section {
   display: inline-block;
   width: 49%;
   padding: 2rem;
+  text-align: center;
 }
