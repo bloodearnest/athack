@@ -1,7 +1,7 @@
 import '/web_modules/preact/debug.js';
 import { h, render, createContext } from '/web_modules/preact.js';
 import { useState, useContext, useRef } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, removeFromListState, useClickOutside, GetVantage} from '/src/core.js'
+import { html, map, getCharacter, removeFromListState, Modal, GetVantage} from '/src/core.js'
 
 
 const AttackContext = createContext()
@@ -132,11 +132,8 @@ const AttackConditions = function() {
 
 }
 
-const AttackDetails = function() {
-    const {name, attack, active, setActive, options} = useAttack()
-    const ref = useRef()
-    const close = () => setActive(false)
-    useClickOutside(ref, close)
+const AttackDetails = function({hide}) {
+    const {name, attack, options} = useAttack()
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -162,29 +159,53 @@ const AttackDetails = function() {
     }
 
     return html`
-    <div class="details popup ${active ? 'on' : 'off'}" ref=${ref}>
-        <span class=close onClick=${() => setActive(false)}>X</span>
-        <div class=name>${name}</div>
-        ${details}
-        ${conditions}
-        <div class=options>${opts}</div>
-    </div>`
+        <div class=details>
+            <span class=close onClick=${hide}>X</span>
+            <div class=name>${name}</div>
+            ${details}
+            ${conditions}
+            <div class=options>${opts}</div>
+        </div>
+    `
 
 }
 
 const Attack = function() {
-    const {name, attack, active, setActive} = useAttack()
-    const click = active ? null : e => setActive(true)
-    const details = active ? html`<${AttackDetails}/>` : null
-    return html`
-        <div class=attack>
-            <div class="summary ${active ? 'on' : 'off'}" onClick=${click}>
+    const {name, attack} = useAttack()
+
+    const button = (show) => {
+        return html`
+            <div class=summary onClick=${show}>
                 <span class=name>${name}</span>
             </div>
-            ${details}
-        </div>
-    `
+        `
+    }
+    const modal = (hide) => {
+        return html`<${AttackDetails} hide=${hide}/>`
+    }
+
+    return html`<${Modal} class=attack button=${button} modal=${modal}/>`
 }
+
+const FILTERS = [
+    'Melee',
+    'Range',
+    'Spell',
+    'AoE',
+];
+
+
+const FilterBar = function() {
+    const {filter, setFilter} = getCharacter()
+    let filters = FILTERS.map((f) => {
+        const active = f == filter
+        const handler = active ? e => setFilter(null) : e => setFilter(f)
+        return html`
+            <span class="filter button ${active ? "on" : "off"}" onClick=${handler}>${f}</span>`
+    })
+    return html` <div id=filters class=row>${filters}</div>`
+}
+
 
 const Attacks = function() {
     const {name, attacks, filter} = getCharacter()
@@ -199,6 +220,7 @@ const Attacks = function() {
 
     return html`
         <section id=attacks>
+            <${FilterBar}/>
             ${elements}
         </section>
     `

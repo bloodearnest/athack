@@ -102,7 +102,7 @@ def get_attack(attack):
         # weapons only
         if 'ct-damage--versatile' in dmg.attrib.get('class', ''):
             options['Versatile'] = {
-                damage_type: damage_str,
+                'damage' : {damage_type: damage_str},
                 'replace': True,
             }
         else:

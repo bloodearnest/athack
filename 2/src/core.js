@@ -47,17 +47,19 @@ function CharacterProvider(props) {
     let initialName = null
     if (location.hash) {
         [initialGroup, initialName] = location.hash.split('/')
+        initialName = initialName.replace('-', ' ')
     }
     const [group, setGroup] = useState(initialGroup);
     const [name, setName] = useState(initialName);
     const [conditions, setConditions] = useCharacterState(name, [])
     const [filter, setFilter] = useCharacterState(name, null)
+    const [activeType, setActiveType] = useCharacterState(name, 'Attacks')
     const attacks = props.characters.attacks[name] || {}
 
     const setNameAndHash = (name, group) => {
         setName(name)
-        setGroup(name)
-        location.hash = group + '/' + name
+        setGroup(group)
+        location.hash = group + '/' + name.replace(' ', '-')
     }
 
     const contextValue = {
@@ -66,6 +68,8 @@ function CharacterProvider(props) {
         attacks: attacks,
         conditions: conditions,
         filter: filter,
+        activeType: activeType,
+        setActiveType, setActiveType,
         setCharacter: setNameAndHash,
         setFilter: setFilter,
         addCondition: addToListState(conditions, setConditions),
@@ -87,6 +91,22 @@ function useClickOutside(ref, handler) {
     })
 }
 
+const Modal = function(props) {
+    const ref = useRef()
+    const [visible, setVisible] = useState(false)
+    const hide = (e) => {
+        setVisible(false)
+    }
+    useClickOutside(ref, hide)
+    const show = () => setVisible(true);
+    const cls = (visible ? 'on' : 'off')
+    return html`
+        <span class="${props.class} modal-wrapper">
+            <span class="switch ${cls}">${props.button(show)}</span>
+            <div  class="modal ${cls}" ref=${ref}>${props.modal(hide)}</div>
+        </span
+    `
+}
 
 const MODIFIERS = {
     "Bless": {hit: '1d4', save: '1d4'},
@@ -121,7 +141,7 @@ export {
     getCharacter,
     CharacterProvider,
     removeFromListState,
-    useClickOutside,
     GetVantage,
+    Modal,
 }
 

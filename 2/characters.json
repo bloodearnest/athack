@@ -1216,7 +1216,9 @@
                         }
                     },
                     "Versatile": {
-                        "Piercing": "1d8",
+                        "damage": {
+                            "Piercing": "1d8"
+                        },
                         "replace": true
                     }
                 },
@@ -1293,7 +1295,9 @@
                 ],
                 "options": {
                     "Versatile": {
-                        "Bludgeoning": "1d8+5",
+                        "damage": {
+                            "Bludgeoning": "1d8+5"
+                        },
                         "replace": true
                     }
                 },
@@ -1408,7 +1412,9 @@
                 ],
                 "options": {
                     "Versatile": {
-                        "Bludgeoning": "1d8+4",
+                        "damage": {
+                            "Bludgeoning": "1d8+4"
+                        },
                         "replace": true
                     }
                 },
@@ -1725,7 +1731,9 @@
                 ],
                 "options": {
                     "Versatile": {
-                        "Bludgeoning": "1d8+3",
+                        "damage": {
+                            "Bludgeoning": "1d8+3"
+                        },
                         "replace": true
                     }
                 },
@@ -1823,7 +1831,9 @@
                 ],
                 "options": {
                     "Versatile": {
-                        "Bludgeoning": "1d8-1",
+                        "damage": {
+                            "Bludgeoning": "1d8-1"
+                        },
                         "replace": true
                     }
                 },
@@ -2031,7 +2041,9 @@
                 ],
                 "options": {
                     "Versatile": {
-                        "Bludgeoning": "1d8+3",
+                        "damage": {
+                            "Bludgeoning": "1d8+3"
+                        },
                         "replace": true
                     }
                 },

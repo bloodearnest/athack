@@ -1,6 +1,6 @@
 body {
   background-color: #EEE5CE;
-  font-size: 5rem;
+  font-size: 4rem;
   font-family: BookSanity;
   text-rendering: optimizeLegibility;
   width: 100%;
@@ -16,19 +16,6 @@ body {
                                   supported by Chrome and Opera */
 }
 
-
-body select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  background: inherit;
-  box-shadow: none;
-  cursor: pointer;
-  border: none;
-  border-radius: 0;
-  line-height: normal;
-}
 
 .button {
   cursor: pointer;
@@ -46,111 +33,122 @@ body select {
   color: #EEE5CE;
 }
 
-.button
+.off .button:active {
+  background-image: none;
+  background-color: #58180D;
+  color: #EEE5CE;
+}
+
+.modal {
+  opacity: 0;
+  z-index: -1;
+  transition: opacity .3s ease-in-out;
+  position: fixed;
+  top: 3%;
+  left: 3%;
+  width: 94%;
+  max-height: 94%;
+  background-color: #EEE5CE;
+  border: 10px solid #58180D;
+  border-radius: 2rem;
+  overflow-y: scroll;
+}
+
+.modal.on  { opacity: 1; z-index: 1;}
+.modal.off { opacity: 0; z-index: -1;}
+
+/* style lists in modals for drop down menu */
+.modal li {
+  width: 100%;
+  color: #58180D;
+  border-bottom: 1px solid #58180D;
+  padding: 1rem;
+  font-size: 6rem;
+}
+
+.modal li.group {
+  background-color: #58180D;
+  color: #EEE5CE;
+  text-transform: uppercase;
+  font-size: 5rem;
+  text-align: center;
+}
 
 
 section {
   width: 100%;
 }
 
-#conditions, #filters, #attacks {
-  border-top: 3px solid #58180D;
-  padding: 1rem;
+/* character bar styles */
+#selector {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
-
-#selector select, #selector select option, #selector select optgroup {
+#selector .selector .name {
   font-family: MrJeeves;
   font-weight: 800;
   color: #58180D;
-  font-size: 6rem;
+  font-size: 6.5rem;
+  padding: 1rem;
 }
 
-#selector select {
-  padding: 1rem 1rem 1rem 4rem; /* 4rem leaves space for the chevron */
-  width: 36rem;
-}
-
-#selector label {
-  position: relative:
-}
-
-#selector label:before {
-  content: "\0027a4";
-  color: #58180D;
-  position: absolute;
-  top: 2rem;
-  left: 1rem;
+#character .condition-menu .button {
+  padding: 0 2rem;
   font-size: 4rem;
 }
 
+
+
+/* conditions row styles */
 #conditions {
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
   position: relative;
 }
-
-#conditions .dropdown.button {
-  padding: 1rem 2rem;
-}
-
-.popup {
-  opacity: 0;
-  z-index: -1;
-  transition: opacity .2s ease-in-out;
-  position: absolute;
-  background-color: #EEE5CE;
-  border: 10px solid #58180D;
-  border-radius: 2rem;
-  width: 90%;
-}
-
-.popup.on  { opacity: 1; z-index: 1;}
-.popup.off  { opacity: 0; z-index: -1;}
-
-
-.dropdown ul {
-  left: 2.5rem;
-}
-
-.dropdown ul li {
-  width: 100%;
-  color: #58180D;
-  border-bottom: 1px solid #58180D;
-  padding: 2rem;
-}
-.dropdown ul li.group {
-  background-color: #58180D;
-  color: #EEE5CE;
-  text-transform: uppercase;
-}
-
-
 .condition {
   position: relative;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .condition:after {
     position: absolute;
     content: 'x';
     top: -1rem;
-    font-size: 3rem;
     right: 0.5rem;
 }
 
+/* roll type styles */
+#type {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  border-bottom: 10px solid #58180D;
+  padding-bottom: 0;
+}
 
+#type .button {
+  padding: 1rem;
+  border-bottom-width: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* attacks styles*/
 #filters {
   display: flex;
   flex-flow: row wrap;
-  font-size: 4rem;
   justify-content: space-around;
+  margin-top: 1rem;
 }
 
 #filters .filter {
   padding: 1rem;
 }
-
 
 .attack .summary {
   display: flex;
@@ -162,11 +160,10 @@ section {
 
 .attack .summary .name {
   font-weight: bold;
-  font-size: 4rem;
   width: 100%;
 }
 
-.attack .summary.off:active {
+.attack.off .summary:active {
   color: #EEE5CE;
   border-color: #EEE5CE;
   background-color: #58180D;
@@ -174,27 +171,21 @@ section {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
 }
 
-.attack .details {
-  padding: 1rem;
-  position: fixed;
-  width: 90%;
-  left: 5%;
-  top: 3%;
+.attack .modal {
   height: 94%;
 }
 
-.attack .details.on {
-  z-index: 10;
+.attack .details {
+  padding: 1rem;
 }
 
-.details .name {
+.attack .details .name {
   font-weight: bold;
-  font-size: 5rem;
   position:relative;
   padding-right: 9rem; /* leave space for .close */
 }
 
-.details .close {
+.attack .details .close {
   position: absolute;
   right: 0;
   top: -0.5rem;
@@ -216,7 +207,6 @@ section {
 }
 
 .details .detail {
-  font-size: 4rem;
   color: black;
 
 }
@@ -228,12 +218,10 @@ section {
 .details .option {
   padding: 1rem;
   width: 100%;
-  font-size: 5rem;
   margin-bottom: 1rem;
 }
 
 .details .option .info {
-  font-size: 4rem;
   font-style: italic;
   margin-right: 1rem;
 }
@@ -242,7 +230,6 @@ section {
   padding: 1rem 0;
 }
 .details .attack_conditions .button {
-  font-size: 4rem;
   padding: 1rem;
 }
 .details .attack_conditions .disabled {
