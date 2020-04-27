@@ -84,7 +84,6 @@ section {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-top: 1rem;
   margin-bottom: 2rem;
 }
 #selector .selector .name {
@@ -96,8 +95,16 @@ section {
 }
 
 #character .condition-menu .button {
-  padding: 0 2rem;
+  padding: 1rem 2rem;
   font-size: 4rem;
+  display: inline-block;
+  vertical-align: bottom;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-width: 0;
+  border-right-width: 0;
+  margin-right: 0;
 }
 
 
@@ -153,17 +160,22 @@ section {
 .attack .summary {
   display: flex;
   align-items: baseline;
+  justify-content: space-between;
   border: 10px transparent #58180D;
   border-radius: 2rem;
   padding: 1.5rem 1rem;
+
 }
 
 .attack .summary .name {
   font-weight: bold;
-  width: 100%;
+}
+.attack .summary .hint {
+  font-size: 3rem;
+  color: black;
 }
 
-.attack.off .summary:active {
+.attack .off .summary:active {
   color: #EEE5CE;
   border-color: #EEE5CE;
   background-color: #58180D;

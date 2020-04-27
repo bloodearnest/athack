@@ -173,10 +173,22 @@ const AttackDetails = function({hide}) {
 const Attack = function() {
     const {name, attack} = useAttack()
 
+    let hint = attack.tohit ? attack.tohit : attack.save
+
+    if (attack.damage) {
+        const entries = Array.from(Object.entries(attack.damage))
+        if (entries.length > 0) {
+            const [_, damage] = entries[0]
+            hint += (hint ? ', ' : '') + damage
+        }
+    }
+    hint = hint.replace(/ /g, '\u00A0')
+
     const button = (show) => {
         return html`
             <div class=summary onClick=${show}>
                 <span class=name>${name}</span>
+                <span class=hint>${hint}</span>
             </div>
         `
     }
