@@ -27,7 +27,10 @@ def main(driver, characters, debug):
         assert tabs[1].text == 'ATTACK'
         tabs[1].click()
 
-        attacks = element.get_attribute('innerHTML')
+
+        root = driver.find_element(By.TAG_NAME, "html")
+        all = root.get_attribute('outerHTML')
+
         spells = None
 
         try:
@@ -42,8 +45,8 @@ def main(driver, characters, debug):
             spells_element = driver.find_element(By.CSS_SELECTOR, '.ct-spells')
             spells = spells_element.get_attribute('innerHTML')
 
-        with open('data/{}_attacks.html'.format(name), 'w') as a:
-            a.write(attacks)
+        with open('data/{}.html'.format(name), 'w') as a:
+            a.write(all)
         if spells:
             with open('data/{}_spells.html'.format(name), 'w') as a:
                 a.write(spells)

@@ -54,7 +54,7 @@ function CharacterProvider(props) {
     const [conditions, setConditions] = useCharacterState(name, [])
     const [filter, setFilter] = useCharacterState(name, null)
     const [activeType, setActiveType] = useCharacterState(name, 'Attacks')
-    const attacks = props.characters.attacks[name] || {}
+    const data = props.characters.characters[name] || {}
 
     const setNameAndHash = (name, group) => {
         setName(name)
@@ -65,7 +65,10 @@ function CharacterProvider(props) {
     const contextValue = {
         group: group,
         name: name,
-        attacks: attacks,
+        attacks: data.attacks,
+        saves: data.saves,
+        abilities: data.abilites,
+        skills: data.skills,
         conditions: conditions,
         filter: filter,
         activeType: activeType,

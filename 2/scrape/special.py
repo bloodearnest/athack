@@ -101,3 +101,8 @@ def melfs_minute_meteors(data):
         data['types'].remove('Melee')
         data['types'] = ['Ranged'] + data['types']
 
+@special
+def unarmed_strike(data):
+    if not data['damage']:
+        data['damage'] = dict(Bludgeoning='1')
+

@@ -1,8 +1,8 @@
 import yaml, json
 campaigns = yaml.safe_load(open('campaigns.yaml'))
-attacks = yaml.safe_load(open('attacks.yaml'))
+characters = yaml.safe_load(open('characters.yaml'))
 characters = {
     'campaigns': campaigns,
-    'attacks': attacks,
+    'characters': characters,
 }
 print(json.dumps(characters, indent=4))

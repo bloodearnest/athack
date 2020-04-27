@@ -66,2008 +66,3200 @@
             }
         }
     },
-    "attacks": {
+    "characters": {
         "Airnel": {
-            "Blight": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Necrotic": "8d8"
+            "abilities": {
+                "cha": {
+                    "bonus": "+2",
+                    "name": "Charisma"
                 },
-                "effect": "Undead and constructs immune. Plants have disadvantage and max damage.",
-                "name": "Blight",
-                "notes": [
-                    "4th Level"
-                ],
-                "options": {
-                    "5th Level": {
-                        "damage": {
-                            "Necrotic": "9d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution"
                 },
-                "range": "30 ft.",
-                "save": "CON 17",
-                "types": [
-                    "Spell"
-                ]
+                "dex": {
+                    "bonus": "+1",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+2",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "-1",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+5",
+                    "name": "Wisdom"
+                }
             },
-            "Crossbow, Light": {
-                "damage": {
-                    "Piercing": "1d8+1"
-                },
-                "name": "Crossbow, Light",
-                "notes": [
-                    "Ranged Weapon",
-                    "Simple",
-                    "Ammunition",
-                    "Loading",
-                    "Range",
-                    "Two-Handed"
-                ],
-                "options": {},
-                "range": "80 (320)",
-                "tohit": "+5",
-                "types": [
-                    "Ranged"
-                ]
-            },
-            "Dagger": {
-                "damage": {
-                    "Piercing": "1d4+1"
-                },
-                "name": "Dagger",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+5",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
-            },
-            "Dawn": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Radiant": "4d10"
-                },
-                "name": "Dawn",
-                "notes": [
-                    "5th Level",
-                    "Concentration, Up To 1 Minute Duration",
-                    "30ft. Cylinder"
-                ],
-                "options": {},
-                "range": "60 ft.",
-                "save": "CON 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Guiding Bolt": {
-                "damage": {
-                    "Radiant": "4d6"
-                },
-                "name": "Guiding Bolt",
-                "notes": [
-                    "1st Level",
-                    "Cleric"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Radiant": "5d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+            "attacks": {
+                "Blight": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Necrotic": "8d8"
                     },
-                    "3rd Level": {
-                        "damage": {
-                            "Radiant": "6d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                    "effect": "Undead and constructs immune. Plants have disadvantage and max damage.",
+                    "name": "Blight",
+                    "notes": [
+                        "4th Level"
+                    ],
+                    "options": {
+                        "5th Level": {
+                            "damage": {
+                                "Necrotic": "9d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
                     },
-                    "4th Level": {
-                        "damage": {
-                            "Radiant": "7d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                    "range": "30 ft.",
+                    "save": "CON 17",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Crossbow, Light": {
+                    "damage": {
+                        "Piercing": "1d8+1"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Radiant": "8d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                    "name": "Crossbow, Light",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Simple",
+                        "Ammunition",
+                        "Loading",
+                        "Range",
+                        "Two-Handed"
+                    ],
+                    "options": {},
+                    "range": "80 (320)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged"
+                    ]
                 },
-                "range": "120 ft.",
-                "tohit": "+9",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Life Transference": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Necrotic": "4d8"
-                },
-                "name": "Life Transference",
-                "notes": [
-                    "3rd Level"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Necrotic": "5d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "Dagger": {
+                    "damage": {
+                        "Piercing": "1d4+1"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Necrotic": "6d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                    "name": "Dagger",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
                 },
-                "range": "30 ft.",
-                "save": "",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Ray of Enfeeblement": {
-                "damage": {},
-                "effect": "Half damage with Stength weapons. CON Save at end of turn ends the spell.",
-                "name": "Ray of Enfeeblement",
-                "notes": [
-                    "2nd Level",
-                    "Cleric",
-                    "Concentration"
-                ],
-                "options": {},
-                "range": "60 ft.",
-                "tohit": "+9",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Sacred Flame": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Radiant": "2d8+5"
-                },
-                "half": false,
-                "name": "Sacred Flame",
-                "notes": [
-                    "Cantrip"
-                ],
-                "options": {},
-                "range": "60 ft.",
-                "save": "DEX 17",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Spirit Guardians": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Radiant": "3d8"
-                },
-                "name": "Spirit Guardians",
-                "notes": [
-                    "3rd Level",
-                    "Concentration, Up To 10 Minutes Duration"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Radiant": "4d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "Dawn": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Radiant": "4d10"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Radiant": "5d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                    "name": "Dawn",
+                    "notes": [
+                        "5th Level",
+                        "Concentration, Up To 1 Minute Duration",
+                        "30ft. Cylinder"
+                    ],
+                    "options": {},
+                    "range": "60 ft.",
+                    "save": "CON 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
                 },
-                "range": "Self",
-                "save": "WIS 17",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Spiritual Weapon": {
-                "damage": {
-                    "Force": "1d8+5"
-                },
-                "name": "Spiritual Weapon",
-                "notes": [
-                    "2nd Level",
-                    "Cleric"
-                ],
-                "options": {
-                    "3rd Level": {
-                        "damage": {
-                            "Force": "1d8+5"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "Guiding Bolt": {
+                    "damage": {
+                        "Radiant": "4d6"
                     },
-                    "4th Level": {
-                        "damage": {
-                            "Force": "2d8+5"
+                    "name": "Guiding Bolt",
+                    "notes": [
+                        "1st Level",
+                        "Cleric"
+                    ],
+                    "options": {
+                        "2nd Level": {
+                            "damage": {
+                                "Radiant": "5d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
+                        "3rd Level": {
+                            "damage": {
+                                "Radiant": "6d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Radiant": "7d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "5th Level": {
+                            "damage": {
+                                "Radiant": "8d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Force": "2d8+5"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                    "range": "120 ft.",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
                 },
-                "range": "60 ft.",
-                "tohit": "+9",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Toll the Dead": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Necrotic": "2d8+5"
-                },
-                "half": false,
-                "name": "Toll the Dead",
-                "notes": [
-                    "Cantrip"
-                ],
-                "options": {
-                    "Injured": {
-                        "damage": {
-                            "Necrotic": "2d12+5"
-                        },
-                        "replace": true
-                    }
-                },
-                "range": "60 ft.",
-                "save": "WIS 17",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {},
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+3",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Vampiric Touch": {
-                "damage": {
-                    "Necrotic": "3d6"
-                },
-                "effect": "You heal half",
-                "name": "Vampiric Touch",
-                "notes": [
-                    "3rd Level",
-                    "Cleric",
-                    "Concentration"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Necrotic": "4d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "Life Transference": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Necrotic": "4d8"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Necrotic": "5d6"
+                    "name": "Life Transference",
+                    "notes": [
+                        "3rd Level"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Necrotic": "5d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                        "5th Level": {
+                            "damage": {
+                                "Necrotic": "6d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "30 ft.",
+                    "save": "",
+                    "types": [
+                        "Spell"
+                    ]
                 },
-                "range": "Self",
-                "tohit": "+9",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
+                "Ray of Enfeeblement": {
+                    "damage": {},
+                    "effect": "Half damage with Stength weapons. CON Save at end of turn ends the spell.",
+                    "name": "Ray of Enfeeblement",
+                    "notes": [
+                        "2nd Level",
+                        "Cleric",
+                        "Concentration"
+                    ],
+                    "options": {},
+                    "range": "60 ft.",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
+                },
+                "Sacred Flame": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Radiant": "2d8+5"
+                    },
+                    "half": false,
+                    "name": "Sacred Flame",
+                    "notes": [
+                        "Cantrip"
+                    ],
+                    "options": {},
+                    "range": "60 ft.",
+                    "save": "DEX 17",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Spirit Guardians": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Radiant": "3d8"
+                    },
+                    "name": "Spirit Guardians",
+                    "notes": [
+                        "3rd Level",
+                        "Concentration, Up To 10 Minutes Duration"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Radiant": "4d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "5th Level": {
+                            "damage": {
+                                "Radiant": "5d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "Self",
+                    "save": "WIS 17",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Spiritual Weapon": {
+                    "damage": {
+                        "Force": "1d8+5"
+                    },
+                    "name": "Spiritual Weapon",
+                    "notes": [
+                        "2nd Level",
+                        "Cleric"
+                    ],
+                    "options": {
+                        "3rd Level": {
+                            "damage": {
+                                "Force": "1d8+5"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Force": "2d8+5"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "5th Level": {
+                            "damage": {
+                                "Force": "2d8+5"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "60 ft.",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
+                },
+                "Toll the Dead": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Necrotic": "2d8+5"
+                    },
+                    "half": false,
+                    "name": "Toll the Dead",
+                    "notes": [
+                        "Cantrip"
+                    ],
+                    "options": {
+                        "Injured": {
+                            "damage": {
+                                "Necrotic": "2d12+5"
+                            },
+                            "replace": true
+                        }
+                    },
+                    "range": "60 ft.",
+                    "save": "WIS 17",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+3",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Vampiric Touch": {
+                    "damage": {
+                        "Necrotic": "3d6"
+                    },
+                    "effect": "You heal half",
+                    "name": "Vampiric Touch",
+                    "notes": [
+                        "3rd Level",
+                        "Cleric",
+                        "Concentration"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Necrotic": "4d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "5th Level": {
+                            "damage": {
+                                "Necrotic": "5d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "Self",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
+                }
+            },
+            "saves": {
+                "cha": "+7",
+                "con": "+2",
+                "dex": "+2",
+                "int": "+3",
+                "str": "+0",
+                "wis": "+10"
+            },
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+1"
+                },
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "-1"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+9"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+9"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+9"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+6"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+1"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+1"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                }
             }
         },
         "Areni": {
-            "Burning Hands": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Fire": "3d6"
+            "abilities": {
+                "cha": {
+                    "bonus": "+0",
+                    "name": "Charisma"
                 },
-                "name": "Burning Hands",
-                "notes": [
-                    "1st Level",
-                    "15ft. Cone"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Fire": "4d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "3rd Level": {
-                        "damage": {
-                            "Fire": "5d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "4th Level": {
-                        "damage": {
-                            "Fire": "6d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "5th Level": {
-                        "damage": {
-                            "Fire": "7d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution"
                 },
-                "range": "Self",
-                "save": "DEX 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
+                "dex": {
+                    "bonus": "+3",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+5",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "-1",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom"
+                }
             },
-            "Cone of Cold": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Cold": "8d8"
-                },
-                "name": "Cone of Cold",
-                "notes": [
-                    "5th Level",
-                    "60ft. Cone"
-                ],
-                "options": {},
-                "range": "Self",
-                "save": "CON 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Dagger": {
-                "damage": {
-                    "Piercing": "1d4+3"
-                },
-                "name": "Dagger",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {
-                    "Booming Blade": {
-                        "damage": {
-                            "Thunder": "1d8"
-                        },
-                        "secondary": {
+            "attacks": {
+                "Burning Hands": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Fire": "3d6"
+                    },
+                    "name": "Burning Hands",
+                    "notes": [
+                        "1st Level",
+                        "15ft. Cone"
+                    ],
+                    "options": {
+                        "2nd Level": {
                             "damage": {
-                                "Thunder": "2d8"
+                                "Fire": "4d6"
                             },
-                            "effect": "Moving Target"
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "3rd Level": {
+                            "damage": {
+                                "Fire": "5d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Fire": "6d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "5th Level": {
+                            "damage": {
+                                "Fire": "7d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         }
-                    }
-                },
-                "range": "20 (60)",
-                "tohit": "+7",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
-            },
-            "Fire Bolt": {
-                "damage": {
-                    "Fire": "2d10"
-                },
-                "name": "Fire Bolt",
-                "notes": [
-                    "Cantrip",
-                    "Wizard"
-                ],
-                "options": {},
-                "range": "120 ft.",
-                "tohit": "+10",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Fireball": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Fire": "8d6"
-                },
-                "name": "Fireball",
-                "notes": [
-                    "3rd Level",
-                    "20ft. Sphere"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Fire": "9d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Fire": "10d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                    "range": "Self",
+                    "save": "DEX 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
                 },
-                "range": "150 ft.",
-                "save": "DEX 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Longbow": {
-                "damage": {
-                    "Piercing": "1d8+3"
-                },
-                "name": "Longbow",
-                "notes": [
-                    "Ranged Weapon",
-                    "Martial",
-                    "Ammunition",
-                    "Heavy",
-                    "Range",
-                    "Two-Handed"
-                ],
-                "options": {},
-                "range": "150 (600)",
-                "tohit": "+7",
-                "types": [
-                    "Ranged"
-                ]
-            },
-            "Maximilian\u2019s Earthen Grasp": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Bludgeoning": "2d6"
-                },
-                "name": "Maximilian\u2019s Earthen Grasp",
-                "notes": [
-                    "2nd Level",
-                    "Concentration, Up To 1 Minute Duration",
-                    "5ft. Square"
-                ],
-                "options": {},
-                "range": "30 ft.",
-                "save": "STR 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Melf's Minute Meteors": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Fire": "2d6"
-                },
-                "name": "Melf's Minute Meteors",
-                "notes": [
-                    "3rd Level",
-                    "Concentration, Up To 10 Minutes Duration"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Fire": "2d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "Cone of Cold": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Cold": "8d8"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Fire": "2d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                    "name": "Cone of Cold",
+                    "notes": [
+                        "5th Level",
+                        "60ft. Cone"
+                    ],
+                    "options": {},
+                    "range": "Self",
+                    "save": "CON 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
                 },
-                "range": "Self",
-                "save": "DEX 17",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Synaptic Static": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Psychic": "8d6"
-                },
-                "name": "Synaptic Static",
-                "notes": [
-                    "5th Level",
-                    "20ft. Sphere"
-                ],
-                "options": {},
-                "range": "120 ft.",
-                "save": "INT 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Thunder Step": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Thunder": "3d10"
-                },
-                "name": "Thunder Step",
-                "notes": [
-                    "3rd Level"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Thunder": "4d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "Dagger": {
+                    "damage": {
+                        "Piercing": "1d4+3"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Thunder": "5d10"
+                    "name": "Dagger",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {
+                        "Booming Blade": {
+                            "damage": {
+                                "Thunder": "1d8"
+                            },
+                            "secondary": {
+                                "damage": {
+                                    "Thunder": "2d8"
+                                },
+                                "effect": "Moving Target"
+                            }
+                        }
+                    },
+                    "range": "20 (60)",
+                    "tohit": "+7",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
+                },
+                "Fire Bolt": {
+                    "damage": {
+                        "Fire": "2d10"
+                    },
+                    "name": "Fire Bolt",
+                    "notes": [
+                        "Cantrip",
+                        "Wizard"
+                    ],
+                    "options": {},
+                    "range": "120 ft.",
+                    "tohit": "+10",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
+                },
+                "Fireball": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Fire": "8d6"
+                    },
+                    "name": "Fireball",
+                    "notes": [
+                        "3rd Level",
+                        "20ft. Sphere"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Fire": "9d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                        "5th Level": {
+                            "damage": {
+                                "Fire": "10d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "150 ft.",
+                    "save": "DEX 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
                 },
-                "range": "90 ft.",
-                "save": "CON 17",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {},
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+3",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Wall of Fire": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Fire": "5d8"
+                "Longbow": {
+                    "damage": {
+                        "Piercing": "1d8+3"
+                    },
+                    "name": "Longbow",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Martial",
+                        "Ammunition",
+                        "Heavy",
+                        "Range",
+                        "Two-Handed"
+                    ],
+                    "options": {},
+                    "range": "150 (600)",
+                    "tohit": "+7",
+                    "types": [
+                        "Ranged"
+                    ]
                 },
-                "name": "Wall of Fire",
-                "notes": [
-                    "4th Level",
-                    "Concentration, Up To 1 Minute Duration"
-                ],
-                "options": {
-                    "5th Level": {
-                        "damage": {
-                            "Fire": "6d8"
+                "Maximilian\u2019s Earthen Grasp": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Bludgeoning": "2d6"
+                    },
+                    "name": "Maximilian\u2019s Earthen Grasp",
+                    "notes": [
+                        "2nd Level",
+                        "Concentration, Up To 1 Minute Duration",
+                        "5ft. Square"
+                    ],
+                    "options": {},
+                    "range": "30 ft.",
+                    "save": "STR 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
+                },
+                "Melf's Minute Meteors": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Fire": "2d6"
+                    },
+                    "name": "Melf's Minute Meteors",
+                    "notes": [
+                        "3rd Level",
+                        "Concentration, Up To 10 Minutes Duration"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Fire": "2d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                        "5th Level": {
+                            "damage": {
+                                "Fire": "2d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "Self",
+                    "save": "DEX 17",
+                    "types": [
+                        "Spell"
+                    ]
                 },
-                "range": "120 ft.",
-                "save": "DEX 17",
-                "types": [
-                    "Spell"
-                ]
+                "Synaptic Static": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Psychic": "8d6"
+                    },
+                    "name": "Synaptic Static",
+                    "notes": [
+                        "5th Level",
+                        "20ft. Sphere"
+                    ],
+                    "options": {},
+                    "range": "120 ft.",
+                    "save": "INT 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
+                },
+                "Thunder Step": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Thunder": "3d10"
+                    },
+                    "name": "Thunder Step",
+                    "notes": [
+                        "3rd Level"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Thunder": "4d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "5th Level": {
+                            "damage": {
+                                "Thunder": "5d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "90 ft.",
+                    "save": "CON 17",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+3",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Wall of Fire": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Fire": "5d8"
+                    },
+                    "name": "Wall of Fire",
+                    "notes": [
+                        "4th Level",
+                        "Concentration, Up To 1 Minute Duration"
+                    ],
+                    "options": {
+                        "5th Level": {
+                            "damage": {
+                                "Fire": "6d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "120 ft.",
+                    "save": "DEX 17",
+                    "types": [
+                        "Spell"
+                    ]
+                }
+            },
+            "saves": {
+                "cha": "+1",
+                "con": "+2",
+                "dex": "+4",
+                "int": "+10",
+                "str": "+0",
+                "wis": "+6"
+            },
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+9"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "-1"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+9"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+9"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+5"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+5"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+7"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                }
             }
         },
         "Corminar": {
-            "Dagger of Venom": {
-                "damage": {
-                    "Piercing": "1d4+3"
+            "abilities": {
+                "cha": {
+                    "bonus": "+4",
+                    "name": "Charisma"
                 },
-                "name": "Dagger of Venom",
-                "notes": [
-                    "Melee Weapon",
-                    "1 Charge",
-                    "Simple",
-                    "Finesse",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {
-                    "Green-Flame Blade": {
-                        "damage": {
-                            "Fire": "1d8"
-                        },
-                        "secondary": {
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "+2",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+2",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+2",
+                    "name": "Wisdom"
+                }
+            },
+            "attacks": {
+                "Dagger of Venom": {
+                    "damage": {
+                        "Piercing": "1d4+3"
+                    },
+                    "name": "Dagger of Venom",
+                    "notes": [
+                        "Melee Weapon",
+                        "1 Charge",
+                        "Simple",
+                        "Finesse",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {
+                        "Green-Flame Blade": {
                             "damage": {
-                                "Fire": "1d8+4"
+                                "Fire": "1d8"
                             },
-                            "effect": "To Second Target"
-                        }
-                    },
-                    "Hex": {
-                        "damage": {
-                            "Necrotic": "1d6"
-                        }
-                    },
-                    "Venom": {
-                        "damage": {
-                            "Poison": "2d10"
+                            "secondary": {
+                                "damage": {
+                                    "Fire": "1d8+4"
+                                },
+                                "effect": "To Second Target"
+                            }
                         },
-                        "effect": "DC 15 Constitution Save Negates"
-                    }
-                },
-                "range": "20 (60)",
-                "tohit": "+7",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
-            },
-            "Dissonant Whispers": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Psychic": "3d6"
-                },
-                "effect": "must use reaction to move full speed away from you.",
-                "name": "Dissonant Whispers",
-                "notes": [
-                    "1st Level"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Psychic": "4d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "3rd Level": {
-                        "damage": {
-                            "Psychic": "5d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "4th Level": {
-                        "damage": {
-                            "Psychic": "6d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "60 ft.",
-                "save": "WIS 16",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Eldritch Blast": {
-                "damage": {
-                    "Force": "1d10+4"
-                },
-                "name": "Eldritch Blast",
-                "notes": [
-                    "Cantrip",
-                    "Warlock",
-                    "Count: 2"
-                ],
-                "options": {
-                    "Hex": {
-                        "damage": {
-                            "Necrotic": "1d6"
-                        }
-                    }
-                },
-                "range": "120 ft.",
-                "tohit": "+8",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Fireball": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Fire": "8d6"
-                },
-                "name": "Fireball",
-                "notes": [
-                    "3rd Level",
-                    "20ft. Sphere"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Fire": "9d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "150 ft.",
-                "save": "DEX 16",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Heat Metal": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Fire": "2d8"
-                },
-                "effect": "If holding/wearing, DC 16 Con save or must drop, disadvantage on attacks and checks if it cannot",
-                "name": "Heat Metal",
-                "notes": [
-                    "2nd Level",
-                    "Concentration, Up To 1 Minute Duration"
-                ],
-                "options": {
-                    "3rd Level": {
-                        "damage": {
-                            "Fire": "3d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "4th Level": {
-                        "damage": {
-                            "Fire": "4d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "60 ft.",
-                "save": "",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Hellish Rebuke": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Fire": "2d10"
-                },
-                "name": "Hellish Rebuke",
-                "notes": [
-                    "1st Level"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Fire": "3d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "3rd Level": {
-                        "damage": {
-                            "Fire": "4d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "4th Level": {
-                        "damage": {
-                            "Fire": "5d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "60 ft.",
-                "save": "DEX 16",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Pistol": {
-                "damage": {
-                    "Piercing": "1d10+2"
-                },
-                "name": "Pistol",
-                "notes": [
-                    "Ranged Weapon",
-                    "Firearms",
-                    "Loading",
-                    "Range",
-                    "Ammunition (Firearms)"
-                ],
-                "options": {
-                    "Hex": {
-                        "damage": {
-                            "Necrotic": "1d6"
-                        }
-                    }
-                },
-                "range": "30 (90)",
-                "tohit": "+2",
-                "types": [
-                    "Ranged"
-                ]
-            },
-            "Poison Spray": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Poison": "2d12"
-                },
-                "half": false,
-                "name": "Poison Spray",
-                "notes": [
-                    "Cantrip"
-                ],
-                "options": {},
-                "range": "10 ft.",
-                "save": "CON 16",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Rapier of Warning": {
-                "damage": {
-                    "Piercing": "1d8+2"
-                },
-                "name": "Rapier of Warning",
-                "notes": [
-                    "Melee Weapon",
-                    "Martial",
-                    "Finesse",
-                    "Only Corminar is not surprised - disregard notes re others"
-                ],
-                "options": {
-                    "Green-Flame Blade": {
-                        "damage": {
-                            "Fire": "1d8"
-                        },
-                        "secondary": {
+                        "Hex": {
                             "damage": {
-                                "Fire": "1d8+4"
+                                "Necrotic": "1d6"
+                            }
+                        },
+                        "Venom": {
+                            "damage": {
+                                "Poison": "2d10"
                             },
-                            "effect": "To Second Target"
+                            "effect": "DC 15 Constitution Save Negates"
                         }
                     },
-                    "Hex": {
-                        "damage": {
-                            "Necrotic": "1d6"
+                    "range": "20 (60)",
+                    "tohit": "+7",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
+                },
+                "Dissonant Whispers": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Psychic": "3d6"
+                    },
+                    "effect": "must use reaction to move full speed away from you.",
+                    "name": "Dissonant Whispers",
+                    "notes": [
+                        "1st Level"
+                    ],
+                    "options": {
+                        "2nd Level": {
+                            "damage": {
+                                "Psychic": "4d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "3rd Level": {
+                            "damage": {
+                                "Psychic": "5d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Psychic": "6d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         }
-                    }
+                    },
+                    "range": "60 ft.",
+                    "save": "WIS 16",
+                    "types": [
+                        "Spell"
+                    ]
                 },
-                "range": "5 ft. Reach",
-                "tohit": "+6",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "1"
-                },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {
-                    "Hex": {
-                        "damage": {
-                            "Necrotic": "1d6"
+                "Eldritch Blast": {
+                    "damage": {
+                        "Force": "1d10+4"
+                    },
+                    "name": "Eldritch Blast",
+                    "notes": [
+                        "Cantrip",
+                        "Warlock",
+                        "Count: 2"
+                    ],
+                    "options": {
+                        "Hex": {
+                            "damage": {
+                                "Necrotic": "1d6"
+                            }
                         }
-                    }
+                    },
+                    "range": "120 ft.",
+                    "tohit": "+8",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
                 },
-                "range": "5 ft. Reach",
-                "tohit": "+4",
-                "types": [
-                    "Melee"
-                ]
+                "Fireball": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Fire": "8d6"
+                    },
+                    "name": "Fireball",
+                    "notes": [
+                        "3rd Level",
+                        "20ft. Sphere"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Fire": "9d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "150 ft.",
+                    "save": "DEX 16",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
+                },
+                "Heat Metal": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Fire": "2d8"
+                    },
+                    "effect": "If holding/wearing, DC 16 Con save or must drop, disadvantage on attacks and checks if it cannot",
+                    "name": "Heat Metal",
+                    "notes": [
+                        "2nd Level",
+                        "Concentration, Up To 1 Minute Duration"
+                    ],
+                    "options": {
+                        "3rd Level": {
+                            "damage": {
+                                "Fire": "3d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Fire": "4d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "60 ft.",
+                    "save": "",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Hellish Rebuke": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Fire": "2d10"
+                    },
+                    "name": "Hellish Rebuke",
+                    "notes": [
+                        "1st Level"
+                    ],
+                    "options": {
+                        "2nd Level": {
+                            "damage": {
+                                "Fire": "3d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "3rd Level": {
+                            "damage": {
+                                "Fire": "4d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Fire": "5d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "60 ft.",
+                    "save": "DEX 16",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Pistol": {
+                    "damage": {
+                        "Piercing": "1d10+2"
+                    },
+                    "name": "Pistol",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Firearms",
+                        "Loading",
+                        "Range",
+                        "Ammunition (Firearms)"
+                    ],
+                    "options": {
+                        "Hex": {
+                            "damage": {
+                                "Necrotic": "1d6"
+                            }
+                        }
+                    },
+                    "range": "30 (90)",
+                    "tohit": "+2",
+                    "types": [
+                        "Ranged"
+                    ]
+                },
+                "Poison Spray": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Poison": "2d12"
+                    },
+                    "half": false,
+                    "name": "Poison Spray",
+                    "notes": [
+                        "Cantrip"
+                    ],
+                    "options": {},
+                    "range": "10 ft.",
+                    "save": "CON 16",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Rapier of Warning": {
+                    "damage": {
+                        "Piercing": "1d8+2"
+                    },
+                    "name": "Rapier of Warning",
+                    "notes": [
+                        "Melee Weapon",
+                        "Martial",
+                        "Finesse",
+                        "Only Corminar is not surprised - disregard notes re others"
+                    ],
+                    "options": {
+                        "Green-Flame Blade": {
+                            "damage": {
+                                "Fire": "1d8"
+                            },
+                            "secondary": {
+                                "damage": {
+                                    "Fire": "1d8+4"
+                                },
+                                "effect": "To Second Target"
+                            }
+                        },
+                        "Hex": {
+                            "damage": {
+                                "Necrotic": "1d6"
+                            }
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+6",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {
+                        "Hex": {
+                            "damage": {
+                                "Necrotic": "1d6"
+                            }
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+4",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Vicious Mockery": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Psychic": "2d4"
+                    },
+                    "effect": "disadvantage on next attack roll",
+                    "half": false,
+                    "name": "Vicious Mockery",
+                    "notes": [
+                        "Cantrip"
+                    ],
+                    "options": {},
+                    "range": "60 ft.",
+                    "save": "WIS 16",
+                    "types": [
+                        "Spell"
+                    ]
+                }
             },
-            "Vicious Mockery": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Psychic": "2d4"
+            "saves": {
+                "cha": "+9",
+                "con": "+2",
+                "dex": "+7",
+                "int": "+3",
+                "str": "+1",
+                "wis": "+3"
+            },
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+5"
                 },
-                "effect": "disadvantage on next attack roll",
-                "half": false,
-                "name": "Vicious Mockery",
-                "notes": [
-                    "Cantrip"
-                ],
-                "options": {},
-                "range": "60 ft.",
-                "save": "WIS 16",
-                "types": [
-                    "Spell"
-                ]
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+5"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+3"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+13"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+7"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+11"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+9"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+7"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+5"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+7"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+7"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+9"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+5"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+10"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+5"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                }
             }
         },
         "Galmyn": {
-            "Dagger": {
-                "damage": {
-                    "Piercing": "1d4+3"
+            "abilities": {
+                "cha": {
+                    "bonus": "-1",
+                    "name": "Charisma"
                 },
-                "name": "Dagger",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {
-                    "Hunter's Mark": {
-                        "damage": {
-                            "Piercing": "1d6"
-                        }
-                    }
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution"
                 },
-                "range": "20 (60)",
-                "tohit": "+5",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
+                "dex": {
+                    "bonus": "+3",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+2",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+2",
+                    "name": "Wisdom"
+                }
             },
-            "Hail of Thorns": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Piercing": "1d10"
-                },
-                "name": "Hail of Thorns",
-                "notes": [
-                    "1st Level",
-                    "Concentration, Up To 1 Minute Duration"
-                ],
-                "options": {},
-                "range": "Self",
-                "save": "DEX 12",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Handaxe": {
-                "damage": {
-                    "Slashing": "1d6"
-                },
-                "name": "Handaxe",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {
-                    "Hunter's Mark": {
-                        "damage": {
-                            "Slashing": "1d6"
-                        }
-                    }
-                },
-                "range": "20 (60)",
-                "tohit": "+2",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
-            },
-            "Longbow": {
-                "damage": {
-                    "Piercing": "1d8+3"
-                },
-                "name": "Longbow",
-                "notes": [
-                    "Ranged Weapon",
-                    "Martial",
-                    "Ammunition",
-                    "Heavy",
-                    "Range",
-                    "Two-Handed"
-                ],
-                "options": {
-                    "Hunter's Mark": {
-                        "damage": {
-                            "Piercing": "1d6"
-                        }
-                    }
-                },
-                "range": "150 (600)",
-                "tohit": "+7",
-                "types": [
-                    "Ranged"
-                ]
-            },
-            "Spear": {
-                "damage": {
-                    "Piercing": "1d6"
-                },
-                "name": "Spear",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Thrown",
-                    "Versatile"
-                ],
-                "options": {
-                    "Hunter's Mark": {
-                        "damage": {
-                            "Piercing": "1d6"
+            "attacks": {
+                "Dagger": {
+                    "damage": {
+                        "Piercing": "1d4+3"
+                    },
+                    "name": "Dagger",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {
+                        "Hunter's Mark": {
+                            "damage": {
+                                "Piercing": "1d6"
+                            }
                         }
                     },
-                    "Versatile": {
-                        "damage": {
-                            "Piercing": "1d8"
-                        },
-                        "replace": true
-                    }
+                    "range": "20 (60)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
                 },
-                "range": "20 (60)",
-                "tohit": "+2",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "1"
+                "Hail of Thorns": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Piercing": "1d10"
+                    },
+                    "name": "Hail of Thorns",
+                    "notes": [
+                        "1st Level",
+                        "Concentration, Up To 1 Minute Duration"
+                    ],
+                    "options": {},
+                    "range": "Self",
+                    "save": "DEX 12",
+                    "types": [
+                        "Spell"
+                    ]
                 },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {
-                    "Hunter's Mark": {
-                        "damage": {
-                            "Bludgeoning": "1d6"
+                "Handaxe": {
+                    "damage": {
+                        "Slashing": "1d6"
+                    },
+                    "name": "Handaxe",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {
+                        "Hunter's Mark": {
+                            "damage": {
+                                "Slashing": "1d6"
+                            }
                         }
-                    }
+                    },
+                    "range": "20 (60)",
+                    "tohit": "+2",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
                 },
-                "range": "5 ft. Reach",
-                "tohit": "+2",
-                "types": [
-                    "Melee"
-                ]
+                "Longbow": {
+                    "damage": {
+                        "Piercing": "1d8+3"
+                    },
+                    "name": "Longbow",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Martial",
+                        "Ammunition",
+                        "Heavy",
+                        "Range",
+                        "Two-Handed"
+                    ],
+                    "options": {
+                        "Hunter's Mark": {
+                            "damage": {
+                                "Piercing": "1d6"
+                            }
+                        }
+                    },
+                    "range": "150 (600)",
+                    "tohit": "+7",
+                    "types": [
+                        "Ranged"
+                    ]
+                },
+                "Spear": {
+                    "damage": {
+                        "Piercing": "1d6"
+                    },
+                    "name": "Spear",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Thrown",
+                        "Versatile"
+                    ],
+                    "options": {
+                        "Hunter's Mark": {
+                            "damage": {
+                                "Piercing": "1d6"
+                            }
+                        },
+                        "Versatile": {
+                            "damage": {
+                                "Piercing": "1d8"
+                            },
+                            "replace": true
+                        }
+                    },
+                    "range": "20 (60)",
+                    "tohit": "+2",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {
+                        "Hunter's Mark": {
+                            "damage": {
+                                "Bludgeoning": "1d6"
+                            }
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+2",
+                    "types": [
+                        "Melee"
+                    ]
+                }
+            },
+            "saves": {
+                "cha": "-1",
+                "con": "+1",
+                "dex": "+5",
+                "int": "+2",
+                "str": "+2",
+                "wis": "+2"
+            },
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+2"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+2"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+2"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+1"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+2"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+4"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+4"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+7"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+4"
+                }
             }
         },
         "Grondrath": {
-            "Breath": {
-                "damage": {
-                    "Fire": "3d6"
+            "abilities": {
+                "cha": {
+                    "bonus": "+2",
+                    "name": "Charisma"
                 },
-                "name": "Breath",
-                "notes": [],
-                "options": {},
-                "range": "15 ft. Range",
-                "save": "16 DEX",
-                "types": [
-                    "Ranged"
-                ]
+                "con": {
+                    "bonus": "+4",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "+1",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "-1",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+5",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom"
+                }
             },
-            "Javelin": {
-                "damage": {
-                    "Piercing": "1d6+5"
+            "attacks": {
+                "Breath": {
+                    "damage": {
+                        "Fire": "3d6"
+                    },
+                    "name": "Breath",
+                    "notes": [],
+                    "options": {},
+                    "range": "15 ft. Range",
+                    "save": "16 DEX",
+                    "types": [
+                        "Ranged"
+                    ]
                 },
-                "name": "Javelin",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "30 (120)",
-                "tohit": "+9",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
+                "Javelin": {
+                    "damage": {
+                        "Piercing": "1d6+5"
+                    },
+                    "name": "Javelin",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "30 (120)",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
+                },
+                "Quarterstaff": {
+                    "damage": {
+                        "Bludgeoning": "1d6+5"
+                    },
+                    "name": "Quarterstaff",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Versatile"
+                    ],
+                    "options": {
+                        "Versatile": {
+                            "damage": {
+                                "Bludgeoning": "1d8+5"
+                            },
+                            "replace": true
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+9",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Scimitar": {
+                    "damage": {
+                        "Slashing": "1d6+5"
+                    },
+                    "name": "Scimitar",
+                    "notes": [
+                        "Melee Weapon",
+                        "Martial",
+                        "Finesse",
+                        "Light"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+9",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Tavern Brawler Strike": {
+                    "damage": {
+                        "Bludgeoning": "1d4+6"
+                    },
+                    "name": "Tavern Brawler Strike",
+                    "notes": [
+                        "Melee Attack",
+                        "TALENT: Tavern Brawler"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+10",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Unrelenting Grip": {
+                    "damage": {
+                        "Bludgeoning": "6"
+                    },
+                    "name": "Unrelenting Grip",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+9",
+                    "types": [
+                        "Melee"
+                    ]
+                }
             },
-            "Quarterstaff": {
-                "damage": {
-                    "Bludgeoning": "1d6+5"
-                },
-                "name": "Quarterstaff",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Versatile"
-                ],
-                "options": {
-                    "Versatile": {
-                        "damage": {
-                            "Bludgeoning": "1d8+5"
-                        },
-                        "replace": true
-                    }
-                },
-                "range": "5 ft. Reach",
-                "tohit": "+9",
-                "types": [
-                    "Melee"
-                ]
+            "saves": {
+                "cha": "+2",
+                "con": "+8",
+                "dex": "+1",
+                "int": "-1",
+                "str": "+9",
+                "wis": "+1"
             },
-            "Scimitar": {
-                "damage": {
-                    "Slashing": "1d6+5"
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+1"
                 },
-                "name": "Scimitar",
-                "notes": [
-                    "Melee Weapon",
-                    "Martial",
-                    "Finesse",
-                    "Light"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+9",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Tavern Brawler Strike": {
-                "damage": {
-                    "Bludgeoning": "1d4+6"
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+1"
                 },
-                "name": "Tavern Brawler Strike",
-                "notes": [
-                    "Melee Attack",
-                    "TALENT: Tavern Brawler"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+10",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Unrelenting Grip": {
-                "damage": {
-                    "Bludgeoning": "6"
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "-1"
                 },
-                "name": "Unrelenting Grip",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+9",
-                "types": [
-                    "Melee"
-                ]
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+9"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+6"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+1"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+5"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                }
             }
         },
         "Heston": {
-            "Absorb Elements": {
-                "components": [
-                    "S"
-                ],
-                "damage": {
-                    "Elemental": "1d6"
+            "abilities": {
+                "cha": {
+                    "bonus": "-1",
+                    "name": "Charisma"
                 },
-                "effect": "You choose from Acid, Cold, Fire, Lightning, or Thunder. You canand can damage to your first melee hit next turn.",
-                "name": "Absorb Elements",
-                "notes": [
-                    "1st Level",
-                    "1 Round Duration"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Elemental": "2d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "3rd Level": {
-                        "damage": {
-                            "Elemental": "3d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    },
-                    "4th Level": {
-                        "damage": {
-                            "Elemental": "4d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                "con": {
+                    "bonus": "+3",
+                    "name": "Constitution"
                 },
-                "range": "Self",
-                "save": "",
-                "types": [
-                    "Spell"
-                ]
+                "dex": {
+                    "bonus": "+2",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+4",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+4",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom"
+                }
             },
-            "Quarterstaff": {
-                "damage": {
-                    "Bludgeoning": "1d6+4"
-                },
-                "name": "Quarterstaff",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Versatile"
-                ],
-                "options": {
-                    "Versatile": {
-                        "damage": {
-                            "Bludgeoning": "1d8+4"
-                        },
-                        "replace": true
-                    }
-                },
-                "range": "5 ft. Reach",
-                "tohit": "+8",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Ray of Sickness": {
-                "damage": {
-                    "Poison": "2d8"
-                },
-                "effect": "DC 16 Con save or poisoned",
-                "name": "Ray of Sickness",
-                "notes": [
-                    "1st Level",
-                    "Artificer"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Poison": "3d8"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+            "attacks": {
+                "Absorb Elements": {
+                    "components": [
+                        "S"
+                    ],
+                    "damage": {
+                        "Elemental": "1d6"
                     },
-                    "3rd Level": {
-                        "damage": {
-                            "Poison": "4d8"
+                    "effect": "You choose from Acid, Cold, Fire, Lightning, or Thunder. You canand can damage to your first melee hit next turn.",
+                    "name": "Absorb Elements",
+                    "notes": [
+                        "1st Level",
+                        "1 Round Duration"
+                    ],
+                    "options": {
+                        "2nd Level": {
+                            "damage": {
+                                "Elemental": "2d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
+                        "3rd Level": {
+                            "damage": {
+                                "Elemental": "3d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Elemental": "4d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
                     },
-                    "4th Level": {
-                        "damage": {
-                            "Poison": "5d8"
+                    "range": "Self",
+                    "save": "",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Quarterstaff": {
+                    "damage": {
+                        "Bludgeoning": "1d6+4"
+                    },
+                    "name": "Quarterstaff",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Versatile"
+                    ],
+                    "options": {
+                        "Versatile": {
+                            "damage": {
+                                "Bludgeoning": "1d8+4"
+                            },
+                            "replace": true
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+8",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Ray of Sickness": {
+                    "damage": {
+                        "Poison": "2d8"
+                    },
+                    "effect": "DC 16 Con save or poisoned",
+                    "name": "Ray of Sickness",
+                    "notes": [
+                        "1st Level",
+                        "Artificer"
+                    ],
+                    "options": {
+                        "2nd Level": {
+                            "damage": {
+                                "Poison": "3d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                        "3rd Level": {
+                            "damage": {
+                                "Poison": "4d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        },
+                        "4th Level": {
+                            "damage": {
+                                "Poison": "5d8"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "60 ft.",
+                    "tohit": "+8",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
                 },
-                "range": "60 ft.",
-                "tohit": "+8",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "5"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+8",
+                    "types": [
+                        "Melee"
+                    ]
+                }
             },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "5"
+            "saves": {
+                "cha": "+0",
+                "con": "+8",
+                "dex": "+3",
+                "int": "+9",
+                "str": "+5",
+                "wis": "+6"
+            },
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+2"
                 },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+8",
-                "types": [
-                    "Melee"
-                ]
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+8"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+4"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+8"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+8"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+4"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "-1"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+8"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+2"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+2"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                }
             }
         },
         "Jerem": {
-            "Crossbow, Light": {
-                "damage": {
-                    "Piercing": "1d8+2"
+            "abilities": {
+                "cha": {
+                    "bonus": "+3",
+                    "name": "Charisma"
                 },
-                "name": "Crossbow, Light",
-                "notes": [
-                    "Ranged Weapon",
-                    "Simple",
-                    "Ammunition",
-                    "Loading",
-                    "Range",
-                    "Two-Handed"
-                ],
-                "options": {},
-                "range": "80 (320)",
-                "tohit": "+4",
-                "types": [
-                    "Ranged"
-                ]
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "+2",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+1",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+2",
+                    "name": "Wisdom"
+                }
             },
-            "Dagger": {
-                "damage": {
-                    "Piercing": "1d4+2"
+            "attacks": {
+                "Crossbow, Light": {
+                    "damage": {
+                        "Piercing": "1d8+2"
+                    },
+                    "name": "Crossbow, Light",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Simple",
+                        "Ammunition",
+                        "Loading",
+                        "Range",
+                        "Two-Handed"
+                    ],
+                    "options": {},
+                    "range": "80 (320)",
+                    "tohit": "+4",
+                    "types": [
+                        "Ranged"
+                    ]
                 },
-                "name": "Dagger",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+4",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
+                "Dagger": {
+                    "damage": {
+                        "Piercing": "1d4+2"
+                    },
+                    "name": "Dagger",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+4",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
+                },
+                "Dissonant Whispers": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Psychic": "3d6"
+                    },
+                    "effect": "must use reaction to move full speed away from you.",
+                    "name": "Dissonant Whispers",
+                    "notes": [
+                        "1st Level"
+                    ],
+                    "options": {
+                        "2nd Level": {
+                            "damage": {
+                                "Psychic": "4d6"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "60 ft.",
+                    "save": "WIS 13",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Rapier": {
+                    "damage": {
+                        "Piercing": "1d8+2"
+                    },
+                    "name": "Rapier",
+                    "notes": [
+                        "Melee Weapon",
+                        "Martial",
+                        "Finesse"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+4",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+2",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Vicious Mockery": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Psychic": "1d4"
+                    },
+                    "effect": "disadvantage on next attack roll",
+                    "half": false,
+                    "name": "Vicious Mockery",
+                    "notes": [
+                        "Cantrip"
+                    ],
+                    "options": {},
+                    "range": "60 ft.",
+                    "save": "WIS 13",
+                    "types": [
+                        "Spell"
+                    ]
+                }
             },
-            "Dissonant Whispers": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Psychic": "3d6"
-                },
-                "effect": "must use reaction to move full speed away from you.",
-                "name": "Dissonant Whispers",
-                "notes": [
-                    "1st Level"
-                ],
-                "options": {
-                    "2nd Level": {
-                        "damage": {
-                            "Psychic": "4d6"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "60 ft.",
-                "save": "WIS 13",
-                "types": [
-                    "Spell"
-                ]
+            "saves": {
+                "cha": "+5",
+                "con": "+1",
+                "dex": "+4",
+                "int": "+1",
+                "str": "+0",
+                "wis": "+2"
             },
-            "Rapier": {
-                "damage": {
-                    "Piercing": "1d8+2"
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+3"
                 },
-                "name": "Rapier",
-                "notes": [
-                    "Melee Weapon",
-                    "Martial",
-                    "Finesse"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+4",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "1"
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+3"
                 },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+2",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Vicious Mockery": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Psychic": "1d4"
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+2"
                 },
-                "effect": "disadvantage on next attack roll",
-                "half": false,
-                "name": "Vicious Mockery",
-                "notes": [
-                    "Cantrip"
-                ],
-                "options": {},
-                "range": "60 ft.",
-                "save": "WIS 13",
-                "types": [
-                    "Spell"
-                ]
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+1"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+5"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+6"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+4"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+4"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+5"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+7"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                }
             }
         },
         "Nordan": {
-            "Call Lightning": {
-                "components": [
-                    "V",
-                    "S"
-                ],
-                "damage": {
-                    "Lightning": "3d10"
+            "abilities": {
+                "cha": {
+                    "bonus": "+0",
+                    "name": "Charisma"
                 },
-                "name": "Call Lightning",
-                "notes": [
-                    "3rd Level",
-                    "Concentration, Up To 10 Minutes Duration",
-                    "60ft. Cylinder"
-                ],
-                "options": {
-                    "4th Level": {
-                        "damage": {
-                            "Lightning": "4d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "-1",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+1",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+2",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+5",
+                    "name": "Wisdom"
+                }
+            },
+            "attacks": {
+                "Call Lightning": {
+                    "components": [
+                        "V",
+                        "S"
+                    ],
+                    "damage": {
+                        "Lightning": "3d10"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Lightning": "5d10"
+                    "name": "Call Lightning",
+                    "notes": [
+                        "3rd Level",
+                        "Concentration, Up To 10 Minutes Duration",
+                        "60ft. Cylinder"
+                    ],
+                    "options": {
+                        "4th Level": {
+                            "damage": {
+                                "Lightning": "4d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "120 ft.",
-                "save": "DEX 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Moonbeam": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Radiant": "2d10"
-                },
-                "name": "Moonbeam",
-                "notes": [
-                    "2nd Level",
-                    "Concentration, Up To 1 Minute Duration",
-                    "5ft. Cylinder"
-                ],
-                "options": {
-                    "3rd Level": {
-                        "damage": {
-                            "Radiant": "3d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                        "5th Level": {
+                            "damage": {
+                                "Lightning": "5d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
                     },
-                    "4th Level": {
-                        "damage": {
-                            "Radiant": "4d10"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
+                    "range": "120 ft.",
+                    "save": "DEX 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
+                },
+                "Moonbeam": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Radiant": "2d10"
                     },
-                    "5th Level": {
-                        "damage": {
-                            "Radiant": "5d10"
+                    "name": "Moonbeam",
+                    "notes": [
+                        "2nd Level",
+                        "Concentration, Up To 1 Minute Duration",
+                        "5ft. Cylinder"
+                    ],
+                    "options": {
+                        "3rd Level": {
+                            "damage": {
+                                "Radiant": "3d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
-                },
-                "range": "120 ft.",
-                "save": "CON 17",
-                "types": [
-                    "Spell",
-                    "AoE"
-                ]
-            },
-            "Primal Savagery": {
-                "damage": {
-                    "Acid": "2d10"
-                },
-                "name": "Primal Savagery",
-                "notes": [
-                    "Cantrip",
-                    "Druid"
-                ],
-                "options": {},
-                "range": "Self",
-                "tohit": "+10",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Shillelagh": {
-                "damage": {
-                    "Bludgeoning": "1d8+5"
-                },
-                "name": "Shillelagh",
-                "notes": [
-                    "Cantrip",
-                    "Druid"
-                ],
-                "options": {},
-                "range": "Touch",
-                "tohit": "+10",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
-            },
-            "Staff of the Jungle": {
-                "damage": {
-                    "Bludgeoning": "1d6+3"
-                },
-                "name": "Staff of the Jungle",
-                "notes": [
-                    "Melee Weapon",
-                    "6/10 Charges",
-                    "Simple",
-                    "Versatile"
-                ],
-                "options": {
-                    "Versatile": {
-                        "damage": {
-                            "Bludgeoning": "1d8+3"
+                        "4th Level": {
+                            "damage": {
+                                "Radiant": "4d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
                         },
-                        "replace": true
-                    }
+                        "5th Level": {
+                            "damage": {
+                                "Radiant": "5d10"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "120 ft.",
+                    "save": "CON 17",
+                    "types": [
+                        "Spell",
+                        "AoE"
+                    ]
                 },
-                "range": "5 ft. Reach",
-                "tohit": "+7",
-                "types": [
-                    "Melee"
-                ]
+                "Primal Savagery": {
+                    "damage": {
+                        "Acid": "2d10"
+                    },
+                    "name": "Primal Savagery",
+                    "notes": [
+                        "Cantrip",
+                        "Druid"
+                    ],
+                    "options": {},
+                    "range": "Self",
+                    "tohit": "+10",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
+                },
+                "Shillelagh": {
+                    "damage": {
+                        "Bludgeoning": "1d8+5"
+                    },
+                    "name": "Shillelagh",
+                    "notes": [
+                        "Cantrip",
+                        "Druid"
+                    ],
+                    "options": {},
+                    "range": "Touch",
+                    "tohit": "+10",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
+                },
+                "Staff of the Jungle": {
+                    "damage": {
+                        "Bludgeoning": "1d6+3"
+                    },
+                    "name": "Staff of the Jungle",
+                    "notes": [
+                        "Melee Weapon",
+                        "6/10 Charges",
+                        "Simple",
+                        "Versatile"
+                    ],
+                    "options": {
+                        "Versatile": {
+                            "damage": {
+                                "Bludgeoning": "1d8+3"
+                            },
+                            "replace": true
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+7",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "3"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+6",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Wind Wall": {
+                    "components": [
+                        "V",
+                        "S",
+                        "M"
+                    ],
+                    "damage": {
+                        "Bludgeoning": "3d8"
+                    },
+                    "name": "Wind Wall",
+                    "notes": [
+                        "3rd Level",
+                        "Concentration, Up To 1 Minute Duration"
+                    ],
+                    "options": {},
+                    "range": "120 ft.",
+                    "save": "STR 17",
+                    "types": [
+                        "Spell"
+                    ]
+                }
             },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "3"
-                },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+6",
-                "types": [
-                    "Melee"
-                ]
+            "saves": {
+                "cha": "+0",
+                "con": "+2",
+                "dex": "-1",
+                "int": "+5",
+                "str": "+2",
+                "wis": "+9"
             },
-            "Wind Wall": {
-                "components": [
-                    "V",
-                    "S",
-                    "M"
-                ],
-                "damage": {
-                    "Bludgeoning": "3d8"
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "-1"
                 },
-                "name": "Wind Wall",
-                "notes": [
-                    "3rd Level",
-                    "Concentration, Up To 1 Minute Duration"
-                ],
-                "options": {},
-                "range": "120 ft.",
-                "save": "STR 17",
-                "types": [
-                    "Spell"
-                ]
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+9"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+1"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+6"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+1"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+1"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+5"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+1"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "-1"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "-1"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+9"
+                }
             }
         },
         "The Count": {
-            "Dagger": {
-                "damage": {
-                    "Piercing": "1d4+3"
+            "abilities": {
+                "cha": {
+                    "bonus": "+3",
+                    "name": "Charisma"
                 },
-                "name": "Dagger",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+5",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "+3",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+0",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "-1",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom"
+                }
             },
-            "Dart": {
-                "damage": {
-                    "Piercing": "1d4+3"
+            "attacks": {
+                "Dagger": {
+                    "damage": {
+                        "Piercing": "1d4+3"
+                    },
+                    "name": "Dagger",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
                 },
-                "name": "Dart",
-                "notes": [
-                    "Ranged Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+5",
-                "types": [
-                    "Ranged"
-                ]
+                "Dart": {
+                    "damage": {
+                        "Piercing": "1d4+3"
+                    },
+                    "name": "Dart",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged"
+                    ]
+                },
+                "Rapier": {
+                    "damage": {
+                        "Piercing": "1d8+3"
+                    },
+                    "name": "Rapier",
+                    "notes": [
+                        "Melee Weapon",
+                        "Martial",
+                        "Finesse"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+5",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+1",
+                    "types": [
+                        "Melee"
+                    ]
+                }
             },
-            "Quarterstaff": {
-                "damage": {
-                    "Bludgeoning": "1d6-1"
-                },
-                "name": "Quarterstaff",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Versatile"
-                ],
-                "options": {
-                    "Versatile": {
-                        "damage": {
-                            "Bludgeoning": "1d8-1"
-                        },
-                        "replace": true
-                    }
-                },
-                "range": "5 ft. Reach",
-                "tohit": "+1",
-                "types": [
-                    "Melee"
-                ]
+            "saves": {
+                "cha": "+3",
+                "con": "+2",
+                "dex": "+5",
+                "int": "+2",
+                "str": "-1",
+                "wis": "+1"
             },
-            "Rapier": {
-                "damage": {
-                    "Piercing": "1d8+3"
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+5"
                 },
-                "name": "Rapier",
-                "notes": [
-                    "Melee Weapon",
-                    "Martial",
-                    "Finesse"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+5",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {},
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+1",
-                "types": [
-                    "Melee"
-                ]
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "-1"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+7"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+7"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+3"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+3"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+5"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+5"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                }
             }
         },
         "Thorin": {
-            "Lightning": {
-                "damage": {
-                    "Lightning": "1d6",
-                    "Slashing": "1d6+5"
+            "abilities": {
+                "cha": {
+                    "bonus": "+2",
+                    "name": "Charisma"
                 },
-                "effect": "If Thunder also hits, DC13 CON or stunned for one round",
-                "name": "Lightning",
-                "notes": [
-                    "Melee Weapon",
-                    "Dual Wield",
-                    "Simple",
-                    "Dual Wield",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+9",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
+                "con": {
+                    "bonus": "+3",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "+1",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "-1",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+5",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom"
+                }
             },
-            "Spiritual Weapon": {
-                "damage": {
-                    "Force": "1d8+2"
+            "attacks": {
+                "Lightning": {
+                    "damage": {
+                        "Lightning": "1d6",
+                        "Slashing": "1d6+5"
+                    },
+                    "effect": "If Thunder also hits, DC13 CON or stunned for one round",
+                    "name": "Lightning",
+                    "notes": [
+                        "Melee Weapon",
+                        "Dual Wield",
+                        "Simple",
+                        "Dual Wield",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
                 },
-                "name": "Spiritual Weapon",
-                "notes": [
-                    "2nd Level",
-                    "Paladin"
-                ],
-                "options": {
-                    "3rd Level": {
-                        "damage": {
-                            "Force": "1d8+2"
-                        },
-                        "replace": true,
-                        "type": "spell slot"
-                    }
+                "Spiritual Weapon": {
+                    "damage": {
+                        "Force": "1d8+2"
+                    },
+                    "name": "Spiritual Weapon",
+                    "notes": [
+                        "2nd Level",
+                        "Paladin"
+                    ],
+                    "options": {
+                        "3rd Level": {
+                            "damage": {
+                                "Force": "1d8+2"
+                            },
+                            "replace": true,
+                            "type": "spell slot"
+                        }
+                    },
+                    "range": "60 ft.",
+                    "tohit": "+6",
+                    "types": [
+                        "Ranged",
+                        "Spell"
+                    ]
                 },
-                "range": "60 ft.",
-                "tohit": "+6",
-                "types": [
-                    "Spell",
-                    "Ranged"
-                ]
+                "Thunder": {
+                    "damage": {
+                        "Slashing": "1d6+5",
+                        "Thunder": "1d6"
+                    },
+                    "effect": "If Lightning also hits, DC13 CON or stunned for one round",
+                    "name": "Thunder",
+                    "notes": [
+                        "Melee Weapon",
+                        "Simple",
+                        "Light",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+9",
+                    "types": [
+                        "Ranged",
+                        "Melee"
+                    ]
+                },
+                "Thunderous Smite": {
+                    "components": [
+                        "V"
+                    ],
+                    "damage": {
+                        "Thunder": "2d6"
+                    },
+                    "name": "Thunderous Smite",
+                    "notes": [
+                        "1st Level",
+                        "Concentration, Up To 1 Minute Duration"
+                    ],
+                    "options": {},
+                    "range": "Self",
+                    "save": "STR 14",
+                    "types": [
+                        "Spell"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "6"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+9",
+                    "types": [
+                        "Melee"
+                    ]
+                }
             },
-            "Thunder": {
-                "damage": {
-                    "Slashing": "1d6+5",
-                    "Thunder": "1d6"
-                },
-                "effect": "If Lightning also hits, DC13 CON or stunned for one round",
-                "name": "Thunder",
-                "notes": [
-                    "Melee Weapon",
-                    "Simple",
-                    "Light",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+9",
-                "types": [
-                    "Melee",
-                    "Ranged"
-                ]
+            "saves": {
+                "cha": "+8",
+                "con": "+5",
+                "dex": "+3",
+                "int": "+1",
+                "str": "+7",
+                "wis": "+7"
             },
-            "Thunderous Smite": {
-                "components": [
-                    "V"
-                ],
-                "damage": {
-                    "Thunder": "2d6"
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+1"
                 },
-                "name": "Thunderous Smite",
-                "notes": [
-                    "1st Level",
-                    "Concentration, Up To 1 Minute Duration"
-                ],
-                "options": {},
-                "range": "Self",
-                "save": "STR 14",
-                "types": [
-                    "Spell"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "6"
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+5"
                 },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+9",
-                "types": [
-                    "Melee"
-                ]
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+5"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+5"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+6"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "-1"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+2"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+3"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+1"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+1"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+1"
+                }
             }
         },
         "Vanuanth": {
-            "Dart": {
-                "damage": {
-                    "Piercing": "1d4+3"
+            "abilities": {
+                "cha": {
+                    "bonus": "+0",
+                    "name": "Charisma"
                 },
-                "name": "Dart",
-                "notes": [
-                    "Ranged Weapon",
-                    "Simple",
-                    "Finesse",
-                    "Thrown"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+5",
-                "types": [
-                    "Ranged"
-                ]
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution"
+                },
+                "dex": {
+                    "bonus": "+3",
+                    "name": "Dexterity"
+                },
+                "int": {
+                    "bonus": "+0",
+                    "name": "Intelligence"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength"
+                },
+                "wis": {
+                    "bonus": "+3",
+                    "name": "Wisdom"
+                }
             },
-            "Deflect Missiles Attack": {
-                "damage": {},
-                "name": "Deflect Missiles Attack",
-                "notes": [
-                    "Ranged Attack",
-                    "Martial Arts"
-                ],
-                "options": {},
-                "range": "20 (60)",
-                "tohit": "+5",
-                "types": [
-                    "Ranged"
-                ]
+            "attacks": {
+                "Dart": {
+                    "damage": {
+                        "Piercing": "1d4+3"
+                    },
+                    "name": "Dart",
+                    "notes": [
+                        "Ranged Weapon",
+                        "Simple",
+                        "Finesse",
+                        "Thrown"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged"
+                    ]
+                },
+                "Deflect Missiles Attack": {
+                    "damage": {},
+                    "name": "Deflect Missiles Attack",
+                    "notes": [
+                        "Ranged Attack",
+                        "Martial Arts"
+                    ],
+                    "options": {},
+                    "range": "20 (60)",
+                    "tohit": "+5",
+                    "types": [
+                        "Ranged"
+                    ]
+                },
+                "Flurry of Blows": {
+                    "damage": {
+                        "Bludgeoning": "1d4+3"
+                    },
+                    "name": "Flurry of Blows",
+                    "notes": [
+                        "Melee Attack",
+                        "Martial Arts"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+5",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Quarterstaff": {
+                    "damage": {
+                        "Bludgeoning": "1d6+3"
+                    },
+                    "name": "Quarterstaff",
+                    "notes": [
+                        "Melee Weapon",
+                        "Martial Arts",
+                        "Simple",
+                        "Versatile"
+                    ],
+                    "options": {
+                        "Versatile": {
+                            "damage": {
+                                "Bludgeoning": "1d8+3"
+                            },
+                            "replace": true
+                        }
+                    },
+                    "range": "5 ft. Reach",
+                    "tohit": "+5",
+                    "types": [
+                        "Melee"
+                    ]
+                },
+                "Unarmed Strike": {
+                    "damage": {
+                        "Bludgeoning": "1d4+3"
+                    },
+                    "name": "Unarmed Strike",
+                    "notes": [
+                        "Melee Attack",
+                        "Martial Arts"
+                    ],
+                    "options": {},
+                    "range": "5 ft. Reach",
+                    "tohit": "+5",
+                    "types": [
+                        "Melee"
+                    ]
+                }
             },
-            "Flurry of Blows": {
-                "damage": {
-                    "Bludgeoning": "1d4+3"
-                },
-                "name": "Flurry of Blows",
-                "notes": [
-                    "Melee Attack",
-                    "Martial Arts"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+5",
-                "types": [
-                    "Melee"
-                ]
+            "saves": {
+                "cha": "+0",
+                "con": "+1",
+                "dex": "+5",
+                "int": "+0",
+                "str": "+2",
+                "wis": "+3"
             },
-            "Quarterstaff": {
-                "damage": {
-                    "Bludgeoning": "1d6+3"
+            "skills": {
+                "Acrobatics": {
+                    "ability": "DEX",
+                    "bonus": "+5"
                 },
-                "name": "Quarterstaff",
-                "notes": [
-                    "Melee Weapon",
-                    "Martial Arts",
-                    "Simple",
-                    "Versatile"
-                ],
-                "options": {
-                    "Versatile": {
-                        "damage": {
-                            "Bludgeoning": "1d8+3"
-                        },
-                        "replace": true
-                    }
+                "Animal Handling": {
+                    "ability": "WIS",
+                    "bonus": "+5"
                 },
-                "range": "5 ft. Reach",
-                "tohit": "+5",
-                "types": [
-                    "Melee"
-                ]
-            },
-            "Unarmed Strike": {
-                "damage": {
-                    "Bludgeoning": "1d4+3"
+                "Arcana": {
+                    "ability": "INT",
+                    "bonus": "+2"
                 },
-                "name": "Unarmed Strike",
-                "notes": [
-                    "Melee Attack",
-                    "Martial Arts"
-                ],
-                "options": {},
-                "range": "5 ft. Reach",
-                "tohit": "+5",
-                "types": [
-                    "Melee"
-                ]
+                "Athletics": {
+                    "ability": "STR",
+                    "bonus": "+0"
+                },
+                "Deception": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "History": {
+                    "ability": "INT",
+                    "bonus": "+2"
+                },
+                "Insight": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                },
+                "Intimidation": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Investigation": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Medicine": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                },
+                "Nature": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Perception": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                },
+                "Performance": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Persuasion": {
+                    "ability": "CHA",
+                    "bonus": "+0"
+                },
+                "Religion": {
+                    "ability": "INT",
+                    "bonus": "+0"
+                },
+                "Sleight of Hand": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Stealth": {
+                    "ability": "DEX",
+                    "bonus": "+3"
+                },
+                "Survival": {
+                    "ability": "WIS",
+                    "bonus": "+3"
+                }
             }
         }
     }

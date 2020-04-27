@@ -296,26 +296,53 @@ def clean_all(attacks):
             )
 
 
-
 def main(characters):
 
     for name in characters:
 
         attacks = dict()
+        abilities = dict()
+        saves = dict()
+        skills = dict()
 
         dir = os.path.dirname(os.path.abspath(__file__))
-        apath = os.path.join(dir, 'data', '{}_attacks.html'.format(name))
+        apath = os.path.join(dir, 'data', '{}.html'.format(name))
         spath = os.path.join(dir, 'data', '{}_spells.html'.format(name))
 
         with open(apath) as fp:
                attacks_html = fp.read()
-        attack_selector = Selector(attacks_html)
+        selector = Selector(attacks_html)
 
-        for attack in attack_selector.css('.ct-combat-attack'):
+        for ability in selector.css('.ct-quick-info__ability'):
+            abbr = get_text(ability, '.ct-ability-summary__abbr::text')
+            abname = get_text(ability, '.ct-ability-summary__label::text')
+            bonus = get_text(ability, '.ct-ability-summary__primary *::text')
+
+            if bonus[0] not in '+-':
+                bonus = get_text(
+                    ability, '.ct-ability-summary__secondary *::text',
+                )
+
+            abilities[abbr] = dict(name=abname, bonus=bonus)
+
+        for save in selector.css('.ct-saving-throws-summary__ability'):
+            cls = '.ct-saving-throws-summary__ability'
+            abbr = get_text(save, cls + '-name::text')
+            bonus = get_text(save, cls + '-modifier *::text')
+            saves[abbr] = bonus
+
+        for skill in selector.css('.ct-skills__item'):
+            sname = get_text(skill, '.ct-skills__col--skill::text')
+            stat = get_text(skill, '.ct-skills__col--stat::text')
+            bonus = get_text(skill, '.ct-skills__col--modifier *::text')
+            skills[sname] = dict(bonus=bonus, ability=stat)
+
+        for attack in selector.css('.ct-combat-attack'):
             data = get_attack(attack)
             if data:
                 clean(data)
                 attacks[data['name']] = data
+
 
         spells = None
         try:
@@ -337,7 +364,12 @@ def main(characters):
                         attacks[data['name']] = data
 
         clean_all(attacks)
-        yield name, attacks
+        yield name, dict(
+            attacks=attacks,
+            abilities=abilities,
+            saves=saves,
+            skills=skills,
+        )
 
 
 
