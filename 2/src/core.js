@@ -7,6 +7,7 @@ import {createPortal} from '/web_modules/preact/compat.js'
 const html = htm.bind(h)
 const map = (obj, func) => Object.entries(obj).map(([k, v]) => func(k, v))
 const CharacterContext = createContext();
+const RollContext = createContext();
 
 
 const ATTRIBUTES = {
@@ -31,6 +32,7 @@ function usePortal(id) {
 
   return rootElemRef.current;
 }
+
 
 function getCharacter() {
   const context = useContext(CharacterContext)
@@ -125,8 +127,14 @@ const Modal = function(props) {
     const ref = useRef()
     const portalRef = usePortal('modals')
     const [visible, setVisible] = useState(false)
-    const hide = () => setVisible(false)
-    const show = () => setVisible(true);
+    const hide = () => {
+        setVisible(false);
+        props.reset && props.reset()
+    }
+    const show = () => {
+        props.reset && props.reset()
+        setVisible(true);
+    }
     useClickOutside(ref, hide)
     const cls = (visible ? 'on' : 'off')
     const portal = createPortal(html`
@@ -178,19 +186,31 @@ function GetVantage(conditions) {
     for (const [k, v] of toCheck) {
         if (v.attacks == 'A') { attacks.advantage += 1 }
         else if (v.attacks == 'D') { attacks.disadvantage += 1 }
+
         if (v.checks == 'A') { checks.advantage += 1 }
         else if (v.checks == 'D') { checks.disadvantage += 1 }
+
         if (v.saves) {
-            for (const [attr, save] of Object.entries(v.saves)) {
-                if (save == 'A') { saves[attr].advantage += 1 }
-                else if (save == 'D') { saves[attr].disadvantage += 1 }
+            if (v.saves === 'A') {
+                for (const [attr, save] of Object.entries(saves)) {
+                    saves[attr].advantage += 1
+                }
+            } else if (v.saves === 'D') {
+                for (const [attr, save] of Object.entries(saves)) {
+                    saves[attr].disadvantage += 1
+                }
+            } else {
+                for (const [attr, save] of Object.entries(v.saves)) {
+                    if (attr == 'all')
+                    if (save == 'A') { saves[attr].advantage += 1 }
+                    else if (save == 'D') { saves[attr].disadvantage += 1 }
+                }
             }
         }
         if (v.hitbonus) { hitbonus[k] = v.hitbonus }
         if (v.savebonus) { savebonus[k] = v.savebonus }
         if (v.damage) { damagebonus[k] = v.damage }
         if (v.checkbonus) { checkbonus[k] = v.checkbonus }
-
     }
     const calculate = obj => {
         return {
@@ -198,10 +218,12 @@ function GetVantage(conditions) {
             disadvantage: obj.disadvantage > 0 && obj.advantage == 0,
         }
     }
+    const check_skill = calculate(checks)
     return {
-        attacks: calculate(attacks),
-        checks: calculate(checks),
-        saves: {
+        attack: calculate(attacks),
+        check: check_skill,
+        skill: check_skill,
+        save: {
             str: calculate(saves['str']),
             dex: calculate(saves['dex']),
             con: calculate(saves['con']),
@@ -216,6 +238,105 @@ function GetVantage(conditions) {
     }
 }
 
+const useRoll = function(type, data) {
+    return useContext(RollContext)
+}
+
+function RollProvider(props) {
+    const type = props.type
+    const {vantage} = getCharacter()
+    let rollVantage = null
+    if (type == 'save' && props.save) {
+        rollVantage = vantage[type][props.save]
+    } else {
+        rollVantage = vantage[type]
+    }
+    const [advantage, setAdvantage] = useState(false)
+    const [disadvantage, setDisadvantage] = useState(false)
+    const [options, setOptions] = useState([])
+
+    // attack specific
+    const [autocrit, setAutocrit] = useState(false)
+    // save specific
+    const [resistance, setResistance] = useState(false)
+    // skill specific
+    const [guidance, setGuidance] = useState(false)
+
+    const rollOptions = props.options || []
+
+    const reset = () => {
+        setAdvantage(rollVantage.advantage)
+        setDisadvantage(rollVantage.disadvantage)
+        setAutocrit(false)
+    }
+    const toggleAdvantage = () => {
+        const adv = !advantage
+        setAdvantage(adv)
+        if (adv) {
+            setDisadvantage(false)
+        }
+    }
+    const toggleDisadvantage = () => {
+        const dis = !disadvantage
+        setDisadvantage(dis)
+        if (dis) {
+            setAdvantage(false)
+        }
+    }
+    const removeOption = removeFromListState(options, setOptions)
+    const addOption = opt => {
+        let temp = options
+        if (rollOptions[opt].type == 'spell slot') {
+            // deselect all other spell slot options
+            const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
+            const toRemove = Object.entries(rollOptions).filter(selector)
+            temp = options.filter(o => toRemove.includes(o))
+        }
+        setOptions([...temp, opt])
+    }
+
+    const contextValue = {
+        type: type,
+        advantage: advantage,
+        disadvantage: disadvantage,
+        vantage: rollVantage,
+        options: options,
+        autocrit: autocrit,
+        guidance: guidance,
+        resistance: resistance,
+        reset: reset,
+        toggleAdvantage: toggleAdvantage,
+        toggleDisadvantage: toggleDisadvantage,
+        toggleAutocrit: () => setAutocrit(!autocrit),
+        toggleGuidance: () => setGuidance(!guidance),
+        toggleResistance: () => setResistance(!resistance),
+        removeOption: removeOption,
+        addOption: addOption,
+    }
+
+    return html`<${RollContext.Provider} value=${contextValue} ...${props} />`
+}
+
+
+
+const Vantage = function({save}) {
+    const roll = useRoll()
+    // if we already have disadvantage, we cannot have advantage
+    const advDisabled = roll.vantage.disadvantage
+    const toggleAdvantage = advDisabled ? null : roll.toggleAdvantage
+    // vice versa
+    const disDisabled = roll.vantage.advantage
+    const toggleDisadvantage = disDisabled ? null : roll.toggleDisadvantage
+    return html`
+        <span class="vantage">
+            <span class="advantage button ${roll.advantage ? 'on' : 'off'} ${advDisabled ? 'disabled': ''}"
+                onClick=${toggleAdvantage}>ADV</span>
+            <span class="disadvantage button ${roll.disadvantage ? 'on' : 'off'} ${disDisabled ? 'disabled': ''}"
+                onClick=${toggleDisadvantage}>DIS</span>
+        </span>
+    `
+}
+
 
 export {
     html,
@@ -225,5 +346,8 @@ export {
     removeFromListState,
     Modal,
     ATTRIBUTES,
+    useRoll,
+    RollProvider,
+    Vantage,
 }
 

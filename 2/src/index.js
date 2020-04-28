@@ -10,8 +10,8 @@ import { readCharacters } from '/src/data.js'
 
 
 const MOD_GROUPS = {
-    "Spells": ["Bless", "Bane", "Synaptic Static", "Enlarge", "Reduce"],
-    "Conditions": ["Poisoned", "Restrained", "Prone", "Frightened"],
+    "Conditions": ["Poisoned", "Restrained", "Prone", "Frightened", "Exhausted 1", "Exhausted 3"],
+    "Spells": ["Bless", "Invisible", "Bane", "Synaptic Static", "Enlarge", "Reduce"],
 }
 
 

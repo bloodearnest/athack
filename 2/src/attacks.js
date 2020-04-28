@@ -1,76 +1,10 @@
 import '/web_modules/preact/debug.js';
 import { createContext } from '/web_modules/preact.js';
 import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, removeFromListState, Modal } from '/src/core.js'
+import { html, map, getCharacter, removeFromListState, Modal, RollProvider, useRoll, Vantage} from '/src/core.js'
 
 
 const AttackContext = createContext()
-
-function useAttack() {
-  return useContext(AttackContext)
-}
-
-
-
-function AttackProvider(props) {
-    const {vantage} = getCharacter()
-    const [options, setOptions] = useState([])
-    const [advantage, setAdvantage] = useState(false)
-    const [disadvantage, setDisadvantage] = useState(false)
-    const [autocrit, setAutocrit] = useState(false)
-    const attackOptions = props.attack.options
-
-    const reset = () => {
-        setAdvantage(vantage.attacks.advantage)
-        setDisadvantage(vantage.attacks.disadvantage)
-        setAutocrit(false)
-    }
-    const toggleAdvantage = () => {
-        const adv = !advantage
-        setAdvantage(adv)
-        if (adv) {
-            setDisadvantage(false)
-        }
-    }
-    const toggleDisadvantage = () => {
-        const dis = !disadvantage
-        setDisadvantage(dis)
-        if (dis) {
-            setAdvantage(false)
-        }
-    }
-    const removeOption = removeFromListState(options, setOptions)
-    const addOption = opt => {
-        let temp = options
-        if (props.attack.options[opt].type == 'spell slot') {
-            // deselect all other spell slot options
-            const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
-            const toRemove = Object.entries(props.attack.options).filter(selector)
-            temp = options.filter(o => toRemove.includes(o))
-        }
-        setOptions([...temp, opt])
-    }
-
-    const contextValue = {
-        attack: props.attack,
-        name: props.name,
-        advantage: advantage,
-        disadvantage: disadvantage,
-        autocrit: autocrit,
-        vantage: vantage,
-        options: options,
-        reset: reset,
-        toggleAdvantage: toggleAdvantage,
-        toggleDisadvantage: toggleDisadvantage,
-        toggleAutocrit: () => setAutocrit(!autocrit),
-        removeOption: removeOption,
-        addOption: addOption,
-    }
-    return html`<${AttackContext.Provider} value=${contextValue} ...${props} />`
-}
-
-
-
 
 const Damage = function({damage, sign}) {
     let damages = []
@@ -81,7 +15,7 @@ const Damage = function({damage, sign}) {
 }
 
 const AttackOption = function({name, option}) {
-    const {options, addOption, removeOption} = useAttack()
+    const {options, addOption, removeOption} = useRoll()
     const active = options.includes(name)
     const toggle = active ? removeOption : addOption
     let details = []
@@ -94,36 +28,22 @@ const AttackOption = function({name, option}) {
             <span>${name}</span> <span class=info>(${details})</span>
         </div>
     `
-
 }
 
 const AttackConditions = function() {
-    const ctx = useAttack()
-
-    // if we already have disadvantage, we cannot have advantage
-    const adv_disabled = ctx.vantage.attacks.disadvantage
-    // vice versa
-    const dis_disabled = ctx.vantage.attacks.advantage
+    const ctx = useRoll()
 
     return html`
-        <div class=attack_conditions>
-            <span class="vantage">
-                <span class="advantage button ${ctx.advantage ? 'on' : 'off'} ${adv_disabled ? 'disabled': ''}"
-                    onClick=${adv_disabled ? null : ctx.toggleAdvantage}>ADV</span>
-                <span class="disadvantage button ${ctx.disadvantage ? 'on' : 'off'} ${dis_disabled ? 'disabled': ''}"
-                    onClick=${dis_disabled ? null : ctx.toggleDisadvantage}>DIS</span>
-            </span>
-            <span class="button autocrit ${ctx.autocrit ? 'on': 'off'}"
+        <div class=conditions>
+            <${Vantage}/>
+            <span class="button vantage-extra ${ctx.autocrit ? 'on': 'off'}"
                   onClick=${ctx.toggleAutocrit}>AUTOCRIT</span>
         </div>
     `
-    console.log(vantage)
-
-
 }
 
-const AttackDetails = function({hide}) {
-    const {name, attack, options} = useAttack()
+const AttackDetails = function({hide, attack}) {
+    const {options} = useRoll()
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -150,17 +70,16 @@ const AttackDetails = function({hide}) {
 
     return html`
         <div class=details>
-            <div class="name title">${name}</div>
+            <div class="name title">${attack.name}</div>
             ${details}
             ${conditions}
             <div class=options>${opts}</div>
         </div>
     `
-
 }
 
-const Attack = function() {
-    const {name, attack, reset} = useAttack()
+const Attack = function({attack}) {
+    const {reset} = useRoll()
 
     let text = attack.tohit ? attack.tohit : attack.save
 
@@ -177,20 +96,18 @@ const Attack = function() {
     text = text.replace(/ /g, '\u00A0')
 
     const button = (show) => {
-        const click = () => { reset(); show(); }
         return html`
             <div class=summary>
-                <span class=name>${name}</span>
-                <span class=button onClick=${click}>${text}</span>
+                <span class=name>${attack.name}</span>
+                <span class=button onClick=${show}>${text}</span>
             </div>
         `
     }
     const modal = (hide) => {
-        const click = () => { hide(); reset(); }
-        return html`<${AttackDetails} hide=${click}/>`
+        return html`<${AttackDetails} hide=${hide} attack=${attack}/>`
     }
 
-    return html`<${Modal} class=attack button=${button} modal=${modal}/>`
+    return html`<${Modal} class=attack button=${button} modal=${modal} reset=${reset}/>`
 }
 
 const FILTERS = [
@@ -221,7 +138,7 @@ const Attacks = function() {
 
     let elements = []
     for (let [name, attack] of Object.entries(attacks).filter(selected)) {
-        elements.push(html`<${AttackProvider} name=${name} attack=${attack}><${Attack}/></${AttackProvider}>`)
+        elements.push(html`<${RollProvider} type=attack options=${attack.options}><${Attack} attack=${attack}/></${RollProvider}>`)
     }
 
     return html`

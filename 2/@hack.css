@@ -244,43 +244,44 @@ section {
   margin-right: 1rem;
 }
 
-.details .attack_conditions {
-  padding: 1rem 0;
+/* conditions styles */
+.conditions {
+  padding: 2rem 0;
 }
-.details .attack_conditions .button {
+.conditions .button {
   padding: 1rem;
 }
-.details .attack_conditions .disabled {
-  color: grey;
-  border-color: grey;
-}
 
-.details .attack_conditions .vantage {
+.conditions .vantage {
   display: inline-block;
   width: 50%;
 }
-.details .attack_conditions .vantage span {
+.conditions .vantage span {
   display: inline-block;
   width: 49%;
   padding: 2rem;
 }
-.details .attack_conditions .advantage {
+.conditions .vantage .advantage {
   margin-right: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right-width: 5px;
 }
-.details .attack_conditions .disadvantage {
+.conditions .vantage .disadvantage {
   margin-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left-width: 5px;
 }
-.details .attack_conditions .autocrit {
+.conditions .vantage-extra {
   display: inline-block;
   width: 49%;
   padding: 2rem;
   text-align: center;
+}
+.conditions .vantage .disabled {
+  color: grey;
+  border-color: grey;
 }
 
 
