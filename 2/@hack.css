@@ -54,8 +54,34 @@ body {
   overflow-y: scroll;
 }
 
-.modal.on  { opacity: 1; z-index: 1;}
+.modal.on  { opacity: 1; z-index: 20;}
 .modal.off { opacity: 0; z-index: -1;}
+
+.modal .title {
+  padding-right: 9rem; /* leave space for .close */
+  min-height: 8rem;
+  font-weight: bold;
+  font-size: 6rem;
+}
+
+.modal .close {
+  position: absolute;
+  right: 0;
+  top: -0.5rem;
+  color: #58180D;
+  background-color: #EEE5CE;
+  border-color: #58180D;
+  border-radius: 0 0 0 2rem;
+  border-style: solid;
+  border-width: 0 0 10px 10px;
+  padding: 2rem 3rem;
+  z-index: 11;
+}
+
+.modal .close:active {
+  color: #EEE5CE;
+  background-color: #58180D;
+}
 
 /* style lists in modals for drop down menu */
 .modal li {
@@ -74,6 +100,14 @@ body {
   text-align: center;
 }
 
+#header {
+  position: sticky;
+  top: 0;
+}
+
+#content {
+  overflow-y: scroll;
+}
 
 section {
   width: 100%;
@@ -132,8 +166,6 @@ section {
 /* roll type styles */
 #type {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
   border-bottom: 10px solid #58180D;
   padding-bottom: 0;
 }
@@ -159,31 +191,23 @@ section {
 
 .attack .summary {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  border: 10px transparent #58180D;
-  border-radius: 2rem;
-  padding: 1.5rem 1rem;
-
+  padding: 1rem 1rem;
 }
 
 .attack .summary .name {
   font-weight: bold;
 }
-.attack .summary .hint {
+
+.attack .summary .button {
   font-size: 3rem;
-  color: black;
+  padding: 1rem;
+  width: 16rem;
+  text-align: center;
 }
 
-.attack .off .summary:active {
-  color: #EEE5CE;
-  border-color: #EEE5CE;
-  background-color: #58180D;
-  /* disable android chrome press highlighting */
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
-}
-
-.attack .modal {
+.attack.modal {
   height: 94%;
 }
 
@@ -194,36 +218,18 @@ section {
 .attack .details .name {
   font-weight: bold;
   position:relative;
-  padding-right: 9rem; /* leave space for .close */
 }
 
-.attack .details .close {
-  position: absolute;
-  right: 0;
-  top: -0.5rem;
-  border-radius: 0 0 0 2rem;
-  border-style: solid;
-  border-color: #58180D;
-  border-width: 0 0 10px 10px;
-  padding: 2rem 3rem;
-  z-index: 2;
-}
-
-.details .close:active {
-  background-color: #58180D;
-  color: #EEE5CE;
-}
 
 .details > div {
   padding: 0.5rem 0;
 }
 
-.details .detail {
+.modal .detail {
   color: black;
-
 }
 
-.details .detail .header {
+.modal .detail .header {
   font-style: italic;
 }
 
@@ -276,3 +282,61 @@ section {
   padding: 2rem;
   text-align: center;
 }
+
+
+/* ability styles */
+
+.save, .check {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 5rem;
+  padding: 1rem;
+}
+
+.save .name, .check .name {
+  font-weight: bold;
+}
+
+.save .button, .check .button {
+  display: inline-block;
+  padding: 2rem;
+  width: 20rem;
+  text-align: center;
+}
+
+.save-menu.modal, .check-menu.modal {
+  height: 94%;
+  padding: 1rem;
+}
+
+.save-details, .check-details > div {
+  margin-top: 1rem;
+}
+
+/* skill styles */
+
+.skill {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 4rem;
+  padding: 0.5rem 1rem;
+}
+
+.skill .name {
+  font-weight: bold;
+}
+
+.skill .button {
+  display: inline-block;
+  padding: 1rem;
+  width: 20rem;
+  text-align: center;
+}
+
+.skill-menu.modal {
+  height: 94%;
+  padding: 1rem;
+}
+

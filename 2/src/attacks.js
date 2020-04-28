@@ -1,7 +1,7 @@
 import '/web_modules/preact/debug.js';
-import { h, render, createContext } from '/web_modules/preact.js';
-import { useState, useContext, useRef } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, removeFromListState, Modal, GetVantage} from '/src/core.js'
+import { createContext } from '/web_modules/preact.js';
+import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
+import { html, map, getCharacter, removeFromListState, Modal } from '/src/core.js'
 
 
 const AttackContext = createContext()
@@ -13,26 +13,17 @@ function useAttack() {
 
 
 function AttackProvider(props) {
-    const {conditions} = getCharacter()
-    const [active, setActiveActual] = useState(false)
+    const {vantage} = getCharacter()
     const [options, setOptions] = useState([])
-    const defaults = GetVantage(conditions)
-    const [advantage, setAdvantage] = useState(defaults.advantage)
-    const [disadvantage, setDisadvantage] = useState(defaults.disadvantage)
+    const [advantage, setAdvantage] = useState(false)
+    const [disadvantage, setDisadvantage] = useState(false)
     const [autocrit, setAutocrit] = useState(false)
     const attackOptions = props.attack.options
 
-    const setActive = f => {
-        setActiveActual(f)
-    }
-
-    const setActiveAndReset = flag => {
-        if (flag == false) {
-            setAdvantage(defaults.advantage)
-            setDisadvantage(defaults.disadvantage)
-            setAutocrit(false)
-        }
-        setActive(flag)
+    const reset = () => {
+        setAdvantage(vantage.attacks.advantage)
+        setDisadvantage(vantage.attacks.disadvantage)
+        setAutocrit(false)
     }
     const toggleAdvantage = () => {
         const adv = !advantage
@@ -61,15 +52,14 @@ function AttackProvider(props) {
     }
 
     const contextValue = {
-        active: active,
         attack: props.attack,
         name: props.name,
         advantage: advantage,
         disadvantage: disadvantage,
         autocrit: autocrit,
-        defaults: defaults,
+        vantage: vantage,
         options: options,
-        setActive: setActiveAndReset,
+        reset: reset,
         toggleAdvantage: toggleAdvantage,
         toggleDisadvantage: toggleDisadvantage,
         toggleAutocrit: () => setAutocrit(!autocrit),
@@ -111,9 +101,9 @@ const AttackConditions = function() {
     const ctx = useAttack()
 
     // if we already have disadvantage, we cannot have advantage
-    const adv_disabled = ctx.defaults.disadvantage
+    const adv_disabled = ctx.vantage.attacks.disadvantage
     // vice versa
-    const dis_disabled = ctx.defaults.advantage
+    const dis_disabled = ctx.vantage.attacks.advantage
 
     return html`
         <div class=attack_conditions>
@@ -160,8 +150,7 @@ const AttackDetails = function({hide}) {
 
     return html`
         <div class=details>
-            <span class=close onClick=${hide}>X</span>
-            <div class=name>${name}</div>
+            <div class="name title">${name}</div>
             ${details}
             ${conditions}
             <div class=options>${opts}</div>
@@ -171,29 +160,34 @@ const AttackDetails = function({hide}) {
 }
 
 const Attack = function() {
-    const {name, attack} = useAttack()
+    const {name, attack, reset} = useAttack()
 
-    let hint = attack.tohit ? attack.tohit : attack.save
+    let text = attack.tohit ? attack.tohit : attack.save
 
-    if (attack.damage) {
+    if (!text && attack.damage) {
         const entries = Array.from(Object.entries(attack.damage))
         if (entries.length > 0) {
             const [_, damage] = entries[0]
-            hint += (hint ? ', ' : '') + damage
+            /*if (text) {
+                text += ' (' + damage + ')'
+            } else {*/
+            text = damage
         }
     }
-    hint = hint.replace(/ /g, '\u00A0')
+    text = text.replace(/ /g, '\u00A0')
 
     const button = (show) => {
+        const click = () => { reset(); show(); }
         return html`
-            <div class=summary onClick=${show}>
+            <div class=summary>
                 <span class=name>${name}</span>
-                <span class=hint>${hint}</span>
+                <span class=button onClick=${click}>${text}</span>
             </div>
         `
     }
     const modal = (hide) => {
-        return html`<${AttackDetails} hide=${hide}/>`
+        const click = () => { hide(); reset(); }
+        return html`<${AttackDetails} hide=${click}/>`
     }
 
     return html`<${Modal} class=attack button=${button} modal=${modal}/>`

@@ -3,6 +3,9 @@ import { render } from '/web_modules/preact.js';
 import { useState, useRef } from '/web_modules/preact/hooks.js';
 import { html, map, getCharacter, CharacterProvider, Modal } from '/src/core.js'
 import { Attacks } from '/src/attacks.js'
+import { Saves } from '/src/saves.js'
+import { Skills } from '/src/skills.js'
+import { Checks } from '/src/checks.js'
 import { readCharacters } from '/src/data.js'
 
 
@@ -86,7 +89,7 @@ const ConditionsBar = function() {
 const RollTypeBar = function() {
     const {activeType, setActiveType} = getCharacter()
     let types = []
-    for (const type of ['Attacks', 'Saves', 'Checks']) {
+    for (const type of ['Attacks', 'Skills', 'Saves', 'Checks']) {
         const active = type == activeType
         types.push(html`
             <span class="${type} button ${active ? "on" : "off"}" onClick=${e => setActiveType(type)}>${type}</span>
@@ -95,6 +98,20 @@ const RollTypeBar = function() {
 
     return html`<section id=type>${types}</section>`
 
+}
+
+
+const RollType = function() {
+    const {activeType} = getCharacter()
+    if (activeType == 'Attacks') {
+        return html`<${Attacks}/>`
+    } else if (activeType == 'Skills') {
+        return html`<${Skills}/>`
+    } else if (activeType == 'Saves') {
+        return html`<${Saves}/>`
+    } else if (activeType == 'Checks') {
+        return html`<${Checks}/>`
+    }
 }
 
 const Result = function() {
@@ -107,9 +124,13 @@ const Result = function() {
 const AtHack = function({characters}) {
     return html`
         <${CharacterProvider} characters=${characters}>
-            <${CharacterBar} characters=${characters}/>
-            <${RollTypeBar}/>
-            <${Attacks}/>
+            <div id=header>
+                <${CharacterBar} characters=${characters}/>
+                <${RollTypeBar}/>
+            </div>
+            <div id=content>
+                <${RollType}/>
+            </div>
             <${Result}/>
         </${CharacterProvider}>
     `
@@ -117,5 +138,5 @@ const AtHack = function({characters}) {
 
 readCharacters().then((data) => {
     const app = html`<${AtHack} characters=${data}/>`
-    render(app, document.body);
+    render(app, document.querySelector('#app'));
 })
