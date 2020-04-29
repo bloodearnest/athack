@@ -1,4 +1,4 @@
-import { html, map, GetVantage } from '/src/core.js'
+import { html, map, GetVantage, ATTRIBUTES } from '/src/core.js'
 import { createContext } from '/web_modules/preact.js';
 import { createPortal } from '/web_modules/preact/compat.js'
 import { useState, useEffect, useMemo, useContext, useRef } from '/web_modules/preact/hooks.js';
@@ -97,98 +97,8 @@ function CharacterProvider(props) {
     return html`<${CharacterContext.Provider} value=${contextValue} ...${props} />`
 }
 
-// roll context
-const RollContext = createContext();
 
-const useRoll = function(type, data) {
-    return useContext(RollContext)
-}
-
-function RollProvider(props) {
-    const type = props.type
-
-    // set the current vantage info for this roll
-    const {vantage} = useCharacter()
-    let rollVantage = null
-    if (type == 'save' && props.save) {
-        rollVantage = vantage[type][props.save]
-    } else {
-        rollVantage = vantage[type]
-    }
-
-    // user state for this roll
-    const [advantage, setAdvantage] = useState(false)
-    const [disadvantage, setDisadvantage] = useState(false)
-    const [options, setOptions] = useState([])
-
-    // this is Autocrit for attacks, Guidance for skills and checks, and
-    // Resistance for saves.
-    const [extra, setExtra] = useState(false)
-
-    // the options available for use to to select for this roll
-    const rollOptions = props.options || []
-
-    // reset roll to inital conditions vantage
-    const reset = () => {
-        setAdvantage(rollVantage.advantage)
-        setDisadvantage(rollVantage.disadvantage)
-        setExtra(false)
-        // TODO: should we reset options here too?
-    }
-
-    // turn on advantage (and off disadvantage)
-    const toggleAdvantage = () => {
-        const adv = !advantage
-        setAdvantage(adv)
-        if (adv) {
-            setDisadvantage(false)
-        }
-    }
-
-    // turn on disadvantage (and off advantage)
-    const toggleDisadvantage = () => {
-        const dis = !disadvantage
-        setDisadvantage(dis)
-        if (dis) {
-            setAdvantage(false)
-        }
-    }
-
-    // manage the active options
-    const removeOption = removeFromListState(options, setOptions)
-    const addOption = opt => {
-        let temp = options
-        // spell slots are mutually exclusive, so deselect other slots
-        if (rollOptions[opt].type == 'spell slot') {
-            // deselect all other spell slot options
-            const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
-            const toRemove = Object.entries(rollOptions).filter(selector)
-            temp = options.filter(o => toRemove.includes(o))
-        }
-        setOptions([...temp, opt])
-    }
-
-    const contextValue = {
-        type: type,
-        advantage: advantage,
-        disadvantage: disadvantage,
-        vantage: rollVantage,
-        options: options,
-        extra: extra,
-        reset: reset,
-        toggleAdvantage: toggleAdvantage,
-        toggleDisadvantage: toggleDisadvantage,
-        toggleExtra: () => setExtra(!extra),
-        removeOption: removeOption,
-        addOption: addOption,
-    }
-
-    return html`<${RollContext.Provider} value=${contextValue} ...${props} />`
-}
-
-
-const Vantage = function({extra}) {
-    const roll = useRoll()
+const Vantage = function({extra, roll}) {
     // if we already have disadvantage, we cannot have advantage
     const advDisabled = roll.vantage.disadvantage
     const toggleAdvantage = advDisabled ? null : roll.toggleAdvantage
@@ -206,8 +116,6 @@ const Vantage = function({extra}) {
         </div>
     `
 }
-
-
 
 
 function useClickOutside(ref, handler) {
@@ -251,9 +159,147 @@ const Modal = function(props) {
     `
 }
 
+
+const useRoll = function({id, type, name, bonus, options}) {
+    // set the current vantage info for this roll
+    const {vantage} = useCharacter()
+    let rollVantage = null
+    if (type == 'save' && id) {
+        rollVantage = vantage[type][id]
+    } else {
+        rollVantage = vantage[type]
+    }
+
+    // user state for this roll
+    const [advantage, setAdvantage] = useState(false)
+    const [disadvantage, setDisadvantage] = useState(false)
+    const [activeOptions, setActiveOptions] = useState([])
+
+    // this is Autocrit for attacks, Guidance for skills and checks, and
+    // Resistance for saves.
+    const [extra, setExtra] = useState(false)
+
+    // reset roll to inital conditions vantage
+    const reset = () => {
+        setAdvantage(rollVantage.advantage)
+        setDisadvantage(rollVantage.disadvantage)
+        setExtra(false)
+        setActiveOptions([])
+    }
+
+    // turn on advantage (and off disadvantage)
+    const toggleAdvantage = () => {
+        const adv = !advantage
+        setAdvantage(adv)
+        if (adv) {
+            setDisadvantage(false)
+        }
+    }
+
+    // turn on disadvantage (and off advantage)
+    const toggleDisadvantage = () => {
+        const dis = !disadvantage
+        setDisadvantage(dis)
+        if (dis) {
+            setAdvantage(false)
+        }
+    }
+
+    // manage the active options
+    const removeOption = removeFromListState(activeOptions, setActiveOptions)
+    const addOption = opt => {
+        let temp = activeOptions
+        // spell slots are mutually exclusive, so deselect other slots
+        if (options[opt].type == 'spell slot') {
+            // deselect all other spell slot options
+            const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
+            const toRemove = Object.entries(options).filter(selector)
+            temp = activeOptions.filter(o => toRemove.includes(o))
+        }
+        setActiveOptions([...temp, opt])
+    }
+
+    return {
+        advantage: advantage,
+        disadvantage: disadvantage,
+        vantage: rollVantage,
+        activeOptions: activeOptions,
+        extra: extra,
+        reset: reset,
+        toggleAdvantage: toggleAdvantage,
+        toggleDisadvantage: toggleDisadvantage,
+        toggleExtra: () => setExtra(!extra),
+        removeOption: removeOption,
+        addOption: addOption,
+    }
+}
+
+const Roll = function(props) {
+    const roll = useRoll({...props})
+    const button = (show) => html`<span class=button onClick=${show}>${props.bonus}</span>`
+    const modal = (hide) => {
+        return html`
+            <div class=roll-details>
+                <div class="roll-name title">${props.name} Check</div>
+                <div class="detail roll-bonus">
+                    <span class=header>Bonus: </span>
+                    <span class=value>${props.bonus}</span>
+                </div>
+                <${Vantage} roll=${roll} extra=${props.extra}/>
+            </div>
+        `
+    }
+
+    return html`
+        <div class="roll ${props.class}">
+            <span class=name>${props.name}</div>
+            <${Modal} class=roll-menu button=${button} modal=${modal} reset=${roll.reset}/>
+        </div>
+    `
+}
+
+
+const Skills = function() {
+    const character = useCharacter()
+    const skills = map(character.skills, (id, skill) => {
+        return html`<${Roll} id=${id} class=skill extra=Guidance ...${skill}/>`
+    })
+    return html`<section id=skills>${skills}</section>`
+}
+
+const Checks = function() {
+    const character = useCharacter()
+    let checks = []
+    for (const [id, name] of Object.entries(ATTRIBUTES)) {
+        const check = character.abilities[id]
+        checks.push(html`<${Roll} id=${id} class=check extra=Guidance ...${check}/>`)
+    }
+    return html`<section id=checks>${checks}</section>`
+}
+
+
+const Saves = function() {
+    const character = useCharacter()
+    let saves = []
+    const options = []
+    for (const [id, name] of Object.entries(ATTRIBUTES)) {
+        const save = character.saves[id]
+        saves.push(html`<${Roll} id=${id} class=save extra=Resistance ...${save}/>`)
+    }
+    return html`<section id=saves>${saves}</section>`
+}
+
+
+
+
 export {
     useCharacter, CharacterProvider,
-    useRoll, RollProvider, Vantage,
+    Roll,
     Modal,
+    Checks,
+    Saves,
+    Skills,
+    Vantage,
+    useRoll,
 }
 

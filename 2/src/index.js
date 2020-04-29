@@ -1,11 +1,8 @@
 import '/web_modules/preact/debug.js';
 import { render } from '/web_modules/preact.js';
 import { html, map } from '/src/core.js'
-import { useCharacter, CharacterProvider, Modal } from '/src/components.js'
+import { useCharacter, CharacterProvider, Modal, Checks, Saves, Skills } from '/src/components.js'
 import { Attacks } from '/src/attacks.js'
-import { Saves } from '/src/saves.js'
-import { Skills } from '/src/skills.js'
-import { Checks } from '/src/checks.js'
 import { readCharacters } from '/src/data.js'
 
 

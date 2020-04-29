@@ -296,6 +296,16 @@ def clean_all(attacks):
             )
 
 
+ATTRIBUTES = {
+    'str': 'Strength',
+    'dex': 'Dexterity',
+    'con': 'Constitution',
+    'int': 'Intelligence',
+    'wis': 'Wisdom',
+    'cha': 'Charisma',
+}
+
+
 def main(characters):
 
     for name in characters:
@@ -323,19 +333,20 @@ def main(characters):
                     ability, '.ct-ability-summary__secondary *::text',
                 )
 
-            abilities[abbr] = dict(name=abname, bonus=bonus)
+            abilities[abbr] = dict(name=abname, bonus=bonus, type='check')
 
         for save in selector.css('.ct-saving-throws-summary__ability'):
             cls = '.ct-saving-throws-summary__ability'
             abbr = get_text(save, cls + '-name::text')
             bonus = get_text(save, cls + '-modifier *::text')
-            saves[abbr] = bonus
+            saves[abbr] = dict(bonus=bonus, name=ATTRIBUTES[abbr], type='save')
 
         for skill in selector.css('.ct-skills__item'):
             sname = get_text(skill, '.ct-skills__col--skill::text')
             stat = get_text(skill, '.ct-skills__col--stat::text')
             bonus = get_text(skill, '.ct-skills__col--modifier *::text')
-            skills[sname] = dict(bonus=bonus, ability=stat)
+            skills[sname] = dict(
+                bonus=bonus, name=sname, ability=stat, type='skill')
 
         for attack in selector.css('.ct-combat-attack'):
             data = get_attack(attack)

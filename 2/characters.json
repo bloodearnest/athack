@@ -71,27 +71,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+2",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+1",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+1",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+2",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "-1",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+5",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -228,8 +234,8 @@
                     "range": "120 ft.",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Life Transference": {
@@ -279,8 +285,8 @@
                     "range": "60 ft.",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Sacred Flame": {
@@ -374,8 +380,8 @@
                     "range": "60 ft.",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Toll the Dead": {
@@ -450,91 +456,151 @@
                     "range": "Self",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 }
             },
             "saves": {
-                "cha": "+7",
-                "con": "+2",
-                "dex": "+2",
-                "int": "+3",
-                "str": "+0",
-                "wis": "+10"
+                "cha": {
+                    "bonus": "+7",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+2",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+3",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+10",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+6"
+                    "bonus": "+6",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -542,27 +608,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+0",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+1",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+3",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+5",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "-1",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+1",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -683,8 +755,8 @@
                     "range": "120 ft.",
                     "tohit": "+10",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Fireball": {
@@ -903,85 +975,145 @@
                 }
             },
             "saves": {
-                "cha": "+1",
-                "con": "+2",
-                "dex": "+4",
-                "int": "+10",
-                "str": "+0",
-                "wis": "+6"
+                "cha": {
+                    "bonus": "+1",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+4",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+10",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+6",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -989,27 +1121,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+4",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+1",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+2",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+2",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+0",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+2",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -1118,8 +1256,8 @@
                     "range": "120 ft.",
                     "tohit": "+8",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Fireball": {
@@ -1353,85 +1491,145 @@
                 }
             },
             "saves": {
-                "cha": "+9",
-                "con": "+2",
-                "dex": "+7",
-                "int": "+3",
-                "str": "+1",
-                "wis": "+3"
+                "cha": {
+                    "bonus": "+9",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+7",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+3",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+1",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+3",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+13"
+                    "bonus": "+13",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+11"
+                    "bonus": "+11",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+10"
+                    "bonus": "+10",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -1439,27 +1637,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "-1",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+1",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+3",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+2",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+0",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+2",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -1613,85 +1817,145 @@
                 }
             },
             "saves": {
-                "cha": "-1",
-                "con": "+1",
-                "dex": "+5",
-                "int": "+2",
-                "str": "+2",
-                "wis": "+2"
+                "cha": {
+                    "bonus": "-1",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+5",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+2",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+2",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+2",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -1699,27 +1963,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+2",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+4",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+1",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "-1",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+5",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+1",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -1829,85 +2099,145 @@
                 }
             },
             "saves": {
-                "cha": "+2",
-                "con": "+8",
-                "dex": "+1",
-                "int": "-1",
-                "str": "+9",
-                "wis": "+1"
+                "cha": {
+                    "bonus": "+2",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+8",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+1",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "-1",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+9",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+6"
+                    "bonus": "+6",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -1915,27 +2245,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "-1",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+3",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+2",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+4",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+4",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+1",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -2041,8 +2377,8 @@
                     "range": "60 ft.",
                     "tohit": "+8",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Unarmed Strike": {
@@ -2062,85 +2398,145 @@
                 }
             },
             "saves": {
-                "cha": "+0",
-                "con": "+8",
-                "dex": "+3",
-                "int": "+9",
-                "str": "+5",
-                "wis": "+6"
+                "cha": {
+                    "bonus": "+0",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+8",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+3",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+9",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+5",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+6",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+8"
+                    "bonus": "+8",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+8"
+                    "bonus": "+8",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+8"
+                    "bonus": "+8",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+8"
+                    "bonus": "+8",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -2148,27 +2544,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+3",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+1",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+2",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+1",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+0",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+2",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -2293,85 +2695,145 @@
                 }
             },
             "saves": {
-                "cha": "+5",
-                "con": "+1",
-                "dex": "+4",
-                "int": "+1",
-                "str": "+0",
-                "wis": "+2"
+                "cha": {
+                    "bonus": "+5",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+4",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+1",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+0",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+2",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+6"
+                    "bonus": "+6",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+4"
+                    "bonus": "+4",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -2379,27 +2841,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+0",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+2",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "-1",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+1",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+2",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+5",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -2498,8 +2966,8 @@
                     "range": "Self",
                     "tohit": "+10",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Shillelagh": {
@@ -2515,8 +2983,8 @@
                     "range": "Touch",
                     "tohit": "+10",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Staff of the Jungle": {
@@ -2582,85 +3050,145 @@
                 }
             },
             "saves": {
-                "cha": "+0",
-                "con": "+2",
-                "dex": "-1",
-                "int": "+5",
-                "str": "+2",
-                "wis": "+9"
+                "cha": {
+                    "bonus": "+0",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "-1",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+5",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+2",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+9",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+6"
+                    "bonus": "+6",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+9"
+                    "bonus": "+9",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -2668,27 +3196,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+3",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+2",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+3",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+0",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "-1",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+1",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -2764,85 +3298,145 @@
                 }
             },
             "saves": {
-                "cha": "+3",
-                "con": "+2",
-                "dex": "+5",
-                "int": "+2",
-                "str": "-1",
-                "wis": "+1"
+                "cha": {
+                    "bonus": "+3",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+2",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+5",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+2",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "-1",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+1",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+7"
+                    "bonus": "+7",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -2850,27 +3444,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+2",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+3",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+1",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "-1",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+5",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+1",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -2918,8 +3518,8 @@
                     "range": "60 ft.",
                     "tohit": "+6",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ]
                 },
                 "Thunder": {
@@ -2979,85 +3579,145 @@
                 }
             },
             "saves": {
-                "cha": "+8",
-                "con": "+5",
-                "dex": "+3",
-                "int": "+1",
-                "str": "+7",
-                "wis": "+7"
+                "cha": {
+                    "bonus": "+8",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+5",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+3",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+1",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+7",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+7",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+6"
+                    "bonus": "+6",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "-1"
+                    "bonus": "-1",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+1"
+                    "bonus": "+1",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         },
@@ -3065,27 +3725,33 @@
             "abilities": {
                 "cha": {
                     "bonus": "+0",
-                    "name": "Charisma"
+                    "name": "Charisma",
+                    "type": "check"
                 },
                 "con": {
                     "bonus": "+1",
-                    "name": "Constitution"
+                    "name": "Constitution",
+                    "type": "check"
                 },
                 "dex": {
                     "bonus": "+3",
-                    "name": "Dexterity"
+                    "name": "Dexterity",
+                    "type": "check"
                 },
                 "int": {
                     "bonus": "+0",
-                    "name": "Intelligence"
+                    "name": "Intelligence",
+                    "type": "check"
                 },
                 "str": {
                     "bonus": "+0",
-                    "name": "Strength"
+                    "name": "Strength",
+                    "type": "check"
                 },
                 "wis": {
                     "bonus": "+3",
-                    "name": "Wisdom"
+                    "name": "Wisdom",
+                    "type": "check"
                 }
             },
             "attacks": {
@@ -3180,85 +3846,145 @@
                 }
             },
             "saves": {
-                "cha": "+0",
-                "con": "+1",
-                "dex": "+5",
-                "int": "+0",
-                "str": "+2",
-                "wis": "+3"
+                "cha": {
+                    "bonus": "+0",
+                    "name": "Charisma",
+                    "type": "save"
+                },
+                "con": {
+                    "bonus": "+1",
+                    "name": "Constitution",
+                    "type": "save"
+                },
+                "dex": {
+                    "bonus": "+5",
+                    "name": "Dexterity",
+                    "type": "save"
+                },
+                "int": {
+                    "bonus": "+0",
+                    "name": "Intelligence",
+                    "type": "save"
+                },
+                "str": {
+                    "bonus": "+2",
+                    "name": "Strength",
+                    "type": "save"
+                },
+                "wis": {
+                    "bonus": "+3",
+                    "name": "Wisdom",
+                    "type": "save"
+                }
             },
             "skills": {
                 "Acrobatics": {
                     "ability": "DEX",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Acrobatics",
+                    "type": "skill"
                 },
                 "Animal Handling": {
                     "ability": "WIS",
-                    "bonus": "+5"
+                    "bonus": "+5",
+                    "name": "Animal Handling",
+                    "type": "skill"
                 },
                 "Arcana": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "Arcana",
+                    "type": "skill"
                 },
                 "Athletics": {
                     "ability": "STR",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Athletics",
+                    "type": "skill"
                 },
                 "Deception": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Deception",
+                    "type": "skill"
                 },
                 "History": {
                     "ability": "INT",
-                    "bonus": "+2"
+                    "bonus": "+2",
+                    "name": "History",
+                    "type": "skill"
                 },
                 "Insight": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Insight",
+                    "type": "skill"
                 },
                 "Intimidation": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Intimidation",
+                    "type": "skill"
                 },
                 "Investigation": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Investigation",
+                    "type": "skill"
                 },
                 "Medicine": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Medicine",
+                    "type": "skill"
                 },
                 "Nature": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Nature",
+                    "type": "skill"
                 },
                 "Perception": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Perception",
+                    "type": "skill"
                 },
                 "Performance": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Performance",
+                    "type": "skill"
                 },
                 "Persuasion": {
                     "ability": "CHA",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Persuasion",
+                    "type": "skill"
                 },
                 "Religion": {
                     "ability": "INT",
-                    "bonus": "+0"
+                    "bonus": "+0",
+                    "name": "Religion",
+                    "type": "skill"
                 },
                 "Sleight of Hand": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Sleight of Hand",
+                    "type": "skill"
                 },
                 "Stealth": {
                     "ability": "DEX",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Stealth",
+                    "type": "skill"
                 },
                 "Survival": {
                     "ability": "WIS",
-                    "bonus": "+3"
+                    "bonus": "+3",
+                    "name": "Survival",
+                    "type": "skill"
                 }
             }
         }

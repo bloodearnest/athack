@@ -2,7 +2,7 @@ import '/web_modules/preact/debug.js';
 import { createContext } from '/web_modules/preact.js';
 import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
 import { html, map } from '/src/core.js'
-import { useCharacter, Modal, RollProvider, useRoll, Vantage} from '/src/components.js'
+import { useCharacter, Modal, useRoll, Vantage} from '/src/components.js'
 
 
 const AttackContext = createContext()
@@ -15,10 +15,7 @@ const Damage = function({damage, sign}) {
     return damages
 }
 
-const AttackOption = function({name, option}) {
-    const {options, addOption, removeOption} = useRoll()
-    const active = options.includes(name)
-    const toggle = active ? removeOption : addOption
+const AttackOption = function({name, option, active, toggle}) {
     let details = []
     if (option.damage) {
         const sign = option.replace ? '' : '+'
@@ -31,18 +28,8 @@ const AttackOption = function({name, option}) {
     `
 }
 
-const AttackConditions = function() {
-    const ctx = useRoll()
-
-    return html`
-        <div class=conditions>
-            <${Vantage} extra=AUTOCRIT/>
-        </div>
-    `
-}
-
-const AttackDetails = function({hide, attack}) {
-    const {options} = useRoll()
+const AttackDetails = function({hide, attack, roll}) {
+    const {activeOptions} = roll
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -59,12 +46,14 @@ const AttackDetails = function({hide, attack}) {
     if (attack.effect) { add('effect','Effect', `${attack.effect}`) }
 
     let opts = map(attack.options, (n, o) => {
-        return html` <${AttackOption} name=${n} option=${o} active=${options.includes(n)}/>`
+        const active = activeOptions.includes(n)
+        const toggle = active ? roll.removeOption : roll.addOption
+        return html` <${AttackOption} name=${n} option=${o} active=${active} toggle=${toggle}/>`
     })
 
     let conditions = null
     if (attack.tohit) {
-        conditions = html`<${AttackConditions}/>`
+        conditions = html`<${Vantage} roll=${roll} extra=AUTOCRIT/>`
     }
 
     return html`
@@ -78,7 +67,7 @@ const AttackDetails = function({hide, attack}) {
 }
 
 const Attack = function({attack}) {
-    const {reset} = useRoll()
+    const roll = useRoll({id: attack.name, type: 'attack', ...attack})
 
     let text = attack.tohit ? attack.tohit : attack.save
 
@@ -103,10 +92,10 @@ const Attack = function({attack}) {
         `
     }
     const modal = (hide) => {
-        return html`<${AttackDetails} hide=${hide} attack=${attack}/>`
+        return html`<${AttackDetails} hide=${hide} attack=${attack} roll=${roll}/>`
     }
 
-    return html`<${Modal} class=attack button=${button} modal=${modal} reset=${reset}/>`
+    return html`<${Modal} class=attack button=${button} modal=${modal} reset=${roll.reset}/>`
 }
 
 const FILTERS = [
@@ -137,7 +126,7 @@ const Attacks = function() {
 
     let elements = []
     for (let [name, attack] of Object.entries(attacks).filter(selected)) {
-        elements.push(html`<${RollProvider} type=attack options=${attack.options}><${Attack} attack=${attack}/></${RollProvider}>`)
+        elements.push(html`<${Attack} attack=${attack}/>`)
     }
 
     return html`

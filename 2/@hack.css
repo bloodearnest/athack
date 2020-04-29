@@ -244,48 +244,42 @@ section {
   margin-right: 1rem;
 }
 
-/* conditions styles */
-.conditions {
+/* vantage styles */
+.vantage {
   padding: 2rem 0;
 }
-.conditions .button {
-  padding: 1rem;
-}
 
-.conditions .vantage span {
+.vantage > span {
+  padding: 1rem;
   display: inline-block;
-  width: 49%;
-  padding: 2rem;
+  text-align: center;
 }
-.conditions .vantage .advantage {
+.vantage .advantage {
   margin-right: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right-width: 5px;
   width: 24%;
 }
-.conditions .vantage .disadvantage {
+.vantage .disadvantage {
   margin-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left-width: 5px;
   width: 24%;
 }
-.conditions .vantage .extra {
-  display: inline-block;
+.vantage .extra {
   width: 49%;
-  padding: 2rem;
-  text-align: center;
 }
-.conditions .vantage .disabled {
+.vantage .disabled {
   color: grey;
   border-color: grey;
 }
 
 
-/* ability styles */
+/* roll styles */
 
-.save, .check {
+.roll {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -293,49 +287,35 @@ section {
   padding: 1rem;
 }
 
-.save .name, .check .name {
+.roll .name {
   font-weight: bold;
 }
 
-.save .button, .check .button {
+.roll .button {
   display: inline-block;
   padding: 2rem;
   width: 20rem;
   text-align: center;
 }
 
-.save-menu.modal, .check-menu.modal {
+.roll-menu.modal {
   height: 94%;
   padding: 1rem;
 }
 
-.save-details, .check-details > div {
+.roll-details > div {
   margin-top: 1rem;
 }
 
 /* skill styles */
 
-.skill {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+.roll.skill {
   font-size: 4rem;
   padding: 0.5rem 1rem;
 }
 
-.skill .name {
-  font-weight: bold;
-}
-
 .skill .button {
-  display: inline-block;
   padding: 1rem;
   width: 20rem;
-  text-align: center;
-}
-
-.skill-menu.modal {
-  height: 94%;
-  padding: 1rem;
 }
 
