@@ -1,13 +1,11 @@
-import '/web_modules/preact/debug.js';
-import { html, getCharacter, ATTRIBUTES, Modal, RollProvider, Vantage, useRoll} from '/src/core.js'
+import { html, map, ATTRIBUTES } from '/src/core.js'
+import { useCharacter, Modal, useRoll, RollProvider, Vantage} from '/src/components.js'
 
 const CheckConditions = function() {
     const roll = useRoll()
     return html`
         <div class=conditions>
-            <${Vantage}/>
-            <span class="button vantage-extra ${roll.guidance ? 'on': 'off'}"
-                  onClick=${roll.toggleGuidance}>Guidance</span>
+            <${Vantage} extra=Guidance/>
         </div>
     `
 }
@@ -38,7 +36,7 @@ const Check = function({id, name, check}) {
 
 
 const Checks = function() {
-    const character = getCharacter()
+    const character = useCharacter()
     let checks = []
     for (const [id, name] of Object.entries(ATTRIBUTES)) {
         const check = character.abilities[id].bonus

@@ -1,15 +1,13 @@
 import '/web_modules/preact/debug.js';
-import { useState } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, Modal, RollProvider, Vantage, useRoll} from '/src/core.js'
+import { html, map } from '/src/core.js'
+import { useCharacter, Modal, useRoll, RollProvider, Vantage} from '/src/components.js'
 
 
 const SkillConditions = function() {
     const roll = useRoll()
     return html`
         <div class=conditions>
-            <${Vantage}/>
-            <span class="button vantage-extra ${roll.guidance ? 'on': 'off'}"
-                  onClick=${roll.toggleGuidance}>Guidance</span>
+            <${Vantage} extra=Guidance/>
         </div>
     `
 }
@@ -42,7 +40,7 @@ const Skill = function({name, bonus}) {
 
 
 const Skills = function() {
-    const character = getCharacter()
+    const character = useCharacter()
     const skills = map(character.skills, (name, skill) => {
         return html`
             <${RollProvider} type=skill>

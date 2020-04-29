@@ -1,7 +1,8 @@
 import '/web_modules/preact/debug.js';
 import { createContext } from '/web_modules/preact.js';
 import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, removeFromListState, Modal, RollProvider, useRoll, Vantage} from '/src/core.js'
+import { html, map } from '/src/core.js'
+import { useCharacter, Modal, RollProvider, useRoll, Vantage} from '/src/components.js'
 
 
 const AttackContext = createContext()
@@ -35,9 +36,7 @@ const AttackConditions = function() {
 
     return html`
         <div class=conditions>
-            <${Vantage}/>
-            <span class="button vantage-extra ${ctx.autocrit ? 'on': 'off'}"
-                  onClick=${ctx.toggleAutocrit}>AUTOCRIT</span>
+            <${Vantage} extra=AUTOCRIT/>
         </div>
     `
 }
@@ -119,7 +118,7 @@ const FILTERS = [
 
 
 const FilterBar = function() {
-    const {filter, setFilter} = getCharacter()
+    const {filter, setFilter} = useCharacter()
     let filters = FILTERS.map((f) => {
         const active = f == filter
         const handler = active ? e => setFilter(null) : e => setFilter(f)
@@ -131,7 +130,7 @@ const FilterBar = function() {
 
 
 const Attacks = function() {
-    const {name, attacks, filter} = getCharacter()
+    const {name, attacks, filter} = useCharacter()
 
     // apply filters to attack list
     let selected = ([n, a]) => !filter || a.types.includes(filter)

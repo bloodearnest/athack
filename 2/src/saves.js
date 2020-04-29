@@ -1,16 +1,14 @@
-import '/web_modules/preact/debug.js';
 import { useState } from '/web_modules/preact/hooks.js';
-import { html, getCharacter, Modal, ATTRIBUTES, Vantage, useRoll, RollProvider} from '/src/core.js'
+import { html, map, ATTRIBUTES } from '/src/core.js'
+import { useCharacter, Modal, useRoll, RollProvider, Vantage} from '/src/components.js'
 
 
 
-const SaveConditions = function({name}) {
+const SaveConditions = function() {
     const roll = useRoll()
     return html`
         <div class=conditions>
-            <${Vantage} save=${name}/>
-            <span class="button vantage-extra ${roll.resistance ? 'on': 'off'}"
-                  onClick=${roll.toggleResistance}>Resistance</span>
+            <${Vantage} extra=Resistance/>
         </div>
     `
 }
@@ -43,7 +41,7 @@ const Save = function({id, name, save}) {
 
 
 const Saves = function() {
-    const character = getCharacter()
+    const character = useCharacter()
     let saves = []
     const options = []
     for (const [id, name] of Object.entries(ATTRIBUTES)) {

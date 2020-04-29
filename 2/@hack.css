@@ -252,10 +252,6 @@ section {
   padding: 1rem;
 }
 
-.conditions .vantage {
-  display: inline-block;
-  width: 50%;
-}
 .conditions .vantage span {
   display: inline-block;
   width: 49%;
@@ -266,14 +262,16 @@ section {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right-width: 5px;
+  width: 24%;
 }
 .conditions .vantage .disadvantage {
   margin-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-left-width: 5px;
+  width: 24%;
 }
-.conditions .vantage-extra {
+.conditions .vantage .extra {
   display: inline-block;
   width: 49%;
   padding: 2rem;

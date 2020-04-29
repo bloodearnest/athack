@@ -1,7 +1,7 @@
 import '/web_modules/preact/debug.js';
 import { render } from '/web_modules/preact.js';
-import { useState, useRef } from '/web_modules/preact/hooks.js';
-import { html, map, getCharacter, CharacterProvider, Modal } from '/src/core.js'
+import { html, map } from '/src/core.js'
+import { useCharacter, CharacterProvider, Modal } from '/src/components.js'
 import { Attacks } from '/src/attacks.js'
 import { Saves } from '/src/saves.js'
 import { Skills } from '/src/skills.js'
@@ -28,7 +28,7 @@ const CharacterBar = function({characters}) {
 }
 
 const CharacterSelector = function({characters}) {
-    let {name, setCharacter} = getCharacter()
+    let {name, setCharacter} = useCharacter()
 
     const button = (show) => {
         return html`<span class=name onClick=${show}>${name || 'Character...'}</span>`
@@ -57,7 +57,7 @@ const CharacterSelector = function({characters}) {
 }
 
 const AddCondition = function() {
-    const {conditions, addCondition} = getCharacter()
+    const {conditions, addCondition} = useCharacter()
 
     const button = (show) => html`<span class=button onClick=${show}>+</span>`
     const optionList = (close) => {
@@ -81,13 +81,13 @@ const AddCondition = function() {
 }
 
 const ConditionsBar = function() {
-    const {conditions, removeCondition} = getCharacter()
+    const {conditions, removeCondition} = useCharacter()
     const tags = conditions.map((c) => html`<span class="condition button on" onClick=${e =>removeCondition(c)}>${c}</span>`)
     return html`<div id=conditions>${tags}</div>`
 }
 
 const RollTypeBar = function() {
-    const {activeType, setActiveType} = getCharacter()
+    const {activeType, setActiveType} = useCharacter()
     let types = []
     for (const type of ['Attacks', 'Skills', 'Saves', 'Checks']) {
         const active = type == activeType
@@ -102,7 +102,7 @@ const RollTypeBar = function() {
 
 
 const RollType = function() {
-    const {activeType} = getCharacter()
+    const {activeType} = useCharacter()
     if (activeType == 'Attacks') {
         return html`<${Attacks}/>`
     } else if (activeType == 'Skills') {
