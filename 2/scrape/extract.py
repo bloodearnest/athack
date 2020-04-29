@@ -121,6 +121,8 @@ def get_attack(attack):
             elif text in ('Booming Blade', 'Green-Flame Blade'):
                 options.update(attack_cantrip(text, note_elements))
             elif text != '+':
+                if text.lower() == 'thrown':
+                    types.add('Ranged')
                 notes.append(text)
 
         elif note_type == 'damage':
@@ -346,7 +348,7 @@ def main(characters):
             stat = get_text(skill, '.ct-skills__col--stat::text')
             bonus = get_text(skill, '.ct-skills__col--modifier *::text')
             skills[sname] = dict(
-                bonus=bonus, name=sname, ability=stat, type='skill')
+                bonus=bonus, name=sname, ability=stat.upper(), type='skill')
 
         for attack in selector.css('.ct-combat-attack'):
             data = get_attack(attack)

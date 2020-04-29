@@ -2,7 +2,7 @@ import '/web_modules/preact/debug.js';
 import { createContext } from '/web_modules/preact.js';
 import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
 import { html, map } from '/src/core.js'
-import { useCharacter, Modal, useRoll, Vantage} from '/src/components.js'
+import { useCharacter, Modal, useRoll, Vantage, FilterBar} from '/src/components.js'
 
 
 const AttackContext = createContext()
@@ -98,32 +98,14 @@ const Attack = function({attack}) {
     return html`<${Modal} class=attack button=${button} modal=${modal} reset=${roll.reset}/>`
 }
 
-const FILTERS = [
-    'Melee',
-    'Range',
-    'Spell',
-    'AoE',
-];
-
-
-const FilterBar = function() {
-    const {filter, setFilter} = useCharacter()
-    let filters = FILTERS.map((f) => {
-        const active = f == filter
-        const handler = active ? e => setFilter(null) : e => setFilter(f)
-        return html`
-            <span class="filter button ${active ? "on" : "off"}" onClick=${handler}>${f}</span>`
-    })
-    return html` <div id=filters class=row>${filters}</div>`
-}
-
 
 const Attacks = function() {
-    const {name, attacks, filter} = useCharacter()
+    const {name, attacks} = useCharacter()
+    const [attackType, setAttackType] = useState(null)
+    const filters = ['Melee', 'Ranged', 'Spell', 'AoE'];
 
-    // apply filters to attack list
-    let selected = ([n, a]) => !filter || a.types.includes(filter)
-
+    const bar = FilterBar({ filters: filters, current: attackType, set: setAttackType })
+    let selected = ([n, a]) => !attackType || a.types.includes(attackType)
     let elements = []
     for (let [name, attack] of Object.entries(attacks).filter(selected)) {
         elements.push(html`<${Attack} attack=${attack}/>`)
@@ -131,7 +113,7 @@ const Attacks = function() {
 
     return html`
         <section id=attacks>
-            <${FilterBar}/>
+            ${bar}
             ${elements}
         </section>
     `

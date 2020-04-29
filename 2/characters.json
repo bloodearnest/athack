@@ -165,8 +165,8 @@
                     "range": "20 (60)",
                     "tohit": "+5",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dawn": {
@@ -738,8 +738,8 @@
                     "range": "20 (60)",
                     "tohit": "+7",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Fire Bolt": {
@@ -1191,8 +1191,8 @@
                     "range": "20 (60)",
                     "tohit": "+7",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dissonant Whispers": {
@@ -1689,8 +1689,8 @@
                     "range": "20 (60)",
                     "tohit": "+5",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Hail of Thorns": {
@@ -1733,8 +1733,8 @@
                     "range": "20 (60)",
                     "tohit": "+2",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Longbow": {
@@ -1790,8 +1790,8 @@
                     "range": "20 (60)",
                     "tohit": "+2",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Unarmed Strike": {
@@ -2020,8 +2020,8 @@
                     "range": "30 (120)",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Quarterstaff": {
@@ -2610,8 +2610,8 @@
                     "range": "20 (60)",
                     "tohit": "+4",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dissonant Whispers": {
@@ -3242,8 +3242,8 @@
                     "range": "20 (60)",
                     "tohit": "+5",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dart": {
@@ -3493,8 +3493,8 @@
                     "range": "20 (60)",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Spiritual Weapon": {
@@ -3539,8 +3539,8 @@
                     "range": "20 (60)",
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Thunderous Smite": {

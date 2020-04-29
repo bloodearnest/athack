@@ -258,13 +258,35 @@ const Roll = function(props) {
     `
 }
 
+const FilterBar = function({filters, current, set}) {
+    const filterButtons = filters.map((f) => {
+        const active = f == current
+        const handler = active ? e => set(null) : e => set(f)
+        return html`
+            <span class="filter button ${active ? "on" : "off"}" onClick=${handler}>${f}</span>`
+    })
+    return html` <div id=filters>${filterButtons}</div>`
+}
+
 
 const Skills = function() {
     const character = useCharacter()
-    const skills = map(character.skills, (id, skill) => {
+    const [ability, setAbility] = useState(null)
+
+    const filters = Object.keys(ATTRIBUTES).filter(a => a != 'con').map(a => a.toUpperCase())
+    const bar = FilterBar({ filters: filters, current: ability, set: setAbility })
+    const selectedSkills = Object.entries(character.skills).filter(([k, v]) => {
+        return ability == null || v.ability == ability
+    })
+    const skills = map(selectedSkills, (i, [id, skill]) => {
         return html`<${Roll} id=${id} class=skill extra=Guidance ...${skill}/>`
     })
-    return html`<section id=skills>${skills}</section>`
+    return html`
+        <section id=skills>
+            ${bar}
+            ${skills}
+        </section>
+    `
 }
 
 const Checks = function() {
@@ -300,6 +322,7 @@ export {
     Saves,
     Skills,
     Vantage,
+    FilterBar,
     useRoll,
 }
 
