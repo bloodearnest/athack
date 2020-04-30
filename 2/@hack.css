@@ -6,6 +6,7 @@ body {
   width: 100%;
   color: #58180D;
 }
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -33,7 +34,7 @@ body {
   color: #EEE5CE;
 }
 
-.off .button:active {
+.button.off:active {
   background-image: none;
   background-color: #58180D;
   color: #EEE5CE;
@@ -201,9 +202,9 @@ section {
 }
 
 .attack .summary .button {
-  font-size: 3rem;
-  padding: 1.5rem 1rem;
-  width: 16rem;
+  font-size: 4rem;
+  padding: 1rem 1rem;
+  width: 18rem;
   text-align: center;
 }
 
@@ -301,10 +302,6 @@ section {
 .roll-menu.modal {
   height: 94%;
   padding: 1rem;
-}
-
-.roll-details > div {
-  margin-top: 1rem;
 }
 
 /* skill styles */

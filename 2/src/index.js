@@ -27,8 +27,8 @@ const CharacterBar = function({characters}) {
 const CharacterSelector = function({characters}) {
     let {name, setCharacter} = useCharacter()
 
-    const button = (show) => {
-        return html`<span class=name onClick=${show}>${name || 'Character...'}</span>`
+    const button = (show, cls) => {
+        return html`<span class="name ${cls}" onClick=${show}>${name || 'Character...'}</span>`
     }
 
     const modal = (hide) => {
@@ -56,7 +56,7 @@ const CharacterSelector = function({characters}) {
 const AddCondition = function() {
     const {conditions, addCondition} = useCharacter()
 
-    const button = (show) => html`<span class=button onClick=${show}>+</span>`
+    const button = (show, cls) => html`<span class="button ${cls}" onClick=${show}>+</span>`
     const optionList = (close) => {
         let options = []
         const select = (e) => {

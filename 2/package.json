@@ -18,8 +18,7 @@
       "htm",
       "preact",
       "preact/hooks",
-      "preact/debug",
-      "preact/compat"
+      "preact/debug"
     ]
   }
 }

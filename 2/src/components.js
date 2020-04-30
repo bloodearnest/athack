@@ -1,22 +1,6 @@
 import { html, map, GetVantage, ATTRIBUTES } from '/src/core.js'
 import { createContext } from '/web_modules/preact.js';
-import { createPortal } from '/web_modules/preact/compat.js'
 import { useState, useEffect, useMemo, useContext, useRef } from '/web_modules/preact/hooks.js';
-
-
-function usePortal(id) {
-  const rootElemRef = useRef(document.createElement('div'));
-
-  useEffect(function setupElement() {
-    const parentElem = document.querySelector(`#${id}`);
-    parentElem.appendChild(rootElemRef.current);
-    return function removeElement() {
-      rootElemRef.current.remove();
-    };
-  }, []);
-
-  return rootElemRef.current;
-}
 
 
 // state helper: index a state by the current character
@@ -133,7 +117,6 @@ function useClickOutside(ref, handler) {
 
 const Modal = function(props) {
     const ref = useRef()
-    const portalRef = usePortal('modals')
     const [visible, setVisible] = useState(false)
     const hide = () => {
         setVisible(false);
@@ -145,16 +128,20 @@ const Modal = function(props) {
     }
     useClickOutside(ref, hide)
     const cls = (visible ? 'on' : 'off')
-    const portal = createPortal(html`
-        <div class="modal ${props.class} ${cls}" ref=${ref} >
+    const modal = !visible ? null : html`
+        <div class="modal ${props.class}" ref=${ref} >
             <span class=close onClick=${hide}>X</span>
             ${props.modal(hide)}
         </div>
-    `, portalRef)
+    `
+    useEffect(() => {
+        ref.current && ref.current.classList.add('on')
+    })
+
     return html`
         <div class="${props.class} modal-wrapper">
-            <div class="switch ${cls}">${props.button(show)}</div>
-            ${portal}
+            ${props.button(show, cls)}
+            ${modal}
         </div
     `
 }
@@ -236,7 +223,7 @@ const useRoll = function({id, type, name, bonus, options}) {
 
 const Roll = function(props) {
     const roll = useRoll({...props})
-    const button = (show) => html`<span class=button onClick=${show}>${props.bonus}</span>`
+    const button = (show, cls) => html`<span class="button ${cls}" onClick=${show}>${props.bonus}</span>`
     const modal = (hide) => {
         return html`
             <div class=roll-details>

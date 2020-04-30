@@ -83,11 +83,11 @@ const Attack = function({attack}) {
     }
     text = text.replace(/ /g, '\u00A0')
 
-    const button = (show) => {
+    const button = (show, cls) => {
         return html`
             <div class=summary>
                 <span class=name>${attack.name}</span>
-                <span class=button onClick=${show}>${text}</span>
+                <span class="button ${cls}" onClick=${show}>${text}</span>
             </div>
         `
     }
