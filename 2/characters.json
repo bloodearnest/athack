@@ -127,7 +127,8 @@
                     "save": "CON 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/blight"
                 },
                 "Crossbow, Light": {
                     "damage": {
@@ -165,8 +166,8 @@
                     "range": "20 (60)",
                     "tohit": "+5",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Dawn": {
@@ -190,7 +191,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/dawn"
                 },
                 "Guiding Bolt": {
                     "damage": {
@@ -236,7 +238,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/guiding-bolt"
                 },
                 "Life Transference": {
                     "components": [
@@ -270,7 +273,8 @@
                     "save": "",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/life-transference"
                 },
                 "Ray of Enfeeblement": {
                     "damage": {},
@@ -287,7 +291,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/ray-of-enfeeblement"
                 },
                 "Sacred Flame": {
                     "components": [
@@ -307,7 +312,8 @@
                     "save": "DEX 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/sacred-flame"
                 },
                 "Spirit Guardians": {
                     "components": [
@@ -343,7 +349,8 @@
                     "save": "WIS 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/spirit-guardians"
                 },
                 "Spiritual Weapon": {
                     "damage": {
@@ -382,7 +389,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/spiritual-weapon"
                 },
                 "Toll the Dead": {
                     "components": [
@@ -409,7 +417,8 @@
                     "save": "WIS 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/toll-the-dead"
                 },
                 "Unarmed Strike": {
                     "damage": {
@@ -458,7 +467,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/vampiric-touch"
                 }
             },
             "saves": {
@@ -686,7 +696,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/burning-hands"
                 },
                 "Cone of Cold": {
                     "components": [
@@ -708,7 +719,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/cone-of-cold"
                 },
                 "Dagger": {
                     "damage": {
@@ -738,8 +750,8 @@
                     "range": "20 (60)",
                     "tohit": "+7",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Fire Bolt": {
@@ -757,7 +769,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/fire-bolt"
                 },
                 "Fireball": {
                     "components": [
@@ -794,7 +807,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/fireball"
                 },
                 "Longbow": {
                     "damage": {
@@ -837,7 +851,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/maximilians-earthen-grasp"
                 },
                 "Melf's Minute Meteors": {
                     "components": [
@@ -873,7 +888,8 @@
                     "save": "DEX 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/melf's-minute-meteors"
                 },
                 "Synaptic Static": {
                     "components": [
@@ -894,7 +910,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/synaptic-static"
                 },
                 "Thunder Step": {
                     "components": [
@@ -927,7 +944,8 @@
                     "save": "CON 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/thunder-step"
                 },
                 "Unarmed Strike": {
                     "damage": {
@@ -971,7 +989,8 @@
                     "save": "DEX 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/wall-of-fire"
                 }
             },
             "saves": {
@@ -1191,8 +1210,8 @@
                     "range": "20 (60)",
                     "tohit": "+7",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Dissonant Whispers": {
@@ -1234,7 +1253,8 @@
                     "save": "WIS 16",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/dissonant-whispers"
                 },
                 "Eldritch Blast": {
                     "damage": {
@@ -1258,7 +1278,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/eldritch-blast"
                 },
                 "Fireball": {
                     "components": [
@@ -1288,7 +1309,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/fireball"
                 },
                 "Heat Metal": {
                     "components": [
@@ -1325,7 +1347,8 @@
                     "save": "",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/heat-metal"
                 },
                 "Hellish Rebuke": {
                     "components": [
@@ -1366,7 +1389,8 @@
                     "save": "DEX 16",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/hellish-rebuke"
                 },
                 "Pistol": {
                     "damage": {
@@ -1411,7 +1435,8 @@
                     "save": "CON 16",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/poison-spray"
                 },
                 "Rapier of Warning": {
                     "damage": {
@@ -1487,7 +1512,8 @@
                     "save": "WIS 16",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/vicious-mockery"
                 }
             },
             "saves": {
@@ -1689,8 +1715,8 @@
                     "range": "20 (60)",
                     "tohit": "+5",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Hail of Thorns": {
@@ -1710,7 +1736,8 @@
                     "save": "DEX 12",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/hail-of-thorns"
                 },
                 "Handaxe": {
                     "damage": {
@@ -1733,8 +1760,8 @@
                     "range": "20 (60)",
                     "tohit": "+2",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Longbow": {
@@ -1790,8 +1817,8 @@
                     "range": "20 (60)",
                     "tohit": "+2",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Unarmed Strike": {
@@ -2020,8 +2047,8 @@
                     "range": "30 (120)",
                     "tohit": "+9",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Quarterstaff": {
@@ -2315,7 +2342,8 @@
                     "save": "",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/absorb-elements"
                 },
                 "Quarterstaff": {
                     "damage": {
@@ -2379,7 +2407,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/ray-of-sickness"
                 },
                 "Unarmed Strike": {
                     "damage": {
@@ -2610,8 +2639,8 @@
                     "range": "20 (60)",
                     "tohit": "+4",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Dissonant Whispers": {
@@ -2639,7 +2668,8 @@
                     "save": "WIS 13",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/dissonant-whispers"
                 },
                 "Rapier": {
                     "damage": {
@@ -2691,7 +2721,8 @@
                     "save": "WIS 13",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/vicious-mockery"
                 }
             },
             "saves": {
@@ -2906,7 +2937,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/call-lightning"
                 },
                 "Moonbeam": {
                     "components": [
@@ -2951,7 +2983,8 @@
                     "types": [
                         "Spell",
                         "AoE"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/moonbeam"
                 },
                 "Primal Savagery": {
                     "damage": {
@@ -2968,7 +3001,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/primal-savagery"
                 },
                 "Shillelagh": {
                     "damage": {
@@ -2985,7 +3019,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/shillelagh"
                 },
                 "Staff of the Jungle": {
                     "damage": {
@@ -3046,7 +3081,8 @@
                     "save": "STR 17",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/wind-wall"
                 }
             },
             "saves": {
@@ -3242,8 +3278,8 @@
                     "range": "20 (60)",
                     "tohit": "+5",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Dart": {
@@ -3493,8 +3529,8 @@
                     "range": "20 (60)",
                     "tohit": "+9",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Spiritual Weapon": {
@@ -3520,7 +3556,8 @@
                     "types": [
                         "Spell",
                         "Ranged"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/spiritual-weapon"
                 },
                 "Thunder": {
                     "damage": {
@@ -3539,8 +3576,8 @@
                     "range": "20 (60)",
                     "tohit": "+9",
                     "types": [
-                        "Melee",
-                        "Ranged"
+                        "Ranged",
+                        "Melee"
                     ]
                 },
                 "Thunderous Smite": {
@@ -3560,7 +3597,8 @@
                     "save": "STR 14",
                     "types": [
                         "Spell"
-                    ]
+                    ],
+                    "url": "https://dndbeyond.com/spells/thunderous-smite"
                 },
                 "Unarmed Strike": {
                     "damage": {

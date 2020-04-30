@@ -2,7 +2,7 @@ import '/web_modules/preact/debug.js';
 import { createContext } from '/web_modules/preact.js';
 import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
 import { html, map } from '/src/core.js'
-import { useCharacter, Modal, useRoll, Vantage, FilterBar} from '/src/components.js'
+import { useCharacter, CardModal, Modal, useRoll, Vantage, FilterBar} from '/src/components.js'
 
 
 const AttackContext = createContext()
@@ -44,6 +44,10 @@ const AttackDetails = function({hide, attack, roll}) {
     if (attack.range)  { add('range', 'Range',  `${attack.range}`) }
     if (attack.damage) { add('damage','Damage', html`<${Damage} damage=${attack.damage}/>`) }
     if (attack.effect) { add('effect','Effect', `${attack.effect}`) }
+    if (attack.secondary) {
+        if (attack.secondary.damage) { add('secondary-damage', 'Secondary Damage', html`<${Damage} damage=${attack.secondary.damage}/>` )}
+        if (attack.secondary.effect) { add('secondary-effect', 'Secondary Effect', `${attack.secondary.effect}`)}
+    }
 
     let opts = map(attack.options, (n, o) => {
         const active = activeOptions.includes(n)
@@ -56,9 +60,14 @@ const AttackDetails = function({hide, attack, roll}) {
         conditions = html`<${Vantage} roll=${roll} extra=AUTOCRIT/>`
     }
 
+    let name = attack.name
+    if (attack.url) {
+        name = html`<a href=${attack.url}>${attack.name}</a>`
+    }
+
     return html`
         <div class=details>
-            <div class="name title">${attack.name}</div>
+            <div class="name title">${name}</div>
             ${details}
             ${conditions}
             <div class=options>${opts}</div>
@@ -82,11 +91,15 @@ const Attack = function({attack}) {
         }
     }
     text = text.replace(/ /g, '\u00A0')
+    let name = attack.name
+    if (attack.url) {
+        name = html`<a href=${attack.url} target=_blank>${attack.name}</a>`
+    }
 
     const button = (show, cls) => {
         return html`
             <div class=summary>
-                <span class=name>${attack.name}</span>
+                <span class=name>${name}</span>
                 <span class="button ${cls}" onClick=${show}>${text}</span>
             </div>
         `
@@ -94,8 +107,10 @@ const Attack = function({attack}) {
     const modal = (hide) => {
         return html`<${AttackDetails} hide=${hide} attack=${attack} roll=${roll}/>`
     }
+    const back = (hide) => html`<div>test back content</div>`
 
-    return html`<${Modal} class=attack button=${button} modal=${modal} reset=${roll.reset}/>`
+    return html`<${CardModal} class=attack button=${button} front=${modal} back=${back} reset=${roll.reset}/>`
+    //return html`<${Modal} class=attack button=${button} modal=${modal} back=${back} reset=${roll.reset}/>`
 }
 
 

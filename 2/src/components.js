@@ -115,36 +115,99 @@ function useClickOutside(ref, handler) {
     })
 }
 
-const Modal = function(props) {
+
+const useModal = function({reset}) {
     const ref = useRef()
     const [visible, setVisible] = useState(false)
     const hide = () => {
         setVisible(false);
-        props.reset && props.reset()
+        reset && reset()
     }
     const show = () => {
-        props.reset && props.reset()
+        reset && reset()
         setVisible(true);
     }
-    useClickOutside(ref, hide)
     const cls = (visible ? 'on' : 'off')
-    const modal = !visible ? null : html`
-        <div class="modal ${props.class}" ref=${ref} >
-            <span class=close onClick=${hide}>X</span>
-            ${props.modal(hide)}
-        </div>
-    `
+    useClickOutside(ref, hide)
     useEffect(() => {
         ref.current && ref.current.classList.add('on')
     })
 
+    return {
+        ref: ref,
+        visible: visible,
+        hide: hide,
+        show: show,
+        cls: cls,
+    }
+}
+
+const Modal = function(props) {
+    const state = useModal({reset: props.reset})
+    const modal = !state.visible ? null : html`
+        <div class="modal ${props.class}" ref=${state.ref} >
+            <div class=content>
+                <span class=close onClick=${state.hide}>X</span>
+                ${props.modal(state.hide)}
+            </div>
+        </div>
+    `
     return html`
         <div class="${props.class} modal-wrapper">
-            ${props.button(show, cls)}
+            ${props.button(state.show, state.cls)}
             ${modal}
         </div
     `
 }
+
+
+const useFlipButton = function(ref) {
+    const flipRef = useRef()
+    const flip = e => {
+        ref.current && ref.current.classList.toggle('flipped')
+    }
+    // do the flip by class manipulation
+    useEffect(() => {
+        flipRef.current && flipRef.current.addEventListener('click', flip, false)
+        return () => flipRef.current && flipRef.current.removeEventListener('click', flip, false)
+    })
+    return flipRef
+}
+
+
+const CardModal = function(props) {
+    const state = useModal({reset: props.reset})
+    const flipFrontRef = useFlipButton(state.ref)
+    const flipBackRef = useFlipButton(state.ref)
+
+    // modal is position: fixed, so we need to have card-outer to set a 3d
+    // context, and card-inner to actuall flip
+    const modal = !state.visible ? null : html`
+        <div class="modal ${props.class}" ref=${state.ref}>
+            <div class=card-outer>
+                <div class=card-inner>
+                    <div class="front content">
+                        <span class=close onClick=${state.hide}>X</span>
+                        <span class=flip ref=${flipFrontRef}>F</span>
+                        ${props.front(state.hide)}
+                    </div>
+                    <div class="back content">
+                        <span class=close onClick=${state.hide}>X</span>
+                        <span class=flip ref=${flipBackRef}>F</span>
+                        ${props.back(state.hide)}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+    return html`
+        <div class="${props.class} card modal-wrapper">
+            ${props.button(state.show, state.cls)}
+            ${modal}
+        </div
+    `
+}
+
 
 
 const useRoll = function({id, type, name, bonus, options}) {
@@ -305,6 +368,7 @@ export {
     useCharacter, CharacterProvider,
     Roll,
     Modal,
+    CardModal,
     Checks,
     Saves,
     Skills,

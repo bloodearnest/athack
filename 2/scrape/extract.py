@@ -268,6 +268,10 @@ def clean(attack):
     attack['range'] = attack['range'].replace('FT', 'ft')
     attack['range'] = attack['range'].replace('SELF', 'Self')
 
+    if 'Spell' in attack['types']:
+        slug = attack['name'].replace(' ', '-').replace('’', '').lower()
+        attack['url'] = 'https://dndbeyond.com/spells/' + slug
+
     for note in attack['notes']:
         if note.lower() == attack['range'].lower():
             attack['notes'].remove(note)
@@ -276,6 +280,7 @@ def clean(attack):
             value = '{} ({})'.format(*values)
             assert value == attack['range'], 'mismatched ranges'
             attack['notes'].remove(note)
+
 
 
 
