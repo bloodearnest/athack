@@ -161,39 +161,38 @@ const Modal = function(props) {
 }
 
 
-const useFlipButton = function(ref) {
+// Button that onclick toggles the flipped class to the target ref.
+// Changing the class via Preact creates a nasty flicker on rerender.
+const FlipButton = function(props) {
     const flipRef = useRef()
-    const flip = e => {
-        ref.current && ref.current.classList.toggle('flipped')
-    }
-    // do the flip by class manipulation
+    const target = props.target
+    const flip = e => { target.current && target.current.classList.toggle('flipped') }
+    // do the flip by DOM class manipulation
     useEffect(() => {
         flipRef.current && flipRef.current.addEventListener('click', flip, false)
         return () => flipRef.current && flipRef.current.removeEventListener('click', flip, false)
     })
-    return flipRef
+    return html`<span class=flip ref=${flipRef}>${props.children}</span>`
 }
 
 
+// A modal that has a back that can be flipped over to show
 const CardModal = function(props) {
     const state = useModal({reset: props.reset})
-    const flipFrontRef = useFlipButton(state.ref)
-    const flipBackRef = useFlipButton(state.ref)
-
     // modal is position: fixed, so we need to have card-outer to set a 3d
-    // context, and card-inner to actuall flip
+    // context, and card-inner to actually flip
     const modal = !state.visible ? null : html`
         <div class="modal ${props.class}" ref=${state.ref}>
             <div class=card-outer>
                 <div class=card-inner>
                     <div class="front content">
                         <span class=close onClick=${state.hide}>X</span>
-                        <span class=flip ref=${flipFrontRef}>F</span>
+                        <${FlipButton} target=${state.ref}>F</${FlipButton}>
                         ${props.front(state.hide)}
                     </div>
                     <div class="back content">
                         <span class=close onClick=${state.hide}>X</span>
-                        <span class=flip ref=${flipBackRef}>F</span>
+                        <${FlipButton} target=${state.ref}>F</${FlipButton}>
                         ${props.back(state.hide)}
                     </div>
                 </div>
