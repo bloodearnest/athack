@@ -215,8 +215,8 @@
                     ],
                     "tohit": "+5",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dawn": {
@@ -302,8 +302,8 @@
                     ],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/guiding-bolt"
                 },
@@ -369,8 +369,8 @@
                     ],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/ray-of-enfeeblement"
                 },
@@ -492,8 +492,8 @@
                     ],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/spiritual-weapon"
                 },
@@ -585,8 +585,8 @@
                     ],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/vampiric-touch"
                 }
@@ -904,8 +904,8 @@
                     ],
                     "tohit": "+7",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Fire Bolt": {
@@ -928,8 +928,8 @@
                     ],
                     "tohit": "+10",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/fire-bolt"
                 },
@@ -1465,8 +1465,8 @@
                     ],
                     "tohit": "+7",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dissonant Whispers": {
@@ -1523,6 +1523,10 @@
                     "damage": {
                         "Force": "1d10+4"
                     },
+                    "description": [
+                        "A beam of crackling energy streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 force damage.",
+                        "The spell creates more than one beam when you reach higher levels: two beams at 5th level, three beams at 11th level, and four beams at 17th level. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam."
+                    ],
                     "name": "Eldritch Blast",
                     "notes": [
                         "Cantrip",
@@ -1537,10 +1541,13 @@
                         }
                     },
                     "range": "120 ft.",
+                    "tags": [
+                        "Damage"
+                    ],
                     "tohit": "+8",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/eldritch-blast"
                 },
@@ -1638,6 +1645,10 @@
                     "damage": {
                         "Fire": "2d10"
                     },
+                    "description": [
+                        "You point your finger, and the creature that damaged you is momentarily surrounded by hellish flames. The creature must make a Dexterity saving throw. It takes 2d10 fire damage on a failed save, or half as much damage on a successful one.",
+                        "At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st."
+                    ],
                     "name": "Hellish Rebuke",
                     "notes": [
                         "1st Level"
@@ -1667,6 +1678,9 @@
                     },
                     "range": "60 ft.",
                     "save": "DEX 16",
+                    "tags": [
+                        "Damage"
+                    ],
                     "types": [
                         "Spell"
                     ],
@@ -2059,8 +2073,8 @@
                     ],
                     "tohit": "+5",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Hail of Thorns": {
@@ -2126,8 +2140,8 @@
                     ],
                     "tohit": "+2",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Longbow": {
@@ -2222,8 +2236,8 @@
                     ],
                     "tohit": "+2",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Unarmed Strike": {
@@ -2464,8 +2478,8 @@
                     ],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Quarterstaff": {
@@ -2752,6 +2766,10 @@
                     "damage": {
                         "Elemental": "1d6"
                     },
+                    "description": [
+                        "The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.",
+                        "At Higher Levels.\u00a0When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st."
+                    ],
                     "effect": "You choose from Acid, Cold, Fire, Lightning, or Thunder. You canand can damage to your first melee hit next turn.",
                     "name": "Absorb Elements",
                     "notes": [
@@ -2783,6 +2801,10 @@
                     },
                     "range": "Self",
                     "save": "",
+                    "tags": [
+                        "Damage",
+                        "Warding"
+                    ],
                     "types": [
                         "Spell"
                     ],
@@ -2827,6 +2849,10 @@
                     "damage": {
                         "Poison": "2d8"
                     },
+                    "description": [
+                        "A ray of sickening greenish energy lashes out toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 poison damage and must make a Constitution saving throw. On a failed save, it is also poisoned until the end of your next turn.",
+                        "At Higher Levels.\u00a0When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st."
+                    ],
                     "effect": "DC 16 Con save or poisoned",
                     "name": "Ray of Sickness",
                     "notes": [
@@ -2857,10 +2883,14 @@
                         }
                     },
                     "range": "60 ft.",
+                    "tags": [
+                        "Damage",
+                        "Debuff"
+                    ],
                     "tohit": "+8",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/ray-of-sickness"
                 },
@@ -3133,8 +3163,8 @@
                     ],
                     "tohit": "+4",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dissonant Whispers": {
@@ -3547,8 +3577,8 @@
                     ],
                     "tohit": "+10",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/primal-savagery"
                 },
@@ -3572,8 +3602,8 @@
                     ],
                     "tohit": "+10",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/shillelagh"
                 },
@@ -3874,8 +3904,8 @@
                     ],
                     "tohit": "+5",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Dart": {
@@ -4165,8 +4195,8 @@
                     "tags": [],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Spiritual Weapon": {
@@ -4199,8 +4229,8 @@
                     ],
                     "tohit": "+6",
                     "types": [
-                        "Ranged",
-                        "Spell"
+                        "Spell",
+                        "Ranged"
                     ],
                     "url": "https://dndbeyond.com/spells/spiritual-weapon"
                 },
@@ -4234,8 +4264,8 @@
                     "tags": [],
                     "tohit": "+9",
                     "types": [
-                        "Ranged",
-                        "Melee"
+                        "Melee",
+                        "Ranged"
                     ]
                 },
                 "Thunderous Smite": {

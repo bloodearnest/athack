@@ -12,6 +12,9 @@ def parse_json(path):
     }
 
     spell_list = []
+    for class_spells in data.get('classSpells', []):
+        spell_list.extend(class_spells.get('spells', []))
+
     try:
         spell_list.extend(data['classSpells'][0]['spells'])
     except KeyError:
