@@ -2,7 +2,7 @@ characters.json: campaigns.yaml characters.yaml scrape/build.py env/done
 	env/bin/python scrape/build.py > .tmp.json
 	mv .tmp.json $@
 
-characters.yaml: env/done scrape/data/*.html scrape/extract.py scrape/special.py
+characters.yaml: env/done scrape/data/*.html scrape/*.py
 	env/bin/python scrape/extract.py campaigns.yaml > .tmp.yaml
 	mv .tmp.yaml characters.yaml
 

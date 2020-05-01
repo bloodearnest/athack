@@ -1,6 +1,7 @@
-import { html, map, GetVantage, ATTRIBUTES } from '/src/core.js'
 import { createContext } from '/web_modules/preact.js';
+import { html, map, GetVantage, ATTRIBUTES, useSwipe, useEventListener } from '/src/core.js'
 import { useState, useEffect, useMemo, useContext, useRef } from '/web_modules/preact/hooks.js';
+
 
 
 // state helper: index a state by the current character
@@ -64,10 +65,10 @@ function CharacterProvider(props) {
     const contextValue = {
         group: group,
         name: name,
-        attacks: data.attacks,
-        saves: data.saves,
-        abilities: data.abilities,
-        skills: data.skills,
+        attacks: data.attacks || {},
+        saves: data.saves || {},
+        abilities: data.abilities || {},
+        skills: data.skills || {},
         conditions: conditions,
         vantage: vantage,
         filter: filter,
@@ -115,21 +116,36 @@ function useClickOutside(ref, handler) {
     })
 }
 
+const YouShallNotPass = (e) => {
+    e.preventDefault && e.preventDefault()
+    e.stopPropagation && e.stopPropagation()
+    e.nativeEvent && e.nativeEvent.stopImmediatePropagation();
+}
 
 const useModal = function({reset}) {
     const ref = useRef()
     const [visible, setVisible] = useState(false)
-    const hide = () => {
-        setVisible(false);
-        reset && reset()
+
+    const remove = () => {
+        console.log('remove')
+        setVisible(false)
     }
-    const show = () => {
+    const hide = (e) => {
+        console.log('hide')
+        ref.current.classList.replace('on', 'off')
+        YouShallNotPass(e)
+        setTimeout(remove, 400)
+    }
+
+    const show = (e) => {
+        console.log('show')
         reset && reset()
-        setVisible(true);
+        setVisible(true)
     }
     const cls = (visible ? 'on' : 'off')
-    useClickOutside(ref, hide)
+    //useClickOutside(ref, hide)
     useEffect(() => {
+        console.log('DOM show')
         ref.current && ref.current.classList.add('on')
     })
 
@@ -147,8 +163,15 @@ const Modal = function(props) {
     const modal = !state.visible ? null : html`
         <div class="modal ${props.class}" ref=${state.ref} >
             <div class=content>
-                <span class=close onClick=${state.hide}>X</span>
-                ${props.modal(state.hide)}
+                <div class=head>
+                    <span class=title>${props.title}</span>
+                    <span class=controls>
+                        <span class=close onClick=${state.hide}>X</span>
+                    </span>
+                </div>
+                <div class=body>
+                    ${props.modal(state.hide)}
+                </div>
             </div>
         </div>
     `
@@ -161,44 +184,74 @@ const Modal = function(props) {
 }
 
 
-// Button that onclick toggles the flipped class to the target ref.
-// Changing the class via Preact creates a nasty flicker on rerender.
-const FlipButton = function(props) {
-    const flipRef = useRef()
-    const target = props.target
-    const flip = e => { target.current && target.current.classList.toggle('flipped') }
-    // do the flip by DOM class manipulation
-    useEffect(() => {
-        flipRef.current && flipRef.current.addEventListener('click', flip, false)
-        return () => flipRef.current && flipRef.current.removeEventListener('click', flip, false)
-    })
-    return html`<span class=flip ref=${flipRef}>${props.children}</span>`
-}
-
-
-// A modal that has a back that can be flipped over to show
-const CardModal = function(props) {
-    const state = useModal({reset: props.reset})
+const CardContent = function(props) {
     // modal is position: fixed, so we need to have card-outer to set a 3d
     // context, and card-inner to actually flip
-    const modal = !state.visible ? null : html`
-        <div class="modal ${props.class}" ref=${state.ref}>
+    const flip = direction => {
+        console.log('flip ' + direction)
+        const elem = props.state.ref.current
+        if (!elem) {
+            return
+        }
+        if (direction == 'right') {
+            elem.classList.add('flipped')
+        } else if (direction == 'left') {
+            elem.classList.remove('flipped')
+        } else {
+            elem.classList.toggle('flipped')
+        }
+    }
+    // because we want events to
+    const fakeClick = e => {
+        console.log('fakeClick')
+        if (e.target.classList.contains('flip')) {
+            flip(e)
+        } else if (e.target.classList.contains('close')) {
+            props.state.hide(e)
+        }
+        YouShallNotPass(e)
+    }
+    useEventListener('pointerup', fakeClick, props.state.ref)
+    useSwipe(flip, props.state.ref, 100)
+    return html`
+        <div class="modal ${props.class}" ref=${props.state.ref}>
             <div class=card-outer>
                 <div class=card-inner>
                     <div class="front content">
-                        <span class=close onClick=${state.hide}>X</span>
-                        <${FlipButton} target=${state.ref}>F</${FlipButton}>
-                        ${props.front(state.hide)}
+                        <div class=head>
+                            <span class=title>${props.title}</span>
+                            <span class=controls>
+                                <span class=flip>${'>'}</span>
+                                <span class=close >X</span>
+                            </span>
+                        </div>
+                        <div class=body>
+                            ${props.front(props.state.hide)}
+                        </div>
                     </div>
                     <div class="back content">
-                        <span class=close onClick=${state.hide}>X</span>
-                        <${FlipButton} target=${state.ref}>F</${FlipButton}>
-                        ${props.back(state.hide)}
+                        <div class=head>
+                            <span class=title>${props.title}</span>
+                            <span class=controls>
+                                <span class=flip>${'<'}</span>
+                                <span class=close>X</span>
+                            </span>
+                        </div>
+                        <div class=body>
+                            ${props.back(props.state.hide)}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     `
+
+}
+
+// A modal that has a back that can be flipped over to show
+const CardModal = function(props) {
+    const state = useModal({reset: props.reset})
+    const modal = state.visible ? html`<${CardContent} state=${state} ...${props}/>` : null
     return html`
         <div class="${props.class} card modal-wrapper">
             ${props.button(state.show, state.cls)}
@@ -302,7 +355,7 @@ const Roll = function(props) {
     return html`
         <div class="roll ${props.class}">
             <span class=name>${props.name}</div>
-            <${Modal} class=roll-menu button=${button} modal=${modal} reset=${roll.reset}/>
+            <${Modal} class=roll-menu title=${props.name} button=${button} modal=${modal} reset=${roll.reset}/>
         </div>
     `
 }

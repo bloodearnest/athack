@@ -67,12 +67,28 @@ const AttackDetails = function({hide, attack, roll}) {
 
     return html`
         <div class=details>
-            <div class="name title">${name}</div>
             ${details}
             ${conditions}
             <div class=options>${opts}</div>
         </div>
     `
+}
+
+
+const AttackDescription = function({attack}) {
+    const description = (attack.description || []).map(d => html`<p class=description>${d}</p>`)
+
+    const tag_list = Array.from(new Set(Object.keys(attack.properties || []).concat(attack.tags || []).concat(attack.notes)))
+    const tags = tag_list.map((t, i) => html`${i == 0 ? '': ', '}<span>${t}</span>`)
+    return html`
+        <div class=attack-description>
+            <div class=tags>
+                ${tags}
+            </div>
+            ${description}
+        </div>
+    `
+
 }
 
 const Attack = function({attack}) {
@@ -92,9 +108,6 @@ const Attack = function({attack}) {
     }
     text = text.replace(/ /g, '\u00A0')
     let name = attack.name
-    if (attack.url) {
-        name = html`<a href=${attack.url} target=_blank>${attack.name}</a>`
-    }
 
     const button = (show, cls) => {
         return html`
@@ -107,10 +120,9 @@ const Attack = function({attack}) {
     const modal = (hide) => {
         return html`<${AttackDetails} hide=${hide} attack=${attack} roll=${roll}/>`
     }
-    const back = (hide) => html`<div>test back content</div>`
+    const back = (hide) => html`<${AttackDescription} attack=${attack}/>`
 
-    return html`<${CardModal} class=attack button=${button} front=${modal} back=${back} reset=${roll.reset}/>`
-    //return html`<${Modal} class=attack button=${button} modal=${modal} back=${back} reset=${roll.reset}/>`
+    return html`<${CardModal} class=attack title=${attack.name} button=${button} front=${modal} back=${back} reset=${roll.reset}/>`
 }
 
 

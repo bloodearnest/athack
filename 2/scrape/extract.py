@@ -6,6 +6,7 @@ from parsel import Selector
 import parse
 
 import special
+import api
 
 DAMAGE_TYPES = {
    'acid',
@@ -58,7 +59,7 @@ def add_damage(dmg, type, amount):
         dmg[type] = amount
 
 
-def get_attack(attack):
+def get_attack(attack, inventory, spell_list):
     name = get_text(attack, CSS.name).replace('Concentration', '')
     notes = attack.css(CSS.type).getall()
     types = set()
@@ -146,6 +147,15 @@ def get_attack(attack):
             'options': options,
             'notes': notes,
         }
+        if name in inventory:
+            extra = inventory[name]
+            data['tags'] = list(extra['tags'])
+            data['description'] = extra['description']
+            data['properties'] = extra['properties']
+        elif name in spell_list:
+            extra = spell_list[name]
+            data['tags'] = list(extra['tags'])
+            data['description'] = extra['description']
         if effects:
             data['effect'] = ', '.join(effects)
         if tohit:
@@ -189,7 +199,7 @@ def attack_cantrip(text, notes):
     return options
 
 
-def get_spell(level, spell, attacks):
+def get_spell(level, spell, attacks, spell_list):
     name = get_text(spell, '.ct-spell-name::text')
     if name.lower() in special.SPELL_BLACKLIST:
         return
@@ -244,6 +254,11 @@ def get_spell(level, spell, attacks):
         )
         if save and level == 'Cantrip':
             data['half'] = False
+
+        if name in spell_list:
+            extra = spell_list[name]
+            data['tags'] = list(extra['tags'])
+            data['description'] = extra['description']
         special.handle(name, data)
         return data
 
@@ -317,17 +332,20 @@ def main(characters):
 
     for name in characters:
 
+        dir = os.path.dirname(os.path.abspath(__file__))
+        apath = os.path.join(dir, 'data', '{}.html'.format(name))
+        spath = os.path.join(dir, 'data', '{}_spells.html'.format(name))
+        jpath = os.path.join(dir, 'data', '{}.json'.format(name))
+
+        inventory, spell_list = api.parse_json(jpath)
         attacks = dict()
         abilities = dict()
         saves = dict()
         skills = dict()
 
-        dir = os.path.dirname(os.path.abspath(__file__))
-        apath = os.path.join(dir, 'data', '{}.html'.format(name))
-        spath = os.path.join(dir, 'data', '{}_spells.html'.format(name))
-
         with open(apath) as fp:
-               attacks_html = fp.read()
+            attacks_html = fp.read()
+
         selector = Selector(attacks_html)
 
         for ability in selector.css('.ct-quick-info__ability'):
@@ -356,7 +374,7 @@ def main(characters):
                 bonus=bonus, name=sname, ability=stat.upper(), type='skill')
 
         for attack in selector.css('.ct-combat-attack'):
-            data = get_attack(attack)
+            data = get_attack(attack, inventory, spell_list)
             if data:
                 clean(data)
                 attacks[data['name']] = data
@@ -376,7 +394,7 @@ def main(characters):
                     level_spells, '.ct-content-group__header-content::text')
 
                 for spell in level_spells.css('.ct-spells-spell'):
-                    data = get_spell(level, spell, attacks)
+                    data = get_spell(level, spell, attacks, spell_list)
                     if data:
                         clean(data)
                         attacks[data['name']] = data

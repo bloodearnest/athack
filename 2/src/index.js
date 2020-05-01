@@ -50,7 +50,7 @@ const CharacterSelector = function({characters}) {
         return html`<ul>${options}</ul>`
     }
 
-    return html`<${Modal} class=selector button=${button} modal=${modal}/>`
+    return html`<${Modal} class=selector title=Character button=${button} modal=${modal}/>`
 }
 
 const AddCondition = function() {
@@ -74,7 +74,7 @@ const AddCondition = function() {
         return html`<ul>${options}</ul>`
     }
 
-    return html`<${Modal} class="condition-menu" button=${button} modal=${optionList}/>`
+    return html`<${Modal} title="Status Effects" class="condition-menu" button=${button} modal=${optionList}/>`
 }
 
 const ConditionsBar = function() {

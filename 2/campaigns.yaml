@@ -3,25 +3,25 @@ toa:
     channel: toa
     characters: 
         Airnel:
-            url: https://ddb.ac/characters/1183264/1eK3Rw
+            url: https://ddb.ac/characters/1183264
         Areni:
-            url: https://ddb.ac/characters/16334152/1UU8vM
+            url: https://ddb.ac/characters/16334152
             rules: 
                 Damage Speciality: [Fire]
         Corminar:
-            url: https://ddb.ac/characters/1339195/vNUdni
+            url: https://ddb.ac/characters/1339195
             rules:
                 Hex: true
         Grondrath:
-            url: https://ddb.ac/characters/6579686/iJATQ1
+            url: https://ddb.ac/characters/6579686
             rules:
                 Rage: true
         Heston:
-            url: https://ddb.ac/characters/23253033/bqSxqn
+            url: https://ddb.ac/characters/23253033
         Nordan:
-            url: https://ddb.ac/characters/1133678/NUYblq
+            url: https://ddb.ac/characters/1133678
         Thorin:
-            url: https://ddb.ac/characters/1149756/Xz8mT2
+            url: https://ddb.ac/characters/1149756
             attacks:
                 Divine Smite:
 wm: 
@@ -29,15 +29,15 @@ wm:
     channel: wm
     characters:
         Jerem: 
-            url: https://ddb.ac/characters/3503461/mRsib5
+            url: https://ddb.ac/characters/3503461
             rules: {}
         The Count:
-            url: https://ddb.ac/characters/25661189/kW92K5
+            url: https://ddb.ac/characters/25661189
             rules: {}
         Vanuanth:
-            url: https://ddb.ac/characters/25582957/BZxLbI
+            url: https://ddb.ac/characters/25582957
             rules: {}
         Galmyn:
-            url: https://ddb.ac/characters/25661213/eIJxX2
+            url: https://ddb.ac/characters/25661213
             rules: 
                 Hunter's Mark: true
