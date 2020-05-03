@@ -1,6 +1,7 @@
 import { createContext } from '/web_modules/preact.js';
-import { html, map, GetVantage, ATTRIBUTES, useSwipe, useEventListener } from '/src/core.js'
 import { useState, useEffect, useMemo, useContext, useRef } from '/web_modules/preact/hooks.js';
+import { html, map, useSwipe, useEventListener } from '/src/core.js'
+import { ATTRIBUTES, d20Roll, getCharacterModifiers, getRollModifiers } from '/src/rules.js'
 
 
 
@@ -54,7 +55,7 @@ function CharacterProvider(props) {
     const [filter, setFilter] = useCharacterState(name, null)
     const [activeType, setActiveType] = useCharacterState(name, 'Attacks')
     const data = props.characters.characters[name] || {}
-    const vantage = useMemo(() => GetVantage(conditions), [conditions])
+    const vantage = useMemo(() => getCharacterModifiers(conditions), [conditions])
 
     const setNameAndHash = (name, group) => {
         setName(name)
@@ -222,7 +223,7 @@ const CardContent = function(props) {
                             <span class=title>${props.title}</span>
                             <span class=controls>
                                 <span class=flip>${'>'}</span>
-                                <span class=close >X</span>
+                                <span class=close onClick=${props.state.hide}>X</span>
                             </span>
                         </div>
                         <div class=body>
@@ -234,7 +235,7 @@ const CardContent = function(props) {
                             <span class=title>${props.title}</span>
                             <span class=controls>
                                 <span class=flip>${'<'}</span>
-                                <span class=close>X</span>
+                                <span class=close onClick=${props.state.hide}>X</span>
                             </span>
                         </div>
                         <div class=body>
@@ -262,12 +263,13 @@ const CardModal = function(props) {
 
 
 
-const useRoll = function({id, type, name, bonus, options}) {
+const useRoll = function({id, type, name, bonus, options, extra}) {
     // set the current vantage info for this roll
+    options = options || {}
     const {vantage} = useCharacter()
     let rollVantage = null
     if (type == 'save' && id) {
-        rollVantage = vantage[type][id]
+        rollVantage = vantage.save[id]
     } else {
         rollVantage = vantage[type]
     }
@@ -279,7 +281,7 @@ const useRoll = function({id, type, name, bonus, options}) {
 
     // this is Autocrit for attacks, Guidance for skills and checks, and
     // Resistance for saves.
-    const [extra, setExtra] = useState(false)
+    const [extraActive, setExtra] = useState(false)
 
     // reset roll to inital conditions vantage
     const reset = () => {
@@ -307,12 +309,19 @@ const useRoll = function({id, type, name, bonus, options}) {
         }
     }
 
+    const toggleExtra = () => {
+        const active = !extraActive
+        setExtra(active)
+        if (active) { addOption(extra) }
+        else { removeOption(extra) }
+    }
+
     // manage the active options
     const removeOption = removeFromListState(activeOptions, setActiveOptions)
     const addOption = opt => {
         let temp = activeOptions
         // spell slots are mutually exclusive, so deselect other slots
-        if (options[opt].type == 'spell slot') {
+        if (options[opt] && options[opt].type == 'spell slot') {
             // deselect all other spell slot options
             const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
             const toRemove = Object.entries(options).filter(selector)
@@ -321,18 +330,29 @@ const useRoll = function({id, type, name, bonus, options}) {
         setActiveOptions([...temp, opt])
     }
 
+
+    const doRoll = () => {
+        const rollModifiers = getRollModifiers(activeOptions, options || {})[type]
+        // copy in character modifiers
+        Object.assign(rollModifiers.modifiers, vantage[type].modifiers)
+        const {total, record} = d20Roll(bonus, advantage, disadvantage, rollModifiers.modifiers, {})
+        console.log(total)
+        console.log(record)
+    }
+
     return {
         advantage: advantage,
         disadvantage: disadvantage,
         vantage: rollVantage,
         activeOptions: activeOptions,
-        extra: extra,
+        extra: extraActive,
         reset: reset,
         toggleAdvantage: toggleAdvantage,
         toggleDisadvantage: toggleDisadvantage,
-        toggleExtra: () => setExtra(!extra),
+        toggleExtra: toggleExtra,
         removeOption: removeOption,
         addOption: addOption,
+        doRoll: doRoll,
     }
 }
 
@@ -348,6 +368,11 @@ const Roll = function(props) {
                     <span class=value>${props.bonus}</span>
                 </div>
                 <${Vantage} roll=${roll} extra=${props.extra}/>
+                <div class=doRoll>
+                    <span class=button onClick=${roll.doRoll}>Roll</span>
+                </div>
+                <div class=result>
+                </div>
             </div>
         `
     }
@@ -359,6 +384,7 @@ const Roll = function(props) {
         </div>
     `
 }
+
 
 const FilterBar = function({filters, current, set}) {
     const filterButtons = filters.map((f) => {

@@ -4,7 +4,6 @@ import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks
 import { html, map } from '/src/core.js'
 import { useCharacter, CardModal, Modal, useRoll, Vantage, FilterBar} from '/src/components.js'
 
-
 const AttackContext = createContext()
 
 const Damage = function({damage, sign}) {
