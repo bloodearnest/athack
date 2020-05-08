@@ -30,7 +30,9 @@ function removeFromListState(list, set) {
 
 // state helper to add an item to the supplied array and set it as new state
 function addToListState(list, set) {
-    return (item) => set([...list, item])
+    return (item) => {
+        set([...list, item])
+    }
 }
 
 
@@ -128,27 +130,21 @@ const useModal = function({reset}) {
     const [visible, setVisible] = useState(false)
 
     const remove = () => {
-        console.log('remove')
         setVisible(false)
     }
     const hide = (e) => {
-        console.log('hide')
         ref.current.classList.replace('on', 'off')
         YouShallNotPass(e)
         setTimeout(remove, 400)
     }
 
     const show = (e) => {
-        console.log('show')
         reset && reset()
         setVisible(true)
     }
     const cls = (visible ? 'on' : 'off')
     //useClickOutside(ref, hide)
-    useEffect(() => {
-        console.log('DOM show')
-        ref.current && ref.current.classList.add('on')
-    })
+    useEffect(() => ref.current && ref.current.classList.add('on') )
 
     return {
         ref: ref,
@@ -189,7 +185,6 @@ const CardContent = function(props) {
     // modal is position: fixed, so we need to have card-outer to set a 3d
     // context, and card-inner to actually flip
     const flip = direction => {
-        console.log('flip ' + direction)
         const elem = props.state.ref.current
         if (!elem) {
             return
@@ -262,36 +257,56 @@ const CardModal = function(props) {
 }
 
 
-
 const useRoll = function({id, type, name, bonus, options, extra}) {
-    // set the current vantage info for this roll
     options = options || {}
-    const {vantage} = useCharacter()
-    let rollVantage = null
-    if (type == 'save' && id) {
-        rollVantage = vantage.save[id]
-    } else {
-        rollVantage = vantage[type]
-    }
+    const character = useCharacter()
 
     // user state for this roll
     const [advantage, setAdvantage] = useState(false)
     const [disadvantage, setDisadvantage] = useState(false)
     const [activeOptions, setActiveOptions] = useState([])
-
     // this is Autocrit for attacks, Guidance for skills and checks, and
     // Resistance for saves.
     const [extraActive, setExtra] = useState(false)
+    // the result of the roll
+    const [result, setResult] = useState(null)
 
-    // reset roll to inital conditions vantage
-    const reset = () => {
-        setAdvantage(rollVantage.advantage)
-        setDisadvantage(rollVantage.disadvantage)
-        setExtra(false)
-        setActiveOptions([])
+    // get the current vantage for this roll type
+    let vantage = null
+    if (type == 'save' && id) {
+        vantage = character.vantage.save[id]
+    } else {
+        vantage = character.vantage[type]
     }
 
-    // turn on advantage (and off disadvantage)
+    // calculate current modifers for this roll, based on selected options
+    // this will
+    const rollModifiers = useMemo(
+        () => {
+            console.log('activeOptions changed, recalculating', activeOptions)
+            return getRollModifiers(activeOptions, options)
+        },
+        [activeOptions],
+    )
+
+    const getModifiers = (type) => {
+        return Object.assign(
+            {},
+            rollModifiers[type].modifiers,
+            character.vantage[type].modifiers,
+        )
+    }
+
+    // reset roll to inital conditions after this roll modal has been closed
+    const reset = () => {
+        setAdvantage(vantage.advantage)
+        setDisadvantage(vantage.disadvantage)
+        setExtra(false)
+        setActiveOptions([])
+        setResult(null)
+    }
+
+    // turn advantage on (and disadvantage off)
     const toggleAdvantage = () => {
         const adv = !advantage
         setAdvantage(adv)
@@ -300,7 +315,7 @@ const useRoll = function({id, type, name, bonus, options, extra}) {
         }
     }
 
-    // turn on disadvantage (and off advantage)
+    // turn disadvantage on (and advantage off)
     const toggleDisadvantage = () => {
         const dis = !disadvantage
         setDisadvantage(dis)
@@ -318,48 +333,44 @@ const useRoll = function({id, type, name, bonus, options, extra}) {
 
     // manage the active options
     const removeOption = removeFromListState(activeOptions, setActiveOptions)
-    const addOption = opt => {
-        let temp = activeOptions
-        // spell slots are mutually exclusive, so deselect other slots
-        if (options[opt] && options[opt].type == 'spell slot') {
-            // deselect all other spell slot options
-            const selector = ([k, v]) => k != opt && v['type'] == 'spell slot'
-            const toRemove = Object.entries(options).filter(selector)
-            temp = activeOptions.filter(o => toRemove.includes(o))
-        }
-        setActiveOptions([...temp, opt])
-    }
-
+    const addOption = addToListState(activeOptions, setActiveOptions)
 
     const doRoll = () => {
-        const rollModifiers = getRollModifiers(activeOptions, options || {})[type]
-        // copy in character modifiers
-        Object.assign(rollModifiers.modifiers, vantage[type].modifiers)
-        const {total, record} = d20Roll(bonus, advantage, disadvantage, rollModifiers.modifiers, {})
-        console.log(total)
-        console.log(record)
+        const result = d20Roll(bonus, advantage, disadvantage, getModifiers(type), {})
+        setTimeout(() => setResult(result), 1000)
     }
 
     return {
         advantage: advantage,
         disadvantage: disadvantage,
-        vantage: rollVantage,
         activeOptions: activeOptions,
         extra: extraActive,
+        extraName: extra,
+        vantage: vantage,
         reset: reset,
+        result: result,
+        getModifiers: getModifiers,
         toggleAdvantage: toggleAdvantage,
         toggleDisadvantage: toggleDisadvantage,
         toggleExtra: toggleExtra,
         removeOption: removeOption,
         addOption: addOption,
         doRoll: doRoll,
+        clearResult: () => setResult(null),
     }
 }
 
 const Roll = function(props) {
     const roll = useRoll({...props})
     const button = (show, cls) => html`<span class="button ${cls}" onClick=${show}>${props.bonus}</span>`
+
+    const result = roll.result ? html`<${Result} title=${props.name} result=${roll.result} clearResult=${roll.clearResult}/>` : null
+
     const modal = (hide) => {
+        const dropAndRoll = e => {
+            hide(e)
+            roll.doRoll()
+        }
         return html`
             <div class=roll-details>
                 <div class="roll-name title">${props.name} Check</div>
@@ -369,7 +380,7 @@ const Roll = function(props) {
                 </div>
                 <${Vantage} roll=${roll} extra=${props.extra}/>
                 <div class=doRoll>
-                    <span class=button onClick=${roll.doRoll}>Roll</span>
+                    <span class=button onClick=${dropAndRoll}>Roll</span>
                 </div>
                 <div class=result>
                 </div>
@@ -381,9 +392,54 @@ const Roll = function(props) {
         <div class="roll ${props.class}">
             <span class=name>${props.name}</div>
             <${Modal} class=roll-menu title=${props.name} button=${button} modal=${modal} reset=${roll.reset}/>
+            ${result}
         </div>
     `
 }
+
+
+const Result = function({title, result, clearResult}) {
+    const ref = useRef()
+
+    useEffect(() => ref.current.classList.add('on'))
+
+    const hide = (e) => {
+        ref.current.classList.replace('on', 'off')
+        YouShallNotPass(e)
+        setTimeout(() => clearResult(null), 400)
+    }
+
+
+    let records = []
+    result.record.forEach(({name, description, amount}) => {
+        records.push(html`
+            <div>
+                <span class=name>${name}</span>
+                <span class=amount>${amount}</span>
+                <span class=desc>${description}</span>
+            </div>
+        `)
+    })
+    return html`
+        <div class="modal" ref=${ref} >
+            <div class=content>
+                <div class=head>
+                    <span class=title>${title}</span>
+                    <span class=controls>
+                        <span class=close onClick=${hide}>X</span>
+                    </span>
+                </div>
+                <div class=body>
+                    <div>
+                        <span class=total>${result.total}</span>
+                    </div>
+                    <div class=record>${records}</div>
+                </div>
+            </div>
+        </div
+    `
+}
+
 
 
 const FilterBar = function({filters, current, set}) {

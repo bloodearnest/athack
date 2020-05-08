@@ -1,17 +1,45 @@
 import '/web_modules/preact/debug.js';
-import { createContext } from '/web_modules/preact.js';
-import { useState, useContext, useRef, useMemo } from '/web_modules/preact/hooks.js';
 import { html, map } from '/src/core.js'
+import { useState, useMemo } from '/web_modules/preact/hooks.js'
 import { useCharacter, CardModal, Modal, useRoll, Vantage, FilterBar} from '/src/components.js'
 
-const AttackContext = createContext()
+
+const useAttackRoll = function(attack) {
+    let roll = useRoll({
+        id: attack.name,
+        type: 'attack',
+        extra: 'AUTOCRIT',
+        bonus: attack.bonus,
+        options: attack.options,
+    })
+    const [attackDamage, setAttackDamage] = useState(attack.default)
+
+    let currentDamage = Object.assign({}, attack.damage[attackDamage])
+    for (const [name, damage] of Object.entries(roll.getModifiers('damage'))) {
+        for (let [type, value] of Object.entries(damage)) {
+            if (type == 'weapon') {
+                type = Object.keys(currentDamage)[0]
+            }
+            currentDamage[type] = (currentDamage[type] || '') + ' + ' + value
+        }
+    }
+
+    return {
+        attackDamage: attackDamage,
+        setAttackDamage: setAttackDamage,
+        attack: attack,
+        currentDamage: currentDamage,
+        ...roll,
+    }
+}
+
 
 const Damage = function({damage, sign}) {
     let damages = []
     for (const [k, v] of Object.entries(damage)) {
-        damages.push(html`<span class=damage data-type=${k}>${sign}${v}${'\u00A0'}${k}</span>`)
+        damages.push(html`<span class=damage data-type=${k}>${v}${'\u00A0'}${k}</span>`)
     }
-    return damages
+    return damages || null
 }
 
 const AttackOption = function({name, option, active, toggle}) {
@@ -20,15 +48,43 @@ const AttackOption = function({name, option, active, toggle}) {
         const sign = option.replace ? '' : '+'
         details.push(html`<${Damage} damage=${option.damage} sign=${sign}/>`)
     }
+    const t = (e) => {
+        toggle(name)
+    }
     return html`
-        <div class="option button ${active ? 'on' : 'off'}" onClick=${e => toggle(name)}>
-            <span>${name}</span> <span class=info>(${details})</span>
+        <div class="option button ${active ? 'on' : 'off'}" onPointerUp=${t}>
+            <span>${name}</span>
         </div>
     `
 }
 
-const AttackDetails = function({hide, attack, roll}) {
-    const {activeOptions} = roll
+
+const SelectAttackDamage = function({attack, roll}) {
+    const set = dmg => e => roll.setAttackDamage(dmg)
+
+    const nDamage = Object.keys(attack.damage).length
+    if (nDamage < 2) {
+        return null
+    }
+
+    // 1st level spells could have 9 damage options...
+    const smol = nDamage > 6
+
+    const select = e => {
+        roll.setAttackDamage(e.target.dataset.id)
+    }
+
+    const options = Object.keys(attack.damage).map(d => {
+        const cls = d == roll.attackDamage ? 'on' : 'off'
+        const txt = smol ? d.charAt(0) : d
+        return html`<span class="button ${cls}" data-id=${d} onPointerUp=${select}>${txt}</span>`
+    })
+
+    return html`<div class="attackDamage button-row ${smol ? 'smol' : ''}">${options}</div>`
+}
+
+const AttackDetails = function({hide, attack}) {
+    const roll = useAttackRoll(attack)
 
     let details = [];
     let add = (cls, hdr, content) => details.push(html`
@@ -38,25 +94,30 @@ const AttackDetails = function({hide, attack, roll}) {
         </div>
     `)
     let half = (attack.half == undefined ? false : attack.half) ? ' for half' : '';
+
     if (attack.tohit)  { add('tohit', 'To Hit', `${attack.tohit}`) }
-    if (attack.save)   { add('save',  'Save',   `${attack.save}${half}`) }
-    if (attack.range)  { add('range', 'Range',  `${attack.range}`) }
-    if (attack.damage) { add('damage','Damage', html`<${Damage} damage=${attack.damage}/>`) }
+    else if (attack.save)   { add('save',  'Save',   `${attack.save}${half}`) }
+
     if (attack.effect) { add('effect','Effect', `${attack.effect}`) }
+
+    if (roll.currentDamage) {
+        add('damage','Damage', html`<${Damage} damage=${roll.currentDamage}/>`)
+    }
+
     if (attack.secondary) {
-        if (attack.secondary.damage) { add('secondary-damage', 'Secondary Damage', html`<${Damage} damage=${attack.secondary.damage}/>` )}
         if (attack.secondary.effect) { add('secondary-effect', 'Secondary Effect', `${attack.secondary.effect}`)}
+        if (roll.secondaryDamage) { add('secondary-damage','Damage', html`<${Damage} damage=${roll.secondaryDamage}/>`) }
     }
 
     let opts = map(attack.options, (n, o) => {
-        const active = activeOptions.includes(n)
+        const active = roll.activeOptions.includes(n)
         const toggle = active ? roll.removeOption : roll.addOption
         return html` <${AttackOption} name=${n} option=${o} active=${active} toggle=${toggle}/>`
     })
 
     let conditions = null
     if (attack.tohit) {
-        conditions = html`<${Vantage} roll=${roll} extra=AUTOCRIT/>`
+        conditions = html`<${Vantage} roll=${roll} extra=${roll.extraName}/>`
     }
 
     let name = attack.name
@@ -64,9 +125,12 @@ const AttackDetails = function({hide, attack, roll}) {
         name = html`<a href=${attack.url}>${attack.name}</a>`
     }
 
+    const attackDamage = html`<${SelectAttackDamage} attack=${attack} roll=${roll}/>`
+
     return html`
         <div class=details>
             ${details}
+            ${attackDamage}
             ${conditions}
             <div class=options>${opts}</div>
         </div>
@@ -91,19 +155,12 @@ const AttackDescription = function({attack}) {
 }
 
 const Attack = function({attack}) {
-    const roll = useRoll({id: attack.name, type: 'attack', ...attack})
 
     let text = attack.tohit ? attack.tohit : attack.save
 
     if (!text && attack.damage) {
-        const entries = Array.from(Object.entries(attack.damage))
-        if (entries.length > 0) {
-            const [_, damage] = entries[0]
-            /*if (text) {
-                text += ' (' + damage + ')'
-            } else {*/
-            text = damage
-        }
+        const dmg = attack.damage[attack.default]
+        text = Object.values(dmg)[0]
     }
     text = text.replace(/ /g, '\u00A0')
     let name = attack.name
@@ -117,11 +174,11 @@ const Attack = function({attack}) {
         `
     }
     const modal = (hide) => {
-        return html`<${AttackDetails} hide=${hide} attack=${attack} roll=${roll}/>`
+        return html`<${AttackDetails} hide=${hide} attack=${attack} />`
     }
     const back = (hide) => html`<${AttackDescription} attack=${attack}/>`
 
-    return html`<${CardModal} class=attack title=${attack.name} button=${button} front=${modal} back=${back} reset=${roll.reset}/>`
+    return html`<${CardModal} class=attack title=${attack.name} button=${button} front=${modal} back=${back}/>`
 }
 
 

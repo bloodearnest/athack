@@ -14,8 +14,8 @@ const CHARACTER_MODIFIERS = {
     "Bane":             {attackmod: '-1d4', savemod: '-1d4'},
     "Invisible":        {attacks: 'A'},
     "Synaptic Static":  {attackmod: '-1d6', checkmod: '-1d6'},
-    "Enlarge":          {damage: '1d4'},
-    "Reduce":           {damage: '-1d4'},
+    "Enlarge":          {damage: {weapon: '1d4'}},
+    "Reduce":           {damage: {weapon: '-1d4'}},
     "Poisoned":         {attacks: 'D', checks: 'D'},
     "Restrained":       {attacks: 'D', saves: {dex: 'D'}},
     "Prone":            {attacks: 'D'},
@@ -29,7 +29,7 @@ const ROLL_MODIFIERS = {
     "Resistance": {savemod: '1d4'},
 }
 
-// calculate the current vantage from character conditions
+// Calculate the current state of the roll, based on the active modifiers
 function calculateModifiers(active, modifiers) {
     const empty = () => {
         return {
@@ -51,9 +51,14 @@ function calculateModifiers(active, modifiers) {
         'cha': empty(),
     }
     let saveModifiers = {}
-    let damage = {mods: {}}
-    let saveList = Object.keys(saves)
 
+    // these are just modifiers, no vantage
+    let damage = {}
+    let damageByType = {}
+    let effects = {}
+    let secondary = {}
+
+    let saveList = Object.keys(saves)
     let setVantage = (vantage, obj, source) => {
         obj[vantage] = true
         obj[vantage + 'Sources'].push(source)
@@ -84,10 +89,25 @@ function calculateModifiers(active, modifiers) {
             })
         }
 
-        if (modifier.attackmod) { attacks.modifiers[name] = modifier.attackmod  }
-        if (modifier.savemod)   { saveModifiers[name]    = modifier.savemod    }
-        if (modifier.checkmod)  { checks.modifiers[name]  = modifier.checkmod }
-        if (modifier.damagemod) { damage.modifiers[name]  = modifier.damagemod  }
+        // roll typemodifiers
+        if (modifier.attackmod) { attacks.modifiers[name] = modifier.attackmod }
+        if (modifier.savemod)   { saveModifiers[name] = modifier.savemod }
+        if (modifier.checkmod)  { checks.modifiers[name] = modifier.checkmod }
+
+        // non d20 effects
+        if (modifier.damage) {
+            damage[name]  = modifier.damage
+            for (const [type, dmg] of Object.entries(modifier.damage)) {
+                damageByType[type] = (damageByType[type] || []).concat(dmg)
+            }
+        }
+        if (modifier.effect)    { effects[name] = modifier.effect  }
+        if (modifier.secondary) {
+            secondary[name] = {
+                damage: modifier.secondary.damage || {},
+                effect: modifier.secondary.effect || {},
+            }
+        }
     }
 
     const calculate = obj => {
@@ -100,11 +120,16 @@ function calculateModifiers(active, modifiers) {
     saves.modifiers = saveModifiers
 
     return {
+        // these are roll types
         attack: attacks,
         check: checks,
-        skill: checks,
+        skill: checks, // alias for ease of use
         save: saves,
-        damage: damage,
+        damage: {modifiers: damage},
+        // these are extra info
+        damageByType: damageByType,
+        effects: effects,
+        secondary: secondary,
     }
 }
 
@@ -123,7 +148,11 @@ function die(size) {
   return Math.floor(Math.random() * (size)) + 1
 }
 
+function mergeDamage(d1, d2) {
+    for (const [t, d] of Object.keys(d2)) {
+    }
 
+}
 function d20Roll(bonus, advantage, disadvantage, extras, rules) {
 
     // do base d20 roll first
@@ -215,8 +244,6 @@ function rollDiceStr(diceStr, reroll) {
     }
     return [total, record]
 }
-
-
 
 
 export {

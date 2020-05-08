@@ -48,12 +48,16 @@ def special(f):
 @special
 def toll_the_dead(data):
     """Add injured option."""
-    data['options']['Injured'] = {
-        'damage': {
-            'Necrotic': data['damage']['Necrotic'].replace('d8', 'd12'),
-        },
-        'replace': True,
+    if 'Cantrip' not in data['damage']:
+        return
+
+    default = data['damage'].pop('Cantrip')
+
+    data['damage']['Uninjured'] = default
+    data['damage']['Injured'] = {
+        'Necrotic': default['Necrotic'].replace('d8', 'd12')
     }
+    data['default'] = 'Uninjured'
 
 
 @special
@@ -66,22 +70,17 @@ def absorb_elements(data):
         'and can damage to your first melee hit next turn.'
     )
 
-    def replace(dmg):
-        if 'Acid' in dmg:
-            d = dmg.pop('Acid')
-            dmg[dtype] = d
-
-    replace(data['damage'])
-    for name, option in data['options'].items():
-        if 'level' in name.lower():
-            replace(option['damage'])
+    for k, v in data['damage'].items():
+        if 'Acid' in v:
+            d = v.pop('Acid')
+            v[dtype] = d
 
 
 @special
 def dagger_of_venom(data):
     "Make poison damage optional"
 
-    dmg = data['damage'].pop('Poison')
+    dmg = data['damage']['default'].pop('Poison')
     effect = data.pop('effect')
     data['options']['Venom'] = {
         'damage': dict(Poison=dmg),
@@ -103,6 +102,6 @@ def melfs_minute_meteors(data):
 
 @special
 def unarmed_strike(data):
-    if not data['damage']:
-        data['damage'] = dict(Bludgeoning='1')
+    if not data['damage']['default']:
+        data['damage']['default'] = dict(Bludgeoning='1')
 

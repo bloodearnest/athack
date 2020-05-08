@@ -79,7 +79,8 @@ def get_attack(attack, inventory, spell_list):
     elif range:
         types.add('Ranged')
 
-    damage = {}
+    damage = {'default': {}}
+    default = 'default'
     options = {}
     save = None
     effects = []
@@ -102,12 +103,12 @@ def get_attack(attack, inventory, spell_list):
 
         # weapons only
         if 'ct-damage--versatile' in dmg.attrib.get('class', ''):
-            options['Versatile'] = {
-                'damage' : {damage_type: damage_str},
-                'replace': True,
-            }
+            damage['1 Handed'] = damage.pop('default')
+            damage['2 Handed'] = {damage_type: damage_str}
+            default = '1 Handed'
         else:
-            add_damage(damage, damage_type, damage_str)
+            add_damage(damage['default'], damage_type, damage_str)
+
 
     note_elements = iter(attack.css('.ct-note-components__component'))
     damage_mod = ""
@@ -135,15 +136,16 @@ def get_attack(attack, inventory, spell_list):
                     'ct-damage-type-icon',
                 ).title()
 
-            add_damage(damage, dtype, damage_mod + text)
+            add_damage(damage['default'], dtype, damage_mod + text)
             damage_mod = ""
 
-    if tohit or damage:
+    if tohit or damage['default']:
         data = {
             'name': name,
             'types': list(types),
             'range': range,
-            'damage': dict(damage),
+            'damage': damage,
+            'default': default,
             'options': options,
             'notes': notes,
         }
@@ -201,6 +203,7 @@ def attack_cantrip(text, notes):
 
 def get_spell(level, spell, attacks, spell_list):
     name = get_text(spell, '.ct-spell-name::text')
+    level_num = level.split(' ')[0]
     if name.lower() in special.SPELL_BLACKLIST:
         return
 
@@ -214,14 +217,16 @@ def get_spell(level, spell, attacks, spell_list):
     dtype = get_tooltip_type(spell.css('.ct-spell-damage-effect'))
 
     if spell.css('.ct-spells-spell__label--scaled'):
-        base_spell = attacks[name]
-        base_spell['options'][level] = {
-            'damage': {dtype: damage},
-            'replace': True,
-            'type': 'spell slot'
-        }
-        special.handle(name, base_spell)
-    elif name not in attacks:
+        assert name in attacks, 'Could not find scaled spell in attacks'
+        add_upcast(attacks[name], level_num, dtype, damage)
+        special.handle(name, attacks[name])
+    elif name in attacks:
+        # added by attack, fix up spell level
+        damage = attacks[name]['damage']
+        if 'default' in damage:
+            damage[level_num] = damage.pop('default')
+            attacks[name]['default'] = level_num
+    else:
         save = get_text(spell, '.ct-spells-spell__save *::text', ' ').upper()
         range = get_text(spell, '.ct-spells-spell__range *::text', ' ').upper()
         types = ['Spell']
@@ -248,9 +253,11 @@ def get_spell(level, spell, attacks, spell_list):
             types=types,
             save=save,
             range=range,
-            damage={dtype: damage},
+            damage={level_num: {dtype: damage}},
+            default=level_num,
             options={},
             notes=notes,
+            level=level_num,
         )
         if save and level == 'Cantrip':
             data['half'] = False
@@ -261,6 +268,24 @@ def get_spell(level, spell, attacks, spell_list):
             data['description'] = extra['description']
         special.handle(name, data)
         return data
+
+
+LEVELS = "1st 2nd 3rd 4th 5th 6th 7th 8th 9th".split(' ')
+
+
+def add_upcast(spell, level_num, dtype, damage):
+    levels = list(spell['damage'].keys())
+    dmg = {dtype: damage}
+
+    if spell['damage'][levels[-1]] == dmg:
+        # no damage increase for this scale
+        current = spell['damage'].pop(levels[-1])
+        new_name = levels[-1] + '/' + level_num
+        if spell['default'] == levels[-1]:
+            spell['default'] = new_name
+        spell['damage'][new_name] = current
+    else:
+        spell['damage'][level_num] = dmg
 
 
 def clean(attack):
@@ -305,17 +330,23 @@ def clean_all(attacks):
     if not (hex or hm):
         return
 
+    hm_dmg = hex_dmg = None
+
+    if hm:
+        hm_dmg = hm['damage'][hm['default']]['Bludgeoning']
+    if hex:
+        hex_dmg = {'damage': list(hex['damage'].values())[0]}
+
     for attack in attacks.values():
         if not attack.get('tohit'):
             continue
 
         if hex:
-            attack['options']['Hex'] = dict(damage=hex['damage'].copy())
+            attack['options']['Hex'] = hex_dmg
         if hm:
-            dtype = next(iter(attack['damage'].keys()))
-            attack['options']['Hunter\'s Mark'] = dict(
-                damage={dtype:hm['damage']['Bludgeoning']},
-            )
+            default = attack['damage'][attack['default']]
+            dtype = list(default.keys())[0]
+            attack['options']['Hunter\'s Mark'] = dict(damage={dtype:hm_dmg})
 
 
 ATTRIBUTES = {
@@ -422,4 +453,12 @@ if __name__ == '__main__':
     for name, data in main(characters):
         attacks[name] = data
 
-    print(yaml.dump(attacks, default_flow_style=False))
+    # ffs yaml
+    yaml.SafeDumper.ignore_aliases = lambda *args : True
+    yaml.Dumper.ignore_aliases = lambda *args : True
+    yaml.safe_dump(
+        attacks,
+        sys.stdout,
+        default_flow_style=False,
+        sort_keys=False,
+    )
