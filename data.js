@@ -630,5 +630,134 @@ const party_data = {
         },
     ]
   },
+  "Jerem": {
+    channel: 'wm',
+    saves: {
+      'Str': 0,
+      'Dex': 4,
+      'Con': 1,
+      'Int': 1,
+      'Wis': 2,
+      'Cha': 5  ,
+    },
+    attacks: [
+        {
+            "name": "Rapier",
+            "damage": {
+                "Piercing": "1d8+2"
+            },
+            "tohit": "+5",
+        }, {
+            "name": "Vicious Mockery",
+            "damage": {
+                "Psychic": "1d4"
+            },
+            "effect": "Disadvantage on next attack",
+            "save": "WIS 13",
+        }, {
+            "name": "Dissonant Whispers",
+            "damage": {
+                "Psychic": "3d6"
+            },
+            "effect": "Must use reactionDisadvantage on next attack",
+            "conditions": { 'Level 2': {'damage': '1d6'}},
+            "save": "WIS 13",
+        }, {
+            "name": "Light Crossbow",
+            "damage": {
+                "Piercing": "1d8+3"
+            },
+            "tohit": "+5",
+        }
+    ]
+ },
+  "Vanuath": {
+    channel: 'wm',
+    saves: {
+      'Str': 2,
+      'Dex': 5,
+      'Con': 1,
+      'Int': 0,
+      'Wis': 3,
+      'Cha': 0,
+    },
+    attacks: [
+        {
+            "name": "Unarmed",
+            "damage": {
+                "Bludgeoning": "1d4+3"
+            },
+            "tohit": "+5",
+        }, {
+            "name": "Quarterstaff",
+            "damage": {
+                "Bludgeoning": "1d6+3"
+            },
+            "tohit": "+5",
+            conditions: {
+            'Versatile': {weapon: "1d8+3", replace: true},
+            },
+
+        }, {
+            "name": "Dart",
+            "damage": {
+                "piercing": "1d4+3"
+            },
+            "tohit": "+5",
+        }
+    ]
+ },
+ "Galmyn": {
+    channel: 'wm',
+    saves: {
+      'Str': 2,
+      'Dex': 5,
+      'Con': 1,
+      'Int': 2,
+      'Wis': 2,
+      'Cha': -1,
+    },
+    attacks: [
+        {
+            "name": "Long bow",
+            "damage": {
+                "Piercing": "1d8+3"
+            },
+            "tohit": "+7",
+            condtions: {'Hunter\'s Mark': {weapon: '1d6'}},
+        }, {
+            "name": "Dagger",
+            "damage": {
+                "Piercing": "1d4+3"
+            },
+            "tohit": "+5",
+            condtions: {'Hunter\'s Mark': {weapon: '1d6'}},
+        }, {
+            "name": "Hand Axe",
+            "damage": {
+                "Slashing": "1d6"
+            },
+            "tohit": "+2",
+            condtions: {'Hunter\'s Mark': {weapon: '1d6'}},
+        }, {
+            "name": "Spear",
+            "damage": {
+                "Piercing": "1d6"
+            },
+            "tohit": "2",
+            condtions: {
+                'Hunter\'s Mark': {weapon: '1d6'},
+                'Versatile': {weapon: "1d8+3", replace: true},
+            }
+        }
+
+    ]
+
+
+  }
+
+
+
+
 
 };
