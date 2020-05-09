@@ -540,7 +540,7 @@ const party_data = {
       },
     ]
   },
-  "The Count": {
+  "TheCount": {
     channel: 'wm',
     saves: {
       'Str': -1,
