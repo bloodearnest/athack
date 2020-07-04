@@ -116,7 +116,7 @@ const party_data = {
   "Thorin": {
     channel: 'toa',
     saves: {
-      'Str': 7,
+      'Str': 8,
       'Dex': 3,
       'Con': 5,
       'Int': 1,
@@ -126,17 +126,17 @@ const party_data = {
     attacks: [
       {
         name: "Thunder",
-        tohit: 9,
+        tohit: 10,
         damage: {
-            "slashing": "d6+5",
+            "slashing": "d6+6",
             thunder: "d6",
             effect: "If Lightning also hits, DC13 CON or stunned for one round",
         },
       }, {
         name: "Lightning",
-        tohit: 9,
+        tohit: 10,
         damage: {
-            "slashing": "d6+5",
+            "slashing": "d6+6",
             "lightning": "d6",
             effect: "If Thunder also hits, DC13 CON or stunned for one round",
         },
@@ -147,14 +147,7 @@ const party_data = {
           "Undead/Fiend": {radiant: "1d8"},
           "Level 2": {radiant: "1d8"},
           "Level 3": {radiant: "2d8"},
-        },
-      }, {
-        name: "Javelin of Lightning",
-        tohit: 9,
-        damage: {
-          piercing: "1d6+5",
-          lightning: "4d6",
-          secondary: { lightning: "4d6", desc: "To all in a line to target"},
+          "Level 4": {radiant: "3d8"},
         },
       }, {
         name: "Crag Cat Claw",
@@ -169,12 +162,12 @@ const party_data = {
         damage: {"slashing": "d10+3"},
       }, {
         name: "Ashbringer",
-        tohit: 9,
-        damage: {"slashing": "d6+5"},
+        tohit: 10,
+        damage: {"slashing": "d6+6"},
       }, {
         name: "Oathbringer (offhand)",
-        tohit: 9,
-        damage: {"slashing": "d6+5"},
+        tohit: 10,
+        damage: {"slashing": "d6+6"},
       }, {
         name: "Cure Wounds",
         damage: {healing: "d8+2"},
@@ -544,7 +537,7 @@ const party_data = {
     channel: 'wm',
     saves: {
       'Str': -1,
-      'Dex': 5,
+      'Dex': 6,
       'Con': 2,
       'Int': 2,
       'Wis': 1,
@@ -553,7 +546,7 @@ const party_data = {
     attacks: [
         {
             "damage": {
-                "Piercing": "1d4+3"
+                "Piercing": "1d4+4"
             },
             "name": "Dagger",
             "notes": [
@@ -566,14 +559,14 @@ const party_data = {
             "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "20 (60)",
-            "tohit": "+5",
+            "tohit": "+6",
             "types": [
                 "Ranged",
                 "Melee"
             ]
         }, {
             "damage": {
-                "Piercing": "1d4+3"
+                "Piercing": "1d4+4"
             },
             "name": "Dart",
             "notes": [
@@ -585,7 +578,7 @@ const party_data = {
             "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "20 (60)",
-            "tohit": "+5",
+            "tohit": "+6",
             "types": [
                 "Ranged"
             ]
@@ -612,7 +605,7 @@ const party_data = {
             ]
         }, {
             "damage": {
-                "Piercing": "1d8+3"
+                "Piercing": "1d8+4"
             },
             "name": "Rapier",
             "notes": [
@@ -623,7 +616,7 @@ const party_data = {
             "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "5 ft. Reach",
-            "tohit": "+5",
+            "tohit": "+6",
             "types": [
                 "Melee"
             ]
@@ -638,7 +631,7 @@ const party_data = {
       'Con': 1,
       'Int': 1,
       'Wis': 2,
-      'Cha': 5  ,
+      'Cha': 6  ,
     },
     attacks: [
         {
@@ -653,21 +646,33 @@ const party_data = {
                 "Psychic": "1d4"
             },
             "effect": "Disadvantage on next attack",
-            "save": "WIS 13",
+            "save": "WIS 14",
         }, {
             "name": "Dissonant Whispers",
             "damage": {
                 "Psychic": "3d6"
             },
-            "effect": "Must use reactionDisadvantage on next attack",
-            "conditions": { 'Level 2': {'damage': '1d6'}},
-            "save": "WIS 13",
+            "effect": "Must use reaction to move away. Disadvantage on next attack",
+            "conditions": {
+                'Level 2': {'damage': '1d6'},
+                'Level 3': {'damage': '2d6'},
+            },
+            "save": "WIS 14",
         }, {
             "name": "Light Crossbow",
             "damage": {
                 "Piercing": "1d8+3"
             },
             "tohit": "+5",
+        }, {
+            "name": "Healing Work",
+            "damage": {
+                "Healing": "1d4+5"
+            },
+            "conditions": {
+                'Level 2': {'Healing': '2d4+4'},
+                'Level 3': {'Healing': '3d4+4'},
+            },
         }
     ]
  },
@@ -675,7 +680,7 @@ const party_data = {
     channel: 'wm',
     saves: {
       'Str': 2,
-      'Dex': 5,
+      'Dex': 6,
       'Con': 1,
       'Int': 0,
       'Wis': 3,
@@ -685,25 +690,25 @@ const party_data = {
         {
             "name": "Unarmed",
             "damage": {
-                "Bludgeoning": "1d4+3"
+                "Bludgeoning": "1d4+4"
             },
-            "tohit": "+5",
+            "tohit": "6",
         }, {
             "name": "Quarterstaff",
             "damage": {
-                "Bludgeoning": "1d6+3"
+                "Bludgeoning": "1d6+4"
             },
-            "tohit": "+5",
+            "tohit": "6",
             conditions: {
-            'Versatile': {weapon: "1d8+3", replace: true},
+            'Versatile': {weapon: "1d8+4", replace: true},
             },
 
         }, {
             "name": "Dart",
             "damage": {
-                "piercing": "1d4+3"
+                "piercing": "1d4+4"
             },
-            "tohit": "+5",
+            "tohit": "6",
         }
     ]
  },
