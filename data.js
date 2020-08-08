@@ -367,7 +367,7 @@ const party_data = {
     channel: 'toa',
     saves: {
       'Str': 5,
-      'Dex': 3,
+      'Dex': 6,
       'Con': 8,
       'Int': 9,
       'Wis': 6,
