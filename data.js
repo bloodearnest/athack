@@ -673,7 +673,14 @@ const party_data = {
                 'Level 2': {'Healing': '2d4+4'},
                 'Level 3': {'Healing': '3d4+4'},
             },
+        }, {
+            "name": "Sleep",
+            "damage": {"Hit Points": "5d8"},
+            "conditions": {
+                'Level 2': {'weapon': '1d8'},
+            }
         }
+
     ]
  },
   "Vanuath": {
