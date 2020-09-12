@@ -637,9 +637,9 @@ const party_data = {
         {
             "name": "Rapier",
             "damage": {
-                "Piercing": "1d8+3"
+                "Piercing": "1d8+4"
             },
-            "tohit": "+5",
+            "tohit": "+6",
         }, {
             "name": "Vicious Mockery",
             "damage": {
