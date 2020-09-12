@@ -537,11 +537,11 @@ const party_data = {
     channel: 'wm',
     saves: {
       'Str': -1,
-      'Dex': 6,
+      'Dex': 7,
       'Con': 2,
       'Int': 2,
       'Wis': 1,
-      'Cha': 3,
+      'Cha': 4,
     },
     attacks: [
         {
@@ -559,7 +559,7 @@ const party_data = {
             "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "20 (60)",
-            "tohit": "+6",
+            "tohit": "+7",
             "types": [
                 "Ranged",
                 "Melee"
@@ -578,7 +578,7 @@ const party_data = {
             "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "20 (60)",
-            "tohit": "+6",
+            "tohit": "+7",
             "types": [
                 "Ranged"
             ]
@@ -599,7 +599,7 @@ const party_data = {
                 }
             },
             "range": "5 ft. Reach",
-            "tohit": "+1",
+            "tohit": "+2",
             "types": [
                 "Melee"
             ]
@@ -616,7 +616,7 @@ const party_data = {
             "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
             "options": {},
             "range": "5 ft. Reach",
-            "tohit": "+6",
+            "tohit": "+7",
             "types": [
                 "Melee"
             ]
@@ -627,26 +627,26 @@ const party_data = {
     channel: 'wm',
     saves: {
       'Str': 0,
-      'Dex': 4,
+      'Dex': 5,
       'Con': 1,
       'Int': 1,
       'Wis': 2,
-      'Cha': 6  ,
+      'Cha': 7,
     },
     attacks: [
         {
             "name": "Rapier",
             "damage": {
-                "Piercing": "1d8+2"
+                "Piercing": "1d8+3"
             },
             "tohit": "+5",
         }, {
             "name": "Vicious Mockery",
             "damage": {
-                "Psychic": "1d4"
+                "Psychic": "2d4"
             },
             "effect": "Disadvantage on next attack",
-            "save": "WIS 14",
+            "save": "WIS 15",
         }, {
             "name": "Dissonant Whispers",
             "damage": {
@@ -657,17 +657,17 @@ const party_data = {
                 'Level 2': {'damage': '1d6'},
                 'Level 3': {'damage': '2d6'},
             },
-            "save": "WIS 14",
+            "save": "WIS 15",
         }, {
             "name": "Light Crossbow",
             "damage": {
-                "Piercing": "1d8+3"
+                "Piercing": "1d8+2"
             },
             "tohit": "+5",
         }, {
             "name": "Healing Work",
             "damage": {
-                "Healing": "1d4+5"
+                "Healing": "1d4+4"
             },
             "conditions": {
                 'Level 2': {'Healing': '2d4+4'},
@@ -678,6 +678,7 @@ const party_data = {
             "damage": {"Hit Points": "5d8"},
             "conditions": {
                 'Level 2': {'weapon': '1d8'},
+                'Level 3': {'weapon': '2d8'},
             }
         }
 
@@ -686,8 +687,8 @@ const party_data = {
   "Vanuath": {
     channel: 'wm',
     saves: {
-      'Str': 2,
-      'Dex': 6,
+      'Str': 3,
+      'Dex': 7,
       'Con': 1,
       'Int': 0,
       'Wis': 3,
@@ -699,13 +700,13 @@ const party_data = {
             "damage": {
                 "Bludgeoning": "1d4+4"
             },
-            "tohit": "6",
+            "tohit": "7",
         }, {
             "name": "Quarterstaff",
             "damage": {
                 "Bludgeoning": "1d6+4"
             },
-            "tohit": "6",
+            "tohit": "7",
             conditions: {
             'Versatile': {weapon: "1d8+4", replace: true},
             },
@@ -715,15 +716,15 @@ const party_data = {
             "damage": {
                 "piercing": "1d4+4"
             },
-            "tohit": "6",
+            "tohit": "7",
         }
     ]
  },
  "Galmyn": {
     channel: 'wm',
     saves: {
-      'Str': 2,
-      'Dex': 5,
+      'Str': 3,
+      'Dex': 6,
       'Con': 1,
       'Int': 2,
       'Wis': 2,
@@ -735,29 +736,29 @@ const party_data = {
             "damage": {
                 "Piercing": "1d8+3"
             },
-            "tohit": "+7",
-            condtions: {'Hunter\'s Mark': {weapon: '1d6'}},
+            "tohit": "+8",
+            conditions: {'Hunter\'s Mark': {weapon: '1d6'}},
         }, {
             "name": "Dagger",
             "damage": {
                 "Piercing": "1d4+3"
             },
-            "tohit": "+5",
-            condtions: {'Hunter\'s Mark': {weapon: '1d6'}},
+            "tohit": "+7",
+            conditions: {'Hunter\'s Mark': {weapon: '1d6'}},
         }, {
             "name": "Hand Axe",
             "damage": {
                 "Slashing": "1d6"
             },
-            "tohit": "+2",
-            condtions: {'Hunter\'s Mark': {weapon: '1d6'}},
+            "tohit": "3",
+            conditions: {'Hunter\'s Mark': {weapon: '1d6'}},
         }, {
             "name": "Spear",
             "damage": {
                 "Piercing": "1d6"
             },
-            "tohit": "2",
-            condtions: {
+            "tohit": "3",
+            conditions: {
                 'Hunter\'s Mark': {weapon: '1d6'},
                 'Versatile': {weapon: "1d8+3", replace: true},
             }
