@@ -556,7 +556,7 @@ const party_data = {
                 "Light",
                 "Thrown"
             ],
-            "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
+            "conditions": { 'Sneak Attack': {'weapon': '3d6'}},
             "options": {},
             "range": "20 (60)",
             "tohit": "+7",
@@ -575,7 +575,7 @@ const party_data = {
                 "Finesse",
                 "Thrown"
             ],
-            "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
+            "conditions": { 'Sneak Attack': {'weapon': '3d6'}},
             "options": {},
             "range": "20 (60)",
             "tohit": "+7",
@@ -605,18 +605,18 @@ const party_data = {
             ]
         }, {
             "damage": {
-                "Piercing": "1d8+4"
+                "Piercing": "1d8+5"
             },
-            "name": "Rapier",
+            "name": "Vicious Rapier",
             "notes": [
                 "Melee Weapon",
                 "Martial",
                 "Finesse"
             ],
-            "conditions": { 'Sneak Attack': {'weapon': '2d6'}},
+            "conditions": { 'Sneak Attack': {'weapon': '3d6'}},
             "options": {},
             "range": "5 ft. Reach",
-            "tohit": "+7",
+            "tohit": "+8",
             "types": [
                 "Melee"
             ]
@@ -637,9 +637,9 @@ const party_data = {
         {
             "name": "Rapier",
             "damage": {
-                "Piercing": "1d8+4"
+                "Piercing": "1d8+2"
             },
-            "tohit": "+6",
+            "tohit": "+5",
         }, {
             "name": "Vicious Mockery",
             "damage": {
