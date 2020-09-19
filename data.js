@@ -186,20 +186,20 @@ const party_data = {
       'Con': 2,
       'Int': 3,
       'Wis': 3,
-      'Cha': 9,
+      'Cha': 10,
     },
     attacks: [
       {
         name: "Eldritch Blast",
-        tohit: 8,
-        damage: {force: "d10+4"},
+        tohit: 9,
+        damage: {force: "d10+5"},
         sounds: SPELL_SOUNDS,
         conditions: {
           "hex": {necrotic: "d6"}
         },
       }, {
         name: "Poison Spray",
-        save: '16 Con',
+        save: '17 Con',
         half: false,
         sounds: SPELL_SOUNDS,
         damage: {
@@ -207,7 +207,7 @@ const party_data = {
         }
       }, {
         name: "Vicious Mockery",
-        save: '16 Wis',
+        save: '17 Wis',
         half: false,
         sounds: SPELL_SOUNDS,
         damage: {
@@ -216,7 +216,7 @@ const party_data = {
         },
       }, {
         name: "Hellish Rebuke",
-        save: '16 Dex',
+        save: '17 Dex',
         damage: {fire: "2d10"},
         sounds: SPELL_SOUNDS,
         conditions: {
@@ -242,7 +242,7 @@ const party_data = {
         },
       }, {
         name: "Dissonant Whispers",
-        save: '16 Wis',
+        save: '17 Wis',
         half: true,
         sounds: SPELL_SOUNDS,
         damage: {
@@ -259,7 +259,7 @@ const party_data = {
         sounds: SPELL_SOUNDS,
         damage: {
           "fire": "2d8",
-          effect: "If holding/wearing, DC 16 Con save or must drop, disadvantage on attacks and checks if it cannot",
+          effect: "If holding/wearing, DC 17 Con save or must drop, disadvantage on attacks and checks if it cannot",
         },
         conditions: {
           'Level 3': {weapon: "1d8"},
@@ -272,7 +272,7 @@ const party_data = {
         conditions: {hex: {necrotic: "d6"}},
       }, {
         name: "Healing Word",
-        damage: {healing: "d4+4"},
+        damage: {healing: "d4+5"},
         sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {weapon: "d4"},
@@ -281,7 +281,7 @@ const party_data = {
         }
       }, {
         name: "Fireball",
-        save: '16 Dex',
+        save: '17 Dex',
         sounds: SPELL_SOUNDS,
         damage: {
           fire: "8d6",
