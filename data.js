@@ -6,26 +6,26 @@ const party_data = {
     saves: {
       'Str': 0,
       'Dex': 2,
-      'Con': 2,
+      'Con': 7,
       'Int': 3,
-      'Wis': 10,
+      'Wis': 11,
       'Cha': 7,
     },
     attacks: [
       {
         name: "Toll the Dead",
-        save: '17 Wis',
+        save: '18 Wis',
         half: false,
         sounds: SPELL_SOUNDS,
-        damage: {necrotic: "2d8+5"},
+        damage: {necrotic: "3d8+5"},
         conditions: {
-          'Injured': {weapon: "2d12+5", replace: true},
+          'Injured': {weapon: "3d12+5", replace: true},
         },
       }, {
         name: "Spiritual Weapon",
-        tohit: 9,
+        tohit: 10,
         sounds: SPELL_SOUNDS,
-        damage: {force: "d8+5"},
+        damage: {force: "d8+6"},
         conditions: {
             'Level 3-4': {force: "d8"},
             'Level 5-6': {force: "2d8"},
@@ -33,7 +33,7 @@ const party_data = {
       }, {
         name: "Guiding Bolt",
         sounds: SPELL_SOUNDS,
-        tohit: 9,
+        tohit: 10,
         damage: {radiant: "4d6"},
         conditions: {
             'Level 2': {radiant: "1d6"},
@@ -43,7 +43,7 @@ const party_data = {
         },
       }, {
         name: "Spirit Guardians",
-        save: "16 Wis",
+        save: "18 Wis",
         damage: {radiant: "3d8", effect: "speed halved"},
         sounds: SPELL_SOUNDS,
         conditions: {
@@ -52,7 +52,7 @@ const party_data = {
         }
       }, {
         name: "Vampiric Touch",
-        tohit: 9,
+        tohit: 10,
         sounds: SPELL_SOUNDS,
         damage: {
           necrotic: "3d6",
@@ -64,7 +64,7 @@ const party_data = {
         }
       }, {
         name: "Healing Word",
-        damage: {healing: "d4+5"},
+        damage: {healing: "d4+6"},
         sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {weapon: "d4"},
@@ -74,7 +74,7 @@ const party_data = {
         }
       }, {
         name: "Cure Wounds",
-        damage: {healing: "d8+5"},
+        damage: {healing: "d8+6"},
         sounds: SPELL_SOUNDS,
         conditions: {
           "Level 2": {weapon: "d8"},
@@ -84,7 +84,7 @@ const party_data = {
         },
       }, {
         name: "Mass Healing Word",
-        damage: {healing: "d4+5"},
+        damage: {healing: "d4+6"},
         sounds: SPELL_SOUNDS,
         conditions: {
           "Level 4": {weapon: "1d4"},
@@ -92,11 +92,11 @@ const party_data = {
         },
       }, {
         name: "Mass Cure Wounds",
-        damage: {healing: "3d8+5"},
+        damage: {healing: "3d8+6"},
         sounds: SPELL_SOUNDS,
       }, {
         name: "Blight",
-        save: "17 Wis",
+        save: "18 Wis",
         damage: {necrotic: "8d8", effect: "Undead and constructs immune. Plants have disadvantage and max damage."},
         sounds: SPELL_SOUNDS,
         conditions: {
@@ -116,19 +116,20 @@ const party_data = {
   "Thorin": {
     channel: 'toa',
     saves: {
-      'Str': 8,
-      'Dex': 3,
-      'Con': 5,
-      'Int': 1,
-      'Wis': 7,
-      'Cha': 8,
+      'Str': 9,
+      'Dex': 4,
+      'Con': 6,
+      'Int': 2,
+      'Wis': 8,
+      'Cha': 10,
     },
     attacks: [
       {
         name: "Thunder",
         tohit: 10,
         damage: {
-            "slashing": "d6+6",
+            slashing: "d6+6",
+            radiant: "d8",
             thunder: "d6",
             effect: "If Lightning also hits, DC13 CON or stunned for one round",
         },
@@ -136,8 +137,9 @@ const party_data = {
         name: "Lightning",
         tohit: 10,
         damage: {
-            "slashing": "d6+6",
-            "lightning": "d6",
+            slashing: "d6+6",
+            lightning: "d6",
+            radiant: "d8",
             effect: "If Thunder also hits, DC13 CON or stunned for one round",
         },
       }, {
@@ -159,18 +161,28 @@ const party_data = {
       }, {
         name: "Crag Cat Bite",
         tohit: 5,
-        damage: {"slashing": "d10+3"},
+        damage: {
+          slashing: "d10+3",
+          radiant: "d8",
+        },
       }, {
         name: "Ashbringer",
         tohit: 10,
-        damage: {"slashing": "d6+6"},
+        damage: {
+	        slashing: "d6+6",
+          radiant: "d8",
+        }
       }, {
         name: "Oathbringer (offhand)",
         tohit: 10,
         damage: {"slashing": "d6+6"},
+        damage: {
+	        slashing: "d6+6",
+          radiant: "d8",
+        }
       }, {
         name: "Cure Wounds",
-        damage: {healing: "d8+2"},
+        damage: {healing: "d8+3"},
         conditions: {
           "Level 2": {weapon: "d8"},
           "Level 3": {weapon: "2d8"},
@@ -367,9 +379,9 @@ const party_data = {
     channel: 'toa',
     saves: {
       'Str': 5,
-      'Dex': 6,
+      'Dex': 7,
       'Con': 8,
-      'Int': 9,
+      'Int': 11,
       'Wis': 6,
       'Cha': 0,
     },
@@ -382,17 +394,64 @@ const party_data = {
           'Two Handed': {weapon: "d8+4", replace: true},
         },
       }, {
+        name: "Acid Splash",
+        save: "Dex 18",
+        half: false,
+        sounds: SPELL_SOUNDS,
+        damage: {
+            acid: "3d6",
+            effect: "Choose two creatures within 5ft of each other",
+        },
+ 
+      }, {
+        name: "Ray of Frost",
+        tohit: 10,
+        sounds: SPELL_SOUNDS,
+        damage: {
+            poison: "3d8",
+            effect: "Speed reduced 10 ft for a turn",
+        },
+      }, {
         name: "Ray of Sickness",
-        tohit: 8,
+        tohit: 10,
         sounds: SPELL_SOUNDS,
         damage: {
             poison: "2d8",
-            effect: "DC 16 Con save or poisoned",
+            effect: "DC 18 Con save or poisoned",
         },
         conditions: {
           "Level 2": {weapon: "1d8"},
           "Level 3": {weapon: "2d8"},
           "Level 4": {weapon: "3d8"},
+          "Level 5": {weapon: "4d8"},
+        },
+      }, {
+        name: "Color Spray",
+        sounds: SPELL_SOUNDS,
+        damage: {
+            hitpoints: "6d10",
+            effect: "Creatures in 15 ft cone, up to value of hit points, are blinded for 1 turn",
+        },
+        conditions: {
+          "Level 2": {weapon: "2d10"},
+          "Level 3": {weapon: "4d10"},
+          "Level 4": {weapon: "6d10"},
+          "Level 5": {weapon: "8d10"},
+        },
+       }, {
+        name: "Sickening Radiance",
+        save: '18 Con',
+        half: false,
+        sounds: SPELL_SOUNDS,
+        damage: {
+            radiant: "4d10",
+            effect: "Suffer 1 level of exhaustion, emit dim light",
+        },
+        conditions: {
+          "Level 2": {weapon: "2d10"},
+          "Level 3": {weapon: "4d10"},
+          "Level 4": {weapon: "6d10"},
+          "Level 5": {weapon: "8d10"},
         },
       },
     ],
@@ -449,17 +508,17 @@ const party_data = {
     saves: {
       'Str': 0,
       'Dex': 4,
-      'Con': 0,
-      'Int': 10,
-      'Wis': 6,
-      'Cha': 1,
+      'Con': 4,
+      'Int': 9,
+      'Wis': 5,
+      'Cha': 0,
     },
     attacks: [
       {
         name: "Firebolt",
         tohit: 10,
         sounds: SPELL_SOUNDS,
-        damage: {"fire": "2d10"},
+        damage: {"fire": "3d10+3"},
         rules: {
           "Damage Speciality": {"fire": 1},
         },
@@ -479,6 +538,7 @@ const party_data = {
           "level 3": {"fire": "2d6"},
           "level 4": {"fire": "3d6"},
           "level 5": {"fire": "4d6"},
+          "level 6": {"fire": "5d6"},
         },
       }, {
         name: "Fireball",
@@ -494,6 +554,7 @@ const party_data = {
         conditions: {
           "Level 4": {weapon: "d8"},
           "Level 5": {weapon: "2d8"},
+          "Level 6": {weapon: "3d8"},
         }
       }, {
         name: "Melf's Minute Meteors",
@@ -507,7 +568,7 @@ const party_data = {
         },
       }, {
         name: "Shadowblade",
-        tohit: 7,
+        tohit: 8,
         sounds: SPELL_SOUNDS,
         damage: {"psychic": "2d8"},
         conditions: {
@@ -516,20 +577,61 @@ const party_data = {
         },
       }, {
         name: "Booming blade (Shadowblade)",
-        tohit: 7,
+        tohit: 8,
         sounds: SPELL_SOUNDS,
-        damage: {"psychic": "2d8", "thunder": "d8"},
-        secondary: {"thunder": "3d8", "desc": "if the target moves"},
+        damage: {
+          "psychic": "2d8", 
+          "thunder": "d8",
+          secondary: {"thunder": "3d8", "desc": "if the target moves"},
+        },
         conditions: {
           "level 3/4": {"weapon": "d8"},
           "level 5/6": {"weapon": "2d8"},
         },
       }, {
         name: "Booming blade (short sword)",
-        tohit: 7,
+        tohit: 8,
         sounds: SPELL_SOUNDS,
-        damage: {"slashing": "d6+3", "thunder": "d8"},
-        secondary: {"thunder": "3d8", "desc": "if the target moves"},
+        damage: {
+          "slashing": "d6+4", 
+          "thunder": "2d8",
+          secondary: {"thunder": "3d8", "desc": "if the target moves"},
+        },
+      }, {
+        name: "Wall of Fire",
+        save: "17 Dex",
+        sounds: SPELL_SOUNDS,
+        damage: {fire: "5d8"},
+        conditions: {
+          "level 5": {"weapon": "d8"},
+          "level 6": {"weapon": "2d8"},
+        },
+        rules: {
+          "Damage Speciality": {"fire": 1},
+        },
+      }, {
+        name: "Cone of Cold",
+        save: "17 Con",
+        sounds: SPELL_SOUNDS,
+        damage: {cold: "8d8"},
+        conditions: {
+          "level 6": {"weapon": "1d8"},
+        },
+      }, {
+        name: "Synaptic Static",
+        save: "17 Int",
+        sounds: SPELL_SOUNDS,
+        damage: {
+          psychic: '8d6',
+          effect: "-1d6 to attacks, ability checks, and Concentration checks until they save"
+        },
+      }, {
+        name: "Chain Lightning",
+        save: "17 Dex",
+        sounds: SPELL_SOUNDS,
+        damage: {
+          lightning: '10d8'
+        },
       },
     ]
   },
