@@ -22,6 +22,12 @@ const party_data = {
           'Injured': {weapon: "3d12+5", replace: true},
         },
       }, {
+        name: "Sacred Flame",
+        save: '18 Wis',
+        half: false,
+        sounds: SPELL_SOUNDS,
+        damage: {radiant: "3d8+5"},
+      }, {
         name: "Spiritual Weapon",
         tohit: 10,
         sounds: SPELL_SOUNDS,
@@ -786,8 +792,8 @@ const party_data = {
             "name": "Sleep",
             "damage": {"Hit Points": "5d8"},
             "conditions": {
-                'Level 2': {'weapon': '1d8'},
-                'Level 3': {'weapon': '2d8'},
+                'Level 2': {'weapon': '2d8'},
+                'Level 3': {'weapon': '4d8'},
             }
         }
 
