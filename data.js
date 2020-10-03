@@ -40,6 +40,7 @@ const party_data = {
             'Level 3': {radiant: "2d6"},
             'Level 4': {radiant: "3d6"},
             'Level 5': {radiant: "4d6"},
+            'Level 6': {radiant: "5d6"},
         },
       }, {
         name: "Spirit Guardians",
@@ -49,6 +50,7 @@ const party_data = {
         conditions: {
           "Level 4": {weapon: "d8"},
           "Level 5": {weapon: "2d8"},
+          "Level 6": {weapon: "3d8"},
         }
       }, {
         name: "Vampiric Touch",
@@ -61,6 +63,7 @@ const party_data = {
         conditions: {
           "Level 4": {weapon: "d6"},
           "Level 5": {weapon: "2d6"},
+          "Level 6": {weapon: "3d6"},
         }
       }, {
         name: "Healing Word",
@@ -71,6 +74,7 @@ const party_data = {
           "Level 3": {weapon: "2d4"},
           "Level 4": {weapon: "3d4"},
           "Level 5": {weapon: "4d4"},
+          "Level 5": {weapon: "5d4"},
         }
       }, {
         name: "Cure Wounds",
@@ -81,6 +85,7 @@ const party_data = {
           "Level 3": {weapon: "2d8"},
           "Level 4": {weapon: "3d8"},
           "Level 5": {weapon: "4d8"},
+          "Level 5": {weapon: "5d8"},
         },
       }, {
         name: "Mass Healing Word",
@@ -89,6 +94,7 @@ const party_data = {
         conditions: {
           "Level 4": {weapon: "1d4"},
           "Level 5": {weapon: "2d4"},
+          "Level 6": {weapon: "3d4"},
         },
       }, {
         name: "Mass Cure Wounds",
@@ -143,6 +149,13 @@ const party_data = {
             effect: "If Thunder also hits, DC13 CON or stunned for one round",
         },
       }, {
+        name: "Mace of Wongo",
+        tohit: 10,
+        damage: {
+            bludgeoning: "d6+6",
+            radiant: "d8",
+        },
+      }, {
         name: "Smite",
         damage: {radiant: "2d8"},
         conditions: {
@@ -166,21 +179,6 @@ const party_data = {
           radiant: "d8",
         },
       }, {
-        name: "Ashbringer",
-        tohit: 10,
-        damage: {
-	        slashing: "d6+6",
-          radiant: "d8",
-        }
-      }, {
-        name: "Oathbringer (offhand)",
-        tohit: 10,
-        damage: {"slashing": "d6+6"},
-        damage: {
-	        slashing: "d6+6",
-          radiant: "d8",
-        }
-      }, {
         name: "Cure Wounds",
         damage: {healing: "d8+3"},
         conditions: {
@@ -193,12 +191,12 @@ const party_data = {
   "Corminar": {
     channel: 'toa',
     saves: {
-      'Str': 0,
-      'Dex': 6,
-      'Con': 1,
-      'Int': 2,
-      'Wis': 2,
-      'Cha': 10,
+      'Str': 1,
+      'Dex': 7,
+      'Con': 2,
+      'Int': 3,
+      'Wis': 7,
+      'Cha': 11,
     },
     attacks: [
       {
@@ -210,12 +208,30 @@ const party_data = {
           "hex": {necrotic: "d6"}
         },
       }, {
+        name: "Mind Sliver",
+        save: '18 Int',
+        half: false,
+        sounds: SPELL_SOUNDS,
+        damage: {
+          psychic: "3d6",
+          effect: "-1d4 on first save before end of your next turn",
+        }
+      }, {
+        name: "Shocking Grasp",
+        tohit: "10",
+        half: false,
+        sounds: SPELL_SOUNDS,
+        damage: {
+          poison: "3d8",
+          effect: "Cannot take reactions",
+        }
+      }, {
         name: "Poison Spray",
         save: '18 Con',
         half: false,
         sounds: SPELL_SOUNDS,
         damage: {
-          poison: "2d12",
+          poison: "3d12",
         }
       }, {
         name: "Vicious Mockery",
@@ -223,7 +239,7 @@ const party_data = {
         half: false,
         sounds: SPELL_SOUNDS,
         damage: {
-          psychic: "2d4",
+          psychic: "3d4",
           effect: "disadvantage on next attack roll",
         },
       }, {
@@ -289,7 +305,7 @@ const party_data = {
         conditions: {
           "Level 2": {weapon: "d4"},
           "Level 3": {weapon: "2d4"},
-          "Level 3": {weapon: "3d4"},
+          "Level 4": {weapon: "3d4"},
         }
       }, {
         name: "Fireball",
@@ -310,7 +326,7 @@ const party_data = {
     saves: {
       'Str': 2,
       'Dex': -1,
-      'Con': 2,
+      'Con': 8,
       'Int': 5,
       'Wis': 9,
       'Cha': 0,
@@ -324,7 +340,7 @@ const party_data = {
         name: "Primal Savagery",
         tohit: 10,
         sounds: SPELL_SOUNDS,
-        damage: {"acid": "2d10"},
+        damage: {"acid": "3d10"},
       }, {
         name: "Call Lightning",
         save: "17 Dex",
@@ -333,6 +349,7 @@ const party_data = {
         conditions: {
           'Level 4': {weapon: "1d10"},
           'Level 5': {weapon: "2d10"},
+          'Level 6': {weapon: "3d10"},
         }
       }, {
         name: "Moonbeam",
@@ -342,26 +359,8 @@ const party_data = {
         conditions: {
           'Level 3': {weapon: "1d10"},
           'Level 4': {weapon: "2d10"},
-          'Level 4': {weapon: "3d10"},
-        }
-      }, {
-        name: "Heat Metal",
-        sounds: SPELL_SOUNDS,
-        damage: {
-          "fire": "2d8",
-          effect: "If holding/wearing, DC 17 Con save or must drop, disadvantage on attacks and checks if it cannot",
-        },
-        conditions: {
-          'Level 3': {weapon: "1d8"},
-          'Level 4': {weapon: "2d8"},
-          'Level 5': {weapon: "3d8"},
-        }
-      }, {
-        name: "Staff of the Jungle (Strength)",
-        tohit: 7,
-        damage: {"bludgeoning": "d6+3"},
-        conditions: {
-          'Two Handed': {weapon: "d8+3", replace: true},
+          'Level 5': {weapon: "3d10"},
+          'Level 6': {weapon: "4d10"},
         }
       }, {
         name: "Healing Word",
@@ -371,7 +370,15 @@ const party_data = {
           "Level 3": {weapon: "2d4"},
           "Level 4": {weapon: "3d4"},
           "Level 5": {weapon: "4d4"},
+          "Level 6": {weapon: "6d4"},
         }
+      }, {
+        name: "Sunbeam",
+        save: "17 Con",
+        damage: {
+          radiant: "6d8",
+          effect: "blinded until your next turn"
+        },
       }
     ],
   },
@@ -506,7 +513,7 @@ const party_data = {
   "Areni": {
     channel: 'toa',
     saves: {
-      'Str': 0,
+      'Str': -1,
       'Dex': 4,
       'Con': 4,
       'Int': 9,
