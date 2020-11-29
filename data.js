@@ -5,7 +5,7 @@ const party_data = {
     channel: 'toa',
     saves: {
       'Str': 0,
-      'Dex': 2,
+      'Dex': 3,
       'Con': 7,
       'Int': 3,
       'Wis': 11,
@@ -128,12 +128,12 @@ const party_data = {
   "Thorin": {
     channel: 'toa',
     saves: {
-      'Str': 9,
-      'Dex': 4,
-      'Con': 6,
-      'Int': 2,
-      'Wis': 8,
-      'Cha': 10,
+      'Str': 10,
+      'Dex': 5,
+      'Con': 7,
+      'Int': 3,
+      'Wis': 9,
+      'Cha': 12,
     },
     attacks: [
       {
@@ -257,6 +257,7 @@ const party_data = {
           "Level 2": {fire: "1d10"},
           "Level 3": {fire: "2d10"},
           "Level 4": {fire: "3d10"},
+          "Level 5": {fire: "4d10"},
         }
       }, {
         name: "Rapier",
@@ -287,6 +288,7 @@ const party_data = {
             'Level 2': {weapon: "1d6"},
             'Level 3': {weapon: "2d6"},
             'Level 4': {weapon: "3d6"},
+            'Level 5': {weapon: "4d6"},
         },
       }, {
         name: "Heat Metal",
@@ -298,6 +300,7 @@ const party_data = {
         conditions: {
           'Level 3': {weapon: "1d8"},
           'Level 4': {weapon: "2d8"},
+          'Level 5': {weapon: "3d8"},
         }
       }, {
         name: "Pistol",
@@ -312,6 +315,7 @@ const party_data = {
           "Level 2": {weapon: "d4"},
           "Level 3": {weapon: "2d4"},
           "Level 4": {weapon: "3d4"},
+          "Level 5": {weapon: "4d4"},
         }
       }, {
         name: "Fireball",
@@ -323,6 +327,7 @@ const party_data = {
         },
         conditions: {
           "Level 4": {weapon: "d8"},
+          "Level 5": {weapon: "2d8"},
         }
       },
     ]
